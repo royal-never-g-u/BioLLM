@@ -1,0 +1,1578 @@
+id,name,reversibility,lower_bound,upper_bound,metabolite_count,gene_reaction_rule
+CITtcp,Citrateisocitrate antiport into peroxisome,True,-999999.0,999999.0,4,
+13BGH,Endo 1 3 beta glucan glucohydrase,False,0.0,999999.0,3,YGR282C
+13BGHe,Exo 1 3 beta glucan glucohydrase,False,0.0,999999.0,3,YOR190W or YDR261C or YLR300W
+13GS,1 3 beta glucan synthase,False,0.0,999999.0,4,((YCR034W and YGR032W) and YLR343W) or ((YCR034W and YGR032W) and YMR215W) or ((YCR034W and YMR306W) and YMR215W) or ((YCR034W and YLR342W) and YOL132W) or ((YCR034W and YMR306W) and YOL132W) or ((YCR034W and YGR032W) and YOL030W) or ((YCR034W and YLR342W) and YOL030W) or ((YCR034W and YMR306W) and YOL030W) or ((YCR034W and YLR342W) and YLR343W) or ((YCR034W and YMR306W) and YLR343W) or ((YCR034W and YGR032W) and YOL132W) or ((YCR034W and YLR342W) and YMR215W) or ((YCR034W and YGR032W) and YMR307W) or ((YCR034W and YLR342W) and YMR307W) or ((YCR034W and YMR306W) and YMR307W)
+16GS,1 6 beta glucan synthase,False,0.0,999999.0,4,YPR159W or YGR143W
+23CAPPD,ADP ribose 2 3 cyclic phosphodiesterase,False,0.0,999999.0,4,YGR247W
+2DDA7Ptm,2 Dehydro 3 deoxy D arabino heptonate7 phohsphate mitochondrial transport via diffusion,True,-999999.0,999999.0,2,
+2DHPtm,2 Dehydropantoate mitochondrial transport,True,-999999.0,999999.0,2,
+2DOXG6PP,2 deoxyglucose 6 phosphatase,False,0.0,999999.0,4,YHR044C or YHR043C
+2HBO,2 HydroxybutyrateNAD oxidoreductase,True,-999999.0,999999.0,5,
+2HBt2,2 hydroxybutyrate cotransport with proton,True,-999999.0,999999.0,4,
+2HMHMBQMTm,2 hexaprenyl 3 methyl 5 hydroxy 6 methoxy 1 4 benzoquinone methyltransferase  mitochondrial,False,0.0,999999.0,5,YOL096C and YDR204W and YML110C and YGR255C and YOR125C and YGL119W and YLR201C
+2HP6MPMOm,2 Hexaprenyl 6 methoxyphenol monooxygenase  mitochondrial,False,0.0,999999.0,4,YOL096C and YDR204W and YML110C and YGR255C and YOR125C and YGL119W and YLR201C
+2HPMBQMTm,2 hexaprenyl 6 methoxy 1 4 benzoquinone methyltransferase  mitochondrial,False,0.0,999999.0,5,YOL096C and YDR204W and YML110C and YGR255C and YOR125C and YGL119W and YLR201C
+2HPMMBQMOm,2 hexaprenyl 3 methyl 6 methoxy 1 4 benzoquinone monooxygenase  mitochondrial,False,0.0,999999.0,3,YOL096C and YDR204W and YML110C and YGR255C and YOR125C and YGL119W and YLR201C
+2MBACt,2 methylbutyl transport  extracellular,False,0.0,999999.0,2,
+EX_epistest_SC_e,Episterol ester  yeast specific exchange,False,0.0,999999.0,1,
+EX_epist_e,Episterol exchange,False,0.0,999999.0,1,
+2MBALDt,2 Methylbutanal transport  extracellular,True,-999999.0,999999.0,2,
+2MBALDtm,2 Methylbutanal transport  mitochondrial,True,-999999.0,999999.0,2,
+2MBTOHt,2 methyl 1 butanol transport  extracellular,True,-999999.0,999999.0,2,
+ACACT6p,Acetyl CoA C acetyltransferase  dodecanoyl   peroxisomal,False,0.0,999999.0,4,YIL160C
+2MBTOHtm,2 methyl 1 butanol transport  mitochondrial,True,-999999.0,999999.0,2,
+ACACT7p,Acetyl CoA acyltransferase  tetradecanoyl CoA   peroxisomal,False,0.0,999999.0,4,YIL160C
+2MPPALt,2 methylpropanal transport  extracellular,True,-999999.0,999999.0,2,
+ACACT8p,Acetyl CoA acyltransferase  hexadecanoyl CoA   peroxisomal,False,0.0,999999.0,4,YIL160C
+ACACT9p,Acetyl CoA acyltransferase  tetracosanoyl CoA   peroxisomal,False,0.0,999999.0,4,YIL160C
+ACALDCD,Acetaldehyde condensation,False,0.0,999999.0,2,YLR044C or YGR087C or YLR134W
+ACALDt,Acetaldehyde reversible transport,True,-999999.0,999999.0,2,
+ACALDtm,Acetaldehyde mitochondrial diffusion,True,-999999.0,999999.0,2,
+ACCOAC,Acetyl-CoA carboxylase,True,-999999.0,999999.0,7,YNR016C
+ACCOACrm,Acetyl Coa carboxylase  mitochondrial,True,-999999.0,999999.0,7,YMR207C
+AGAT_SC,1 Acyl glycerol 3 phosphate acyltransferase  yeast specific,False,0.0,999999.0,11,YDL052C or UNKNOWN
+AGPRim,N acetyl g glutamyl phosphate reductase  irreversible  mitochondrial,False,0.0,999999.0,6,YER069W
+AGTi,Alanine glyoxylate aminotransferase  irreversible,False,0.0,999999.0,4,YFL030W
+AHCYStm,S adenosyl L homocysteine reversible transport  mitochondrial,True,-999999.0,999999.0,2,
+ACCOAtn,Acetyl CoA transport  nuclear,True,-999999.0,999999.0,2,
+2MPPALtm,2 methylpropanal transport  mitochondrial,True,-999999.0,999999.0,2,
+ACESt,Acetic ester transport  extracellular,False,0.0,999999.0,2,
+ACGAM6PS,N acetylglucosamine 6 phosphate synthase,True,-999999.0,999999.0,5,YFL017C
+AHCi,Adenosylhomocysteinase,False,0.0,999999.0,4,YER043C
+AHMMPS,4 amino 5 hydroxymethyl 2 methylpyrimidine synthetase,False,0.0,999999.0,5,
+AHSERL,O acetylhomoserine  thiol  lyase,False,0.0,999999.0,5,YLR303W
+AHSERL2,O acetylhomoserine  thiol  lyase,False,0.0,999999.0,5,YLR303W
+ACGAMPM,Phosphoacetylglucosamine mutase,True,-999999.0,999999.0,2,YEL058W
+ACGKm,Acetylglutamate kinase  mitochondrial,False,0.0,999999.0,4,YER069W
+2OBUTtm,2obut transporter  mitochondrial,True,-999999.0,999999.0,2,
+ACGSm,N acteylglutamate synthase  mitochondrial,False,0.0,999999.0,5,YMR062C or YJL071W
+2OXOADPtim,2 oxoadipate transport out of mitochondria via diffusion,False,0.0,999999.0,2,
+ACHBSm,2 aceto 2 hydroxybutanoate synthase  mitochondrial,False,0.0,999999.0,5,YCL009C and YMR108W
+ACHLE1,Isoamyl acetate hydrolyzing esterase,False,0.0,999999.0,5,YOR126C
+2PHETOHt,2 phenylethanol reversible transport,True,-999999.0,999999.0,2,
+ACHLE2,Isobutyl acetate hydrolyzing esterase,False,0.0,999999.0,5,YOR126C
+ACHLE3,Ethyl acetate hydrolyzing esterase,False,0.0,999999.0,5,YOR126C
+ACLSm,Acetolactate synthase  mitochondrial,False,0.0,999999.0,4,YCL009C and YMR108W
+2PHETOHtm,2 phenylethanol reversible transport  mitochondrial,True,-999999.0,999999.0,2,
+ACOAHim,Acetyl CoA hydrolase  mitochondrial  irreversible,False,0.0,999999.0,5,YBL015W
+34HPLFM,3  4 hydroxyphenyl  lactate formation,False,0.0,999999.0,5,
+ACOAO4p,Acyl CoA oxidase  decanoyl CoA   peroxisomal,False,0.0,999999.0,4,YGL205W
+AICART,Phosphoribosylaminoimidazolecarboxamide formyltransferase,True,-999999.0,999999.0,4,YLR028C or YMR120C
+AIRCr,Phosphoribosylaminoimidazole carboxylase,True,-999999.0,999999.0,4,YOR128C
+AKGDam,Oxoglutarate dehydrogenase  lipoamide,True,-999999.0,999999.0,5,YIL125W and YDR148C and YFL018C
+AKGDbm,Oxoglutarate dehydrogenase  dihydrolipoamide S succinyltransferase,False,0.0,999999.0,4,YIL125W and YDR148C and YFL018C
+ACOAO5p,Acyl CoA oxidase  dodecanoyl CoA   peroxisomal,False,0.0,999999.0,4,YGL205W
+ACOAO6p,Acyl CpA oxidase  tetradecanoyl CoA   peroxisomal,False,0.0,999999.0,4,YGL205W
+ACOAO7p,Acyl CoA oxidase  hexadecanoyl CoA   peroxisomal,False,0.0,999999.0,4,YGL205W
+ACOAO8p,Acyl CoA oxidase  octadecanoyl CoA   peroxisomal,False,0.0,999999.0,4,YGL205W
+ACOAO9p,Acyl CoA oxidase  hexacanoyl CoA   peroxisomal,False,0.0,999999.0,4,YGL205W
+AKGMAL,Alpha ketoglutaratemalate transporter,True,-999999.0,999999.0,4,
+AKGt2n,2 oxoglutarate nuclear transport via proton symport,True,-999999.0,999999.0,4,
+AKGt2r,2 oxoglutarate reversible transport via symport,True,-999999.0,999999.0,4,
+34HPPOR,4 Hydroxyphenylpyruvateoxygen oxidoreductase,False,0.0,999999.0,4,
+AKGtp,AKG transporter  peroxisome,True,-999999.0,999999.0,2,
+AKP1,Alkaline phosphatase  Dihydroneopterin,False,0.0,999999.0,5,YDR481C
+ALASm,5 aminolevulinate synthase,False,0.0,999999.0,6,YDR232W
+ALATA_L,L-alanine transaminase,True,-999999.0,999999.0,4,YDR111C
+ALATA_Lm,L alanine transaminase  mitochondrial,True,-999999.0,999999.0,4,YLR089C
+ACOATA,Acetyl-CoA ACP transacylase,True,-999999.0,999999.0,4,YKL182W and YPL231W
+ACOATAm,Acetyl CoA ACP transacylase,True,-999999.0,999999.0,4,YKL192C and YER061C and YHR067W and YOR221C and YBR026C and YKL055C
+ACON3MT,Trans aconitate 3 methyltransferase,False,0.0,999999.0,4,YER175C
+ALATRS,Alanyl-tRNA synthetase,False,0.0,999999.0,6,YOR335C
+34HPPt2m,3  4 hydroxyphenyl pyruvate mitochondrial transport via proton symport,True,-999999.0,999999.0,4,
+ALAt2r,L alanine reversible transport via proton symport,True,-999999.0,999999.0,4,YKR039W or YPL265W or YCL025C or YOL020W or YOR348C
+ALAtmi,Alanine transport from mitochondia to cytoplasm,False,0.0,999999.0,2,
+ACONT,Aconitate hydratase,True,-999999.0,999999.0,2,YLR304C
+ACONT3m,Aconitase  mitochondrial,True,-999999.0,999999.0,2,YPR002W
+ACONTm,Aconitate hydratase,True,-999999.0,999999.0,2,YLR304C or YJL200C
+ACOTAim,Acteylornithine transaminase  irreversible  mitochondrial,False,0.0,999999.0,4,YOL140W
+ALCD19y,Alcohol dehydrogenase  glycerol  NADP,False,0.0,999999.0,5,YHR104W or YDR368W
+ALCD22xi,Aldehyde dehydrogenase  2 methylbutanol  NAD,False,0.0,999999.0,5,YBR145W or YMR303C or YDL168W or YGL256W or YOL086C
+ALCD22xim,Aldehyde dehydrogenase  2 methylbutanol  NAD   mitochondrial,False,0.0,999999.0,5,YMR083W
+34HPPt2p,3  4 hydroxyphenyl pyruvate peroxisomal transport via proton symport,True,-999999.0,999999.0,4,
+ALCD22yi,Aldehyde dehydrogenase  2 methylbutanol  NADP,False,0.0,999999.0,5,YDR368W or YMR318C or YBR036C
+ALCD23xi,Aldehyde dehydrogenase  isobutyl alcohol  NAD,False,0.0,999999.0,5,YGL256W or YBR145W or YDL168W or YOL086C or YMR303C
+ALCD23xim,Aldehyde dehydrogenase  isobutyl alcohol  NAD   mitochondrial,False,0.0,999999.0,5,YMR083W
+ALCD23yi,Aldehyde dehydrogenase  isobutyl alcohol  NADP,False,0.0,999999.0,5,YBR036C or YMR318C
+ALCD24xi,Aldehyde dehydrogenase  isoamyl alcohol  NAD,False,0.0,999999.0,5,YDL168W or YGL256W or YMR303C or YOL086C or YBR145W
+ALCD24xim,Aldehyde dehydrogenase  isoamyl alcohol  NAD   mitochondrial,False,0.0,999999.0,5,YMR083W
+ACP1e,Acid phosphatase  extracellular  secreted,False,0.0,999999.0,4,YBR093C or YAR071W
+ACPSm,Acyl carrier protein synthase  mitochondrial,False,0.0,999999.0,5,YPL148C
+ACRNtm,O acetylcarnintine transport into mitochondria via diffusion,False,0.0,999999.0,2,
+ACRNtp,Acetylcarnitine transport out of peroxisome,False,0.0,999999.0,2,
+ACS,Acetyl-CoA synthetase,False,0.0,999999.0,6,YLR153C
+ACSm,Acetyl CoA synthetase,False,0.0,999999.0,6,YAL054C
+ACSp,Acetyl CoA synthetase,False,0.0,999999.0,6,YAL054C
+ACt2r,Acetate reversible transport via proton symport,True,-999999.0,999999.0,4,YCR032W
+ALCD24yi,Aldehyde dehydrogenase  isoamyl alcohol  NADP,False,0.0,999999.0,5,YMR318C or YBR036C
+ALCD25xi,Aldehyde dehydrogenase  2 phenylethanol  NAD,False,0.0,999999.0,5,YGL256W or YMR303C or YDL168W or YOL086C or YBR145W
+ALCD25xim,Aldehyde dehydrogenase  2 phenylethanol  NAD   mitochondrial,False,0.0,999999.0,5,YMR083W
+ALCD25yi,Aldehyde dehydrogenase  2 phenylethanol  NADP,False,0.0,999999.0,5,YMR318C or YBR036C
+ACtm,Acetate transport  mitochondrial,True,-999999.0,999999.0,2,
+3C3HMPt,2 Isopropylmalate transport  diffusion,True,-999999.0,999999.0,2,
+ACtp,Acetate transport  peroxisomal,True,-999999.0,999999.0,2,
+ACtr,Acetate transporter,True,-999999.0,999999.0,2,YCR010C
+ADA,Adenosine deaminase,False,0.0,999999.0,5,YNL141W
+ADCL,4-aminobenzoate synthase,False,0.0,999999.0,4,YMR289W
+ALCD26xi,Aldehyde dehydrogenase  tryptophol  NAD,False,0.0,999999.0,5,YGL256W or YDL168W or YMR303C or YBR145W or YOL086C
+ALCD26xim,Aldehyde dehydrogenase  tryptophol  NAD   mitochondrial,False,0.0,999999.0,5,YMR083W
+ALCD2x_copy1,Alcohol dehydrogenase (ethanol),False,0.0,999999.0,5,YMR303C
+ALCD2ir,Alcohol dehydrogenase  reverse rxn  acetaldehyde   ethanol,False,0.0,999999.0,5,YOL086C or YGL256W or YBR145W
+ALCD2irm,Alcohol dehydrogenase  reverse rxn  acetaldehyde   ethanol   mitochondrial,False,0.0,999999.0,5,YMR083W
+ADCS,4-amino-4-deoxychorismate synthase,False,0.0,999999.0,4,YNR033W
+3C3HMPtm,2 Isopropylmalate transport  diffusion  mitochondrial,True,-999999.0,999999.0,2,
+ADD,Adenine deaminase,False,0.0,999999.0,5,YNL141W
+ADEt2,Adenine transport in via proton symport,False,0.0,999999.0,4,YER056C or YER060W or YER060W_A or YGL186C
+ADEtm,Adenine reversible transport  mitochondria,True,-999999.0,999999.0,2,
+ADHAPR_SC,Acyldihydroxyacetonephosphate reductase  yeast specific,False,0.0,999999.0,5,YIL124W
+ADK1,Adenylate kinase,True,-999999.0,999999.0,3,YDR226W
+ADK1m,Adenylate kinase  mitochondrial,True,-999999.0,999999.0,3,YER170W
+ADK3,Adentylate kinase (GTP),True,-999999.0,999999.0,4,YDR226W
+ALCD2x_copy2,Alcohol dehydrogenase (ethanol),True,-999999.0,999999.0,5,YDL168W
+ALDD19xr,"Aldehyde dehydrogenase (phenylacetaldehyde, NAD)",False,0.0,999999.0,6,YMR170C or YMR169C
+ALDD20xm,Aldehyde dehydrogenase  indole 3 acetaldehyde  NAD   mitochondrial,False,0.0,999999.0,6,YOR374W
+ALDD20y,Aldehyde dehydrogenase  indole 3 acetaldehyde  NADP,False,0.0,999999.0,6,YPL061W
+ALDD20ym,Aldehyde dehydrogenase  indole 3 acetaldehyde  NADP   mitochondrial,False,0.0,999999.0,6,YOR374W or YER073W
+ALDD22x,Aldehyde dehydrogenase  3 aminopropanal  NAD,False,0.0,999999.0,6,YMR170C or YMR169C
+ALDD2xm,Aldehyde dehydrogenase  acetylaldehyde  NAD   mitochondrial,False,0.0,999999.0,6,YOR374W
+ALDD2y,"Aldehyde dehydrogenase (acetaldehyde, NADP)",False,0.0,999999.0,6,YPL061W
+ALDD2ym,Aldehyde dehydrogenase  acetylaldehyde  NADP   mitochondrial,False,0.0,999999.0,6,YER073W or YOR374W
+ADK3m,Adentylate kinase  GTP,True,-999999.0,999999.0,4,YER170W
+ADK4,Adentylate kinase (ITP),True,-999999.0,999999.0,4,YDR226W
+ADK4m,Adentylate kinase  ITP   mitochondrial,True,-999999.0,999999.0,4,YER170W
+ADMDC,Adenosylmethionine decarboxylase,False,0.0,999999.0,4,YOL052C
+ADNCYC,Adenylate cyclase,False,0.0,999999.0,3,YJL005W
+ADNK1,Adenosine kinase,False,0.0,999999.0,5,YJR105W
+ADNUC,Adenosine hydrolase,False,0.0,999999.0,4,YDR400W
+ALLTAHr,Allantoate amidinohydrolase  reversible,True,-999999.0,999999.0,4,YIR029W
+ALLTN,Allantoinase,True,-999999.0,999999.0,4,YIR027C
+ALLTNti,Allantoin irreversible uniport,False,0.0,999999.0,2,YIR028W
+ALLTTti,Allantoate irreversible uniport,False,0.0,999999.0,2,YJR152W
+ADNt2,Adenosine transport in via proton symport,False,0.0,999999.0,4,YAL022C
+3C4MOPtm,3 Carboxy 4 methyl 2 oxopentanoate transport  diffusion  mitochondrial,True,-999999.0,999999.0,2,
+ADPT,Adenine phosphoribosyltransferase,False,0.0,999999.0,4,YML022W or YDR441C
+ADSK,Adenylyl-sulfate kinase,False,0.0,999999.0,5,YKL001C
+ALPHNH,Allophanate hydrolase,False,0.0,999999.0,5,YBR208C
+AMAOTr,Adenosylmethionine-8-amino-7-oxononanoate transaminase,True,-999999.0,999999.0,4,YNR058W
+ADSL1r,Adenylsuccinate lyase,True,-999999.0,999999.0,3,YLR359W
+AMETt2,S adenosyl L methionine transport in via proton symport,False,0.0,999999.0,4,YPL274W
+3DH5HPBMTm,S adenosyl L methionine3 hexaprenyl 4 5 dihydroxylate O methyltransferase  mitochondrial,False,0.0,999999.0,5,YOL096C and YDR204W and YML110C and YGR255C and YOR125C and YGL119W and YLR201C
+AMETtm,S Adenosyl L methionine reversible transport  mitochondrial,True,-999999.0,999999.0,2,YNL003C
+AMID,GUANIDINOBUTANAMIDE-NH3-RXN,False,0.0,999999.0,4,YMR293C or YDR242W
+AMID2,Amidase,False,0.0,999999.0,4,YDR242W
+AMID3,Amidase,False,0.0,999999.0,4,YDR242W
+ADSL2r,Adenylosuccinate lyase,True,-999999.0,999999.0,3,YLR359W
+ADSS,Adenylosuccinate synthase,False,0.0,999999.0,7,YNL220W
+AMPN,AMP nucleosidase,False,0.0,999999.0,4,YML035C or YBR284W or YJL070C
+AMPDA,Adenosine monophosphate deaminase,False,0.0,999999.0,5,YML035C
+3DH5HPBtm,3 Hexaprenyl 4 5 dihydroxybenzoate transport  mitochondrial,True,-999999.0,999999.0,2,
+AMPtn,AMP transport via diffusion  cytosol to nucleus,True,-999999.0,999999.0,2,
+ANPRT,Anthranilate phosphoribosyltransferase,False,0.0,999999.0,4,YDR354W
+ATPS3v,ATP synthase  vacuole,False,0.0,999999.0,6,YBR127C and YDL185W and YEL027W and YEL051W and YGR020C and YHR026W and YHR039C_A and YKL080W and YLR447C and YOR270C and YOR332W and YPL234C and YPR036W
+3DSPHR,3 Dehydrosphinganine reductase,False,0.0,999999.0,5,YBR265W
+ATPtm_H,ADPATP transporter  mitochondrial,False,0.0,999999.0,6,YBR085W or YBL030C or YMR056C
+ATPtp_H,ADPATP transporter  peroxisomal,False,0.0,999999.0,6,YPR128C
+ANS,Anthranilate synthase,False,0.0,999999.0,6,YER090W and YKL211C
+AOBUTDs,L-2-amino-3-oxobutanoate decarboxylation (spontaneous),False,0.0,999999.0,4,
+AP4AH,Ap4A hydrolase,True,-999999.0,999999.0,4,YDR305C
+APRTO2,N acetylputrescine oxygen oxireductase  deaminating,False,0.0,999999.0,6,
+ARAB14LO,D arabinono 1 4 lactone oxidase,True,-999999.0,999999.0,4,YML086C
+BACCL,Biotin acetyl CoA carboxylase ligase,False,0.0,999999.0,5,YDL141W
+3HAO,3 hydroxyanthranilate 3 4 dioxygenase,False,0.0,999999.0,4,YJR025C
+ARAB1D2,D arabinose 1 dehydrogenase  NADP,False,0.0,999999.0,5,YBR149W
+ARABR,Arabinose reductase,False,0.0,999999.0,5,YHR104W
+3HPH5MBDCm,3 Hexaprenyl 4 hydroxy 5 methoxybenzoate decarboxylase  mitochondrial,False,0.0,999999.0,3,
+ARAB_Dt,D arabinose reversible transport,True,-999999.0,999999.0,2,
+ARAB_Lt,L arabinoase extracellular transport,True,-999999.0,999999.0,2,
+ARGN,Arginase,False,0.0,999999.0,4,YPL111W
+BPNT,"3',5'-bisphosphate nucleotidase",False,0.0,999999.0,4,YOL064C
+BTDD_RR,R R  butanediol dehydrogenase,True,-999999.0,999999.0,5,YAL060W
+BTDt_RR,R R  butanediol transport,True,-999999.0,999999.0,2,
+3IPM3MT,3 Isopropylmalate 3 methyltransferase,False,0.0,999999.0,4,YER175C
+BTNt2i,Biotin uptake,False,0.0,999999.0,4,YGR065C
+BTSr,Biotin synthase,True,-999999.0,999999.0,4,YGR286C
+C14STR,C 14 sterol reductase,False,0.0,999999.0,5,YNL280C
+C22STDS,C 22 sterol desaturase  NADP,False,0.0,999999.0,7,YMR015C and YHR042W
+C22STDSx,C 22 sterol desaturase  NAD,False,0.0,999999.0,7,(YIL043C and YNL111C and YMR015C) or (YNL111C and YMR015C and YKL150W)
+C24STRer,C s24 sterol reductase  endoplamic reticular,False,0.0,999999.0,5,YGL012W
+C3STDH1,C 3 sterol dehydrogenase  4 methylzymosterol,False,0.0,999999.0,6,YGL001C
+ARGSL,Argininosuccinate lyase,True,-999999.0,999999.0,3,YHR018C
+ARGSS,Argininosuccinate synthase,True,-999999.0,999999.0,7,YOL058W
+ARGTRS,Arginyl-tRNA synthetase,False,0.0,999999.0,6,YDR341C
+ARGTRSm,Arginyl tRNA synthetase  mitochondrial,False,0.0,999999.0,6,YHR091C
+ARGt2m,Arginine mitochondrial transport via proton symport,True,-999999.0,999999.0,4,
+ARGt2r,L arganine reversible transport via proton symport,True,-999999.0,999999.0,4,YKR039W or YEL063C or YNL270C
+ARGt6,L arginine transport in via proton antiport  vacuolar,False,0.0,999999.0,4,YBR293W
+ARMT,HnRNP arginine N methyltransferase,False,0.0,999999.0,5,YBR034C
+ASAD,Aspartate-semialdehyde dehydrogenase,False,-999999.0,0.0,6,YDR158W
+C3STDH2,C 3 sterol dehydrogenase  zymosterol,False,0.0,999999.0,6,YGL001C
+C3STKR1,C 3 sterol keto reductase  4 methylzymosterol,False,0.0,999999.0,5,YLR100W
+C3STKR2,C 3 sterol keto reductase  zymosterol,False,0.0,999999.0,5,YLR100W
+ASNN,L-asparaginase,False,0.0,999999.0,4,YDR321W
+C4STMO1,C 4 sterol methyl oxidase  4 4 dimethylzymosterol,False,0.0,999999.0,7,YGR060W
+ASNNe,L asparaginase  extracellular,False,0.0,999999.0,4,YLR160C or YLR158C or YLR157C or YLR155C
+C4STMO2,C 4 sterol methyl oxidase  4 methylzymosterol,False,0.0,999999.0,7,YGR060W
+ASNS1,Asparagine synthase (glutamine-hydrolysing),False,0.0,999999.0,9,YML096W or YGR124W or YPR145W
+3MBALDt,3 methylbutanal transport  extracellular,True,-999999.0,999999.0,2,
+ASNTRS,Asparaginyl-tRNA synthetase,False,0.0,999999.0,6,YHR019C
+ASNTRSm,Asparaginyl tRNA synthetase  miotchondrial,False,0.0,999999.0,6,YCR024C
+C5STDS,C 5 sterol desaturase,False,0.0,999999.0,7,YLR056W
+C8STI,C 8 sterol isomerase,False,0.0,999999.0,2,YMR202W
+ASNt2m,Asparagine mitochondrial transport via proton transport,True,-999999.0,999999.0,4,
+ASNt2r,L asparagine reversible transport via proton symport,True,-999999.0,999999.0,4,YKR039W or YCL025C or YDR508C or YPL265W
+3MBALDtm,3 methylbutanal transport  mitochondrial,True,-999999.0,999999.0,2,
+ASNt6,L asparagine transport in via proton antiport  vacuolar,False,0.0,999999.0,4,YJR001W
+ASNt7,L asparagine transport out via proton symport  vacuolar,False,0.0,999999.0,4,YKL146W or YNL101W
+CAT,Catalase,False,0.0,999999.0,3,YGR088W
+CATp,Catalase A  peroxisomal,False,0.0,999999.0,3,YDR256C
+ASPCT,Aspartate carbamoyltransferase,False,0.0,999999.0,5,YJL130C
+3MOBDC,3 Methyl 2 oxobutanoate decarboxylase,False,0.0,999999.0,4,YLR134W or YLR044C or (YGR087C and YGR087C)
+ASPGLU2m,Aspartate glutamate transporter,False,0.0,999999.0,4,YPR021C
+ASPGLUtp,Aspartate glutamate peroxisomal shuttle,True,-999999.0,999999.0,4,
+ASPK,Aspartate kinase,False,0.0,999999.0,4,YER052C
+ASPOcm,Aspartate oxidase,False,0.0,999999.0,5,
+CBASPtn,N carbomoyl L aspartate transport  diffusion,True,-999999.0,999999.0,2,
+CBPS,Carbamoyl-phosphate synthase (glutamine-hydrolysing),False,0.0,999999.0,9,(YJR109C and YOR303W) or YJL130C
+CBPtn,Carbamoyl phosphate nuclear transport via diffusion,True,-999999.0,999999.0,2,
+CCP2m,Cytochrome c peroxidase  mitochondrial,False,0.0,999999.0,4,(YKR066C and YJR048W) or (YKR066C and YEL039C)
+CDPDGPm_SC,CDP diacylglycerol  serine O phosphatidyltransferae  yeast specific  mitochondrial,True,-999999.0,999999.0,5,YCL004W
+ASPTA,Aspartate transaminase,True,-999999.0,999999.0,4,YLR027C
+ASPTAm,Aspartate transaminase,True,-999999.0,999999.0,4,YKL106W
+3MOBtm,3 methyl 2 oxobutanoate transport  diffusion  mitochondrial,True,-999999.0,999999.0,2,
+ASPTAp,Aspartate transaminase  peroxisomal,True,-999999.0,999999.0,4,YLR027C
+ASPTRS,Aspartyl-tRNA synthetase,False,0.0,999999.0,6,YLL018C
+ASPTRSm,Aspartyl tRNA synthetase  mitochondrial,False,0.0,999999.0,6,YPL104W
+CDPtn,CDP nuclear transport,True,-999999.0,999999.0,2,
+CER1_24ter,Ceramide 1  C24  endoplasmic reticular transport,True,-999999.0,999999.0,2,
+CER1_26ter,Ceramide 1  C26  endoplasmic reticular transport,True,-999999.0,999999.0,2,
+CER2_24ter,Ceramide 2  C24  endoplasmic reticular transport,True,-999999.0,999999.0,2,
+CER2_26ter,Ceramide 2  C26  endoplasmic reticular transport,True,-999999.0,999999.0,2,
+ASPt2m,Aspartate mitochondrial transport via proton symport,True,-999999.0,999999.0,4,
+ASPt2n,Aspartate nuclear transport via proton symport,True,-999999.0,999999.0,4,
+CERASE124er,Alkaline ceramidase  ceramide 1   endoplasmic reticulum,False,0.0,999999.0,5,YPL087W
+3MOPDC,3 Methyl 2 oxopentanoate decarboxylase,False,0.0,999999.0,4,YLR044C or YDL080C or YLR134W or YGR087C or YDR380W
+CERASE126er,Alkaline ceramidase  ceramide 1   endoplasmic reticulum,False,0.0,999999.0,5,YPL087W
+ASPt2r,L aspartate reversible transport via proton symport,True,-999999.0,999999.0,4,YFL055W or YKR039W or YPL265W
+ASPt5n,L aspartate nuclear transport via diffusion,True,-999999.0,999999.0,2,
+ASPt7,L aspartate transport out via proton symport  vacuolar,False,0.0,999999.0,4,YER119C
+CERASE224er,Alkaline ceramidase  ceramide 2   endoplasmic reticulum,False,0.0,999999.0,5,YPL087W or YBR183W
+CERASE226er,Alkaline ceramidase  ceramide 2   endoplasmic reticulum,False,0.0,999999.0,5,YPL087W or YBR183W
+ATHRDHr,L-allo-threonine dehydrogenase,True,-999999.0,999999.0,5,YMR226C
+3MOPt,3mop reversible trasport,True,-999999.0,999999.0,2,
+ATP2tp_H,AMPATP transporter  peroxisomal,False,0.0,999999.0,6,YPR128C
+ATPATF1,ATP adenylyltransferase,False,0.0,999999.0,5,YDR530C
+ATPATF2,ATP adenylyltransferase,False,0.0,999999.0,5,YCL050C
+ATPATF3,ATP adenylyltransferase,False,0.0,999999.0,5,YCL050C
+ATPH1,ATP diphosphohydrolase,False,0.0,999999.0,5,YER005W
+ATPM,ATP maintenance requirement,False,1.0,1.0,5,
+CERH124_copy1,Ceramide 1 hydroxylase  24C,False,0.0,999999.0,7,YDR297W
+CERH126_copy1,Ceramide 1 hydroxylase  26C,False,0.0,999999.0,7,YDR297W
+CERS124,Ceramide 1 synthase  24C,False,0.0,999999.0,5,YKL008C or YHL003C
+CERS124er,Ceramide 1 synthase  24C   endoplasmic reticular,False,0.0,999999.0,5,YHL003C or YKL008C or YPL087W
+CERS126,Ceramide 1 synthase  26C,False,0.0,999999.0,5,YKL008C or YHL003C
+CERS126er,Ceramide 1 synthase  26C   endoplasmic reticular,False,0.0,999999.0,5,YHL003C or YKL008C or YPL087W
+CERS224,Ceramide 2 synthase  24C,False,0.0,999999.0,5,YKL008C or YHL003C
+CERS224er,Ceramide 2 synthase  24C   endoplasmic reticular,False,0.0,999999.0,5,YHL003C or YKL008C or YBR183W
+ATPPRT,ATP phosphoribosyltransferase,False,0.0,999999.0,4,YER055C
+ATPS,ATPase  cytosolic,False,0.0,999999.0,5,(YCR024C_A and YEL017C_A and YGL008C) or (YCR024C_A and YEL017C_A and YPL036W)
+ATPS3g,ATP synthase  Golgi Apparatus,False,0.0,999999.0,6,YBR127C and YDL185W and YEL027W and YEL051W and YGR020C and YHR026W and YHR039C_A and YKL080W and YLR447C and YMR054W and YOR332W and YPL234C and YPR036W
+ATPS3m,ATP synthase  mitochondrial,False,0.0,999999.0,6,(Q0080 and Q0085 and Q0130 and YBL099W and YBR039W and YDL004W and YDL181W and YDR298C and YDR377W and YJR121W and YKL016C and YLR295C and YML081C_A and YPL078C and YPL271W) or (Q0080 and Q0085 and Q0130 and YBL099W and YBR039W and YDL004W and YDL181W and YDR298C and YDR322C_A and YDR377W and YJR121W and YKL016C and YLR295C and YML081C_A and YOL077W_A and YPL078C and YPL271W and YPR020W)
+CERS226,Ceramide 2 synthase  26C,False,0.0,999999.0,5,YKL008C or YHL003C
+CERS226er,Ceramide 2 synthase  26C   endoplasmic reticular,False,0.0,999999.0,5,YHL003C or YKL008C or YBR183W
+CERH124_copy2,Ceramide 1 hydroxylase  24C,False,0.0,999999.0,7,YMR272C
+CERH126_copy2,Ceramide 1 hydroxylase  26C,False,0.0,999999.0,7,YMR272C
+CITtbm,Citrate transport  mitochondrial,True,-999999.0,999999.0,4,YBR291C
+3MOPtm,3 Methyl 2 oxopentanoate transport  diffusion  mitochondrial,True,-999999.0,999999.0,2,
+CITtcm,Citrate transport  mitochondrial,True,-999999.0,999999.0,4,YBR291C
+CERS324,Ceramide 3 synthase  24C,False,0.0,999999.0,7,YMR272C
+CERS326,Ceramide 3 synthase  26C,False,0.0,999999.0,7,YMR272C
+CHLPCTD,Choline phosphate cytididyltransferase,False,0.0,999999.0,5,YGR202C
+CHLSTI,Cholestenol delta isomerase  lumped reaction,False,0.0,999999.0,7,
+CLPNSm_SC,Cardiolipin synthase  yeast specific  mitochondrial,False,0.0,999999.0,5,YDL142C
+3OPHB5Hm,3 Hexaprenyl 4 5 dihydroxybenzoate hydroxylase  mitochondrial,False,0.0,999999.0,3,
+CMPN,CMP nucleosidase,False,0.0,999999.0,4,
+CHLt2,Choline transport via proton symport,False,0.0,999999.0,4,YGL077C
+CHOLK,Choline kinase,False,0.0,999999.0,5,YLR133W
+CHORM,Chorismate mutase,False,0.0,999999.0,2,YPR060C
+CHORS,Chorismate synthase,False,0.0,999999.0,3,YGL148W
+CHRPL,Chorismate pyruvate lyase,False,0.0,999999.0,3,
+CO2t,CO2 transporter via diffusion,True,-999999.0,999999.0,2,
+CO2tg,CO2 Golgi transport,True,-999999.0,999999.0,2,
+CO2tm,CO2 transport  diffusion   mitochondrial,True,-999999.0,999999.0,2,
+CO2tn,CO2 nuclear transport via diffusion,True,-999999.0,999999.0,2,
+CO2tp,CO2 peroxisomal transport,True,-999999.0,999999.0,2,
+CHTNDA,Chitin deacetylase,False,0.0,999999.0,5,YLR307W or YLR308W
+CHTNS,Chitin synthase,False,0.0,999999.0,4,YNL192W or YBR038W or YBR023C
+CITt2r,Citrate reversible transport via symport,True,-999999.0,999999.0,4,
+CO2tv,CO2 vacuolar transport,True,-999999.0,999999.0,2,
+COAHLp,CoA hydrolase  peroxisomal,False,0.0,999999.0,5,YLR151C
+3OPHB_5tm,3 Octaprenyl 4 hydroxybenzoate mitochondrial transport,True,-999999.0,999999.0,2,
+COAtim,CoA transporter  mitochondrial   irreversible,False,0.0,999999.0,2,YHR002W
+CITtam,Citrate transport  mitochondrial,True,-999999.0,999999.0,4,YBR291C or UNKNOWN
+CITtap,Citratemalate antiport into peroxisome,True,-999999.0,999999.0,4,
+COAtn,Coenzyme A transport  nuclear,True,-999999.0,999999.0,2,
+4ABUTNtm,4 aminobutanal mitochondrial transport via diffusion,True,-999999.0,999999.0,2,
+COUCOAFm,P coumaroyl CoA formation,False,0.0,999999.0,6,
+CPPPGO,Coproporphyrinogen oxidase (O2 required),False,0.0,999999.0,6,YDR044W
+4ABUTtm,4 aminobutanoate mitochondrial transport via diffusion,True,-999999.0,999999.0,2,
+CRNCARtm,Carnithine acetylcarnithine carrier  mitochondrial,False,0.0,999999.0,4,YOR100C
+CRNCARtp,Carnitine acetylcarnitine carrier  peroxisomal,False,0.0,999999.0,4,
+DCTPD,DCTP deaminase,False,0.0,999999.0,5,YHR144C
+DCYTD,Deoxycytidine deaminase,False,0.0,999999.0,5,YLR245C
+CRNt,L carnitine reversible transport,True,-999999.0,999999.0,2,YBR132C
+4ABZt,4 Aminobenzoate mitochondrial transport via diffusion,True,-999999.0,999999.0,2,
+CRNtim,L carnitine transport out of mitochondria via diffusion,False,0.0,999999.0,2,
+DCYTt2,Deoxycytidine transport in via proton symport,False,0.0,999999.0,4,
+CRNtp,Carnitine transport into peroxsiome,False,0.0,999999.0,2,
+4ABZtm,4 Aminobenzoate mitochondrial transport via diffusion,True,-999999.0,999999.0,2,
+CSNATm,Carnitine O aceyltransferase  mitochondrial,True,-999999.0,999999.0,4,YML042W
+DDPA,3-deoxy-D-arabino-heptulosonate 7-phosphate synthetase,False,0.0,999999.0,5,YBR249C or YDR035W
+DDPAm,2 deoxy D arabino heptulosonate 7 phosphate synthetase  mitochondrial,False,0.0,999999.0,5,YDR035W
+DESAT14,Myristicoyl CoA desaturase  n C140CoA   n C141CoA,False,0.0,999999.0,7,
+DESAT16,Palmitoyl CoA desaturase  n C160CoA   n C161CoA,False,0.0,999999.0,7,YGL055W
+DESAT18,Stearoyl CoA desaturase  n C180CoA   n C181CoA,False,0.0,999999.0,7,YGL055W
+CSNATp,Carnitine O acetyltransferase  reverse direction  peroxisomal,True,-999999.0,999999.0,4,YML042W
+CSNATr,Carnitine O acetyltransferase,True,-999999.0,999999.0,4,YAR035W or YER024W
+CSND,Cytosine deaminase,False,0.0,999999.0,5,YPR062W
+CSNt2,Cytosine transport in via proton symport,False,0.0,999999.0,4,YER056C or YER060W or YER060W_A or YGL186C
+CSm,Citrate synthase,False,0.0,999999.0,6,YNR001C or YPR001W
+DESAT18_2,Oleoyl CoA desaturase  n C181CoA   n C182CoA,False,0.0,999999.0,7,
+DGDPtn,DGDP nuclear transport,True,-999999.0,999999.0,2,
+CSp,Citrate synthase,False,0.0,999999.0,6,YCR005C
+DGGH,Alpha D glucoside glucohydrase,False,0.0,999999.0,4,YJL221C
+4H2OGLTtm,4 hydroxy 2 oxoglutarate mitochondrial transport via diffusion,True,-999999.0,999999.0,2,
+DGK1,Deoxyguanylate kinase (dGMP:ATP),True,-999999.0,999999.0,4,YDR454C
+DGSNt2,Deoxyguanosine transport in via proton symport,False,0.0,999999.0,4,
+CTPS1,CTP synthase  NH3,False,0.0,999999.0,7,YBL039C or YJR103W
+CTPS2,CTP synthase (glutamine),False,0.0,999999.0,9,YBL039C or YJR103W
+CTPtm,CTPCMP antiport,False,0.0,999999.0,6,YBR192W
+DHAD1m,Dihydroxy acid dehydratase  2 3 dihydroxy 3 methylbutanoate   mitochondrial,False,0.0,999999.0,3,YJR016C
+4H2OGLTtp,4 hydroxy 2 oxoglutarate peroxisomal transport via diffusion,True,-999999.0,999999.0,2,
+DHAD2m,Dihydroxy acid dehydratase  2 3 dihydroxy 3 methylpentanoate   mitochondrial,False,0.0,999999.0,3,YJR016C
+DHAK,Dihydroxyacetone kinase,False,0.0,999999.0,5,YML070W or YFL053W
+CYOOm,Cytochrome c oxidase  mitochondrial,False,0.0,999999.0,6,((Q0045 and Q0250 and Q0275 and YDL067C and YGL187C and YGL191W and YHR051W and YLR038C and YLR395C and YMR256C and YNL052W) and YEL039C) or ((Q0045 and Q0250 and Q0275 and YDL067C and YGL187C and YGL191W and YHR051W and YLR038C and YLR395C and YMR256C and YNL052W) and YJR048W) or ((Q0045 and Q0250 and Q0275 and YDL067C and YGL187C and YGL191W and YHR051W and YIL111W and YLR038C and YLR395C and YMR256C) and YJR048W) or ((Q0045 and Q0250 and Q0275 and YDL067C and YGL187C and YGL191W and YHR051W and YIL111W and YLR038C and YLR395C and YMR256C) and YEL039C)
+CYOR_u6m,Ubiquinol 6 cytochrome c reductase,False,0.0,999999.0,6,((Q0105 and YBL045C and YDR529C and YEL024W and YFR033C and YGR183C and YHR001W_A and YJL166W and YOR065W and YPR191W) and YEL039C) or ((Q0105 and YBL045C and YDR529C and YEL024W and YFR033C and YGR183C and YHR001W_A and YJL166W and YOR065W and YPR191W) and YJR048W)
+DHAPtm,Dihydroxyacetone phosphate transport  mitochondrial,False,0.0,999999.0,2,
+DHFR,Dihydrofolate reductase,False,0.0,999999.0,5,YOR236W
+CYSS,Cysteine synthase,False,0.0,999999.0,5,YGR012W
+4HBZCOAFm,4 hydroxybenzoyl CoA formation,False,0.0,999999.0,8,
+CYSTGL,Cystathionine g lyase,False,0.0,999999.0,5,YAL012W
+CYSTL,Cystathionine b-lyase,False,0.0,999999.0,5,YFR055W
+CYSTLp,Cystathione b lyase  peroxisomal,False,0.0,999999.0,5,YGL184C
+CYSTRS,Cysteinyl-tRNA synthetase,False,0.0,999999.0,6,YNL247W
+CYSTS,Cystathionine beta synthase,False,0.0,999999.0,4,YGR155W
+DHFRim,Dihydrofolate reductase  mitochondrial,False,0.0,999999.0,5,YOR236W
+DHFS,Dihydrofolate synthase,False,0.0,999999.0,7,
+DHFtm,Dihydrofolate reversible mitochondrial transport,True,-999999.0,999999.0,2,
+DHNPAm,Dihydroneopterin aldolase,False,0.0,999999.0,4,YNL256W
+DHNPTtm,Dhnpt mitochondrial transport,True,-999999.0,999999.0,2,
+DHORD4i,Dihydoorotic acid  ubiquinone 6   irreversible,False,0.0,999999.0,4,YKL216W
+DHORDfum,Fumarate dependent DHORD,False,0.0,999999.0,4,YKL216W
+CYSTtp,Cystathione peroxisomal transport,True,-999999.0,999999.0,2,
+CYSt2r,L cysteine reversible transport via proton symport,True,-999999.0,999999.0,4,YKR039W or YDR508C or YBR068C or YDR046C or YBR069C or YOL020W
+CYTD,Cytidine deaminase,False,0.0,999999.0,5,YLR245C
+CYTDK2,Cytidine kinase (GTP),False,0.0,999999.0,5,YNR012W
+DHORDi,Dihydoorotic acid dehydrogenase  irreversible,False,0.0,999999.0,4,YKL216W
+DHORTS,Dihydroorotase,True,-999999.0,999999.0,4,YLR420W or YJL130C
+4HBZFm,4 hydroxybenzoate formation,False,0.0,999999.0,5,
+DHPSm,Dihydropteroate synthase  mitochondrial,False,0.0,999999.0,4,YNL256W
+DHPTtm,Dihydropteroate mitochondrial transport via diffusion,True,-999999.0,999999.0,2,
+DHQS,3-dehydroquinate synthase,False,0.0,999999.0,3,YDR127W
+DHQTi,"3-dehydroquinate dehydratase, irreversible",False,0.0,999999.0,3,YDR127W
+CYTDt2,Cytidine transport in via proton symport,False,0.0,999999.0,4,YAL022C
+CYTK1,Cytidylate kinase (CMP),True,-999999.0,999999.0,4,
+CYTK2,Cytidylate kinase (dCMP),True,-999999.0,999999.0,4,
+DADA,Deoxyadenosine deaminase,False,0.0,999999.0,5,YNL141W
+DADK,Deoxyadenylate kinase,True,-999999.0,999999.0,4,
+DIAT,Diamine transaminase,False,0.0,999999.0,5,
+DINSt2,Deoxyinosine transport in via proton symport,False,0.0,999999.0,4,
+DADNt2,Deoxyadenosine transport in via proton symport,False,0.0,999999.0,4,
+DIPS,Diphthine synthase,False,0.0,999999.0,5,YLR172C
+DADPtn,DADP nuclear transport,True,-999999.0,999999.0,2,
+4HBZtm,4 Hydroxybenzoate mitochondrial transport,True,-999999.0,999999.0,2,
+DAGCPT_SC,Diacylglycerol cholinephosphotransferase  yeast specific,False,0.0,999999.0,5,YNL130C or YHR123W
+DAGPYP_SC,Diacylglycerol pyrophosphate phosphatase  yeast specific,False,0.0,999999.0,4,YDR503C or YDR284C
+DKMPPD2,2 3 diketo 5 methylthio 1 phosphopentane degradation reaction,False,0.0,999999.0,6,YMR009W and YEL038W
+DMATT,Dimethylallyltranstransferase,False,0.0,999999.0,4,YJL167W
+DNMPPA,Dihydroneopterin monophosphate dephosphorylase,False,0.0,999999.0,4,YDL100C
+DNTPPA,Dihydroneopterin triphosphate pyrophosphatase,False,0.0,999999.0,5,
+DOLK,Dolichol kinase,False,0.0,999999.0,5,YMR013C
+DOLPMMer,Dolichyl phosphate mannose  protein mannosyltransferase  endoplasmic reticular,False,0.0,999999.0,4,(YDL095W and YAL023C) or YOR321W or YJR143C or YDL093W or YGR199W
+DANNt2,7 8 Diaminononanoate reversible transport via proton symport,True,-999999.0,999999.0,4,
+DASYN_SC,CDP Diacylglycerol synthetase  yeast specific,True,-999999.0,999999.0,5,YBR029C
+DASYNm_SC,CDP Diacylglycerol synthetase  yeast specific  mitochondrial,True,-999999.0,999999.0,5,YBR029C
+DB4PS,"3,4-Dihydroxy-2-butanone-4-phosphate synthase",False,0.0,999999.0,4,YDR487C
+DBTS,Dethiobiotin synthase,True,-999999.0,999999.0,7,YNR057C
+DCDPtn,DCDP nuclear transport,True,-999999.0,999999.0,2,
+DCMPDA,DCMP deaminase,True,-999999.0,999999.0,5,YHR144C
+DOLPMTcer,Dolichyl phosphate D mannosyltransferase,False,0.0,999999.0,4,YPR183W
+DOLPt2er,Dolichol phosphate endoplasmic reticular transport via proton symport,True,-999999.0,999999.0,4,
+4HGLSDm,L 4 hydroxyglutamate semialdehyde dehydrogenase  mitochondrial,True,-999999.0,999999.0,6,YHR037W
+DPCOAK,Dephospho-CoA kinase,False,0.0,999999.0,5,
+DPCOAKm,Dephospho CoA kinase  mitochondrial,False,0.0,999999.0,5,
+DPGM,Diphosphoglyceromutase,True,-999999.0,999999.0,3,YKL152C
+DPMVD,Diphosphomevalonate decarboxylase,False,0.0,999999.0,6,YNR043W
+ECOAH4p,3 hydroxyacyl CoA dehydratase  3 hydroxydecanoyl CoA   peroxisomal,True,-999999.0,999999.0,3,YKR009C
+ECOAH5p,3 hydroxyacyl CoA dehydratase  3 hydroxydodecanoyl CoA   peroxisomal,True,-999999.0,999999.0,3,YKR009C
+DPR,2-dehydropantoate 2-reductase,False,0.0,999999.0,5,YHR063C
+4HPRO_LTtm,Trans 4 hydroxy L proline mitochondrial transport via diffusion,True,-999999.0,999999.0,2,
+DPRm,2 dehydropantoate 2 reductase  mitochondrial,False,0.0,999999.0,5,YLR355C
+ECOAH6p,3 hydroxyacyl CoA dehydratase  3 hydroxytetradecanoyl CoA   peroxisomal,True,-999999.0,999999.0,3,YKR009C
+DRBK,Deoxyribokinase,False,0.0,999999.0,5,YCR036W
+ECOAH7p,3 hydroxyacyl CoA dehydratase  3 hydroxyhexadecanoyl CoA   peroxisomal,True,-999999.0,999999.0,3,YKR009C
+ECOAH8p,3 hydroxyacyl CoA dehydratase  3 hydroxyoctadecanoyl CoA   peroxisomal,True,-999999.0,999999.0,3,YKR009C
+DROPPRy,2 5 diamino 6 ribosylamino 4 3H  pyrimidinone 5  phosphate reductase  nadph,False,0.0,999999.0,5,YBR153W
+4HTHRS,4-Hydroxy-L-threonine synthase,False,0.0,999999.0,4,YCR053W
+DRTPPD,2 5 diamino 6 ribitylamino 4 3H  pyrimidinone 5  phosphate deaminase,False,0.0,999999.0,5,YOL066C
+EHGLAT,L erythro 4 Hydroxyglutamate2 oxoglutarate aminotransferase,False,0.0,999999.0,4,YLR027C
+EHGLATm,L erythro 4 Hydroxyglutamate2 oxoglutarate aminotransferase  mitochondrial,False,0.0,999999.0,4,YKL106W
+EHGLATp,L erythro 4 Hydroxyglutamate2 oxoglutarate aminotransferase  peroxisomal,False,0.0,999999.0,4,YLR027C
+ENO,Enolase,True,-999999.0,999999.0,3,YPL281C or YGR254W or YHR174W or YOR393W or YMR323W
+EPGALURSe,Endopolygalacturonase  extracellular,False,0.0,999999.0,3,YJR153W
+EPISTAT_SC,Acyl CoAepisterol acyltransferase  yeast specific,False,0.0,999999.0,9,YCR048W
+DTMPK,DTMP kinase,True,-999999.0,999999.0,4,YJR057W
+DTTPt,DTTP reversible uniport,True,-999999.0,999999.0,2,
+DUMPtn,DUMP nuclear transport,True,-999999.0,999999.0,2,
+DURIK1,Deoxyuridine kinase (ATP:Deoxyuridine),False,0.0,999999.0,5,
+DURIPP,Deoxyuridine phosphorylase,True,-999999.0,999999.0,4,YLR209C
+DURIt2,Deoxyuridine transport in via proton symport,False,0.0,999999.0,4,
+DUTPDP,DUTP diphosphatase,False,0.0,999999.0,5,YBR252W
+EPISTESTH_SC,Episterol ester hydrolase  yeast specific,False,0.0,999999.0,10,YLL012W or YKL140W
+EPISTESTH_SCe,Episterol ester hydrolase  yeast specific  extracellular,False,0.0,999999.0,10,YLR020C
+EPISTt,Episterol reversible transport,True,-999999.0,999999.0,2,YOR011W or YIL013C
+DXHPScm,Deoxyhypusine synthase  cytosolicmitochondrial,False,0.0,999999.0,6,YHR068W
+D_LACDcm,D lactate dehydrogenase  cytosolicmitochondrial,False,0.0,999999.0,4,(YJR048W and YDL174C) or (YEL039C and YDL174C) or (YJR048W and YEL071W) or (YEL039C and YEL071W)
+EPMGH,Epimelibiose galactohydrolase,True,-999999.0,999999.0,4,YBR184W
+4MOPDC,4 Methyl 2 oxopentanoate decarboxylase,False,0.0,999999.0,4,YDL080C or YDR380W
+ERGSTAT_SC,Acyl CoAergosterol acyltransferase  yeast specific,False,0.0,999999.0,9,YCR048W or YNR019W
+ERGSTESTH_SC,Ergosterol ester hydrolase  yeast specific,False,0.0,999999.0,10,YKL140W or YLL012W
+ERGSTESTH_SCe,Ergosterol ester hydrolase  yeast specific  extracellular,False,0.0,999999.0,10,YLR020C
+ERGSTGLCT,UDP glucoseergosterol glucosyltransferase,False,0.0,999999.0,5,YLR189C
+D_LACDm,D lactate dehydrogenase  mitochondrial,False,0.0,999999.0,4,(YJR048W and YDL178W) or (YEL039C and YDL178W)
+D_LACt2,D lactate transport via proton symport,True,-999999.0,999999.0,4,YKL217W
+D_LACt2m,D lactatepyruvate antiport  mitochondrial,True,-999999.0,999999.0,4,
+D_LACtm,D lactate transport  mitochondrial,True,-999999.0,999999.0,4,
+E4HGLUtm,L erythro 4 hydroxyglutamate mitochondrial transport via diffusion,True,-999999.0,999999.0,2,
+ERGSTt,Ergosterol reversible transport,True,-999999.0,999999.0,2,YIL013C or YOR011W
+ERGSTter,Ergosterol endoplasmic reticular transport,True,-999999.0,999999.0,2,
+ERGTETROLter,Ergosta 5 6 22 24  28  tetraen 3beta ol endoplamic reticular transport,True,-999999.0,999999.0,2,
+E4HGLUtp,L erythro 4 hydroxyglutamate peroxisomal transport via diffusion,True,-999999.0,999999.0,2,
+E4Ptm,D erythrose 4 phosphate mtiochondrial transport via diffusion,True,-999999.0,999999.0,2,
+ETHAK,Ethanolamine kinase,False,0.0,999999.0,5,YDR147W
+5AOPt2,5 Aminolevulinate transport in via proton symport,False,0.0,999999.0,4,YDL210W
+ETHAPT_SC,Ethanolaminephosphotransferase  yeast specific,True,-999999.0,999999.0,5,YHR123W
+ETHAt,Ethanolamine transport via diffusion  extracellular,True,-999999.0,999999.0,2,
+ETOHt,Ethanol reversible transport,True,-999999.0,999999.0,2,
+ETOHtm,Ethanol transport to mitochondria  diffusion,True,-999999.0,999999.0,2,
+ECOAH11p,3 hydroxyacyl CoA dehydratase  3 hydroxyhexacosyl CoA   peroxisomal,True,-999999.0,999999.0,3,YKR009C
+EX_ergst_e,Ergosterol exchange,False,0.0,999999.0,1,
+EX_ergstest_SC_e,Ergosterol ester  yeast specific exchange,False,0.0,999999.0,1,
+EX_13BDglcn_e,1 3 beta D Glucan exchange,False,0.0,999999.0,1,
+EX_etha_e,Ethanolamine exchange,False,0.0,999999.0,1,
+EX_2hb_e,2 Hydroxybutyrate exchange,False,0.0,999999.0,1,
+EX_etoh_e,Ethanol exchange,False,0.0,999999.0,1,
+5AOPtm,5 Aminolevulinate mitochondrial transport,True,-999999.0,999999.0,2,
+EX_fe2_e,Fe2+ exchange,True,-999999.0,999999.0,1,
+EX_fecost_e,Fecosterol exchange,False,0.0,999999.0,1,
+EX_2mbac_e,2 methylbutyl acetate exchange,False,0.0,999999.0,1,
+EX_2mbald_e,2 methylbutyraldehyde exchange,False,0.0,999999.0,1,
+EX_2mbtoh_e,2 methyl 1 butanol exchange,False,0.0,999999.0,1,
+EX_2mppal_e,2 methylpropanal exchange,False,0.0,999999.0,1,
+EX_2phetoh_e,2 phenylethanol exchange,False,0.0,999999.0,1,
+EX_fecostest_SC_e,Fecosterol ester  yeast specific exchange,False,0.0,999999.0,1,
+EX_fmn_e,FMN exchange,False,0.0,999999.0,1,
+EX_3c3hmp_e,3 Carboxy 3 hydroxy 4 methylpentanoate exchange,False,0.0,999999.0,1,
+6PGLter,6 phospho D glucono 1 5 lactone endoplasmic reticular transport via diffusion,True,-999999.0,999999.0,2,
+EX_3mbald_e,3 Methylbutanal exchange,False,0.0,999999.0,1,
+EX_for_e,Formate exchange,False,0.0,999999.0,1,
+EX_fru_e,D-Fructose exchange,False,0.0,999999.0,1,
+EX_3mop_e,3mop exchange,False,0.0,999999.0,1,
+8AONNt2,8 Amino 7 oxononanoate reversible transport via proton symport,True,-999999.0,999999.0,4,YNR056C
+EX_4abut_e,4-Aminobutanoate exchange,False,0.0,999999.0,1,
+EX_fum_e,Fumarate exchange,False,0.0,999999.0,1,
+EX_g3pc_e,Sn-Glycero-3-phosphocholine exchange,False,0.0,999999.0,1,
+EX_4abz_e,4 Aminobenzoate exchange,False,0.0,999999.0,1,
+AABTN,4 acetamidobutyrate deacetylase,False,0.0,999999.0,4,
+EX_5aop_e,5 Amino 4 oxopentanoate exchange,False,0.0,999999.0,1,
+EX_g3pi_e,Sn-Glycero-3-phospho-1-inositol exchange,False,0.0,999999.0,1,
+EX_gal_e,D-Galactose exchange,False,0.0,999999.0,1,
+EX_8aonn_e,8 Amino 7 oxononanoate exchange,False,0.0,999999.0,1,
+EX_Nbfortyr_e,N N bisformyl dityrosine exchange,False,0.0,999999.0,1,
+EX_abt_e,L Arabinitol exchange,False,0.0,999999.0,1,
+EX_ac_e,Acetate exchange,False,0.0,999999.0,1,
+EX_acald_e,Acetaldehyde exchange,False,0.0,999999.0,1,
+EX_aces_e,Acetic ester exchange,False,0.0,999999.0,1,
+EX_galur_e,D-Galacturonate exchange,False,0.0,999999.0,1,
+EX_gam6p_e,D-Glucosamine 6-phosphate exchange,False,0.0,999999.0,1,
+EX_gcald_e,Glycolaldehyde exchange,False,0.0,999999.0,1,
+EX_glc__D_e,D-Glucose exchange,True,-10.0,999999.0,1,
+EX_gln__L_e,L-Glutamine exchange,False,0.0,999999.0,1,
+EX_glu__L_e,L-Glutamate exchange,False,0.0,999999.0,1,
+EX_glx_e,Glyoxylate exchange,False,0.0,999999.0,1,
+EX_ade_e,Adenine exchange,False,0.0,999999.0,1,
+EX_adn_e,Adenosine exchange,False,0.0,999999.0,1,
+EX_akg_e,2-Oxoglutarate exchange,False,0.0,999999.0,1,
+EX_ala__L_e,L-Alanine exchange,False,0.0,999999.0,1,
+EX_gly_e,Glycine exchange,False,0.0,999999.0,1,
+EX_glyc_e,Glycerol exchange,False,0.0,999999.0,1,
+AACTOOR,Aminoacetone:oxygen oxidoreductase(deaminating)(flavin-containing),False,0.0,999999.0,6,
+EX_gsn_e,Guanosine exchange,False,0.0,999999.0,1,
+EX_gthox_e,Oxidized glutathione exchange,False,0.0,999999.0,1,
+EX_gthrd_e,Reduced glutathione exchange,False,0.0,999999.0,1,
+EX_alltn_e,Allantoin exchange,False,0.0,999999.0,1,
+EX_alltt_e,Allantoate exchange,False,0.0,999999.0,1,
+EX_amet_e,S Adenosyl L methionine exchange,False,0.0,999999.0,1,
+EX_arab__D_e,D Arabinose exchange,False,0.0,999999.0,1,
+EX_arab__L_e,L-Arabinose exchange,False,0.0,999999.0,1,
+EX_gua_e,Guanine exchange,False,0.0,999999.0,1,
+EX_arg__L_e,L-Arginine exchange,False,0.0,999999.0,1,
+EX_h2o_e,H2O exchange,True,-999999.0,999999.0,1,
+AASAD1,L aminoadipate semialdehyde dehydrogenase  NADPH,False,0.0,999999.0,8,YBR115C and YGL154C
+EX_h_e,H+ exchange,True,-999999.0,999999.0,1,
+EX_hdca_e,Hexadecanoate (n-C16:0) exchange,False,0.0,999999.0,1,
+EX_hdcea_e,Hexadecenoate (n-C16:1) exchange,False,0.0,999999.0,1,
+EX_asn__L_e,L-Asparagine exchange,False,0.0,999999.0,1,
+EX_asp__L_e,L-Aspartate exchange,False,0.0,999999.0,1,
+EX_btd_RR_e,R R  2 3 Butanediol exchange,False,0.0,999999.0,1,
+EX_btn_e,Biotin exchange,False,0.0,999999.0,1,
+EX_hexc_e,Hexacosanoate  n C260  exchange,False,0.0,999999.0,1,
+AASAD2,L aminoadipate semialdehyde dehydrogenase  NADH,False,0.0,999999.0,8,YBR115C and YGL154C
+EX_his__L_e,L-Histidine exchange,False,0.0,999999.0,1,
+EX_hxan_e,Hypoxanthine exchange,False,0.0,999999.0,1,
+EX_iamac_e,Isoamyl acetate exchange,False,0.0,999999.0,1,
+EX_iamoh_e,Isoamyl alcohol exchange,False,0.0,999999.0,1,
+EX_ibutac_e,Isobutyl acetate exchange,False,0.0,999999.0,1,
+EX_chol_e,Choline exchange,False,0.0,999999.0,1,
+EX_cit_e,Citrate exchange,False,0.0,999999.0,1,
+EX_co2_e,CO2 exchange,False,0.0,999999.0,1,
+EX_crn_e,L-Carnitine exchange,False,0.0,999999.0,1,
+EX_csn_e,Cytosine exchange,False,0.0,999999.0,1,
+EX_cys__L_e,L-Cysteine exchange,False,0.0,999999.0,1,
+EX_cytd_e,Cytidine exchange,False,0.0,999999.0,1,
+EX_dad_2_e,Deoxyadenosine exchange,False,0.0,999999.0,1,
+EX_dann_e,7 8 Diaminononanoate exchange,False,0.0,999999.0,1,
+EX_ibutoh_e,Isobutyl alcohol exchange,False,0.0,999999.0,1,
+EX_id3acald_e,Indole 3 acetaldehyde exchange,False,0.0,999999.0,1,
+EX_ile__L_e,L-Isoleucine exchange,False,0.0,999999.0,1,
+EX_ind3eth_e,Indole 3 ethanol exchange,False,0.0,999999.0,1,
+EX_inost_e,Myo-Inositol exchange,False,0.0,999999.0,1,
+EX_dca_e,Decanoate (n-C10:0) exchange,False,0.0,999999.0,1,
+EX_dcyt_e,Deoxycytidine exchange,False,0.0,999999.0,1,
+EX_ddca_e,Dodecanoate (n-C12:0) exchange,False,0.0,999999.0,1,
+EX_ins_e,Inosine exchange,False,0.0,999999.0,1,
+EX_k_e,K+ exchange,True,-999999.0,999999.0,1,
+EX_dgsn_e,Deoxyguanosine exchange,False,0.0,999999.0,1,
+EX_din_e,Deoxyinosine exchange,False,0.0,999999.0,1,
+EX_lac__D_e,D-lactate exchange,False,0.0,999999.0,1,
+AATA,2 aminoadipate transaminase,True,-999999.0,999999.0,4,
+EX_lac__L_e,L-Lactate exchange,False,0.0,999999.0,1,
+EX_lanost_e,Lanosterol exchange,False,0.0,999999.0,1,
+EX_lanostest_SC_e,Lanosterol ester  yeast specific exchange,False,0.0,999999.0,1,
+EX_dttp_e,DTTP exchange,False,0.0,999999.0,1,
+EX_duri_e,Deoxyuridine exchange,False,0.0,999999.0,1,
+EX_leu__L_e,L-Leucine exchange,False,0.0,999999.0,1,
+ABTA,4-aminobutyrate transaminase,False,0.0,999999.0,4,YGR019W
+EX_lys__L_e,L-Lysine exchange,False,0.0,999999.0,1,
+EX_mal__L_e,L-Malate exchange,False,0.0,999999.0,1,
+EX_malt_e,Maltose exchange,False,0.0,999999.0,1,
+EX_ribflv_e,Riboflavin exchange,False,0.0,999999.0,1,
+EX_sbt__D_e,D-Sorbitol exchange,False,0.0,999999.0,1,
+EX_man_e,D-Mannose exchange,False,0.0,999999.0,1,
+ABTt,L arabinitol transport via passive diffusion,True,-999999.0,999999.0,2,
+EX_melib_e,Melibiose exchange,False,0.0,999999.0,1,
+EX_met__L_e,L-Methionine exchange,False,0.0,999999.0,1,
+EX_mmet_e,S-Methyl-L-methionine exchange,False,0.0,999999.0,1,
+EX_na1_e,Sodium exchange,True,-999999.0,999999.0,1,
+EX_nac_e,Nicotinate exchange,False,0.0,999999.0,1,
+EX_sbt__L_e,L Sorbitol exchange,False,0.0,999999.0,1,
+EX_ser__L_e,L-Serine exchange,False,0.0,999999.0,1,
+EX_so3_e,Sulfite exchange,False,0.0,999999.0,1,
+EX_so4_e,Sulfate exchange,True,-999999.0,999999.0,1,
+EX_spmd_e,Spermidine exchange,False,0.0,999999.0,1,
+EX_sprm_e,Spermine exchange,False,0.0,999999.0,1,
+EX_srb__L_e,L Sorbose exchange,False,0.0,999999.0,1,
+EX_succ_e,Succinate exchange,False,0.0,999999.0,1,
+EX_nadp_e,Nicotinamide adenine dinucleotide phosphate exchange,False,0.0,999999.0,1,
+EX_nh4_e,Ammonia exchange,True,-999999.0,999999.0,1,
+EX_nmn_e,NMN exchange,False,0.0,999999.0,1,
+EX_sucr_e,Sucrose exchange,False,0.0,999999.0,1,
+EX_o2_e,O2 exchange,True,-2.0,999999.0,1,
+EX_taur_e,Taurine exchange,False,0.0,999999.0,1,
+ABUTDm,Aminobutyraldehyde dehydrogenase  mitochondrial,False,0.0,999999.0,6,YOR374W or YER073W
+EX_thm_e,Thiamin exchange,False,0.0,999999.0,1,
+EX_oaa_e,Oxaloacetate exchange,False,0.0,999999.0,1,
+EX_ocdca_e,Octadecanoate (n-C18:0) exchange,False,0.0,999999.0,1,
+EX_ocdcea_e,Octadecenoate (n-C18:1) exchange,False,0.0,999999.0,1,
+ABUTt2r,4 aminobutyrate reversible transport in via proton symport,True,-999999.0,999999.0,4,YOR348C or YDL210W
+EX_ocdcya_e,Octadecynoate  n C182  exchange,False,0.0,999999.0,1,
+EX_orn_e,Ornithine exchange,False,0.0,999999.0,1,
+EX_thmmp_e,Thiamin monophosphate exchange,False,0.0,999999.0,1,
+EX_thmpp_e,Thiamine diphosphate exchange,False,0.0,999999.0,1,
+EX_thr__L_e,L-Threonine exchange,False,0.0,999999.0,1,
+EX_thym_e,Thymine exchange,False,0.0,999999.0,1,
+EX_pacald_e,Phenylacetaldehyde exchange,False,0.0,999999.0,1,
+EX_pap_e,Adenosine 3  5  bisphosphate exchange,False,0.0,999999.0,1,
+EX_thymd_e,Thymidine exchange,False,0.0,999999.0,1,
+ACACT1r,Acetyl-CoA C-acetyltransferase,False,0.0,999999.0,3,YPL028W
+EX_tre_e,Trehalose exchange,False,0.0,999999.0,1,
+EX_trp__L_e,L-Tryptophan exchange,False,0.0,999999.0,1,
+EX_pc_SC_e,Phosphatidylcholine  yeast specific exchange,False,0.0,999999.0,1,
+EX_pectin_e,Pectin exchange,False,0.0,999999.0,1,
+EX_pepd_e,Peptide exchange,False,0.0,999999.0,1,
+EX_phe__L_e,L-Phenylalanine exchange,False,0.0,999999.0,1,
+EX_pheac_e,Phenethyl acetate exchange,False,0.0,999999.0,1,
+EX_pi_e,Phosphate exchange,True,-999999.0,999999.0,1,
+EX_pnto__R_e,(R)-Pantothenate exchange,False,0.0,999999.0,1,
+EX_ttdca_e,Tetradecanoate (n-C14:0) exchange,False,0.0,999999.0,1,
+EX_tyr__L_e,L-Tyrosine exchange,False,0.0,999999.0,1,
+EX_ura_e,Uracil exchange,False,0.0,999999.0,1,
+EX_urea_e,Urea exchange,False,0.0,999999.0,1,
+EX_uri_e,Uridine exchange,False,0.0,999999.0,1,
+EX_val__L_e,L-Valine exchange,False,0.0,999999.0,1,
+EX_xan_e,Xanthine exchange,False,0.0,999999.0,1,
+EX_xtsn_e,Xanthosine exchange,False,0.0,999999.0,1,
+EX_pro__L_e,L-Proline exchange,False,0.0,999999.0,1,
+EX_ptd1ino_SC_e,Phosphatidyl 1D myo inositol  yeast specific exchange,False,0.0,999999.0,1,
+EX_ptrc_e,Putrescine exchange,False,0.0,999999.0,1,
+EX_pyr_e,Pyruvate exchange,False,0.0,999999.0,1,
+EX_xyl__D_e,D-Xylose exchange,False,0.0,999999.0,1,
+EX_xylt_e,Xylitol exchange,False,0.0,999999.0,1,
+EX_rib__D_e,D-Ribose exchange,False,0.0,999999.0,1,
+ACACT1m,Acetyl CoA C acetyltransferase  mitochondrial,False,0.0,999999.0,3,YPL028W
+EX_zymst_e,Zymosterol exchange,False,0.0,999999.0,1,
+EX_zymstest_SC_e,Zymosterol ester  yeast specific exchange,False,0.0,999999.0,1,
+FA100tp,Fatty acid peroxisomal transport,False,0.0,999999.0,2,
+ACACT4p,Acetyl CoA C acetyltransferase  octanoyl CoA   peroxisomal,False,0.0,999999.0,4,YIL160C
+FA120ACPHi,Fatty-acyl-ACP hydrolase,True,-999999.0,999999.0,5,YKL182W and YPL231W
+FACOAL161,Fatty acid  CoA ligase  hexadecenoate,True,-999999.0,999999.0,6,YOR317W or YIL009W or YMR246W
+FACOAL161p,Fatty acid  CoA ligase  hexadecenoate   peroxisomal,True,-999999.0,999999.0,6,YER015W
+FA120ACPtm,Fatty acyl ACP mitochondrial transport,False,0.0,999999.0,2,
+ACACT5p,Acetyl CoA C acyltransferase  decanoyl CoA   peroxisomal,False,0.0,999999.0,4,YIL160C
+FA120tp,Fatty acid peroxisomal transport,False,0.0,999999.0,2,
+FA140ACPHi,Fatty-acyl-ACP hydrolase,True,-999999.0,999999.0,5,YKL182W and YPL231W
+FACOAL180,Fatty acid  CoA ligase  octadecanoate,True,-999999.0,999999.0,6,YOR317W or YIL009W or YMR246W
+FACOAL181,Fatty acid  CoA ligase  octadecenoate,True,-999999.0,999999.0,6,YOR317W or YIL009W or YMR246W
+FACOAL182,Fatty acid  CoA ligase  octadecynoate,True,-999999.0,999999.0,6,YOR317W or YMR246W or YIL009W
+FA140ACPtm,Fatty acyl ACP mitochondrial transport,False,0.0,999999.0,2,
+FACOAL240p,Fatty acid  CoA ligase  n C240   peroxisomal,True,-999999.0,999999.0,6,YBR041W
+FA140COAabcp,Fatty acid peroxisomal transport via ABC system,False,0.0,999999.0,7,YPL147W and YKL188C
+FA140tp,Fatty acid peroxisomal transport,False,0.0,999999.0,2,
+FA141ACPHi,Fatty-acyl-ACP hydrolase,True,-999999.0,999999.0,5,YKL182W and YPL231W
+FA141ACPtm,Fatty acyl ACP mitochondrial transport,False,0.0,999999.0,2,
+FACOAL260p,Fatty acid  CoA ligase  n C260   peroxisomal,True,-999999.0,999999.0,6,YBR041W
+FACOAL80p,Fatty acid  CoA ligase  octanoate   peroxisomal,True,-999999.0,999999.0,6,YER015W
+FADFMNtm,FADFMN antiport,False,0.0,999999.0,4,YIL134W
+FALDH,Formaldehyde dehydrogenase,True,-999999.0,999999.0,6,YDL168W
+FA141COAabcp,Fatty acid peroxisomal transport via ABC system,False,0.0,999999.0,7,YPL147W and YKL188C
+FAS161ACPm,Fatty acyl ACP synthase  n C161ACP   mitochondrial,False,0.0,999999.0,10,YKL192C and YER061C and YHR067W and YOR221C and YBR026C and YKL055C
+FA141tp,Fatty acid peroxisomal transport,False,0.0,999999.0,2,
+FA160ACPHi,Fatty-acyl-ACP hydrolase,True,-999999.0,999999.0,5,YKL182W and YPL231W
+FA160ACPtm,Fatty acyl ACP mitochondrial transport,False,0.0,999999.0,2,
+FA160COAabcp,Fatty acyl CoA peroxisomal transport via ABC system,False,0.0,999999.0,7,YPL147W and YKL188C
+FAO141p_even,Fatty acid oxidation,False,0.0,999999.0,11,(YLR284C and YKR009C and YIL160C and YGL205W and YNL202W) or (YOR180C and YKR009C and YIL160C and YGL205W and YNL202W) or (YOR180C and YLR284C and YKR009C and YIL160C and YGL205W and YNL202W)
+FAO141p_odd,Fatty acid oxidation,False,0.0,999999.0,9,(YLR284C and YKR009C and YIL160C and YGL205W) or (YOR180C and YKR009C and YIL160C and YGL205W)
+FAO161p_even,Fatty acid oxidation,False,0.0,999999.0,11,(YLR284C and YKR009C and YIL160C and YGL205W and YNL202W) or (YOR180C and YKR009C and YIL160C and YGL205W and YNL202W) or (YOR180C and YLR284C and YKR009C and YIL160C and YGL205W and YNL202W)
+FAO161p_odd,Fatty acid oxidation,False,0.0,999999.0,9,(YLR284C and YKR009C and YIL160C and YGL205W) or (YOR180C and YKR009C and YIL160C and YGL205W)
+FAO181p_even,Fatty acid oxidation,False,0.0,999999.0,11,(YLR284C and YKR009C and YIL160C and YGL205W and YNL202W) or (YOR180C and YKR009C and YIL160C and YGL205W and YNL202W) or (YOR180C and YLR284C and YKR009C and YIL160C and YGL205W and YNL202W)
+FA160tp,Fatty acid peroxisomal transport,False,0.0,999999.0,2,
+FA161ACPHi,Fatty-acyl-ACP hydrolase,True,-999999.0,999999.0,5,YKL182W and YPL231W
+FA161ACPtm,Fatty acyl ACP mitochondrial transport,False,0.0,999999.0,2,
+FAO181p_odd,Fatty acid oxidation,False,0.0,999999.0,9,(YLR284C and YKR009C and YIL160C and YGL205W) or (YOR180C and YKR009C and YIL160C and YGL205W)
+FAS180,Fatty acid synthase  n C180,False,0.0,999999.0,9,YGR037C and YNR016C and (YKL182W and YPL231W)
+FAO182p_eveneven,Fatty acid oxidation,False,0.0,999999.0,11,(YOR180C and YKR009C and YIL160C and YGL205W and YNL202W) or (YLR284C and YKR009C and YIL160C and YGL205W and YNL202W) or (YOR180C and YLR284C and YKR009C and YIL160C and YGL205W and YNL202W)
+FAO182p_evenodd,Fatty acid oxidation,False,0.0,999999.0,11,(YLR284C and YKR009C and YIL160C and YGL205W and YNL202W) or (YOR180C and YKR009C and YIL160C and YGL205W and YNL202W)
+FAO182p_oddodd,Fatty acid oxidation,False,0.0,999999.0,9,(YLR284C and YKR009C and YIL160C and YGL205W) or (YOR180C and YKR009C and YIL160C and YGL205W)
+FAO240p,Fatty acid oxidation  tetradecansoyl CoA   peroxisomal,False,0.0,999999.0,10,YKR009C and YIL160C and YGL205W
+FAO80p,Fatty acid oxidation  octanoyl CoA   peroxisomal,False,0.0,999999.0,9,YKR009C and YIL160C and YGL205W
+FAS100,Fatty acid synthase  n C100,False,0.0,999999.0,9,YGR037C and YNR016C and (YKL182W and YPL231W)
+FA161COAabcp,Fatty acyl CoA peroxisomal transport via ABC system,False,0.0,999999.0,7,YPL147W and YKL188C
+FA161tp,Fatty acid peroxisomal transport,False,0.0,999999.0,2,
+FA180ACPH,Fatty acyl ACP hydrolase,True,-999999.0,999999.0,5,YKL182W and YPL231W
+FA180ACPtm,Fatty acyl ACP mitochondrial transport,False,0.0,999999.0,2,
+FA180COAabcp,Fatty acyl CoA transport via ABC system,False,0.0,999999.0,7,YPL147W and YKL188C
+FA181ACPH,Fatty acyl ACP hydrolase,True,-999999.0,999999.0,5,YKL182W and YPL231W
+FA181ACPtm,Fatty acyl ACP mitochondrial transport,False,0.0,999999.0,2,
+FA181COAabcp,Fatty acyl CoA peroxisomal transport via ABC system,False,0.0,999999.0,7,YPL147W and YKL188C
+FA182ACPH,Fatty acyl ACP hydrolase,True,-999999.0,999999.0,5,YKL182W and YPL231W
+FA182ACPtm,Fatty acyl ACP mitochondrial transport,False,0.0,999999.0,2,
+FA182COAabcp,Fatty acyl CoA peroxisomal transport via ABC system,False,0.0,999999.0,7,YPL147W and YKL188C
+FA240tp,Fatty acid peroxisomal transport,False,0.0,999999.0,2,YBR041W
+FAS100ACPm,Fatty acyl ACP synthase  n C100ACP   mitochondrial,False,0.0,999999.0,9,YKL192C and YER061C and YHR067W and YOR221C and YBR026C and YKL055C
+FAS100COA,Fatty acyl CoA synthase  n C100CoA,False,0.0,999999.0,9,YGR037C and YNR016C and (YKL182W and YPL231W)
+FAS120,Fatty acid synthase  n C120,False,0.0,999999.0,9,YGR037C and YNR016C and (YKL182W and YPL231W)
+FAS120ACPm,Fatty acyl ACP synthase  n C120ACP   mitochondrial,False,0.0,999999.0,9,YKL192C and YER061C and YHR067W and YOR221C and YBR026C and YKL055C
+FAS120COA,Fatty acyl CoA synthase  n C120CoA,False,0.0,999999.0,9,YGR037C and YNR016C and (YKL182W and YPL231W)
+FAS140,Fatty acid synthase  n C140,False,0.0,999999.0,9,YGR037C and YNR016C and (YKL182W and YPL231W)
+FAS140ACPm,Fatty acyl ACP synthase  n C140ACP   mitochondrial,False,0.0,999999.0,9,YKL192C and YER061C and YHR067W and YOR221C and YBR026C and YKL055C
+FAS140COA,Fatty acyl CoA synthase  n C140CoA,False,0.0,999999.0,9,YGR037C and YNR016C and (YKL182W and YPL231W)
+FAS141,Fatty acid synthase  n C141,False,0.0,999999.0,10,YJL196C
+FA260tp,Fatty acid peroxisomal transport,False,0.0,999999.0,2,YBR041W
+FA80tp,Fatty acid peroxisomal transport,False,0.0,999999.0,2,
+FACOAL100p,Fatty acid  CoA ligase  decanoate   peroxisomal,True,-999999.0,999999.0,6,YER015W
+FAS141ACPm,Fatty acyl ACP synthase  n C141ACP   mitochondrial,False,0.0,999999.0,10,YKL192C and YER061C and YHR067W and YOR221C and YBR026C and YKL055C
+FACOAL120p,Fatty acid  CoA ligase  dodecanoate   peroxisomal,True,-999999.0,999999.0,6,YER015W
+FACOAL140,Fatty acid  CoA ligase  tetradecanoate,True,-999999.0,999999.0,6,YOR317W or YIL009W or YMR246W
+FACOAL140p,Fatty acid  CoA ligase  tetradecanoate   peroxisomal,True,-999999.0,999999.0,6,YER015W
+FACOAL141,Fatty acid  CoA ligase  tetradecenoate,True,-999999.0,999999.0,6,YOR317W or YIL009W or YMR246W
+FACOAL141p,Fatty acid  CoA ligase  tetradecenoate   peroxisomal,True,-999999.0,999999.0,6,YER015W
+FAS160,Fatty acid synthase  n C160,False,0.0,999999.0,9,YGR037C and YNR016C and (YKL182W and YPL231W)
+FAS160ACPm,Fatty acyl ACP synthase  n C160ACP   mitochondrial,False,0.0,999999.0,9,YKL192C and YER061C and YHR067W and YOR221C and YBR026C and YKL055C
+FAS160COA,Fatty acyl CoA synthase  n C160CoA,False,0.0,999999.0,9,YGR037C and YNR016C and (YKL182W and YPL231W)
+FAS161,Fatty acid synthase  n C161,False,0.0,999999.0,10,YJL196C
+FACOAL160,Fatty acid  CoA ligase  hexadecanoate,True,-999999.0,999999.0,6,YOR317W or YIL009W or YMR246W
+FACOAL160p,Fatty acid  CoA ligase  hexadecanoate   peroxisomal,True,-999999.0,999999.0,6,YER015W
+FAS180ACPm,Fatty acyl ACP synthase  n C180ACP   mitochondrial,False,0.0,999999.0,9,YKL192C and YER061C and YHR067W and YOR221C and YBR026C and YKL055C
+G3PDm,Glycerol 3 phosphate dehydrogenase  FAD   mitochondrial,False,0.0,999999.0,4,YIL155C
+FAS180COA,Fatty acyl CoA synthase  n C180CoA,False,0.0,999999.0,9,YGR037C and YNR016C and (YKL182W and YPL231W)
+GLUK,Glucokinase,False,0.0,999999.0,5,YCL040W
+G3PIt,Glycero 3 phospho 1 inositol transport  extracellular to cytosol,True,-999999.0,999999.0,2,YCR098C
+FAS181,Fatty acid synthase  n C181,False,0.0,999999.0,10,YJL196C
+FAS181ACPm,Fatty acyl ACP synthase  n C181ACP   mitochondrial,False,0.0,999999.0,10,YKL192C and YER061C and YHR067W and YOR221C and YBR026C and YKL055C
+FAS182ACPm,Fatty acyl ACP synthase  n C182ACP   mitochondrial,False,0.0,999999.0,10,YKL192C and YER061C and YHR067W and YOR221C and YBR026C and YKL055C
+G3PT,Glycerol-3-phosphatase,False,0.0,999999.0,4,YER062C or YIL053W
+FAS240_L,Fatty acid synthase  n C240   lumped reaction,False,0.0,999999.0,9,YCR034W and YLR372W and YDL015C
+G5SADs,L-glutamate 5-semialdehyde dehydratase (spontaneous),True,-999999.0,999999.0,4,
+G5SADrm,L glutamate 5 semialdehyde dehydratase  reversible  mitochondrial,True,-999999.0,999999.0,4,
+FAS260,Fatty acid synthase  n C260,False,0.0,999999.0,9,YCR034W and YLR372W and YDL015C
+G5SD,Glutamate-5-semialdehyde dehydrogenase,False,0.0,999999.0,6,YOR323C
+G5SD2,Glutamate 5 semialdehyde dehydrogenase,False,0.0,999999.0,6,YOR323C
+GLUN,Glutaminase,False,0.0,999999.0,4,
+GLUPRT,Glutamine phosphoribosyldiphosphate amidotransferase,False,0.0,999999.0,6,YMR300C
+G6PDA,Glucosamine-6-phosphate deaminase,False,0.0,999999.0,4,
+FAS80ACPm_L,Fatty acyl ACP synthase  n C80ACP   mitochondrial  lumped reaction,False,0.0,999999.0,9,YKL192C and YER061C and YHR067W and YOR221C and YBR026C and YKL055C
+G6PDH2r,Glucose 6-phosphate dehydrogenase,False,0.0,999999.0,5,YNL241C
+G6PDH2er,Glucose 6 phosphate dehydrogenase  endoplasmic reticulum,False,0.0,999999.0,5,
+G6PI,Glucose 6 phosphate isomerase,True,-999999.0,999999.0,2,YBR196C
+G6PI3,Glucose 6 phosphate isomerase,True,-999999.0,999999.0,2,YBR196C
+G6Pter,Glucose 6 phosphate endoplasmic reticular transport via diffusion,True,-999999.0,999999.0,2,
+GALIGH,1 alpha D Galactosyl myo inositol galactohydrolase,True,-999999.0,999999.0,4,YBR184W
+GALKr,Galactokinase,False,0.0,999999.0,5,YBR020W
+GALS3,A-galactosidase (melibiose),False,0.0,999999.0,4,YBR184W
+GALT,Galactose 1 phosphate uridylyltransferase,True,-999999.0,999999.0,5,YBR018C
+GLUSx,Glutamate synthase  NADH2,False,0.0,999999.0,6,YDL171C
+GLUTRS,Glutamyl-tRNA synthetase,False,0.0,999999.0,6,YGL245W
+GLUTRSm,Glutamyl tRNA synthetase  mitochondrial,False,0.0,999999.0,6,YOL033W
+GLUt2n,Glutamate nuclear transport via proton symport,True,-999999.0,999999.0,4,
+GLUt2r,L glutamate transport via proton symport  reversible,True,-999999.0,999999.0,4,YFL055W or YDR536W or YKR039W or YCL025C or YPL265W
+GLUt5m,L glutamate transport into mitochondria via hydroxide ion antiport,False,0.0,999999.0,4,
+GLUt7,L glutamate transport out via proton symport  vacuolar,False,0.0,999999.0,4,YER119C
+GLUt7m,Glutamate transport  uniporter   mitochondrial,False,0.0,999999.0,2,YPR021C
+GLXt,Glyoxylate transport,True,-999999.0,999999.0,2,
+GLXtp,Glyoxylate transport  peroxisomal,True,-999999.0,999999.0,2,
+GLYAT,Glycine C-acetyltransferase,False,-999999.0,0.0,4,
+GLYC3Ptm,Glycerol 3 phosphate shuttle,False,0.0,999999.0,2,
+GALUi,UTP-glucose-1-phosphate uridylyltransferase (irreversible),True,-999999.0,999999.0,5,YKL035W or YHL012W
+GALt2,D galactose transport in via proton symport,False,0.0,999999.0,4,YLR081W or YFL011W or YOL156W or YNL318C or YJL219W or YDR536W
+GAM6Pt,D glucosamine 6 phosphate reversible uniport,True,-999999.0,999999.0,2,
+GAPD,Glyceraldehyde-3-phosphate dehydrogenase,True,-999999.0,999999.0,6,YJL052W or YJR009C or YGR192C
+GLYCDy,Glycerol dehydrogenase  NADP dependent,False,0.0,999999.0,5,YOR120W
+FAS80COA_L,Fatty acyl CoA synthase  n C80CoA   lumped reaction,False,0.0,999999.0,9,YGR037C and YNR016C and (YKL182W and YPL231W)
+GLYCLm,Glycine cleavage system  mitochondrial,False,0.0,999999.0,7,YDR019C and YMR189W and YAL044C and YFL018C
+GLYCt,Glycerol transport via channel,True,-999999.0,999999.0,2,YLL043W
+GLYCt2,Glycerol transport via symport,False,0.0,999999.0,4,YGL084C or YPL189W
+GARFT,Phosphoribosylglycinamide formyltransferase,False,0.0,999999.0,5,YDR408C
+GAT1_SC,Glycerol 3 phosphate acyltransferase  glycerol 3 phosphate   yeast specific,False,0.0,999999.0,11,YKR067W or YBL011W
+GAT2_SC,Glycerol 3 phosphate acyltransferase  glycerone phosphate   yeast specific,False,0.0,999999.0,11,YKR067W or YBL011W
+GBEZ,1 4 alpha glucan branching enzyme,False,0.0,999999.0,3,YEL011W
+GCALDt,Glycoaldehydye reversible transport,True,-999999.0,999999.0,2,
+GCALDtm,Glycoaldehyde mitochondrial transport,True,-999999.0,999999.0,2,
+GCC2am,Glycine cleavage complex  lipoamide   mitochondrial,True,-999999.0,999999.0,5,YDR019C and YMR189W and YAL044C and YFL018C
+GCC2bim,Glycine cleavage system  lipoamide  irreversible  mitochondrial,False,0.0,999999.0,5,YDR019C and YMR189W and YAL044C and YFL018C
+GCC2cm_copy1,Glycine cleavage complex  lipoamide   mitochondrial,True,-999999.0,999999.0,5,YDR019C and YMR189W and YAL044C and YFL018C
+GCCam,Glycine cleavage complex  lipoylprotein   mitochondrial,True,-999999.0,999999.0,5,YDR019C and YMR189W and YAL044C and YFL018C
+GCCbim,Glycine cleavage complex  lipoylprotein  irreversible  mitochondrial,False,0.0,999999.0,5,YDR019C and YMR189W and YAL044C and YFL018C
+GLYGS,Glycogen  starch  synthase,False,0.0,999999.0,5,(YKR058W and YFR015C) or (YJL137C and YFR015C) or (YKR058W and YLR258W) or (YJL137C and YLR258W)
+GLYK,Glycerol kinase,False,0.0,999999.0,5,YHL032C
+GLYOX,Hydroxyacylglutathione hydrolase,False,0.0,999999.0,5,YDR272W
+GLYOXm,Hydroxyacylglutathione hydrolase  mitochondrial,False,0.0,999999.0,5,YOR040W
+GLYTRS,Glycyl-tRNA synthetase,False,0.0,999999.0,6,YBR121C or YPR081C
+GLYt2m,Glycine mitochondrial transport via proton symport,True,-999999.0,999999.0,4,
+GLYt2r,Glycine reversible transport via proton symport,True,-999999.0,999999.0,4,YKR039W or YOL020W or YPL265W or YOR348C
+GCCcm,Glycine cleavage complex  lipoylprotein   mitochondrial,True,-999999.0,999999.0,5,YDR019C and YMR189W and YAL044C and YFL018C
+GDPMANNtg,GDP mannose antiport,False,0.0,999999.0,4,YGL225W
+GMPS2,GMP synthase,False,0.0,999999.0,9,YMR217W
+GDPt3g,GDP Golgi transport via proton anitport,True,-999999.0,999999.0,4,
+GND,Phosphogluconate dehydrogenase,False,0.0,999999.0,5,YGR256W or YHR183W
+FAS80_L,Fatty acid synthase  n C80   lumped reaction,False,0.0,999999.0,9,YGR037C and YNR016C and (YKL182W and YPL231W)
+GNNUC,Ribosylpyrimidine nucleosidase,False,0.0,999999.0,4,YDR400W
+GDPtn,GDP nuclear transport,True,-999999.0,999999.0,2,
+GF6PTA,Glutamine-fructose-6-phosphate transaminase,False,0.0,999999.0,4,YMR085W or YKL104C or YMR084W
+GPDDA1,Glycerophosphodiester phosphodiesterase (Glycerophosphocholine),False,0.0,999999.0,5,YPL110C
+GGLGH,Galactosylglycerol galactohydrolase,True,-999999.0,999999.0,4,YBR184W
+FBA,Fructose-bisphosphate aldolase,True,-999999.0,999999.0,3,YKL060C
+GGTT,Geranylgeranyltranstransferase,False,0.0,999999.0,4,
+GHMT2r,"Glycine hydroxymethyltransferase, reversible",True,-999999.0,999999.0,5,YLR058C
+GHMT2rm,Glycine hydroxymethyltransferase  reversible  mitochondrial,True,-999999.0,999999.0,5,YBR263W
+GRTT,Geranyltranstransferase,False,0.0,999999.0,4,YJL167W
+GSNK,Guanosine kinase,False,0.0,999999.0,5,
+GSNt2,Guanosine transport in via proton symport,False,0.0,999999.0,4,
+GK1,Guanylate kinase (GMP:ATP),True,-999999.0,999999.0,4,YDR454C
+GK2,Guanylate kinase  GMPdATP,True,-999999.0,999999.0,4,YDR454C
+GLCGSD,Glucan 1 4 alpha glucosidase,False,0.0,999999.0,3,YPR184W
+GLCGSDv,Glucan 1 4 alpha glucosidase  vacuole,False,0.0,999999.0,3,YIL099W
+GSNt2m,Guanosine mitochondrial transport via proton symport,True,-999999.0,999999.0,4,
+GTHOr,Glutathione oxidoreductase,False,0.0,999999.0,5,(YPL091W and YDR513W) or (YPL091W and YCL035C) or (YPL091W and YDR098C) or (YPL091W and YER174C)
+GTHOXti,Oxidized glutathione irreversible uniport,False,0.0,999999.0,2,
+GTHOm,Glutathione oxidoreductase,False,0.0,999999.0,5,YPL091W and YPL059W
+GLCNtv,Glycogen vacuolar  transport  via autophagy,False,0.0,999999.0,2,
+FBA2,D Fructose 1 phosphate D glyceraldehyde 3 phosphate lyase,True,-999999.0,999999.0,3,YKL060C
+GLCP,Glycogen phosphorylase,False,0.0,999999.0,3,YPR160W
+GLCS2,Glycogen synthase  UDPGlc,False,0.0,999999.0,4,(YKR058W and YLR258W) or (YKR058W and YFR015C) or (YJL137C and YFR015C) or (YJL137C and YLR258W)
+GTHPi,Glutathione peridoxase,True,-999999.0,999999.0,4,YDR513W or YCL035C or YBR244W or YIR037W or YKL026C
+GTHPm,Glutathione peroxidase  mitochondria,True,-999999.0,999999.0,4,YPL059W
+GTHRDabcv,Reduced glutathione via ABC system  vacuolar,False,0.0,999999.0,7,YDR135C
+GTHRDt2,Glutathione transport,False,0.0,999999.0,2,YJL212C
+GLCt1,Glucose transport  uniport,False,0.0,999999.0,2,YHR092C or YLR081W or YOL156W or YDR536W or YHR094C or YEL069C or YDL245C or YJR158W or YFL011W or YNR072W or YMR011W or YDR345C or YHR096C or YDR343C or YDR342C or YJL214W or YJL219W
+GLCtv,Glucose transport  vacuolar,True,-999999.0,999999.0,2,
+FBA3,"Sedoheptulose 1,7-bisphosphate D-glyceraldehyde-3-phosphate-lyase",True,-999999.0,999999.0,3,YKL060C
+GLNS,Glutamine synthetase,False,0.0,999999.0,7,YPR035W
+GLNTRS,Glutaminyl-tRNA synthetase,False,0.0,999999.0,6,YOR168W
+GTHS,Glutathione synthetase,False,0.0,999999.0,7,YOL049W
+GTMLT,G glutamyltransferase,False,0.0,999999.0,4,YLR299W
+GLNt2n,Glutamine nuclear transport via proton symport,True,-999999.0,999999.0,4,
+FBP,Fructose-bisphosphatase,False,0.0,999999.0,4,YLR377C
+GLNt2r,L glutamine reversible transport via proton symport,True,-999999.0,999999.0,4,YKR039W or YCL025C or YDR508C or YPL265W
+GLNt6,L glutamine transport in via proton antiport  vacuolar,False,0.0,999999.0,4,YJR001W
+GTPCI,GTP cyclohydrolase I,False,0.0,999999.0,5,YGR267C
+GTPCII,GTP cyclohydrolase II,False,0.0,999999.0,6,YBL033C
+GTPH1,GTP diphosphohydrolase,False,0.0,999999.0,5,YER005W
+GLNt7,L glutamine transport out via proton symport  vacuolar,False,0.0,999999.0,4,YKL146W or YNL101W
+GTPt2m,GTPGDP translocase  mitochondrial  electroneutral,False,0.0,999999.0,6,YDL198C
+GLPT,Glycylpeptide N tetradecanoyltransferase,False,0.0,999999.0,4,YLR195C
+FBP26,Fructose 2 6 bisphosphate 2 phosphatase,False,0.0,999999.0,4,YJL155C
+GLU5K,Glutamate 5-kinase,False,0.0,999999.0,4,YDR300C
+GLUCYS,Gamma-glutamylcysteine synthetase,False,0.0,999999.0,7,YJL101C
+GLUDC,Glutamate Decarboxylase,False,0.0,999999.0,4,YMR250W
+GUAD,Guanine deaminase,False,0.0,999999.0,5,YDL238C
+GUAPRT,Guanine phosphoribosyltransferase,False,0.0,999999.0,4,YDR399W
+GUAt2r,Guanine reversible transport via proton symport,True,-999999.0,999999.0,4,YER056C or YER060W or YER060W_A or YGL186C
+GUAtm,Guanine mitochondrial transport via diffusion,True,-999999.0,999999.0,2,
+H2O2tn,Hydrogen peroxide nuclear transport,True,-999999.0,999999.0,2,
+H2Ot,H2O transport via diffusion,True,-999999.0,999999.0,2,YPR192W or YLL052C
+GLUDxi,Glutamate dehydrogenase  NAD,False,0.0,999999.0,7,YDL215C
+GLUDy,Glutamate dehydrogenase (NADP),False,-999999.0,0.0,7,YOR375C or YAL062W
+H2Oter,H2O endoplasmic reticulum transport,True,-999999.0,999999.0,2,
+FCLTm,Ferrochelatase  mitochondrial,False,0.0,999999.0,4,YOR176W
+H2Otm,H2O transport  mitochondrial,True,-999999.0,999999.0,2,
+H2Otn,H2O transport  nuclear,True,-999999.0,999999.0,2,
+H2Otp,H2O transport  peroxisomal,True,-999999.0,999999.0,2,
+HCITSm,Homocitrate synthase,False,0.0,999999.0,6,
+H2Otv,H2O transport  vacuolar,True,-999999.0,999999.0,2,
+HCITSn,Homocitrate synthase,False,0.0,999999.0,6,YDL131W or YDL182W
+FDH,Formate dehydrogenase,False,0.0,999999.0,4,YOR388C or YPL275W or YPL276W
+HACD10p,3 hydroxyacyl CoA dehydrogenase  3 oxohexacosyl CoA   peroxisomal,True,-999999.0,999999.0,5,YKR009C
+HACD4p,3 hydroxyacyl CoA dehydrogenase  3 oxodecanoyl CoA   peroxisomal,True,-999999.0,999999.0,5,YKR009C
+FDNG,Formate  dehydrogenase  cytosolicmitochondrial,False,0.0,999999.0,5,
+HACD5p,3 hydroxyacyl CoA dehydrogenase  3 oxodecanoyl CoA   peroxisomal,True,-999999.0,999999.0,5,YKR009C
+HACD6p,3 Hydroxyacyl CoA dehydrogenase  3 oxotetradecanoyl CoA   peroxisomal,True,-999999.0,999999.0,5,YKR009C
+HCO3E,HCO3 equilibration reaction,True,-999999.0,999999.0,4,
+HCO3Em,HCO3 equilibration reaction,True,-999999.0,999999.0,4,
+HCO3En,HCO3 equilibrium reaction  nuclear,True,-999999.0,999999.0,4,
+HACD7p,3 hydroxyacyl CoA dehydrogenase  3 oxohexadecanoyl CoA   peroxisomal,True,-999999.0,999999.0,5,YKR009C
+HACD8p,3 hydroxyacyl CoA dehydrogenase  3 oxooctadecanoyl CoA   peroxisomal,True,-999999.0,999999.0,5,YKR009C
+HCO3tn,Bicarbonate nuclear transport via diffusion,True,-999999.0,999999.0,2,
+HACNHm,Homoacontinate hydratase  mitochondrial,True,-999999.0,999999.0,3,YDR234W
+FE2t,Iron  II  transport,False,0.0,999999.0,2,YMR319C
+HBZOPT6m,Hydroxybenzoate octaprenyltransferase  mitochondrial,False,0.0,999999.0,4,YNR041C
+FE2utm,Iron  II  uptake  mitochondrial,False,0.0,999999.0,2,
+HCYSMT,Homocysteine S-methyltransferase,False,0.0,999999.0,5,YPL273W or YLL062C
+HCYSt2p,Homocysteine peroxisomal transport via proton symport,True,-999999.0,999999.0,4,
+HDCAt,Hexadecanoate  n C160  transport in via uniport,False,0.0,999999.0,2,
+HDCEAt,Hexadecenoate  n C161  transport in via uniport,False,0.0,999999.0,2,
+FECOSTAT_SC,Acyl CoAfecosterol acyltransferase  yeast specific,False,0.0,999999.0,9,YCR048W
+HEMEOMOm,Heme O monooxygenase  mitochondrial,False,0.0,999999.0,6,YDR376W and YER141W and YPL252C
+HEMEOSm,Heme O synthase  mitochondrial,False,0.0,999999.0,5,YPL172C
+HETZK,Hydroxyethylthiazole kinase,False,0.0,999999.0,5,YPL214C
+FECOSTESTH_SC,Fecosterol ester hydrolase  yeast specific,False,0.0,999999.0,10,YKL140W or YLL012W
+HEX1,Hexokinase (D-glucose:ATP),False,0.0,999999.0,5,YFR053C or YGL253W or YCL040W
+HEX4,Hexokinase (D-mannose:ATP),False,0.0,999999.0,5,YFR053C or YGL253W
+FECOSTESTH_SCe,Fecosterol ester hydrolase  yeast specific  extracellular,False,0.0,999999.0,10,YLR020C
+HEX7,Hexokinase (D-fructose:ATP),False,0.0,999999.0,5,YFR053C or YGL253W
+HEXCCOAtx,Fatty acid intracellular transport,True,-999999.0,999999.0,2,
+HEXDPtm,All trans hexaprenyl diphosphate transport  mitochondrial,True,-999999.0,999999.0,2,
+ILEtmi,Isoleucine transport from mitochondria to cytosol,False,0.0,999999.0,2,
+FECOSTt,Fecosterol reversible transport,True,-999999.0,999999.0,2,YOR011W or YIL013C
+HGNTOR,Homogentisateoxygen 1 2 oxidoreductase  decyclizing,False,0.0,999999.0,4,
+HICITDm,Homoisocitrate dehydrogenase,True,-999999.0,999999.0,5,YIL094C
+FEtm,Iron  II  transport,False,0.0,999999.0,2,
+IMPC,IMP cyclohydrolase,True,-999999.0,999999.0,3,YLR028C or YMR120C
+FKYNH,N Formyl L kynurenine amidohydrolase,False,0.0,999999.0,5,YJL060W
+IMPD,IMP dehydrogenase,False,0.0,999999.0,6,YHR216W or YLR432W or YAR075W or YML056C or YAR073W
+IND3ACtm,Indole 3 acetate mitochondrial transport via diffusion,True,-999999.0,999999.0,2,
+HISTD,Histidinol dehydrogenase,False,0.0,999999.0,6,YCL030C
+FMETTRSm,Methionyl tRNA formyltransferase  mitochondrial,False,0.0,999999.0,5,YBL013W
+HISTP,Histidinol-phosphatase,False,0.0,999999.0,4,YFR025C
+HISTRS,Histidyl-tRNA synthetase,False,0.0,999999.0,6,YPR033C
+IND3ETHt,Tryptophol transport  extracellular,True,-999999.0,999999.0,2,
+IND3ETHtm,Tryptophol transport  mitochondrial,True,-999999.0,999999.0,2,
+INDPYRD,Indole 3 pyruvate decarboxylase,True,-999999.0,999999.0,4,YLR134W or YLR044C or YGR087C or YDR380W
+HISTRSm,Histidyl tRNA synthetase  mitochondrial,False,0.0,999999.0,6,YPR033C
+INSK,Insosine kinase,False,0.0,999999.0,5,
+FMNAT,FMN adenylyltransferase,False,0.0,999999.0,5,YDL045C
+HISt2m,Histidine mitochondrial transport via proton symport,True,-999999.0,999999.0,4,
+HISt2r,L histidine reversible transport via proton symport,True,-999999.0,999999.0,4,YGR191W or YKR039W or YCL025C or YBR069C
+HISt6,L histidine transport in via proton antiport  vacuolar,False,0.0,999999.0,4,YBR293W or YMR088C or YCL069W
+HKYNH,3 Hydroxy L kynurenine hydrolase,False,0.0,999999.0,4,YLR231C
+HMBS,Hydroxymethylbilane synthase,False,0.0,999999.0,4,YDL205C
+INSTt2,Inositol transport in via proton symport,False,0.0,999999.0,4,YDR497C or YOL103W
+INSt2,Inosine transport in via proton symport,False,0.0,999999.0,4,
+IPC124PLC_SC,Inositol phosphorylceramide  ceramide 1  24C  phospholipase C,False,0.0,999999.0,5,YER019W
+IPC126PLC_SC,Inositol phosphorylceramide  ceramide 1  26C  phospholipase C,False,0.0,999999.0,5,YER019W
+IPC224PLC_SC,Inositol phosphorylceramide  ceramide 2  24C  phospholipase C,False,0.0,999999.0,5,YER019W
+IPC226PLC_SC,Inositol phosphorylceramide  ceramide 2  26C  phospholipase C,False,0.0,999999.0,5,YER019W
+HMGCOAR,Hydroxymethylglutaryl CoA reductase,True,-999999.0,999999.0,6,YLR450W or YML075C
+HMGCOAS,Hydroxymethylglutaryl CoA synthase,True,-999999.0,999999.0,6,YML126C
+HMGCOASm,Hydroxymethylglutaryl CoA synthase  mitochondrial,True,-999999.0,999999.0,6,YML126C
+IPC324PLC_SC,Inositol phosphorylceramide  ceramide 3  24C  phospholipase C,False,0.0,999999.0,5,YER019W
+IPC326PLC_SC,Inositol phosphorylceramide  ceramide 3  26C  phospholipase C,False,0.0,999999.0,5,YER019W
+HMGCOAtm,Hydroxymethylglutaryl CoA reversible mitochondrial transport,True,-999999.0,999999.0,2,
+FMNATm,FMN adenylyltransferase,False,0.0,999999.0,5,
+HMPK1,Hydroxymethylpyrimidine kinase (ATP),False,0.0,999999.0,5,YOL055C or YPL258C or YPR121W
+HPPKm,2 amino 4 hydroxy 6 hydroxymethyldihydropteridine diphosphokinase  mitochondrial,False,0.0,999999.0,5,YNL256W
+HPROa,L hydroxyproline reductase  NAD,False,0.0,999999.0,5,YER023W
+IPCS124_SC,Inositol phosphorylceramide synthase  ceramide 1  24C   yeast specific,False,0.0,999999.0,4,YKL004W
+IPCS126_SC,Inositol phosphorylceramide synthase  ceramide 1  26C   yeast specific,False,0.0,999999.0,4,YKL004W
+IPCS224_SC,Inositol phosphorylceramide synthase  ceramide 2  24C   yeast specific,False,0.0,999999.0,4,YKL004W
+IPCS226_SC,Inositol phosphoryceramide synthase  ceramide 2  26C   yeast specific,False,0.0,999999.0,4,YKL004W
+HPROb,L hydroxyproline reductase  NADP,False,0.0,999999.0,5,YER023W
+HPROxm,L hydroxyproline dehydrogenase  NAD   mitochondrial,False,0.0,999999.0,5,YHR037W
+IPCS324_SC,Inositol phosphorylceramide synthase  ceramide 3  24C   yeast specific,False,0.0,999999.0,4,YKL004W
+IPCS326_SC,Inositol phosphorylceramide synthase  ceramide 3  26C   yeast specific,False,0.0,999999.0,4,YKL004W
+HPROym,L hydroxyproline dehydrogenase  NADP   mitochondrial,False,0.0,999999.0,5,YHR037W
+FMNRx,FMN reductase,False,0.0,999999.0,5,YLR011W
+HSDxi,Homoserine dehydrogenase  NADH   irreversible,False,0.0,999999.0,5,YJR139C
+IPDDI,Isopentenyl-diphosphate D-isomerase,True,-999999.0,999999.0,2,YPL117C
+FMNRx2,FMN reductase,False,0.0,999999.0,5,YLR011W
+IPDPtm,Isopentenyl diphosphate transport  mitochondrial,True,-999999.0,999999.0,2,
+IPMD,3-isopropylmalate dehydrogenase,False,0.0,999999.0,5,YCL018W
+IPPMIa,3-isopropylmalate dehydratase,True,-999999.0,999999.0,3,YGL009C
+IPPMIb,2-isopropylmalate hydratase,True,-999999.0,999999.0,3,YGL009C
+IPPS,2-isopropylmalate synthase,False,0.0,999999.0,6,YOR108W or YNL104C
+HSDy,Homoserine dehydrogenase (NADPH),False,-999999.0,0.0,5,YJR139C
+HSERTA,Homoserine O trans acetylase,True,-999999.0,999999.0,4,YNL277W
+HSK,Homoserine kinase,False,0.0,999999.0,5,YHR025W
+HSTPT,Histidinol-phosphate transaminase,False,0.0,999999.0,4,YIL116W
+HXANt2r,Hypoxanthine reversible transport via proton symport,True,-999999.0,999999.0,4,
+HXPRT,Hypoxanthine phosphoribosyltransferase (Hypoxanthine),False,0.0,999999.0,4,YDR399W
+HYPOE,Hypothetical enyme,False,0.0,999999.0,4,
+IAMACt,Isoamyl acetate transport  extracellular,False,0.0,999999.0,2,
+IAMOHt,Isoamyl alcohol transport  extracellular,True,-999999.0,999999.0,2,
+IAMOHtm,Isoamyl alcohol transport  mitochondrial,True,-999999.0,999999.0,2,
+IBUTACt,Isobutyl acetate transport  extracellular,False,0.0,999999.0,2,
+IBUTOHt,Isobutyl alcohol transport  extracellular,True,-999999.0,999999.0,2,
+IBUTOHtm,Isobutyl alcohol transport  mitochondrial,True,-999999.0,999999.0,2,
+ICDHxm,Isocitrate dehydrogenase  NAD,False,0.0,999999.0,5,YNL037C and YOR136W
+IPPSm,2 isopropylmalate synthase  mitochondrial,False,0.0,999999.0,6,YNL104C
+ITCOALm,Itaconate  CoA ligase  ADP forming   mitochondrial,True,-999999.0,999999.0,6,YGR244C and YOR142W
+KARA1im,Acetohydroxy acid isomeroreductase  mitochondrial,False,0.0,999999.0,5,YLR355C
+KARA2im,Ketol acid reductoisomerase  2 Aceto 2 hydroxybutanoate   mitochondrial,False,0.0,999999.0,5,YLR355C
+KYN,Kynureninase,False,0.0,999999.0,5,YLR231C
+KYN3OX,Kynurenine 3 monooxygenase,False,0.0,999999.0,7,YBL098W
+Kt2r,Potassium reversible transport  via proton symport,True,-999999.0,999999.0,4,
+LALDO3,L-Lactaldehyde:NADP+ 1-oxidoreductase,False,0.0,999999.0,5,YOL151W or YHR104W
+LANOSTAT_SC,Acyl CoAlanosterol acyltransferase  yeast specific,False,0.0,999999.0,9,YCR048W
+ICDHyr,Isocitrate dehydrogenase (NADP),False,0.0,999999.0,5,YLR174W
+ICDHym,Isocitrate dehydrogenase  NADP,False,0.0,999999.0,5,YDL066W
+ICDHyp,Isocitrate dehydrogenase  NADP,False,0.0,999999.0,5,YNL009W
+ICL,Isocitrate lyase,False,0.0,999999.0,3,YER065C
+LANOSTESTH_SC,Lanosterol ester hydrolase  yeast specific,False,0.0,999999.0,10,YKL140W or YLL012W
+FOLD3m,Dihydropteroate synthase  mitochondrial,False,0.0,999999.0,4,YNL256W
+LANOSTESTH_SCe,Lanosterol ester hydrolase  yeast specific  extracellular,False,0.0,999999.0,10,YLR020C
+LANOSTt,Lanosterol reversible transport,True,-999999.0,999999.0,2,YOR011W or YIL013C
+LCADi,Lactaldehyde dehydrogenase,False,0.0,999999.0,6,
+LCYSTintv,L cystine transport via proton symport  vacuolar,False,0.0,999999.0,4,YCR075C
+LEUTA,Leucine transaminase,True,-999999.0,999999.0,4,YJR148W
+LEUTAm,Leucine transaminase  mitochondrial,True,-999999.0,999999.0,4,YHR208W
+LEUTRS,Leucyl-tRNA synthetase,False,0.0,999999.0,6,YPL160W
+LEUTRSm,Leucyl tRNA synthetase  mitochondrial,False,0.0,999999.0,6,YLR382C
+ID3ACALDt,Indoleacetaldehyde transport  extracellular,True,-999999.0,999999.0,2,
+ID3ACALDtm,Indole 3 acetaldehyde mitochondrial transport via diffusion,True,-999999.0,999999.0,2,
+IG3PS,Imidazole-glycerol-3-phosphate synthase,False,0.0,999999.0,6,YBR248C
+IGPDH,Imidazoleglycerol-phosphate dehydratase,False,0.0,999999.0,3,YOR202W
+IGPS,Indole-3-glycerol-phosphate synthase,False,0.0,999999.0,5,YKL211C
+ILETA,Isoleucine transaminase,True,-999999.0,999999.0,4,YJR148W
+ILETAm,Isoleucine transaminase  mitochondrial,True,-999999.0,999999.0,4,YHR208W
+ILETRS,Isoleucyl-tRNA synthetase,False,0.0,999999.0,6,YBL076C
+ILETRSm,Isoleucyl tRNA synthetase  mitochondrial,False,0.0,999999.0,6,YPL040C
+ILEt2r,L isoleucine reversible transport via proton symport,True,-999999.0,999999.0,4,YBR069C or YKR039W or YCL025C or YBR068C or YDR046C
+ILEt6,L isoleucine transport in via proton antiport  vacuolar,False,0.0,999999.0,4,YJR001W
+ILEt7,L isoleucine transport out via proton symport  vacuolar,False,0.0,999999.0,4,YKL146W or YNL101W
+LEUt2r,L leucine reversible transport via proton symport,True,-999999.0,999999.0,4,YBR069C or YKR039W or YCL025C or YBR068C or YDR046C or YDR508C
+LEUt6,L leucine transport in via proton antiport  vacuolar,False,0.0,999999.0,4,YJR001W
+LEUt7,L leucine transport out via proton symport  vacuolar,False,0.0,999999.0,4,YNL101W or YKL146W
+LGTHL,Lactoylglutathione lyase,False,0.0,999999.0,3,YML004C
+LNS14DM,Cytochrome P450 lanosterol 14 alpha demethylase  NADP,False,0.0,999999.0,8,YHR007C and YHR042W
+LNS14DMx,Cytochrome P450 lanosterol 14 alpha demethylase  NAD,False,0.0,999999.0,8,(YNL111C and YHR007C and YKL150W) or (YIL043C and YNL111C and YHR007C)
+FORt,Formate transport via diffusion,True,-999999.0,999999.0,2,
+LNSTLS,Lanosterol synthase,False,0.0,999999.0,2,YHR072W
+MACACI,Maleylacetoacetate isomerase,False,0.0,999999.0,2,
+MALOAAtp,Malateoxaloacetate shuttle,True,-999999.0,999999.0,4,
+LPCAT_SC,Lyso phosphatidylcholine acyltransferase acyltransferase  yeast specific,False,0.0,999999.0,11,YPR140W
+LPP_SC,Lipid phosphate phosphatase  yeast specific,False,0.0,999999.0,5,YDR284C or YDR503C
+FORtm,Formate mitochondrial transport,False,0.0,999999.0,2,
+FRDPtm,Farnesyl diphosphate transport  mitochondrial,True,-999999.0,999999.0,2,
+FRDcm,Fumarate reductase  cytosolicmitochondrial,False,0.0,999999.0,4,YEL047C
+LSERDHr,L-serine dehydrogenase,True,-999999.0,999999.0,5,YMR226C
+LYSTRS,Lysyl-tRNA synthetase,False,0.0,999999.0,6,YDR037W
+LYSTRSm,Lysyl tRNA synthetase  mitochondrial,False,0.0,999999.0,6,YNL073W
+LYSt2m,Lysine mitochondrial transport via proton symport,True,-999999.0,999999.0,4,
+LYSt2r,L lysine reversible transport via proton symport,True,-999999.0,999999.0,4,YNL268W or YKR039W
+MALS,Malate synthase,False,0.0,999999.0,6,YIR031C or YNL117W
+MALSp,Malate synthase,False,0.0,999999.0,6,YIR031C or YNL117W
+MALT,Alpha glucosidase,False,0.0,999999.0,3,YBR299W or YGR292W or YJL221C or YGR287C or YIL172C or YJL216C
+MALTt2,Maltose transport in via proton symport,False,0.0,999999.0,4,YGR289C or YBR298C or YDL247W or YJR160C
+MALt2r,L malate reversible transport via proton symport,True,-999999.0,999999.0,4,
+MALtm,Malate transport  mitochondrial,True,-999999.0,999999.0,4,YLR348C
+MAN1PT,Mannose 1 phosphate guanylyltransferase,False,0.0,999999.0,5,YDL055C
+LYSt6,L lysine transport in via proton antiport  vacuolar,False,0.0,999999.0,4,YBR293W or YCL069W or YMR088C
+L_LACD2cm,L Lactate dehydrogenase  cytosolicmitochondrial,False,0.0,999999.0,4,(YML054C and YEL039C) or (YML054C and YJR048W)
+L_LACt2r,L lactate reversible transport via proton symport,True,-999999.0,999999.0,4,YKL217W
+MAN6PI,Mannose-6-phosphate isomerase,True,-999999.0,999999.0,2,YER003C
+L_LACtm,L lactate transport  mitochondrial,True,-999999.0,999999.0,4,
+MANNANter,Mannan endoplasmic reticulum transport via diffusion,True,-999999.0,999999.0,2,
+FRDm,Fumarate reductase,False,0.0,999999.0,4,YJR051W
+MANt2,D mannose transport in via proton symport,False,0.0,999999.0,4,YHR094C or YFL011W or YOL156W or YEL069C or YDL245C or YJR158W or YNR072W or YMR011W or YDR345C or YHR092C or YHR096C or YDR343C or YDR342C or YJL214W or YJL219W
+MCITDm,2 methylcitrate dehydratase  mitochondrial,True,-999999.0,999999.0,3,
+MCITL2m,Methylisocitrate lyase,False,0.0,999999.0,3,YPR006C
+FRTT,Farnesyltranstransferase,False,0.0,999999.0,4,YPL069C
+MCITSm,2 methylcitrate synthase,False,0.0,999999.0,6,YPR001W
+MCOATA,Malonyl-CoA-ACP transacylase,True,-999999.0,999999.0,4,YKL182W and YPL231W
+MCOATAm,Malonyl CoA ACP transacylase  mitochondrial,True,-999999.0,999999.0,4,YKL192C and YER061C and YHR067W and YOR221C and YBR026C and YKL055C
+MIPC326PLC_SC,Mannose inositol phosphorylceramide  ceramide 3  26C  phospholipase C,False,0.0,999999.0,5,YER019W
+MIPCS124_SC,Mannose inositiol phophorylceramide synthase  ceramide 1  24C   yeast specific,False,0.0,999999.0,5,(YBR036C and YPL057C) or (YBR036C and YBR161W)
+MIPCS126_SC,Mannose inositol phosphorylceramide synthase  ceramide 1  26C   yeast specific,False,0.0,999999.0,5,(YBR036C and YPL057C) or (YBR036C and YBR161W)
+MDH,Malate dehydrogenase,True,-999999.0,999999.0,5,YOL126C
+MIPCS224_SC,Mannose inositol phosphorylceramide synthase  ceramide 2  24C   yeast specific,False,0.0,999999.0,5,(YBR036C and YPL057C) or (YBR036C and YBR161W)
+MDHm,Malate dehydrogenase  mitochondrial,True,-999999.0,999999.0,5,YKL085W
+MDHp,Malate dehydrogenase  peroxisomal,True,-999999.0,999999.0,5,YDL078C
+MIPCS226_SC,Mannose inositol phosphorylceramide synthase  ceramide 2  26C   yeast specific,False,0.0,999999.0,5,(YBR036C and YPL057C) or (YBR036C and YBR161W)
+MIPCS324_SC,Mannose inositol phosphorylceramide synthase  ceramide 3  24C   yeast specific,False,0.0,999999.0,5,(YBR036C and YPL057C) or (YBR036C and YBR161W)
+MIPCS326_SC,Mannose inositol phosphorylceramide synthase  ceramide 3  26C   yeast specific,False,0.0,999999.0,5,(YBR036C and YPL057C) or (YBR036C and YBR161W)
+MMETt2,S methylmethionine permease,False,0.0,999999.0,4,YLL061W
+FRUK,Fructose-1-phosphate kinase,False,0.0,999999.0,5,
+MDRPD,5-Methylthio-5-deoxy-D-ribulose 1-phosphate dehydratase,False,0.0,999999.0,3,
+FRUt2,D fructose transport in via proton symport,False,0.0,999999.0,4,YHR094C or YFL011W or YOL156W or YEL069C or YDL245C or YJR158W or YNR072W or YMR011W or YDR345C or YHR092C or YHR096C or YDR343C or YDR342C or YJL214W or YJL219W
+FTHFCL,5 formethyltetrahydrofolate cyclo ligase,False,0.0,999999.0,5,YER183C
+ME1m,Malic enzyme  NAD   mitochondrial,False,0.0,999999.0,5,YKL029C
+ME2m,Malic enzyme  NADP   mitochondrial,False,0.0,999999.0,5,YKL029C
+MOHMT,3-methyl-2-oxobutanoate hydroxymethyltransferase,False,0.0,999999.0,5,YBR176W
+MTAP,5  methylthioadenosine phosphorylase,False,0.0,999999.0,4,YLR017W
+MELIBt2,Melibiose transport in via symport,False,0.0,999999.0,4,
+FTHFCLm,5 formethyltetrahydrofolate cyclo ligase  mitochondrial,False,0.0,999999.0,5,
+MELTGH,Melibiitol galactohydrolase,True,-999999.0,999999.0,4,YBR184W
+METAT,Methionine adenosyltransferase,False,0.0,999999.0,6,YDR502C or YLR180W
+MTHFC,Methenyltetrahydrofolate cyclohydrolase,True,-999999.0,999999.0,4,YGR204W
+MTHFCm,Methenyltetrahydrifikate cyclohydrolase  mitochondrial,True,-999999.0,999999.0,4,YBR084W
+MTHFD,Methylenetetrahydrofolate dehydrogenase (NADP),True,-999999.0,999999.0,4,YGR204W
+FTHFI,5 Formyltetrahydrofolate10 Formyltetrahydrofolate isomerase,False,0.0,999999.0,7,
+MTHFD2i,Methylenetetrahydrofolate dehydrogenase  NAD,False,0.0,999999.0,4,YKR080W
+MTHFDm,Methylenetetrahydrofolate dehydrogenase  NADP   mitochondrial,True,-999999.0,999999.0,4,YBR084W
+MTHFR3,5 10 methylenetetrahydrofolatereductase  NADPH,False,0.0,999999.0,5,YPL023C or YGL125W
+METB1,Metb1 (rev),False,0.0,999999.0,5,YJR130C
+METS,Methionine synthase,False,0.0,999999.0,5,YER091C
+METTRS,Methionyl-tRNA synthetase,False,0.0,999999.0,6,YGR264C
+METTRSm,Methionyl tRNA synthetase  mitochondrial,False,0.0,999999.0,6,YGR171C
+METt2m,Methionine mitochondrial transport via proton symport,True,-999999.0,999999.0,4,
+FTHFLi,Formate-tetrahydrofolate ligase,False,0.0,999999.0,6,YGR204W
+METt2r,L methionine reversible transport via proton symport,True,-999999.0,999999.0,4,YKR039W or YCL025C or YDR508C or YBR068C or YDR046C or YGR055W or YHL036W
+MTRI,5-methylthioribose-1-phosphate isomerase,True,-999999.0,999999.0,2,
+NABTNO,N4 AcetylaminobutanalNAD oxidoreductase,False,0.0,999999.0,6,
+NACt,Nicotinic acid transport,True,-999999.0,999999.0,2,YGR260W
+NADDPp,NAD diphosphatase  peroxisomal,False,0.0,999999.0,5,YGL067W
+NADH2_u6cm,NADH dehydrogenase  cytosolicmitochondrial,False,0.0,999999.0,5,YMR145C or YDL085W
+NADH2_u6m,NADH dehydrogenase  mitochondrial,False,0.0,999999.0,5,YML120C or YKL192C
+NADK,NAD kinase,False,0.0,999999.0,5,YJR049C or YEL041W or YPL188W
+MEVK1,Mevalonate kinase  atp,False,0.0,999999.0,5,YMR208W
+MEVK2,Mevalonate kinase  ctp,False,0.0,999999.0,5,YMR208W
+MEVK3,Mevalonate kinase  gtp,False,0.0,999999.0,5,YMR208W
+MEVK4,Mevalonate kinase  utp,False,0.0,999999.0,5,YMR208W
+MFAPS_SC,Methylene fatty acyl phospholipid synthase  yeast specific,False,0.0,999999.0,5,YJR073C
+MGSA,Methylglyoxal synthase,False,0.0,999999.0,3,
+MHPGLUT,5 methyltetrahydropteroyltriglutamate homocysteine S methyltransferase,False,0.0,999999.0,4,YER091C
+NADKm,NAD kinase  mitochondrial,False,0.0,999999.0,5,YEL041W or YJR049C or YPL188W
+NADN,NAD nucleosidase,False,0.0,999999.0,5,
+NADNm,NAD nucleosidase  mitochondrial,False,0.0,999999.0,5,
+MI13456PKn,Inositol 1 3 4 5 6 pentakisphosphate 2 kinase  nuclear,False,0.0,999999.0,5,YDR315C
+FTHFLmi,Formate tetrahydrofolate ligase  mitochondrial irreversible,False,0.0,999999.0,6,YBR084W
+MI1345PKn,Inositol 1 3 4 5 triphosphate 6 kinase  nucleus,False,0.0,999999.0,5,YDR173C
+MI1456PKn,Inositol 1 4 5 6  tetrakisphosphate 3 kinase  nucleus,False,0.0,999999.0,5,YDR173C
+MI145P6Kn,Inositol 1 4 5 triphosphate 6 kinase  nucleus,False,0.0,999999.0,5,YDR173C
+MI145PKn,Inositol 1 4 5 trisphosphate 3 kinase  nucleus,False,0.0,999999.0,5,YDR173C
+NADPPPS,NADP phosphatase,False,0.0,999999.0,4,
+NADPPPSm,NADP phosphatase,False,0.0,999999.0,4,
+NADPt,NADP transporter,True,-999999.0,999999.0,2,
+MI145Ptn,1D myo Inositol 1 4 5 trisphosphate nuclear transport via diffusion,True,-999999.0,999999.0,2,
+FUM,Fumarase,True,-999999.0,999999.0,3,YPL262W
+MI1PP,Myo-inositol 1-phosphatase,False,0.0,999999.0,4,YHR046C
+MI1PS,Myo Inositol 1 phosphate synthase,False,0.0,999999.0,2,YJL153C
+MINOHPtn,Inositol hexakisphosphate nuclear transport  diffusion,True,-999999.0,999999.0,2,
+NADS1,NAD synthase (nh3),False,0.0,999999.0,7,YHR074W
+NADS1n,NAD synthase  nh3   nuclear,False,0.0,999999.0,7,YHR074W
+NADtn,NAD transport  nuclear through pores,True,-999999.0,999999.0,2,
+MIP2C124PLC_SC,Mannose  inositol P 2 ceramide  ceramide 1  24C  phospholipase C,False,0.0,999999.0,5,YER019W
+NAPRT,NAPRTase (rev),False,0.0,999999.0,5,YOR209C
+MIP2C126PLC_SC,Mannose  inositol P 2 ceramide  ceramide 1  26C  phospholipase C,False,0.0,999999.0,5,YER019W
+FUMAC,Fumarylacetoacetase,False,0.0,999999.0,5,
+MIP2C224PLC_SC,Mannose  inositol P 2 ceramide  ceramide 2  24C  phospholipase C,False,0.0,999999.0,5,YER019W
+MIP2C226PLC_SC,Mannose  inositol P 2 ceramide  ceramide 2  26C  phospholipase C,False,0.0,999999.0,5,YER019W
+MIP2C324PLC_SC,Mannose  inositol P 2 ceramide  ceramide 3  24C  phospholipase C,False,0.0,999999.0,5,YER019W
+MIP2C326PLC_SC,Mannose  inositol P 2 ceramide  ceramide 3  26C  phospholipase C,False,0.0,999999.0,5,YER019W
+NAPRTm,NAPRTase  mitochondrial,False,0.0,999999.0,5,YOR209C
+NAt3_1,Sodium proton antiporter  HNA is 11,True,-999999.0,999999.0,4,YLR138W
+NDP1,Nucleoside diphosphatase  ADP,False,0.0,999999.0,5,YER005W
+NDP3,Nucleoside diphosphatase  GDP,False,0.0,999999.0,5,YER005W
+NDP3g,Nucleoside diphosphatase  GDP   Golgi,False,0.0,999999.0,5,YEL042W
+NDP4,Nucleoside diphosphatase  dGDP,False,0.0,999999.0,5,
+MIP2CS124_SC,Mannose  inositol P 2 ceramide synthase  ceramide 1  24C   yeast specific,False,0.0,999999.0,4,YDR072C
+MIP2CS126_SC,Mannose  inositol P 2 ceramide synthase  ceramide 1  26C   yeast specific,False,0.0,999999.0,4,YDR072C
+NDP7,Nucleoside diphosphatase  UDP,False,0.0,999999.0,5,YER005W
+MIP2CS224_SC,Mannose  inositol P 2 ceramide synthase  ceramide 2  26C   yeast specific,False,0.0,999999.0,4,YDR072C
+FUMm,Fumarase  mitochondrial,True,-999999.0,999999.0,3,YPL262W
+MIP2CS226_SC,Mannose  inositol P 2 ceramide synthase  ceramide 2  24C   yeast specific,False,0.0,999999.0,4,YDR072C
+MIP2CS324_SC,Mannose  inositol P 2 ceramide synthase  ceramide 3  24C   yeast specific,False,0.0,999999.0,4,YDR072C
+MIP2CS326_SC,Mannose  inositol P 2 ceramide synthase  ceramide 3  26C   yeast specific,False,0.0,999999.0,4,YDR072C
+MIPC124PLC_SC,Mannose inositol phosphorylceramide  ceramide 1  24C  phospholipase C,False,0.0,999999.0,5,YER019W
+NDPK1,Nucleoside-diphosphate kinase (ATP:GDP),True,-999999.0,999999.0,4,YKL067W
+NDPK2,Nucleoside-diphosphate kinase (ATP:UDP),True,-999999.0,999999.0,4,YKL067W
+NDPK3,Nucleoside-diphosphate kinase (ATP:CDP),True,-999999.0,999999.0,4,YKL067W
+NDPK4,Nucleoside-diphosphate kinase (ATP:dTDP),True,-999999.0,999999.0,4,YKL067W
+NDPK5,Nucleoside-diphosphate kinase (ATP:dGDP),True,-999999.0,999999.0,4,YKL067W
+MIPC126PLC_SC,Mannose inositol phosphorylceramide  ceramide 1  26C  phospholipase C,False,0.0,999999.0,5,YER019W
+NDPK6,Nucleoside-diphosphate kinase (ATP:dUDP),True,-999999.0,999999.0,4,YKL067W
+FUMt2r,Fumarate reversible transport via symport,True,-999999.0,999999.0,4,
+NDPK7,Nucleoside-diphosphate kinase (ATP:dCDP),True,-999999.0,999999.0,4,YKL067W
+NDPK8,Nucleoside-diphosphate kinase (ATP:dADP),True,-999999.0,999999.0,4,YKL067W
+MIPC224PLC_SC,Mannose inositol phosphorylceramide  ceramide 2  24C  phospholipase C,False,0.0,999999.0,5,YER019W
+MIPC226PLC_SC,Mannose inositol phosphorylceramide  ceramide 2  26C  phospholipase C,False,0.0,999999.0,5,YER019W
+MIPC324PLC_SC,Mannose inositol phosphorylceramide  ceramide 3  24C  phospholipase C,False,0.0,999999.0,5,YER019W
+NDPK9,Nucleoside diphosphate kinase  ATPIDP,True,-999999.0,999999.0,4,YKL067W
+NFORTYRt,N N bisformyl dityrosine transport  extracellular,False,0.0,999999.0,2,YBR180W
+NFTYROX,N formyltyrosine oxidase,False,0.0,999999.0,5,YDR402C and YHR042W
+NH4t,Ammonia reversible transport,True,-999999.0,999999.0,2,YGR121C or YNL142W or YPR138C
+NH4ti,Ammonia transport  efflux  cytosol to extracellular,False,0.0,999999.0,2,YDR384C
+NH4tm,NH3 mitochondrial transport,True,-999999.0,999999.0,2,
+NTD1,5'-nucleotidase (dUMP),False,0.0,999999.0,4,
+G12MT1g,Glycolipid 1 2 alpha D mannosyltransferase  Golgi apparatus,False,0.0,999999.0,5,YDR483W or YOR099W or YKR061W or YBR205W or YBR199W or YNL029C or YPL053C or YJL139C
+NTD10,5'-nucleotidase (XMP),False,0.0,999999.0,4,
+NTD11,5'-nucleotidase (IMP),False,0.0,999999.0,4,YOR155C
+NTD2,5'-nucleotidase (UMP),False,0.0,999999.0,4,YGL224C
+NTD3,5'-nucleotidase (dCMP),False,0.0,999999.0,4,
+NH4tn,Ammonia nuclear transport,True,-999999.0,999999.0,2,
+NH4tp,Ammonia peroxisomal transport,True,-999999.0,999999.0,2,
+NMNAT,Nicotinamide-nucleotide adenylyltransferase,False,0.0,999999.0,5,YGR010W
+NMNATm,Nicotinamide nucleotide adenylyltransferase  mitochondrial,False,0.0,999999.0,5,YLR328W
+NMNTP,Nmntp,False,0.0,999999.0,4,
+NTD4,5'-nucleotidase (CMP),False,0.0,999999.0,4,YGL224C
+G12MT2g,Glycolipid 1 2 alpha D mannosyltransferase  Golgi apparatus,False,0.0,999999.0,5,YDR483W or YOR099W or YKR061W or YBR205W or YBR199W or YNL029C or YPL053C or YJL139C
+NTD5,5'-nucleotidase (dTMP),False,0.0,999999.0,4,
+NMNt2m,NMN mitochondrial transport via proton symport,True,-999999.0,999999.0,4,
+NMNt2p,NMN peroxisomal transport via proton symport,True,-999999.0,999999.0,4,
+NNAM,Nicotinamidase,True,-999999.0,999999.0,4,YGL037C
+G13MTg,Glycolipid 1 3 alpha D mannosyltransferase  Golgi apparatus,False,0.0,999999.0,5,
+NNAMrm,Nicotinamidase  reversible  mitochondrial,True,-999999.0,999999.0,4,YGL037C
+NTD6,5'-nucleotidase (dAMP),False,0.0,999999.0,4,
+NTD7,5'-nucleotidase (AMP),False,0.0,999999.0,4,
+NNATr,Nicotinate-nucleotide adenylyltransferase,False,0.0,999999.0,5,YLR328W
+NNATm,Nicotinate nucleotide adenylyltransferase  mitochondrial,False,0.0,999999.0,5,YLR328W
+NNDPR,Nicotinate-nucleotide diphosphorylase (carboxylating),False,0.0,999999.0,6,YFR047C
+NTD8,5'-nucleotidase (dGMP),False,0.0,999999.0,4,
+NTD9,5'-nucleotidase (GMP),False,0.0,999999.0,4,
+NTP3,Nucleoside-triphosphatase (GTP),False,0.0,999999.0,5,
+G16MTg,Glycolipid 1 6 alpha D mannosyltransferase  Golgi apparatus,False,0.0,999999.0,5,
+G3PCt,Glycero 3 phosphocholine transport  extracellular to cytosol,True,-999999.0,999999.0,2,YCR098C
+NNDPRm,Nicotinate nucleotide diphosphorylase  carboxylating   mitochondrial,False,0.0,999999.0,6,YFR047C
+G3PD1ir,Glycerol 3 phosphate dehydrogenase  NAD,False,0.0,999999.0,5,YDL022W
+NNMT,Nicotinamide N methyltransferase,False,0.0,999999.0,4,YLR285W
+NTP4,Nucleoside triphosphatase  dGTP,False,0.0,999999.0,5,
+NTRLASE,Nitrilase,False,0.0,999999.0,4,YIL164C or YLR351C or YJL126W
+NTRLASE2,Nitrilase,False,0.0,999999.0,4,YIL164C or YJL126W or YLR351C
+NTRLASE3,Nitrilase,False,0.0,999999.0,4,YIL164C or YLR351C or YJL126W
+PEPDt3,Peptide transport in via proton symport,False,0.0,999999.0,4,YKR093W
+G3PD1irm,Glycerol 3 phosphate dehydrogenase  NAD   mitochondrial,False,0.0,999999.0,5,YOL059W
+PETHCT,Phosphoethanolamine cytidyltransferase,False,0.0,999999.0,5,YGR007W
+PETOHM_SC,Phosphatidylethanolamine N methyltransferase  yeast specific,False,0.0,999999.0,5,YGR157W
+PEtg_SC,Phosphatidylethanolamine Golgi transport  yeast specific,True,-999999.0,999999.0,2,
+O2t,O2 transport  diffusion,True,-999999.0,999999.0,2,
+O2ter,O2  transport  endoplasmic reticulum,True,-999999.0,999999.0,2,
+O2tm,O2 transport  diffusion,True,-999999.0,999999.0,2,
+OAAt,Oxaloacetate transport,True,-999999.0,999999.0,2,
+PEtm_SC,Phosphatidylethanolamine mitochondrial transport  yeast specific,True,-999999.0,999999.0,2,
+OAAt2m,Oxaloacetate transport  mitochondrial,True,-999999.0,999999.0,4,YKL120W
+PEtv_SC,Phosphatidylethanolamine vacuolar transport  yeast specific,True,-999999.0,999999.0,2,
+OBDHm,2 Oxobutanoate dehydrogenase,False,0.0,999999.0,6,
+PPM,Phosphopentomutase,True,-999999.0,999999.0,2,YKL127W or YMR105C
+OCBT,Ornithine carbamoyltransferase,False,0.0,999999.0,5,YJL088W
+OCDCAt,Octadecanoate  n C180  transport in via uniport,False,0.0,999999.0,2,
+OCDCEAt,Octadecenoate  n C181  transport in via uniport,False,0.0,999999.0,2,
+OCDCYAt,Octadecynoate  n C182  transport in via uniport,False,0.0,999999.0,2,
+OHACT1,Alcohol Acetyltransferase  ethanol,False,0.0,999999.0,4,YOR377W or YGR177C
+PFK,Phosphofructokinase,False,0.0,999999.0,5,YGR240C and YMR205C
+PFK26,6 phosphofructo 2 kinase,False,0.0,999999.0,5,YIL107C or YOL136C
+PFK_2,Phosphofructokinase,False,0.0,999999.0,5,YGR240C and YMR205C
+PFK_3,Phosphofructokinase (s7p),False,0.0,999999.0,5,YGR240C and YMR205C
+PGAMT,Phosphoglucosamine mutase,True,-999999.0,999999.0,2,YEL058W
+OHACT2,Alcohol Acetyltransferase  isoamyl alcohol,False,0.0,999999.0,4,YOR377W or YGR177C
+PGCD,Phosphoglycerate dehydrogenase,False,0.0,999999.0,5,YER081W or YIL074C
+PPNCL2,Phosphopantothenate-cysteine ligase,False,0.0,999999.0,7,
+PGI,Glucose-6-phosphate isomerase,True,-999999.0,999999.0,2,YBR196C
+OHACT3,Alcohol Acetyltransferase  2 methylbutanol,False,0.0,999999.0,4,YOR377W or YGR177C
+OHACT4,Alcohol Acetyltransferase  isobutyl alcohol,False,0.0,999999.0,4,YOR377W or YGR177C
+PGK,Phosphoglycerate kinase,True,-999999.0,999999.0,4,YCR012W
+PGL,6-phosphogluconolactonase,False,0.0,999999.0,4,YNR034W or YHR163W or YGR248W or YCR073W_A
+PGM,Phosphoglycerate mutase,True,-999999.0,999999.0,2,YKL152C or YDL021W or YOL056W
+PGMT,Phosphoglucomutase,True,-999999.0,999999.0,2,YKL127W or YMR105C
+PGPPAm_SC,Phosphatidylglycerol phosphate phosphatase A  yeast specific  mitochondrial,False,0.0,999999.0,4,
+OHACT5,Alcohol Acetyltransferase  Phenylethanol alcohol,False,0.0,999999.0,4,YOR377W or YGR177C
+OHPBAT,O-Phospho-4-hydroxy-L-threonine:2-oxoglutarate aminotransferase,True,-999999.0,999999.0,4,YOR184W
+OMCDC,2-Oxo-4-methyl-3-carboxypentanoate decarboxylation,False,0.0,999999.0,4,YJR148W
+OMCDCm,2 oxo 4 methyl 3 carboxypentanoate decarboxylation,False,0.0,999999.0,4,YHR208W
+OMPDC,Orotidine-5'-phosphate decarboxylase,False,0.0,999999.0,4,YEL021W
+PHCDm,L 1 pyrroline 3 hydroxy 5 carboxylate dehydrogenase,False,0.0,999999.0,6,YHR037W
+PHCHGSm,L 1 Pyrroline 3 hydroxy 5 carboxylate spontaneous conversion to L 4 Hydroxyglutamate semialdehyde  mitochondrial,True,-999999.0,999999.0,4,
+PHEACt,Phenethyl acetate transport  extracellular,False,0.0,999999.0,2,
+ORNDC,Ornithine Decarboxylase,False,0.0,999999.0,4,YKL184W
+PPND,Prephenate dehydrogenase,False,0.0,999999.0,5,
+ORNTA,Ornithine transaminase,False,0.0,999999.0,4,YLR438W
+ORNTACim,Ornithine transacetylase  irreversible  mitochondrial,False,0.0,999999.0,4,YMR062C
+ORNt2r,Orntithine reversible transport in via proton symport,True,-999999.0,999999.0,4,YKR039W or YEL063C
+ORNt3m,Ornithine mitochondrial transport via proton antiport,True,-999999.0,999999.0,4,YOR130C
+PHETA1,Phenylalanine transaminase,True,-999999.0,999999.0,4,YHR137W or YGL202W
+PHETRS,Phenylalanyl-tRNA synthetase,False,0.0,999999.0,6,YFL022C and YLR060W
+PHETRSm,Phenylalanyl tRNA synthetase  mitochondrial,False,0.0,999999.0,6,YPR047W
+PHEt2m,Phenylalanine mitochondrial transport via proton symport,True,-999999.0,999999.0,4,
+PHEt2r,L phenylalanine reversible transport via proton symport,True,-999999.0,999999.0,4,YKR039W or YCL025C or YOL020W or YBR068C or YDR046C
+ORPT,Orotate phosphoribosyltransferase,True,-999999.0,999999.0,4,YML106W or YMR271C
+OXAGm,Non enzymatic reaction,True,-999999.0,999999.0,4,
+PI35BP5P_SC,1 phosphatidylinositol 3 5 bisphosphate 5 phosphatase  yeast specific,False,0.0,999999.0,4,YNL106C or YOR109W or YKL212W
+PPND2,Prephenate dehydrogenase  NADP,False,0.0,999999.0,5,YBR166C
+PI3P4K_SC,Phosphatidylinositol 3 phosphate 4 kinase  yeast specific,False,0.0,999999.0,5,
+PI3P5K_SC,Phosphatidylinositol 3 phosphate 5 kinase  yeast specfic,False,0.0,999999.0,5,YFR019W
+OXO2Ctm,2 oxodicarboylate transporter  mitochondrial,True,-999999.0,999999.0,4,YPL134C or YOR222W
+P5CDm,1 pyrroline 5 carboxylate dehydrogenase  mitochondrial,False,0.0,999999.0,6,
+PPNDH,Prephenate dehydratase,False,0.0,999999.0,5,YNL316C
+P5CR,Pyrroline-5-carboxylate reductase,False,0.0,999999.0,5,YER023W
+PACALDt,Phenylacetaldehyde transport  extracellular,True,-999999.0,999999.0,2,
+PACALDtm,Phenylacetaldehyde transport  mitochondrial,True,-999999.0,999999.0,2,
+PAK_SC,Phosphatidate kinase  yeast specific,False,0.0,999999.0,4,
+PAN4Ptm,Panthetheine 4  phosphate reversible mitochondrial transport,True,-999999.0,999999.0,2,
+PI45BP5P_SC,1 phosphatidylinositol 4 5 bisphosphate 5 phosphatase  yeast specific,False,0.0,999999.0,4,YNL106C or YOR109W or YOL065C or YIL002C
+PI45BPP_SC,1 phosphatidylinositol 4 5 bisphosphate phosphodiesterase  yeast specific,False,0.0,999999.0,5,YPL268W
+PI4P5K_SC,Phosphatidylinositol 4 phosphate 5 kinase  yeast specfic,False,0.0,999999.0,5,YDR208W
+PIN3K_SC,1 phosphatidylinositol 3 kinase  yeast specific,False,0.0,999999.0,5,YKL203C or YLR240W or YJR066W
+PIN4K_SC,Phosphatidylinositol 4 kinase  yeast specific,False,0.0,999999.0,5,YNL267W or YLR305C
+PIN4Kn_SC,Phosphatidylinositol 4 kinase  nuclear  yeast specifc,False,0.0,999999.0,5,YNL267W
+PINOS_SC,Phosphatidylinositol synthase  yeast specific,False,0.0,999999.0,5,YPR113W
+PIt2m,Phosphate transporter  mitochondrial,True,-999999.0,999999.0,4,YJR077C
+PANTS,Pantothenate synthase,False,0.0,999999.0,7,YIL145C
+PANTtm,Pantothenate mitochondrial transport,True,-999999.0,999999.0,2,
+PAPSR,Phosphoadenylyl-sulfate reductase (thioredoxin),False,0.0,999999.0,6,(YPR167C and YLR043C) or (YPR167C and YGR209C)
+PAPt,PAP reversible uniport,True,-999999.0,999999.0,2,
+PIt2n,Phosphate nuclear transport via proton symport,True,-999999.0,999999.0,4,
+PIt2p,Phosphate peroxisomal transport via proton symport,True,-999999.0,999999.0,4,
+PIt2r,Phosphate reversible transport via symport,True,-999999.0,999999.0,4,YML123C or YCR037C or YBR296C or YJL198W or YNR013C
+PAPtm,Adenosine 3  5  bisphosphate mitochondrial transport,True,-999999.0,999999.0,2,
+PIt2v,Phosphate vacuolar transport via proton symport,True,-999999.0,999999.0,4,
+PAtm_SC,Phosphatidate reversible transport  mitochondrial  yeast specific,True,-999999.0,999999.0,2,
+PPPG9tm,Protoporphyrinogen IX mitochondrial transport,True,-999999.0,999999.0,2,
+PC,Pyruvate carboxylase,False,0.0,999999.0,7,YGL062W or YBR218C
+PCDAGAT,Phosphatidylcholine diacylglycerol acyltransferase,False,0.0,999999.0,4,YNR008W
+PIt5m,Phosphate transport via hydroxide ion symport  mitochondrial,True,-999999.0,999999.0,4,YER053C
+PLBP1I_SCe,Phospholipase B  phosphatidylinositol   yeast specific  extracellular,False,0.0,999999.0,12,YMR008C or YMR006C or YOL011W
+PLBPC_SC,Phospholipase B  phosphatidylcholine   yeast specific,False,0.0,999999.0,12,YML059C
+PDE1,"3',5'-cyclic-nucleotide phosphodiesterase",False,0.0,999999.0,4,YOR360C or YGL248W
+PLBPC_SCe,Phospholipase B  phosphatidylcholine   yeast specific  extracellular,False,0.0,999999.0,12,YMR006C or YMR008C
+PPPGOm,Protoporphyrinogen oxidase  mitochondrial,False,0.0,999999.0,4,YER014W
+PLD_SC,Phospholipase D  yeast specific,False,0.0,999999.0,5,YKR031C
+PMANM,Phosphomannomutase,True,-999999.0,999999.0,2,YFL045C
+PMDPHT,Pyrimidine phosphatase,False,0.0,999999.0,4,
+PMETM_SC,Phosphatidyl N methylethanolamine N methyltransferase  yeast specific,False,0.0,999999.0,5,YJR073C
+PDE2,3  5  cyclic nucleotide phosphodiesterase,False,0.0,999999.0,4,YOR360C
+PDE3,3  5  cyclic nucleotide phosphodiesterase,False,0.0,999999.0,4,YOR360C
+PDE4,"3',5'-cyclic-nucleotide phosphodiesterase",False,0.0,999999.0,4,YOR360C
+PDE5,3  5  cyclic nucleotide phosphodiesterase,False,0.0,999999.0,4,YOR360C
+GCC2cm_copy2,Glycine cleavage complex  lipoamide   mitochondrial,False,0.0,999999.0,5,YIL125W and YDR148C and YFL018C
+PDHm,Pyruvate dehydrogenase,False,0.0,999999.0,6,(YBR221C and YER178W) and YNL071W and YFL018C and YGR193C
+PDX5POi,Pyridoxine 5'-phosphate oxidase,True,-999999.0,999999.0,4,YBR035C
+PENDPtm,All trans Pentaprenyl diphosphate transport  mitochondrial,True,-999999.0,999999.0,2,
+PMEVK,Phosphomevalonate kinase,False,0.0,999999.0,4,YMR220W
+PMI12346PH,5 diphosphoinositol 1 2 3 4 6 pentakisphosphate diphosphohydrolase,False,0.0,999999.0,5,YOR163W
+PMI12346PS,5 diphosphoinositol 1 2 3 4 6 pentakisphosphate synthase,False,0.0,999999.0,4,YDR017C
+PEPAT,Peptide alpha N acetyltransferase,False,0.0,999999.0,5,YDL040C or YGR147C
+PPTTm,Trans pentaprenyltranstransferase  mitochondrial,False,0.0,999999.0,4,YBR003W
+PMI1346PH,Diphosphoinositol 1 3 4 6 tetrakisphosphate diphosphohydrolase,False,0.0,999999.0,5,YOR163W
+PMI1346PS,Diphosphoinositol 1 3 4 6 tetrakisphosphate synthase,False,0.0,999999.0,4,YDR017C
+PMPK,Phosphomethylpyrimidine kinase,False,0.0,999999.0,4,YOL055C or YPL258C
+PPYRDC,Phenylpyruvate decarboxylase,False,0.0,999999.0,4,YLR044C or YLR134W or YGR087C or YDR380W
+PNP,Purine nucleoside phosphorylase,True,-999999.0,999999.0,5,
+PNTK,Pantothenate kinase,False,0.0,999999.0,5,YDR531W
+PNTOt2,Pantothenate reversible transport via proton symport,True,-999999.0,999999.0,4,YCR028C
+PYRDC2,Pyruvate decarboxylase  acetoin forming,False,0.0,999999.0,5,YLR044C or YGR087C or YLR134W
+PYRt,Pyruvate exchange  diffusion,False,0.0,999999.0,2,
+POLYAO,Polyamine oxidase,False,0.0,999999.0,6,YMR020W
+PRAGSr,Phosphoribosylglycinamide synthase,True,-999999.0,999999.0,7,YGL234W
+POLYAO2,Poylamine oxidase,False,0.0,999999.0,6,YMR020W
+POLYAO3,Poylamine oxidase,False,0.0,999999.0,6,YMR020W
+PYRt2,Pyruvate transport in via proton symport,False,0.0,999999.0,4,YKL217W
+PYRt2m,Pyruvate mitochondrial transport via proton symport,True,-999999.0,999999.0,4,
+PRAIS,Phosphoribosylaminoimidazole synthase,False,0.0,999999.0,6,YGL234W
+PYRt2p,Pyruvate peroxisomal transport via proton symport,True,-999999.0,999999.0,4,
+QUILSYN,Quinolinate Synthase  Eukaryotic,False,0.0,999999.0,4,
+PPA,Inorganic diphosphatase,False,0.0,999999.0,4,YBR011C
+PPAm,Inorganic diphosphatase,False,0.0,999999.0,4,YMR267W
+PPBNGS,Porphobilinogen synthase,False,0.0,999999.0,4,YGL040C
+PPCDC,Phosphopantothenoylcysteine decarboxylase,False,0.0,999999.0,4,
+PPCK,Phosphoenolpyruvate carboxykinase,False,0.0,999999.0,5,YKR097W
+PRAIi,Phosphoribosylanthranilate isomerase (irreversible),False,0.0,999999.0,2,YDR007W
+QULNS,Quinolinate synthase,False,0.0,999999.0,5,
+PRAMPC,Phosphoribosyl-AMP cyclohydrolase,False,0.0,999999.0,3,YCL030C
+QULNtm,Quinolinate reversible mitochondrial transport,True,-999999.0,999999.0,2,
+RAFGH,Raffinose galactohydrolase,False,0.0,999999.0,4,YBR184W
+RBFK,Riboflavin kinase,False,0.0,999999.0,5,YDR236C
+SLCBK2,Sphingolipid long chain base kinase  phytosphingosine,False,0.0,999999.0,5,YOR171C or YLR260W
+SLFAT,Sulfate adenylyltransferase  ADP,True,-999999.0,999999.0,5,YCL050C
+RBFKm,Riboflavin kinase  mitochondrial,False,0.0,999999.0,5,YDR236C
+PRASCSi,Phosphoribosylaminoimidazolesuccinocarboxamide synthase,True,-999999.0,999999.0,7,YAR015W
+RBFSa,Riboflavin synthase,False,0.0,999999.0,5,YOL143C
+RBFSb,Riboflavin synthase,False,0.0,999999.0,3,YBR256C
+SO3ti,Sulfite transport  efflux  cytosol to extracellular,False,0.0,999999.0,2,YPL092W
+SO4ti,Sulfate irreversible uniport,False,0.0,999999.0,2,YBR294W or YLR092W or YGR125W
+RBK,Ribokinase,False,0.0,999999.0,5,YCR036W
+SPH1Pter,Sphinganine 1 phosphate endoplasmic reticular transport,False,0.0,999999.0,2,
+RIBFLVt2,Riboflavin transport in via proton symport,False,0.0,999999.0,4,
+PRATPP,Phosphoribosyl-ATP pyrophosphatase,False,0.0,999999.0,5,YCL030C
+RIBFLVtm,Riboflavin reversible mitochondrial transport,True,-999999.0,999999.0,2,
+SPHPL,Sphinganine phosphate lyase,False,0.0,999999.0,3,YDR294C
+RIBt2,Ribose transport in via proton symporter,False,0.0,999999.0,4,
+PRFGS,Phosphoribosylformylglycinamidine synthase,False,0.0,999999.0,9,YGR061C
+SPMDAT1,Spermidine acetyltransferase,False,0.0,999999.0,5,
+RNDR1,Ribonucleoside-diphosphate reductase (ADP),False,0.0,999999.0,5,((YIL066C and YJL026W) and YLR043C) or ((YIL066C and YJL026W) and YGR209C) or ((YER070W and YJL026W) and YLR043C) or ((YER070W and YJL026W) and YGR209C)
+PRMICI,1-(5-phosphoribosyl)-5-[(5-phosphoribosylamino)methylideneamino)imidazole-4-carboxamide isomerase,False,0.0,999999.0,2,YIL020C
+RNDR1n,Ribonucleoside diphosphate reductase  nuclear,False,0.0,999999.0,5,((YGR180C and YIL066C) and YLR043C) or ((YGR180C and YIL066C) and YGR209C) or ((YER070W and YGR180C) and YLR043C) or ((YER070W and YGR180C) and YGR209C)
+SPMDt3i,Spermidine transport in via proton antiport,False,0.0,999999.0,4,YOR273C or YLL028W
+SPMDtex2,Spermidine excretion  cytosol to extracellular,False,0.0,999999.0,2,YKL174C
+RNDR2,Ribonucleoside-diphosphate reductase (GDP),False,0.0,999999.0,5,((YER070W and YJL026W) and YLR043C) or ((YER070W and YJL026W) and YGR209C)
+RNDR2n,Ribonucleoside diphosphate reductase  GDP   nuclear,False,0.0,999999.0,5,((YER070W and YGR180C) and YLR043C) or ((YER070W and YGR180C) and YGR209C)
+RNDR3,Ribonucleoside-diphosphate reductase (CDP),False,0.0,999999.0,5,((YER070W and YJL026W) and YLR043C) or ((YER070W and YJL026W) and YGR209C)
+RNDR3n,Ribonucleoside diphosphate reductase  CDP   nuclear,False,0.0,999999.0,5,((YER070W and YGR180C) and YLR043C) or ((YER070W and YGR180C) and YGR209C)
+SPMS,Spermidine synthase,False,0.0,999999.0,5,YPR069C
+SPRMS,Spermine synthase,False,0.0,999999.0,5,YLR146C
+SPRMt2i,Spermine transport via proton antiport irreversible,False,0.0,999999.0,4,YLL028W or YPR156C or YOR273C or YGR138C
+SQ23EPXter,Squalene 2 3 epoxide endoplamic reticular transport,True,-999999.0,999999.0,2,
+SQLEr,Squalene epoxidase  endoplasmic reticular  NADP,False,0.0,999999.0,7,YGR175C and YHR042W
+SQLErx,Squalene epoxidase  endoplasmic reticular  NAD,False,0.0,999999.0,7,(YIL043C and YNL111C and YGR175C) or (YNL111C and YGR175C and YKL150W)
+RNDR4,Ribonucleoside-diphosphate reductase (UDP),False,0.0,999999.0,5,((YER070W and YJL026W) and YLR043C) or ((YER070W and YJL026W) and YGR209C)
+RNDR4n,Ribonucleoside diphosphate reductase  UDP   nuclear,False,0.0,999999.0,5,((YER070W and YGR180C) and YLR043C) or ((YER070W and YGR180C) and YGR209C)
+SQLS,Squalene synthase,False,0.0,999999.0,6,YHR190W
+RNMK,Ribosylnicotinamide kinase,False,0.0,999999.0,5,YNL129W
+PRO1xm,Proline oxidase  NAD   mitochondrial,False,0.0,999999.0,5,YLR142W
+RNTR1,Ribonucleoside triphosphate reductase  ATP,False,0.0,999999.0,5,YLR043C or YGR209C
+RNTR2,Ribonucleoside triphosphate reductase  GTP,False,0.0,999999.0,5,YLR043C or YGR209C
+SQLter,Squalene endoplamic reticular transport,True,-999999.0,999999.0,2,
+SRB_Lt,L sorbose reversible transport,True,-999999.0,999999.0,2,
+RNTR3,Ribonucleoside triphosphate reductase  CTP,False,0.0,999999.0,5,YGR209C or YLR043C
+PROTRS,Prolyl-tRNA synthetase,False,0.0,999999.0,6,YER087W or YHR020W
+RNTR4,Ribonucleoside triphosphate reductase  UTP,False,0.0,999999.0,5,YLR043C or YGR209C
+RPE,Ribulose 5-phosphate 3-epimerase,True,-999999.0,999999.0,2,YJL121C
+SSALy,Succinate-semialdehyde dehydrogenase (NADP),False,0.0,999999.0,6,YBR006W
+PROt2r,L proline reversible transport via proton symport,True,-999999.0,999999.0,4,YKR039W or YOR348C
+RPI,Ribose-5-phosphate isomerase,True,-999999.0,999999.0,2,YOR095C
+SACCD1,Saccharopine dehydrogenase  NADP  L glutamate forming,True,-999999.0,999999.0,7,YNR050C
+SUCCt2r,Succinate transport via proton symport,True,-999999.0,999999.0,4,
+SACCD2,Saccharopine dehydrogenase  NAD  L lysine forming,True,-999999.0,999999.0,7,YIR034C
+PROtm,L proline transport  mitochondrial,True,-999999.0,999999.0,2,
+SADT,Sulfate adenylyltransferase,False,0.0,999999.0,5,YJR010W
+SAM24MT,S adenosyl methionine delta 24 sterol c methyltransferase,False,0.0,999999.0,5,YML008C
+SBPP1er,Sphingoid base phosphate phosphatase  sphinganine 1 phosphatase   endoplasmic reticulum,False,0.0,999999.0,4,YJL134W or YKR053C
+SBPP2er,Sphingoid base phosphate phosphatase  phytosphingosine 1 phosphate   endoplasmic reticulum,False,0.0,999999.0,4,YJL134W or YKR053C
+SBTD_D2,D sorbitol dehydrogenase  D fructose producing,False,0.0,999999.0,5,YJR159W
+SBTD_L,L sorbitol dehydrogenase  L sorbose producing,False,0.0,999999.0,5,YJR159W
+SUCCtm,Succinate transport  mitochondrial,False,0.0,999999.0,4,YLR348C
+SUCD1m,Succinate dehydrogenase,True,-999999.0,999999.0,4,(YKL141W and YKL148C and YLL041C and YLR164W) or (YDR178W and YKL148C and YLL041C and YMR118C) or (YDR178W and YJL045W and YKL141W and YLL041C) or (YDR178W and YKL141W and YKL148C and YLL041C)
+SUCD2_u6m,Succinate dehydrogenase  ubiquinone 6   mitochondrial,True,-999999.0,999999.0,4,(YDR178W and YKL141W and YKL148C and YLL041C) or (YKL141W and YKL148C and YLL041C and YLR164W) or (YDR178W and YKL148C and YLL041C and YMR118C) or (YDR178W and YJL045W and YKL141W and YLL041C)
+SUCD3_u6m,Succinate dehydrogenase  ubiquinone 6   mitochondrial,True,-999999.0,999999.0,4,(YDR178W and YKL141W and YKL148C and YLL041C) or (YKL141W and YKL148C and YLL041C and YLR164W) or (YDR178W and YKL148C and YLL041C and YMR118C) or (YDR178W and YJL045W and YKL141W and YLL041C)
+SUCFUMtm,Succinate fumarate transport  mitochondrial,False,0.0,999999.0,4,YJR095W or YLR348C
+SUCOASm,Succinate  CoA ligase  ADP forming,True,-999999.0,999999.0,6,YGR244C and YOR142W
+SUCRe,Sucrose hydrolyzing enxyme  extracellular,False,0.0,999999.0,4,YIL162W
+SUCRt2,Sucrose transport in via proton symport,False,0.0,999999.0,4,
+SBTR,D sorbitol reductase,False,0.0,999999.0,5,YHR104W
+SBT_Dt,D sorbitol transport via passive diffusion,True,-999999.0,999999.0,2,
+SBT_Lt,L sorbitol transport via passive diffusion,True,-999999.0,999999.0,2,
+SERAT,Serine O-acetyltransferase,False,0.0,999999.0,4,
+SULR,Sulfite reductase (NADPH2),True,-999999.0,999999.0,6,YFR030W or YJR137C
+T4HCINNMFM,4 hydroxycinnamate formation,False,0.0,999999.0,3,
+SERPT,Serine C palmitoyltransferase,False,0.0,999999.0,6,(YDR062W and YMR296C) and YBR058C_A
+PRPPS,Phosphoribosylpyrophosphate synthetase,True,-999999.0,999999.0,5,YER099C or YOL061W or YBL068W or YHL011C or YKL181W
+SERTRS,Seryl-tRNA synthetase,False,0.0,999999.0,6,YHR011W or YDR023W
+SERt2m,Serine mitochondrial transport via proton symport,True,-999999.0,999999.0,4,
+SERt2r,L serine reversible transport via proton symport,True,-999999.0,999999.0,4,YFL055W or YCL025C or YDR508C or YKR039W or YPL265W
+SFGTHi,S-Formylglutathione hydralase,True,-999999.0,999999.0,5,YJL068C
+TAGL_SC,Triacylglycerol lipase  yeast specific,False,0.0,999999.0,12,YDR058C or YMR313C
+TALA,Transaldolase,True,-999999.0,999999.0,4,YLR354C or YGR043C
+TAUDO,Taurine dioxygenase,False,0.0,999999.0,8,YLL057C
+TAURt,Taurine transport,True,-999999.0,999999.0,2,
+SHCHD,Sirohydrochlorin dehydrogenase,False,0.0,999999.0,5,YBR213W
+SHCHF,Sirohydrochlorin ferrochelatase,False,0.0,999999.0,4,YBR213W
+SHK3Dr,Shikimate dehydrogenase,False,0.0,999999.0,5,YDR127W
+SHKK,Shikimate kinase,False,0.0,999999.0,5,YDR127W
+SHSL1,O-succinylhomoserine lyase (L-cysteine),False,0.0,999999.0,5,
+TCHOLAabcv,Taurcholate via ABC system  vacuolar,False,0.0,999999.0,7,YLL048C
+THFATm,Tetrahydrofolate aminomethyltransferase  mitochondrial,False,0.0,999999.0,4,YDR019C and YMR189W and YAL044C and (YBR221C and YER178W)
+THFGLUS,TetrahydrofolateL glutamate gamma ligase  ADP forming,True,-999999.0,999999.0,7,YKL132C or YOR241W or YMR113W
+THIORDXi,Hydrogen peroxide reductase (thioredoxin),False,0.0,999999.0,4,(YLR043C and YDR453C) or (YGR209C and YDR453C)
+THIORDXm,Hydrogen peroxide reductase  thioredoxin   mitochondrial,True,-999999.0,999999.0,4,YBL064C and YCR083W
+THIORDXni,Thioredoxin  nuclear  irreversible,False,0.0,999999.0,4,(YIL010W and YLR043C) or (YIL010W and YGR209C)
+THIORDXp,Hydrogen peroxide reductase  thioredoxin   peroxisomal,True,-999999.0,999999.0,4,(YLR109W and YLR043C) or (YLR109W and YGR209C)
+SHSL4r,O succinylhomoserine lyase  elimination   reversible,True,-999999.0,999999.0,6,YML082W
+SLCBK1,Sphingolipid long chain base kinase  sphinganine,False,0.0,999999.0,5,YLR260W or YOR171C
+PRPPtm,PRPP reversible transport  mitochondrial,True,-999999.0,999999.0,2,
+THMDPe,Thiamin diphosphatase  extracellular,False,0.0,999999.0,5,YBR092C
+THMDt2,Thymidine transport in via proton symport,False,0.0,999999.0,4,
+THMP,Thiamin phosphatase,False,0.0,999999.0,4,
+PSCVT,3-phosphoshikimate 1-carboxyvinyltransferase,False,0.0,999999.0,4,YDR127W
+THMPPt2m,Thiamine diphosphate transport  mitochondria,False,0.0,999999.0,2,YGR096W
+THMPe,Thiamin phosphatase  extracellular,False,0.0,999999.0,4,YBR092C
+THRt2r,L threonine reversible transport via proton symport,True,-999999.0,999999.0,4,YKR039W or YBR069C or YCL025C or YDR508C
+THYMt3r,Thymine reversible transport via proton antiport,True,-999999.0,999999.0,4,
+THZPSN1_SC,Thiazole phosphate synthesis  xylulose 5 phosphate   yeast specific,False,0.0,999999.0,12,
+THZPSN2_SC,Thiazole phosphate synthesis  ribose 5 phosphate   yeast specifc,False,0.0,999999.0,12,
+THMt2,Thiamine transport in via proton symport,False,0.0,999999.0,4,YLR237W or YOR071C or YOR192C
+PSERDg_SC,Phosphatidylserine decarboxylase  yeast specific  Golgi,False,0.0,999999.0,4,YGR170W
+THRA2,L-allo-Threonine Aldolase,False,0.0,999999.0,3,YEL046C
+TKT1,Transketolase,True,-999999.0,999999.0,4,YBR117C or YPR074C
+PSERDm_SC,Phosphatidylserine decarboxylase  yeast specific  mitochondrial,False,0.0,999999.0,4,YNL169C
+TKT2,Transketolase,True,-999999.0,999999.0,4,YPR074C or YBR117C
+TMDK1,Thymidine kinase (ATP:thymidine),False,0.0,999999.0,5,
+TMDPK,Thiamine diphosphokinase,False,0.0,999999.0,5,YOR143C
+THRA,Threonine aldolase,False,0.0,999999.0,3,YEL046C
+THRD_L,L-threonine deaminase,False,0.0,999999.0,3,YCL064C or YKL218C
+THRD_Lm,L threonine deaminase  mitochondrial,False,0.0,999999.0,3,YER086W
+THRS,Threonine synthase,False,0.0,999999.0,4,YCR053W
+THRTRS,Threonyl-tRNA synthetase,False,0.0,999999.0,6,YIL078W
+THRTRSm,Threonyl tRNA synthetase  mitochondrial,False,0.0,999999.0,6,YKL194C
+THRt2m,Threonine mitochondrial transport via proton symport,True,-999999.0,999999.0,4,
+URIK1,Uridine kinase  ATPUridine,False,0.0,999999.0,5,YNR012W
+TMDPP,Thymidine phosphorylase,True,-999999.0,999999.0,4,YLR209C
+TMDPPK,Thiamine diphosphate kinase,False,0.0,999999.0,4,YOR143C
+TMDS,Thymidylate synthase,False,0.0,999999.0,4,YOR074C
+TMN,Thiaminase,False,0.0,999999.0,5,
+TMPK,Thiamine-phosphate kinase,True,-999999.0,999999.0,4,
+TMPPP,Thiamine-phosphate diphosphorylase,False,0.0,999999.0,5,YPL214C
+TPI,Triose-phosphate isomerase,True,-999999.0,999999.0,2,YDR050C
+TRDOXtp,Oxidized thioredoxin peroxisomal transport via diffusion,True,-999999.0,999999.0,2,
+TRDR,Thioredoxin reductase (NADPH),False,0.0,999999.0,5,(YDR353W and YDR353W) or YLR043C or (YDR353W and YGR209C)
+PSERDv_SC,Phosphatidylserine decarboxylase  yeast specific  vacuolar,False,0.0,999999.0,4,YGR170W
+TRDRDtp,Reduced thioredoxin peroxisomal transport via diffusion,True,-999999.0,999999.0,2,
+TRDRm,Thioredoxin reductase  NADPH,False,0.0,999999.0,5,YHR106W and YCR083W
+TRE6PP,Trehalose-phosphatase,False,0.0,999999.0,4,(YBR126C and YDR074W and YML100W) or (YBR126C and YDR074W and YMR261C)
+URIK2,Uridine kinase (GTP:Uridine),False,0.0,999999.0,5,YNR012W
+URIt2,Uridine transport in via proton symport,False,0.0,999999.0,4,YBL042C or YAL022C
+UTPH1,UTP diphosphohydrolase,False,0.0,999999.0,5,YER005W
+UTPtm,UTPUMP antiport,False,0.0,999999.0,6,YBR192W
+TRE6PS,"Alpha,alpha-trehalose-phosphate synthase (UDP-forming)",False,0.0,999999.0,5,(YBR126C and YDR074W and YML100W) or (YBR126C and YDR074W and YMR261C)
+TREH,"Alpha,alpha-trehalase",False,0.0,999999.0,3,YDR001C or YBR001C
+PSERS_SC,Phosphatidylserine synthase  yeast specific,True,-999999.0,999999.0,5,YER026C
+TREHv,Alpha alpha trehalase  vacuolar,False,0.0,999999.0,3,YPR026W
+VALTA,Valine transaminase,True,-999999.0,999999.0,4,YJR148W
+VALTAim,Valine transaminase  mitochondiral,False,0.0,999999.0,4,YHR208W
+VALTRS,Valyl-tRNA synthetase,False,0.0,999999.0,6,YGR094W
+TREt2,Trehalose transport in via proton symporter,False,0.0,999999.0,4,
+TREt2v,Trehalose vacuolar transport via proton symport,True,-999999.0,999999.0,4,
+VALTRSm,Valyl tRNA synthetase  mitochondrial,False,0.0,999999.0,6,YGR094W
+PSERSm_SC,Phosphatidylserine synthase  yeast specific  mitochondrial,True,-999999.0,999999.0,5,YER026C
+VALt2m,Valine reversible mitochondrial transport via proton symport,True,-999999.0,999999.0,4,
+VALt2r,L valine reversible transport via proton symport,True,-999999.0,999999.0,4,YKR039W or YCL025C or YDR046C or YBR069C or YBR068C
+XANt,Xanthine reversible transport,True,-999999.0,999999.0,2,
+XPPT,Xanthine phosphoribosyltransferase,False,0.0,999999.0,4,YJR133W
+XTSNt2,Xanthosine transport in via proton symport,False,0.0,999999.0,4,
+TRIGS_SC,Triglycerol synthesis,False,0.0,999999.0,11,YOR245C or YCR048W or YNR019W
+TRPO2,L Tryptophanoxygen 2 3 oxidoreductase  decyclizing,False,0.0,999999.0,3,YJR078W
+TRPS1,Tryptophan synthase (indoleglycerol phosphate),False,0.0,999999.0,5,YGL026C
+TRPTA,Tryptophan transaminase,True,-999999.0,999999.0,4,YGL202W or YHR137W
+TRPTRS,Tryptophanyl-tRNA synthetase,False,0.0,999999.0,6,YOL097C
+TRPTRSm,Tryptophanyl tRNA synthetase  mitochondrial,False,0.0,999999.0,6,YDR268W
+TRPt2m,Tryptophan mitochondrial transport via proton symport,True,-999999.0,999999.0,4,
+TRPt2r,L tryptophan reversible transport via proton symport,True,-999999.0,999999.0,4,YBR069C or YKR039W or YOL020W or YBR068C or YDR046C
+TTCCOAtx,Fatty acid intracellular transport,True,-999999.0,999999.0,2,
+XYLK,Xylulokinase,False,0.0,999999.0,5,YGR194C
+XYLR,Xylose reductase,False,0.0,999999.0,5,YHR104W
+XYLTD_D,Xylitol dehydrogenase  D xyulose forming,False,0.0,999999.0,5,YLR070C
+XYLTt,Xylitol transport via passive diffusion,True,-999999.0,999999.0,2,
+TTDCAtr,Fatty acid transport,True,-999999.0,999999.0,2,
+TYRNFT,L tyrosine N formyltransferase,False,0.0,999999.0,5,YDR403W
+PSERT,Phosphoserine transaminase,False,0.0,999999.0,4,YOR184W
+TYRTAi,Tyrosine transaminase  irreversible,False,0.0,999999.0,4,YGL202W or YHR137W or YLR027C
+TYRTAim,Tyrosine transaminase  irreversible  mitochondrial,False,0.0,999999.0,4,YKL106W
+TYRTAip,Tyrosine transaminase  irreversible  peroxisomal,False,0.0,999999.0,4,YLR027C
+XYLt,D xylose reversible transport,True,-999999.0,999999.0,2,
+YUMPS,YUMP synthetase,True,-999999.0,999999.0,4,YFL001W or YPL212C or YGL063W or YNL292W
+ZYMSTAT_SC,Acyl CoAzymosterol acyltransferase  yeast specific,False,0.0,999999.0,9,YCR048W
+ZYMSTESTH_SC,Zymosterol ester hydrolase  yeast specific,False,0.0,999999.0,10,YKL140W or YLL012W
+TYRTRS,Tyrosyl-tRNA synthetase,False,0.0,999999.0,6,YGR185C
+TYRTRSm,Tyrosyl tRNA synthetase  mitochondrial,False,0.0,999999.0,6,YPL097W
+ZYMSTESTH_SCe,Zymosterol ester hydrolase  yeast specific  extracellular,False,0.0,999999.0,10,YLR020C
+TYRt2m,Tyrosine mitochondrial transport via proton symport,True,-999999.0,999999.0,4,
+PSPH1Pter,Phytosphinganine 1 phosphate endoplasmic reticular transport,False,0.0,999999.0,2,
+TYRt2p,Tyrosine peroxisomal transport via proton symport,True,-999999.0,999999.0,4,
+TYRt2r,L tyrosine reversible transport via proton symport,True,-999999.0,999999.0,4,YBR069C or YKR039W or YCL025C or YBR068C or YOL020W or YDR046C or YCL025C
+TYRt6,L tyrosine transport in via proton antiport  vacuolar,False,0.0,999999.0,4,YBR293W or YJR001W
+TYRt7,L tyrosine transport out via proton symport  vacuolar,False,0.0,999999.0,4,YKL146W or YNL101W
+UDPACGLP,UDP N acetylglucosamine diphosphorylase,True,-999999.0,999999.0,5,YDL103C
+ZYMSTt,Zymosterol reversible transport,True,-999999.0,999999.0,2,YIL013C or YOR011W
+BIOMASS_SC5_notrace,Biomass SC5 notrace,False,0.0,999999.0,47,
+SERD_L,L-serine deaminase,False,0.0,999999.0,3,YCL064C or YIL167W
+UDPG4E,UDPglucose 4-epimerase,True,-999999.0,999999.0,2,YBR019C
+PSPHPL,Phytosphingosine phosphate lyase,False,0.0,999999.0,3,YDR294C
+UDPGALt2g,UDPgalactose transport  Golgi apparatus,False,0.0,999999.0,2,YPL244C
+UGLT,UDPglucose--hexose-1-phosphate uridylyltransferase,True,-999999.0,999999.0,4,YBR018C
+UGLYCH,Ureidoglycolate hydrolase,True,-999999.0,999999.0,6,YIR032C
+PSPHS,Phytosphingosine synthesis,False,0.0,999999.0,7,YDR297W
+UMPK,UMP kinase,True,-999999.0,999999.0,4,YKL024C
+PSP_L,Phosphoserine phosphatase (L-serine),False,0.0,999999.0,4,YGR208W
+UMPKn,UMP kinase  nuclear,True,-999999.0,999999.0,4,YKL024C
+UMPtn,UMP nuclear transport,True,-999999.0,999999.0,2,
+PStg_SC,Phosphatidylserine Golgi transport  yeast specific,True,-999999.0,999999.0,2,
+PStm_SC,Phosphatidylserine mitochondrial  transport  yeast specific,True,-999999.0,999999.0,2,
+UNK3,2-keto-4-methylthiobutyrate transamination,False,0.0,999999.0,4,
+UPP3MT,Uroporphyrinogen methyltransferase,False,0.0,999999.0,5,YKR069W
+PStv_SC,Phosphatidylserine vacuolar transport  yeast specific,True,-999999.0,999999.0,2,
+UPP3S,Uroporphyrinogen-III synthase,False,0.0,999999.0,3,YOR278W
+UPPDC1,Uroporphyrinogen decarboxylase (uroporphyrinogen III),False,0.0,999999.0,4,YDR047W
+UPPRT,Uracil phosphoribosyltransferase,False,0.0,999999.0,4,YHR128W
+PTD1INOtn_SC,Phosphatidyl 1D myo insoitol nuclear transport  yeast specific,True,-999999.0,999999.0,2,
+URAt2,Uracil transport in via proton symport,False,0.0,999999.0,4,YBR021W
+PTD4INOtn_SC,Phosphatidyl 1D myo 4 inositol nuclear transport  yeast specific,True,-999999.0,999999.0,2,
+UREA2t2,Urea reversible transport via proton symport  2 H,True,-999999.0,999999.0,4,YHL016C
+UREASE,Urea carboxylase,True,-999999.0,999999.0,7,YBR208C
+PTE10x,Peroxisomal acyl CoA thioesterase,False,0.0,999999.0,5,YJR019C
+URIDK2r,Uridylate kinase (dUMP),True,-999999.0,999999.0,4,YKL024C
+URIDK2rn,Uridylate kinase  dUMP   nuclear,True,-999999.0,999999.0,4,YKL024C
+PTE11x,Peroxisomal acyl CoA thioesterase,False,0.0,999999.0,5,YJR019C
+PTE12x,Peroxisomal acyl CoA thioesterase,False,0.0,999999.0,5,YJR019C
+PTE2x,Peroxisomal acyl CoA thioesterase,False,0.0,999999.0,5,YJR019C
+PTE7x,Peroxisomal acyl CoA thioesterase,False,0.0,999999.0,5,YJR019C
+PTE8x,Peroxisomal acyl CoA thioesterase,False,0.0,999999.0,5,YJR019C
+PTE9x,Peroxisomal acyl CoA thioesterase,False,0.0,999999.0,5,YJR019C
+PTPATi,Pantetheine-phosphate adenylyltransferase,False,0.0,999999.0,5,
+PTPATim,Panthetheine phosphate adenylyltransferase,False,0.0,999999.0,5,
+PTRCt3i,Putrescine transport in via proton antiport  irreversible,False,0.0,999999.0,4,YOR273C or YLL028W
+PTRCtex2,Putrescine excretion  cytosol to extracellular,False,0.0,999999.0,2,YKL174C
+PUNP1,Purine-nucleoside phosphorylase (Adenosine),True,-999999.0,999999.0,4,YLR209C
+PUNP1m,Purine nucleoside phosphorylase  Adenosine   mitochondrial,True,-999999.0,999999.0,4,YLR209C
+PUNP2,Purine-nucleoside phosphorylase (Deoxyadenosine),True,-999999.0,999999.0,4,YLR209C
+PUNP3,Purine-nucleoside phosphorylase (Guanosine),True,-999999.0,999999.0,4,YLR209C
+PUNP3m,Purine nucleoside phosphorylase  Guanosine   mitochondrial,True,-999999.0,999999.0,4,YLR209C
+PUNP4,Purine-nucleoside phosphorylase (Deoxyguanosine),True,-999999.0,999999.0,4,YLR209C
+PUNP5,Purine-nucleoside phosphorylase (Inosine),True,-999999.0,999999.0,4,YLR209C
+PUNP6,Purine-nucleoside phosphorylase (Deoxyinosine),True,-999999.0,999999.0,4,YLR209C
+PUNP7,Purine-nucleoside phosphorylase (Xanthosine),True,-999999.0,999999.0,4,YLR209C
+PYAM5PO,Pyridoxamine 5'-phosphate oxidase,False,0.0,999999.0,6,YBR035C
+PYDAMK,Pyridoxamine kinase,False,0.0,999999.0,5,
+PYDXK,Pyridoxal kinase,False,0.0,999999.0,5,
+PYDXNK,Pyridoxine kinase,False,0.0,999999.0,5,
+PYDXNO,Pyridoxine oxidase,True,-999999.0,999999.0,4,YBR035C
+PYDXO,Pyridoxal oxidase,True,-999999.0,999999.0,6,YBR035C
+PYK,Pyruvate kinase,False,0.0,999999.0,5,YAL038W or YOR347C
+PYNP2r,Pyrimidine-nucleoside phosphorylase (uracil),True,-999999.0,999999.0,4,
+PYR5CDm,D1 pyrroline 5 carboxylate dehydrogenase  mitochondrial,False,0.0,999999.0,6,YHR037W
+PYRDC,Pyruvate decarboxylase,False,0.0,999999.0,4,YGR087C or YLR134W or YLR044C

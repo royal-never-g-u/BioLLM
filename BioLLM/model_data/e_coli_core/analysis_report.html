@@ -1,0 +1,390 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Analysis Report</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f5f5f5; }
+        .container { max-width: 1200px; margin: 0 auto; background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1 { color: #333; text-align: center; border-bottom: 3px solid #007bff; padding-bottom: 10px; }
+        h2 { color: #007bff; margin-top: 30px; }
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 20px 0; }
+        .stat-card { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; border-radius: 10px; text-align: center; }
+        .stat-number { font-size: 2em; font-weight: bold; }
+        .stat-label { font-size: 0.9em; opacity: 0.9; }
+        .visualization { margin: 20px 0; text-align: center; }
+        .visualization img { max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .data-table { margin: 20px 0; overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background-color: #007bff; color: white; }
+        tr:nth-child(even) { background-color: #f2f2f2; }
+        .download-links { margin: 20px 0; }
+        .download-links a { display: inline-block; margin: 5px; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px; }
+        .download-links a:hover { background-color: #0056b3; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔬 Model Analysis Report</h1>
+        
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-number">72</div>
+                <div class="stat-label">Metabolites</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">95</div>
+                <div class="stat-label">Reactions</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">137</div>
+                <div class="stat-label">Genes</div>
+            </div>
+        </div>
+        
+        <h2>📊 Visualizations</h2>
+        
+        <div class="visualization">
+            <h3>Model Summary</h3>
+            <img src="visualizations/model_summary.png" alt="Model Summary">
+        </div>
+        
+        <div class="visualization">
+            <h3>Metabolites by Compartment</h3>
+            <img src="visualizations/metabolites_by_compartment.png" alt="Metabolites by Compartment">
+        </div>
+        
+        <div class="visualization">
+            <h3>Metabolites Connectivity Distribution</h3>
+            <img src="visualizations/metabolites_connectivity.png" alt="Metabolites Connectivity">
+        </div>
+        
+        <div class="visualization">
+            <h3>Reactions by Reversibility</h3>
+            <img src="visualizations/reactions_by_reversibility.png" alt="Reactions by Reversibility">
+        </div>
+        
+        <div class="visualization">
+            <h3>Reactions Complexity Distribution</h3>
+            <img src="visualizations/reactions_complexity.png" alt="Reactions Complexity">
+        </div>
+        
+        <div class="visualization">
+            <h3>Genes by Functionality</h3>
+            <img src="visualizations/genes_by_functionality.png" alt="Genes by Functionality">
+        </div>
+        
+        <div class="visualization">
+            <h3>Genes Activity Distribution</h3>
+            <img src="visualizations/genes_activity.png" alt="Genes Activity">
+        </div>
+        
+        <div class="visualization">
+            <h3>Top 15 Metabolites by Connectivity</h3>
+            <img src="visualizations/top_metabolites.png" alt="Top Metabolites">
+        </div>
+        
+        <div class="visualization">
+            <h3>Top 15 Reactions by Complexity</h3>
+            <img src="visualizations/top_reactions.png" alt="Top Reactions">
+        </div>
+        
+        <h2>📁 Download Data</h2>
+        <div class="download-links">
+            <a href="metabolites.csv" download>Download Metabolites CSV</a>
+            <a href="reactions.csv" download>Download Reactions CSV</a>
+            <a href="genes.csv" download>Download Genes CSV</a>
+            <a href="structure_info.json" download>Download Structure Info JSON</a>
+        </div>
+        
+        <h2>📋 Data Preview</h2>
+        
+        <h3>Top 10 Metabolites</h3>
+        <div class="data-table">
+            <table border="1" class="dataframe data-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>id</th>
+      <th>name</th>
+      <th>compartment</th>
+      <th>formula</th>
+      <th>charge</th>
+      <th>reaction_count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>glc__D_e</td>
+      <td>D-Glucose</td>
+      <td>e</td>
+      <td>C6H12O6</td>
+      <td>0.0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>gln__L_c</td>
+      <td>L-Glutamine</td>
+      <td>c</td>
+      <td>C5H10N2O3</td>
+      <td>0.0</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>gln__L_e</td>
+      <td>L-Glutamine</td>
+      <td>e</td>
+      <td>C5H10N2O3</td>
+      <td>0.0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>glu__L_c</td>
+      <td>L-Glutamate</td>
+      <td>c</td>
+      <td>C5H8NO4</td>
+      <td>-1.0</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>glu__L_e</td>
+      <td>L-Glutamate</td>
+      <td>e</td>
+      <td>C5H8NO4</td>
+      <td>-1.0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>glx_c</td>
+      <td>Glyoxylate</td>
+      <td>c</td>
+      <td>C2H1O3</td>
+      <td>-1.0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>h2o_c</td>
+      <td>H2O H2O</td>
+      <td>c</td>
+      <td>H2O</td>
+      <td>0.0</td>
+      <td>18</td>
+    </tr>
+    <tr>
+      <td>h2o_e</td>
+      <td>H2O H2O</td>
+      <td>e</td>
+      <td>H2O</td>
+      <td>0.0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>h_c</td>
+      <td>H+</td>
+      <td>c</td>
+      <td>H</td>
+      <td>1.0</td>
+      <td>35</td>
+    </tr>
+    <tr>
+      <td>h_e</td>
+      <td>H+</td>
+      <td>e</td>
+      <td>H</td>
+      <td>1.0</td>
+      <td>17</td>
+    </tr>
+  </tbody>
+</table>
+        </div>
+        
+        <h3>Top 10 Reactions</h3>
+        <div class="data-table">
+            <table border="1" class="dataframe data-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>id</th>
+      <th>name</th>
+      <th>reversibility</th>
+      <th>lower_bound</th>
+      <th>upper_bound</th>
+      <th>metabolite_count</th>
+      <th>gene_reaction_rule</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>PFK</td>
+      <td>Phosphofructokinase</td>
+      <td>False</td>
+      <td>0.0</td>
+      <td>1000.0</td>
+      <td>5</td>
+      <td>b3916 or b1723</td>
+    </tr>
+    <tr>
+      <td>PFL</td>
+      <td>Pyruvate formate lyase</td>
+      <td>False</td>
+      <td>0.0</td>
+      <td>1000.0</td>
+      <td>4</td>
+      <td>((b0902 and b0903) and b2579) or (b0902 and b0903) or (b0902 and b3114) or (b3951 and b3952)</td>
+    </tr>
+    <tr>
+      <td>PGI</td>
+      <td>Glucose-6-phosphate isomerase</td>
+      <td>True</td>
+      <td>-1000.0</td>
+      <td>1000.0</td>
+      <td>2</td>
+      <td>b4025</td>
+    </tr>
+    <tr>
+      <td>PGK</td>
+      <td>Phosphoglycerate kinase</td>
+      <td>True</td>
+      <td>-1000.0</td>
+      <td>1000.0</td>
+      <td>4</td>
+      <td>b2926</td>
+    </tr>
+    <tr>
+      <td>PGL</td>
+      <td>6-phosphogluconolactonase</td>
+      <td>False</td>
+      <td>0.0</td>
+      <td>1000.0</td>
+      <td>4</td>
+      <td>b0767</td>
+    </tr>
+    <tr>
+      <td>ACALD</td>
+      <td>Acetaldehyde dehydrogenase (acetylating)</td>
+      <td>True</td>
+      <td>-1000.0</td>
+      <td>1000.0</td>
+      <td>6</td>
+      <td>b0351 or b1241</td>
+    </tr>
+    <tr>
+      <td>AKGt2r</td>
+      <td>2 oxoglutarate reversible transport via symport</td>
+      <td>True</td>
+      <td>-1000.0</td>
+      <td>1000.0</td>
+      <td>4</td>
+      <td>b2587</td>
+    </tr>
+    <tr>
+      <td>PGM</td>
+      <td>Phosphoglycerate mutase</td>
+      <td>True</td>
+      <td>-1000.0</td>
+      <td>1000.0</td>
+      <td>2</td>
+      <td>b3612 or b4395 or b0755</td>
+    </tr>
+    <tr>
+      <td>PIt2r</td>
+      <td>Phosphate reversible transport via symport</td>
+      <td>True</td>
+      <td>-1000.0</td>
+      <td>1000.0</td>
+      <td>4</td>
+      <td>b2987 or b3493</td>
+    </tr>
+    <tr>
+      <td>ALCD2x</td>
+      <td>Alcohol dehydrogenase (ethanol)</td>
+      <td>True</td>
+      <td>-1000.0</td>
+      <td>1000.0</td>
+      <td>5</td>
+      <td>b0356 or b1478 or b1241</td>
+    </tr>
+  </tbody>
+</table>
+        </div>
+        
+        <h3>Top 10 Genes</h3>
+        <div class="data-table">
+            <table border="1" class="dataframe data-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>id</th>
+      <th>name</th>
+      <th>functional</th>
+      <th>reaction_count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>b1241</td>
+      <td></td>
+      <td>True</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>b0351</td>
+      <td></td>
+      <td>True</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>s0001</td>
+      <td></td>
+      <td>True</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>b1849</td>
+      <td></td>
+      <td>True</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>b3115</td>
+      <td></td>
+      <td>True</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>b2296</td>
+      <td></td>
+      <td>True</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>b1276</td>
+      <td></td>
+      <td>True</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>b0118</td>
+      <td></td>
+      <td>True</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>b0474</td>
+      <td></td>
+      <td>True</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>b0116</td>
+      <td></td>
+      <td>True</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+        </div>
+    </div>
+</body>
+</html>
+            

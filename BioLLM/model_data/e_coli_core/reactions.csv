@@ -1,0 +1,96 @@
+id,name,reversibility,lower_bound,upper_bound,metabolite_count,gene_reaction_rule
+PFK,Phosphofructokinase,False,0.0,1000.0,5,b3916 or b1723
+PFL,Pyruvate formate lyase,False,0.0,1000.0,4,((b0902 and b0903) and b2579) or (b0902 and b0903) or (b0902 and b3114) or (b3951 and b3952)
+PGI,Glucose-6-phosphate isomerase,True,-1000.0,1000.0,2,b4025
+PGK,Phosphoglycerate kinase,True,-1000.0,1000.0,4,b2926
+PGL,6-phosphogluconolactonase,False,0.0,1000.0,4,b0767
+ACALD,Acetaldehyde dehydrogenase (acetylating),True,-1000.0,1000.0,6,b0351 or b1241
+AKGt2r,2 oxoglutarate reversible transport via symport,True,-1000.0,1000.0,4,b2587
+PGM,Phosphoglycerate mutase,True,-1000.0,1000.0,2,b3612 or b4395 or b0755
+PIt2r,Phosphate reversible transport via symport,True,-1000.0,1000.0,4,b2987 or b3493
+ALCD2x,Alcohol dehydrogenase (ethanol),True,-1000.0,1000.0,5,b0356 or b1478 or b1241
+ACALDt,Acetaldehyde reversible transport,True,-1000.0,1000.0,2,s0001
+ACKr,Acetate kinase,True,-1000.0,1000.0,4,b3115 or b2296 or b1849
+PPC,Phosphoenolpyruvate carboxylase,False,0.0,1000.0,6,b3956
+ACONTa,"Aconitase (half-reaction A, Citrate hydro-lyase)",True,-1000.0,1000.0,3,b0118 or b1276
+ACONTb,"Aconitase (half-reaction B, Isocitrate hydro-lyase)",True,-1000.0,1000.0,3,b0118 or b1276
+ATPM,ATP maintenance requirement,False,8.39,1000.0,5,
+PPCK,Phosphoenolpyruvate carboxykinase,False,0.0,1000.0,5,b3403
+ACt2r,Acetate reversible transport via proton symport,True,-1000.0,1000.0,4,
+PPS,Phosphoenolpyruvate synthase,False,0.0,1000.0,7,b1702
+ADK1,Adenylate kinase,True,-1000.0,1000.0,3,b0474
+AKGDH,2-Oxogluterate dehydrogenase,False,0.0,1000.0,6,b0116 and b0726 and b0727
+ATPS4r,ATP synthase (four protons for one ATP),True,-1000.0,1000.0,6,((b3736 and b3737 and b3738) and (b3731 and b3732 and b3733 and b3734 and b3735)) or ((b3736 and b3737 and b3738) and (b3731 and b3732 and b3733 and b3734 and b3735) and b3739)
+PTAr,Phosphotransacetylase,True,-1000.0,1000.0,4,b2297 or b2458
+PYK,Pyruvate kinase,False,0.0,1000.0,5,b1854 or b1676
+BIOMASS_Ecoli_core_w_GAM,Biomass Objective Function with GAM,False,0.0,1000.0,23,
+PYRt2,Pyruvate transport in via proton symport,True,-1000.0,1000.0,4,
+CO2t,CO2 transporter via diffusion,True,-1000.0,1000.0,2,s0001
+RPE,Ribulose 5-phosphate 3-epimerase,True,-1000.0,1000.0,2,b3386 or b4301
+CS,Citrate synthase,False,0.0,1000.0,6,b0720
+RPI,Ribose-5-phosphate isomerase,True,-1000.0,1000.0,2,b2914 or b4090
+SUCCt2_2,Succinate transport via proton symport (2 H),False,0.0,1000.0,4,b3528
+CYTBD,Cytochrome oxidase bd (ubiquinol-8: 2 protons),False,0.0,1000.0,6,(b0978 and b0979) or (b0733 and b0734)
+D_LACt2,D lactate transport via proton symport,True,-1000.0,1000.0,4,b2975 or b3603
+ENO,Enolase,True,-1000.0,1000.0,3,b2779
+SUCCt3,Succinate transport out via proton antiport,False,0.0,1000.0,4,
+ETOHt2r,Ethanol reversible transport via proton symport,True,-1000.0,1000.0,4,
+SUCDi,Succinate dehydrogenase (irreversible),False,0.0,1000.0,4,b0721 and b0722 and b0723 and b0724
+SUCOAS,Succinyl-CoA synthetase (ADP-forming),True,-1000.0,1000.0,6,b0728 and b0729
+TALA,Transaldolase,True,-1000.0,1000.0,4,b2464 or b0008
+THD2,NAD(P) transhydrogenase,False,0.0,1000.0,6,b1602 and b1603
+TKT1,Transketolase,True,-1000.0,1000.0,4,b2935 or b2465
+TKT2,Transketolase,True,-1000.0,1000.0,4,b2935 or b2465
+TPI,Triose-phosphate isomerase,True,-1000.0,1000.0,2,b3919
+EX_ac_e,Acetate exchange,False,0.0,1000.0,1,
+EX_acald_e,Acetaldehyde exchange,False,0.0,1000.0,1,
+EX_akg_e,2-Oxoglutarate exchange,False,0.0,1000.0,1,
+EX_co2_e,CO2 exchange,True,-1000.0,1000.0,1,
+EX_etoh_e,Ethanol exchange,False,0.0,1000.0,1,
+EX_for_e,Formate exchange,False,0.0,1000.0,1,
+EX_fru_e,D-Fructose exchange,False,0.0,1000.0,1,
+EX_fum_e,Fumarate exchange,False,0.0,1000.0,1,
+EX_glc__D_e,D-Glucose exchange,True,-10.0,1000.0,1,
+EX_gln__L_e,L-Glutamine exchange,False,0.0,1000.0,1,
+EX_glu__L_e,L-Glutamate exchange,False,0.0,1000.0,1,
+EX_h_e,H+ exchange,True,-1000.0,1000.0,1,
+EX_h2o_e,H2O exchange,True,-1000.0,1000.0,1,
+EX_lac__D_e,D-lactate exchange,False,0.0,1000.0,1,
+EX_mal__L_e,L-Malate exchange,False,0.0,1000.0,1,
+EX_nh4_e,Ammonia exchange,True,-1000.0,1000.0,1,
+EX_o2_e,O2 exchange,True,-1000.0,1000.0,1,
+EX_pi_e,Phosphate exchange,True,-1000.0,1000.0,1,
+EX_pyr_e,Pyruvate exchange,False,0.0,1000.0,1,
+EX_succ_e,Succinate exchange,False,0.0,1000.0,1,
+FBA,Fructose-bisphosphate aldolase,True,-1000.0,1000.0,3,b2097 or b1773 or b2925
+FBP,Fructose-bisphosphatase,False,0.0,1000.0,4,b3925 or b4232
+FORt2,Formate transport in via proton symport,False,0.0,1000.0,4,b0904 or b2492
+FORt,Formate transport via diffusion,False,-1000.0,0.0,2,b0904 or b2492
+FRD7,Fumarate reductase,False,0.0,1000.0,4,b4151 and b4152 and b4153 and b4154
+FRUpts2,Fructose transport via PEP:Pyr PTS (f6p generating),False,0.0,1000.0,4,b1817 and b1818 and b1819 and b2415 and b2416
+FUM,Fumarase,True,-1000.0,1000.0,3,b1612 or b4122 or b1611
+FUMt2_2,Fumarate transport via proton symport (2 H),False,0.0,1000.0,4,b3528
+G6PDH2r,Glucose 6-phosphate dehydrogenase,True,-1000.0,1000.0,5,b1852
+GAPD,Glyceraldehyde-3-phosphate dehydrogenase,True,-1000.0,1000.0,6,b1779
+GLCpts,D-glucose transport via PEP:Pyr PTS,False,0.0,1000.0,4,(b2417 and b1101 and b2415 and b2416) or (b1817 and b1818 and b1819 and b2415 and b2416) or (b2417 and b1621 and b2415 and b2416)
+GLNS,Glutamine synthetase,False,0.0,1000.0,7,b3870 or b1297
+GLNabc,L-glutamine transport via ABC system,False,0.0,1000.0,7,b0811 and b0810 and b0809
+GLUDy,Glutamate dehydrogenase (NADP),True,-1000.0,1000.0,7,b1761
+GLUN,Glutaminase,False,0.0,1000.0,4,b1812 or b0485 or b1524
+GLUSy,Glutamate synthase (NADPH),False,0.0,1000.0,6,b3212 and b3213
+GLUt2r,L glutamate transport via proton symport  reversible,True,-1000.0,1000.0,4,b4077
+GND,Phosphogluconate dehydrogenase,False,0.0,1000.0,5,b2029
+H2Ot,H2O transport via diffusion,True,-1000.0,1000.0,2,b0875 or s0001
+ICDHyr,Isocitrate dehydrogenase (NADP),True,-1000.0,1000.0,5,b1136
+ICL,Isocitrate lyase,False,0.0,1000.0,3,b4015
+LDH_D,D-lactate dehydrogenase,True,-1000.0,1000.0,5,b2133 or b1380
+MALS,Malate synthase,False,0.0,1000.0,6,b4014 or b2976
+MALt2_2,Malate transport via proton symport (2 H),False,0.0,1000.0,4,b3528
+MDH,Malate dehydrogenase,True,-1000.0,1000.0,5,b3236
+ME1,Malic enzyme (NAD),False,0.0,1000.0,5,b1479
+ME2,Malic enzyme (NADP),False,0.0,1000.0,5,b2463
+NADH16,NADH dehydrogenase (ubiquinone-8 & 3 protons),False,0.0,1000.0,6,b2276 and b2277 and b2278 and b2279 and b2280 and b2281 and b2282 and b2283 and b2284 and b2285 and b2286 and b2287 and b2288
+NADTRHD,NAD transhydrogenase,False,0.0,1000.0,4,b3962 or (b1602 and b1603)
+NH4t,Ammonia reversible transport,True,-1000.0,1000.0,2,s0001 or b0451
+O2t,O2 transport  diffusion,True,-1000.0,1000.0,2,s0001
+PDH,Pyruvate dehydrogenase,False,0.0,1000.0,6,b0114 and b0115 and b0116

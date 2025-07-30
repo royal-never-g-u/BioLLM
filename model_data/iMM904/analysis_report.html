@@ -1,0 +1,390 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Analysis Report</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f5f5f5; }
+        .container { max-width: 1200px; margin: 0 auto; background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1 { color: #333; text-align: center; border-bottom: 3px solid #007bff; padding-bottom: 10px; }
+        h2 { color: #007bff; margin-top: 30px; }
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 20px 0; }
+        .stat-card { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; border-radius: 10px; text-align: center; }
+        .stat-number { font-size: 2em; font-weight: bold; }
+        .stat-label { font-size: 0.9em; opacity: 0.9; }
+        .visualization { margin: 20px 0; text-align: center; }
+        .visualization img { max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .data-table { margin: 20px 0; overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background-color: #007bff; color: white; }
+        tr:nth-child(even) { background-color: #f2f2f2; }
+        .download-links { margin: 20px 0; }
+        .download-links a { display: inline-block; margin: 5px; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px; }
+        .download-links a:hover { background-color: #0056b3; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔬 Model Analysis Report</h1>
+        
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-number">1226</div>
+                <div class="stat-label">Metabolites</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">1577</div>
+                <div class="stat-label">Reactions</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">905</div>
+                <div class="stat-label">Genes</div>
+            </div>
+        </div>
+        
+        <h2>📊 Visualizations</h2>
+        
+        <div class="visualization">
+            <h3>Model Summary</h3>
+            <img src="visualizations/model_summary.png" alt="Model Summary">
+        </div>
+        
+        <div class="visualization">
+            <h3>Metabolites by Compartment</h3>
+            <img src="visualizations/metabolites_by_compartment.png" alt="Metabolites by Compartment">
+        </div>
+        
+        <div class="visualization">
+            <h3>Metabolites Connectivity Distribution</h3>
+            <img src="visualizations/metabolites_connectivity.png" alt="Metabolites Connectivity">
+        </div>
+        
+        <div class="visualization">
+            <h3>Reactions by Reversibility</h3>
+            <img src="visualizations/reactions_by_reversibility.png" alt="Reactions by Reversibility">
+        </div>
+        
+        <div class="visualization">
+            <h3>Reactions Complexity Distribution</h3>
+            <img src="visualizations/reactions_complexity.png" alt="Reactions Complexity">
+        </div>
+        
+        <div class="visualization">
+            <h3>Genes by Functionality</h3>
+            <img src="visualizations/genes_by_functionality.png" alt="Genes by Functionality">
+        </div>
+        
+        <div class="visualization">
+            <h3>Genes Activity Distribution</h3>
+            <img src="visualizations/genes_activity.png" alt="Genes Activity">
+        </div>
+        
+        <div class="visualization">
+            <h3>Top 15 Metabolites by Connectivity</h3>
+            <img src="visualizations/top_metabolites.png" alt="Top Metabolites">
+        </div>
+        
+        <div class="visualization">
+            <h3>Top 15 Reactions by Complexity</h3>
+            <img src="visualizations/top_reactions.png" alt="Top Reactions">
+        </div>
+        
+        <h2>📁 Download Data</h2>
+        <div class="download-links">
+            <a href="metabolites.csv" download>Download Metabolites CSV</a>
+            <a href="reactions.csv" download>Download Reactions CSV</a>
+            <a href="genes.csv" download>Download Genes CSV</a>
+            <a href="structure_info.json" download>Download Structure Info JSON</a>
+        </div>
+        
+        <h2>📋 Data Preview</h2>
+        
+        <h3>Top 10 Metabolites</h3>
+        <div class="data-table">
+            <table border="1" class="dataframe data-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>id</th>
+      <th>name</th>
+      <th>compartment</th>
+      <th>formula</th>
+      <th>charge</th>
+      <th>reaction_count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>2dr5p_c</td>
+      <td>2-Deoxy-D-ribose 5-phosphate</td>
+      <td>c</td>
+      <td>C5H9O7P</td>
+      <td>-2.0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>2hb_c</td>
+      <td>2 Hydroxybutyrate C4H7O3</td>
+      <td>c</td>
+      <td>C4H7O3</td>
+      <td>-1.0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>2hb_e</td>
+      <td>2 Hydroxybutyrate C4H7O3</td>
+      <td>e</td>
+      <td>C4H7O3</td>
+      <td>-1.0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>2hhxdal_c</td>
+      <td>2 Hydroxy hexadecanal C16H32O2</td>
+      <td>c</td>
+      <td>C16H32O2</td>
+      <td>0.0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>2hp6mbq_m</td>
+      <td>2 Hexaprenyl 6 methoxy 1 4 benzoquinone C37H54O3</td>
+      <td>m</td>
+      <td>C37H54O3</td>
+      <td>0.0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>2hp6mp_m</td>
+      <td>2 Hexaprenyl 6 methoxyphenol C37H56O2</td>
+      <td>m</td>
+      <td>C37H56O2</td>
+      <td>0.0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>2hpmhmbq_m</td>
+      <td>2 hexaprenyl 3 methyl 5 hydroxy 6 methoxy 1 4 benzoquinone C38H56O4</td>
+      <td>m</td>
+      <td>C38H56O4</td>
+      <td>0.0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>2hpmmbq_m</td>
+      <td>2 hexaprenyl 3 methyl 6 methoxy 1 4 benzoquinone C38H56O3</td>
+      <td>m</td>
+      <td>C38H56O3</td>
+      <td>0.0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>2ippm_c</td>
+      <td>2-Isopropylmaleate</td>
+      <td>c</td>
+      <td>C7H8O4</td>
+      <td>-2.0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>2kmb_c</td>
+      <td>2-keto-4-methylthiobutyrate</td>
+      <td>c</td>
+      <td>C5H7O3S</td>
+      <td>-1.0</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+        </div>
+        
+        <h3>Top 10 Reactions</h3>
+        <div class="data-table">
+            <table border="1" class="dataframe data-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>id</th>
+      <th>name</th>
+      <th>reversibility</th>
+      <th>lower_bound</th>
+      <th>upper_bound</th>
+      <th>metabolite_count</th>
+      <th>gene_reaction_rule</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>CITtcp</td>
+      <td>Citrateisocitrate antiport into peroxisome</td>
+      <td>True</td>
+      <td>-999999.0</td>
+      <td>999999.0</td>
+      <td>4</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>13BGH</td>
+      <td>Endo 1 3 beta glucan glucohydrase</td>
+      <td>False</td>
+      <td>0.0</td>
+      <td>999999.0</td>
+      <td>3</td>
+      <td>YGR282C</td>
+    </tr>
+    <tr>
+      <td>13BGHe</td>
+      <td>Exo 1 3 beta glucan glucohydrase</td>
+      <td>False</td>
+      <td>0.0</td>
+      <td>999999.0</td>
+      <td>3</td>
+      <td>YOR190W or YDR261C or YLR300W</td>
+    </tr>
+    <tr>
+      <td>13GS</td>
+      <td>1 3 beta glucan synthase</td>
+      <td>False</td>
+      <td>0.0</td>
+      <td>999999.0</td>
+      <td>4</td>
+      <td>((YCR034W and YGR032W) and YLR343W) or ((YCR034W and YGR032W) and YMR215W) or ((YCR034W and YMR306W) and YMR215W) or ((YCR034W and YLR342W) and YOL132W) or ((YCR034W and YMR306W) and YOL132W) or ((YCR034W and YGR032W) and YOL030W) or ((YCR034W and YLR342W) and YOL030W) or ((YCR034W and YMR306W) and YOL030W) or ((YCR034W and YLR342W) and YLR343W) or ((YCR034W and YMR306W) and YLR343W) or ((YCR034W and YGR032W) and YOL132W) or ((YCR034W and YLR342W) and YMR215W) or ((YCR034W and YGR032W) and YMR307W) or ((YCR034W and YLR342W) and YMR307W) or ((YCR034W and YMR306W) and YMR307W)</td>
+    </tr>
+    <tr>
+      <td>16GS</td>
+      <td>1 6 beta glucan synthase</td>
+      <td>False</td>
+      <td>0.0</td>
+      <td>999999.0</td>
+      <td>4</td>
+      <td>YPR159W or YGR143W</td>
+    </tr>
+    <tr>
+      <td>23CAPPD</td>
+      <td>ADP ribose 2 3 cyclic phosphodiesterase</td>
+      <td>False</td>
+      <td>0.0</td>
+      <td>999999.0</td>
+      <td>4</td>
+      <td>YGR247W</td>
+    </tr>
+    <tr>
+      <td>2DDA7Ptm</td>
+      <td>2 Dehydro 3 deoxy D arabino heptonate7 phohsphate mitochondrial transport via diffusion</td>
+      <td>True</td>
+      <td>-999999.0</td>
+      <td>999999.0</td>
+      <td>2</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>2DHPtm</td>
+      <td>2 Dehydropantoate mitochondrial transport</td>
+      <td>True</td>
+      <td>-999999.0</td>
+      <td>999999.0</td>
+      <td>2</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>2DOXG6PP</td>
+      <td>2 deoxyglucose 6 phosphatase</td>
+      <td>False</td>
+      <td>0.0</td>
+      <td>999999.0</td>
+      <td>4</td>
+      <td>YHR044C or YHR043C</td>
+    </tr>
+    <tr>
+      <td>2HBO</td>
+      <td>2 HydroxybutyrateNAD oxidoreductase</td>
+      <td>True</td>
+      <td>-999999.0</td>
+      <td>999999.0</td>
+      <td>5</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+        </div>
+        
+        <h3>Top 10 Genes</h3>
+        <div class="data-table">
+            <table border="1" class="dataframe data-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>id</th>
+      <th>name</th>
+      <th>functional</th>
+      <th>reaction_count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>YHR104W</td>
+      <td></td>
+      <td>True</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>YDR368W</td>
+      <td></td>
+      <td>True</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>YGR282C</td>
+      <td></td>
+      <td>True</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>YOL086C</td>
+      <td></td>
+      <td>True</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>YLR300W</td>
+      <td></td>
+      <td>True</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>YFR055W</td>
+      <td></td>
+      <td>True</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>YGL184C</td>
+      <td></td>
+      <td>True</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>YDR261C</td>
+      <td></td>
+      <td>True</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>YDL168W</td>
+      <td></td>
+      <td>True</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <td>YOR190W</td>
+      <td></td>
+      <td>True</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+        </div>
+    </div>
+</body>
+</html>
+            

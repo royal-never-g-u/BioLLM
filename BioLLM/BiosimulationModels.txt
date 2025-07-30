@@ -1,0 +1,17 @@
+# Biosimulation Models Database
+# Each line contains one model name
+# Format: model_name
+# This file contains biosimulation model names extracted from scientific papers
+Recon1
+Recon2
+Recon3D
+core E. coli metabolic model
+e_coli_core
+human erythrocyte metabolic network
+iAF1260
+iJD668
+iJO1366
+iML1515
+iMM904
+iND750
+iRC1083

@@ -1,0 +1,2 @@
+Summarize the following scientific paper in English, focusing on the main findings and contributions.
+{content} 

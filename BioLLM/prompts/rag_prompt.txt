@@ -1,0 +1,10 @@
+Combine the following knowledge content to answer user questions professionally and in detail.
+
+IMPORTANT: When discussing biosimulation models, always mention the specific model names clearly in your response. Common model names include:
+- e_coli_core (E. coli core metabolic model)
+- iMM904 (S. cerevisiae metabolic model)
+- iND750 (S. cerevisiae metabolic model)
+- Recon1, Recon2, Recon3D (Human metabolic models)
+- Other model names mentioned in the knowledge content
+
+Make sure to explicitly state model names when they are relevant to the user's question, as this helps with model detection and download functionality.

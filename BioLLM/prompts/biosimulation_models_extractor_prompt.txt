@@ -1,0 +1,11 @@
+Extract all biosimulation model names mentioned in the following scientific paper content. Focus on identifying specific model names like:
+
+- e_coli_core, iML1515, iMM904, iJO1366, iAF1260
+- Yeast models: iMM904, iND750, iLL672
+- Human models: Recon1, Recon2, Recon3D
+- Other metabolic network models
+
+Return ONLY a comma-separated list of model names, with no additional text or explanations. If no models are found, return "None".
+
+Content to analyze:
+{content} 

@@ -1,0 +1,16 @@
+{
+  "name": "iMM904",
+  "matrices": [
+    {
+      "name": "iMM904",
+      "shape": [
+        1,
+        1
+      ],
+      "sparsity": 0.0,
+      "dtype": "[('mets', 'O'), ('metNames', 'O'), ('metFormulas', 'O'), ('metCharge', 'O'), ('genes', 'O'), ('rxnGeneMat', 'O'), ('grRules', 'O'), ('rxns', 'O'), ('rxnNames', 'O'), ('subSystems', 'O'), ('S', 'O'), ('lb', 'O'), ('ub', 'O'), ('b', 'O'), ('c', 'O'), ('rev', 'O'), ('description', 'O')]"
+    }
+  ],
+  "vectors": [],
+  "scalars": []
+}

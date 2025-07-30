@@ -1,0 +1,1 @@
+You are a code expert, please explain the function, logic and role of each part of the following code in detail.
