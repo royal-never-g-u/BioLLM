@@ -26,11 +26,11 @@ class CodeWriterAgent(BaseAgent):
             api_key=API_KEY,
             base_url=BASE_URL
         )
-        # 读取代码生成专用system prompt
+        # Read code generation specific system prompt
         prompt_path = os.path.join(os.path.dirname(__file__), '../prompts/code_writer_prompt.txt')
         with open(prompt_path, 'r', encoding='utf-8') as f:
             self.system_prompt = f.read().strip()
-        # 读取chat专用system prompt
+        # Read chat specific system prompt
         chat_prompt_path = os.path.join(os.path.dirname(__file__), '../prompts/code_writer_chat_prompt.txt')
         with open(chat_prompt_path, 'r', encoding='utf-8') as f:
             self.chat_system_prompt = f.read().strip()
@@ -59,28 +59,33 @@ class CodeWriterAgent(BaseAgent):
             f.write(content)
 
     def _call_llm(self, prompt: str, system_prompt: str = None, tools: list = None) -> str:
-        # 构建prompt模板，支持可选system/tools
-        messages = []
-        if system_prompt:
-            messages.append(SystemMessagePromptTemplate.from_template(system_prompt))
-        # 加入历史
-        history = self.memory.load_memory_variables({})["history"]
-        messages.extend(history)
-        # 加入用户输入
-        messages.append(HumanMessagePromptTemplate.from_template("{input}"))
-        # 可选：加入tools（如有）
-        if tools:
-            messages.extend(tools)
-        chat_prompt = ChatPromptTemplate.from_messages(messages)
-        full_prompt = chat_prompt.format_prompt(input=prompt)
-        result = self.llm.invoke(full_prompt.to_messages())
-        output = getattr(result, "content", str(result))
-        self.memory.save_context({"input": prompt}, {"output": output})
-        return output
+        try:
+            # Build prompt template, support optional system/tools
+            messages = []
+            if system_prompt:
+                messages.append(SystemMessagePromptTemplate.from_template(system_prompt))
+            # Add history
+            history = self.memory.load_memory_variables({})["history"]
+            messages.extend(history)
+            # Add user input
+            messages.append(HumanMessagePromptTemplate.from_template("{input}"))
+            # Optional: add tools (if any)
+            if tools:
+                messages.extend(tools)
+            chat_prompt = ChatPromptTemplate.from_messages(messages)
+            full_prompt = chat_prompt.format_prompt(input=prompt)
+            result = self.llm.invoke(full_prompt.to_messages())
+            output = getattr(result, "content", str(result))
+            self.memory.save_context({"input": prompt}, {"output": output})
+            return output
+        except Exception as e:
+            error_message = f"Error calling LLM: {str(e)}"
+            self.memory.save_context({"input": prompt}, {"output": error_message})
+            return error_message
 
     def run(self, prompt: str, memory=None, tools: list = None) -> str:
         output = self._call_llm(prompt, system_prompt=self.system_prompt, tools=tools)
-        # 关键词提取和代码块保存逻辑
+        # Keyword extraction and code block saving logic
         keywords = self.extract_keywords_ml(prompt)
         py_blocks = self.extract_code_blocks(output, "python")
         bash_blocks = self.extract_code_blocks(output, "bash")

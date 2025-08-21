@@ -1,0 +1,68 @@
+e_coli_core Metabolic Network Model Analysis Report
+==================================================
+
+Basic Information:
+- Model ID: e_coli_core
+- Model name: None
+- Reaction count: 95
+- Metabolite count: 72
+- Gene count: 137
+- Compartments: e, c
+
+Reaction Classification:
+- Exchange reactions: 20
+- Transport reactions: 3
+- Biomass reactions: 1
+- Maintenance reactions: 1
+- Internal reactions: 70
+
+Metabolic Pathway Distribution:
+- Amino Acid Metabolism: 37 reactions (18.0%)
+- Glycolysis: 24 reactions (11.7%)
+- Energy Metabolism: 24 reactions (11.7%)
+- TCA Cycle: 24 reactions (11.7%)
+- Cofactor Metabolism: 23 reactions (11.2%)
+- Nucleotide Metabolism: 22 reactions (10.7%)
+- Transport: 21 reactions (10.2%)
+- Other: 15 reactions (7.3%)
+- Lipid Metabolism: 9 reactions (4.4%)
+- Pentose Phosphate: 7 reactions (3.4%)
+
+Top Reaction Prefixes:
+- ex: 20
+- biomass: 1
+- succt2: 1
+- d: 1
+- fumt2: 1
+- ldh: 1
+- malt2: 1
+
+Glycolysis Pathway Key Reactions:
+- PFK: Phosphofructokinase
+- PGI: Glucose-6-phosphate isomerase
+- PGK: Phosphoglycerate kinase
+- PGM: Phosphoglycerate mutase
+- PPC: Phosphoenolpyruvate carboxylase
+- PPCK: Phosphoenolpyruvate carboxykinase
+- PPS: Phosphoenolpyruvate synthase
+- PYK: Pyruvate kinase
+- ENO: Enolase
+- TPI: Triose-phosphate isomerase
+
+TCA Cycle Key Reactions:
+- AKGDH: 2-Oxogluterate dehydrogenase
+- CS: Citrate synthase
+- SUCOAS: Succinyl-CoA synthetase (ADP-forming)
+- EX_fum_e: Fumarate exchange
+- FRD7: Fumarate reductase
+- FUM: Fumarase
+- FUMt2_2: Fumarate transport via proton symport (2 H)
+- MDH: Malate dehydrogenase
+
+Important Exchange Reactions:
+- EX_co2_e: CO2 exchange
+- EX_glc__D_e: D-Glucose exchange
+- EX_h2o_e: H2O exchange
+- EX_nh4_e: Ammonia exchange
+- EX_o2_e: O2 exchange
+- EX_pi_e: Phosphate exchange

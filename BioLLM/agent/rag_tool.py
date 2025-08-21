@@ -312,20 +312,25 @@ class RAGTool:
         print("Successfully force updated the knowledge base.")
 
     def _call_llm(self, prompt: str, system_prompt: str = None, tools: list = None) -> str:
-        messages = []
-        if system_prompt:
-            messages.append(SystemMessagePromptTemplate.from_template(system_prompt))
-        history = self.memory.load_memory_variables({})["history"]
-        messages.extend(history)
-        messages.append(HumanMessagePromptTemplate.from_template("{input}"))
-        if tools:
-            messages.extend(tools)
-        chat_prompt = ChatPromptTemplate.from_messages(messages)
-        full_prompt = chat_prompt.format_prompt(input=prompt)
-        result = self.llm.invoke(full_prompt.to_messages())
-        output = getattr(result, "content", str(result))
-        self.memory.save_context({"input": prompt}, {"output": output})
-        return output
+        try:
+            messages = []
+            if system_prompt:
+                messages.append(SystemMessagePromptTemplate.from_template(system_prompt))
+            history = self.memory.load_memory_variables({})["history"]
+            messages.extend(history)
+            messages.append(HumanMessagePromptTemplate.from_template("{input}"))
+            if tools:
+                messages.extend(tools)
+            chat_prompt = ChatPromptTemplate.from_messages(messages)
+            full_prompt = chat_prompt.format_prompt(input=prompt)
+            result = self.llm.invoke(full_prompt.to_messages())
+            output = getattr(result, "content", str(result))
+            self.memory.save_context({"input": prompt}, {"output": output})
+            return output
+        except Exception as e:
+            error_message = f"Error calling LLM: {str(e)}"
+            self.memory.save_context({"input": prompt}, {"output": error_message})
+            return error_message
 
     def run(self, prompt: str, memory=None, tools: list = None) -> str:
         # 检索知识内容并拼接到用户输入
@@ -335,4 +340,36 @@ class RAGTool:
         return self._call_llm(user_input, system_prompt=self.system_prompt, tools=tools)
 
     def chat(self, prompt: str, memory=None, tools: list = None) -> str:
-        return self._call_llm(prompt, system_prompt=self.system_prompt, tools=tools) 
+        return self._call_llm(prompt, system_prompt=self.system_prompt, tools=tools)
+    
+    def search(self, query: str, top_k: int = 5) -> list:
+        """
+        Search the knowledge base for relevant documents
+        
+        Args:
+            query (str): Search query
+            top_k (int): Number of top results to return
+            
+        Returns:
+            list: List of dictionaries containing search results
+        """
+        try:
+            # Search the vector store
+            docs = self.vectorstore.similarity_search(query, k=top_k)
+            
+            # Convert to list of dictionaries
+            results = []
+            for doc in docs:
+                result = {
+                    'content': doc.page_content,
+                    'source': doc.metadata.get('source', 'Unknown'),
+                    'type': doc.metadata.get('type', 'Unknown'),
+                    'title': doc.metadata.get('title', 'Unknown')
+                }
+                results.append(result)
+            
+            return results
+            
+        except Exception as e:
+            print(f"Error searching knowledge base: {e}")
+            return [] 

@@ -1,0 +1,1 @@
+echo 'Starting analysis for e_coli_core_analysis_script.py'

@@ -94,8 +94,8 @@ class ModelAnalyzerAgent(BaseAgent):
             str: Analysis results and visualizations
         """
         try:
-            # Extract model name from prompt
-            model_name = self._extract_model_name(prompt)
+            # Extract model name from prompt - use the same method as match_command
+            model_name = self._extract_model_name_from_biosimulation_models(prompt)
             
             if not model_name:
                 return self._list_available_models()

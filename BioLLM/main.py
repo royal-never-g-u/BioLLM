@@ -8,14 +8,17 @@ from agent.rag_tool import RAGTool
 from agent.memory import Memory
 from agent.virtual_command_agent import VirtualCommandAgent
 from agent.download_tool import DownloadTool
-from agent.model_analyzer_agent import ModelAnalyzerAgent
+from agent.new_model_analyzer_agent import NewModelAnalyzerAgent
+from bio_task import initialize_bio_task
 from dotenv import load_dotenv
 import re
 
 load_dotenv()
 
 def strip_command(user_input, command):
-    # 去除开头的命令关键词及其后空格
+    # Remove command keywords at the beginning and subsequent spaces
+    if user_input is None:
+        return ""
     pattern = rf"^{re.escape(command)}[\s:：]*"
     return re.sub(pattern, '', user_input, flags=re.IGNORECASE).strip()
 
@@ -24,6 +27,8 @@ def extract_model_name(user_input, available_models):
     Extract biosimulation model name from user input.
     Returns the matched model name or None if no match found.
     """
+    if user_input is None:
+        return None
     user_input_lower = user_input.lower()
     
     # First, try exact word matches
@@ -40,6 +45,11 @@ def extract_model_name(user_input, available_models):
     return None
 
 def main(initialize_only=False):
+    # Initialize BioTask file only if it doesn't exist
+    from bio_task import get_current_task
+    if get_current_task() is None:
+        initialize_bio_task()
+    
     memory = Memory()
     code_writer = CodeWriterAgent()
     code_explainer = CodeExplainerAgent()
@@ -49,7 +59,7 @@ def main(initialize_only=False):
     rag_tool = RAGTool()
     virtual_command_agent = VirtualCommandAgent()
     download_tool = DownloadTool()
-    model_analyzer = ModelAnalyzerAgent()
+    model_analyzer = NewModelAnalyzerAgent()
 
     def search_and_answer(prompt):
         search_results = search_tool.run(prompt)
@@ -220,7 +230,7 @@ def main(initialize_only=False):
                     if found_model:
                         result = f"Selected biosimulation model: {found_model}"
                         
-                        # 尝试下载对应的.mat文件
+                        # Try to download corresponding .mat file
                         import sys
                         print(f"Attempting to download {found_model}.mat from BIGG database...", file=sys.stderr)
                         download_result = download_tool.download_model_from_name(found_model)
@@ -238,7 +248,7 @@ def main(initialize_only=False):
             
             # Handle analyse_model virtual command
             elif command_name == 'analyse_model':
-                # 直接跳过，不做任何处理，让后续 fallback 机制生效
+                # Skip directly, do nothing, let subsequent fallback mechanism take effect
                 pass
             
             # Handle other virtual commands here if needed
@@ -282,7 +292,15 @@ def main(initialize_only=False):
                 else: # Commands with a prompt
                     prompt = strip_command(user_input, matched_cmd)
                     result = regular_commands[matched_cmd](prompt)
-                matched = True
+                    
+                    # Check if it's executor's debug exit
+                    if matched_cmd == "execute" and result and "[DEBUG_EXIT]" in result:
+                        # Remove debug exit marker
+                        result = result.replace("[DEBUG_EXIT]", "").strip()
+                        matched = True
+                        # Continue execution, let result display normally
+                    else:
+                        matched = True
         
         # Step 5: Final fallback to default chat
         if not matched:

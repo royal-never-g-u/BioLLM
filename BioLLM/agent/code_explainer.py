@@ -26,20 +26,25 @@ class CodeExplainerAgent(BaseAgent):
         self.memory = ConversationBufferMemory(return_messages=True)
 
     def _call_llm(self, prompt: str, system_prompt: str = None, tools: list = None) -> str:
-        messages = []
-        if system_prompt:
-            messages.append(SystemMessagePromptTemplate.from_template(system_prompt))
-        history = self.memory.load_memory_variables({})["history"]
-        messages.extend(history)
-        messages.append(HumanMessagePromptTemplate.from_template("{input}"))
-        if tools:
-            messages.extend(tools)
-        chat_prompt = ChatPromptTemplate.from_messages(messages)
-        full_prompt = chat_prompt.format_prompt(input=prompt)
-        result = self.llm.invoke(full_prompt.to_messages())
-        output = getattr(result, "content", str(result))
-        self.memory.save_context({"input": prompt}, {"output": output})
-        return output
+        try:
+            messages = []
+            if system_prompt:
+                messages.append(SystemMessagePromptTemplate.from_template(system_prompt))
+            history = self.memory.load_memory_variables({})["history"]
+            messages.extend(history)
+            messages.append(HumanMessagePromptTemplate.from_template("{input}"))
+            if tools:
+                messages.extend(tools)
+            chat_prompt = ChatPromptTemplate.from_messages(messages)
+            full_prompt = chat_prompt.format_prompt(input=prompt)
+            result = self.llm.invoke(full_prompt.to_messages())
+            output = getattr(result, "content", str(result))
+            self.memory.save_context({"input": prompt}, {"output": output})
+            return output
+        except Exception as e:
+            error_message = f"Error calling LLM: {str(e)}"
+            self.memory.save_context({"input": prompt}, {"output": error_message})
+            return error_message
 
     def run(self, prompt: str, memory=None, tools: list = None) -> str:
         # 如果prompt为空或无意义，自动读取ResultsData下第一个py文件内容

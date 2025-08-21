@@ -5,13 +5,37 @@ import re
 import warnings
 import traceback
 
-# 显示所有警告
+# Show all warnings
 warnings.filterwarnings("always")
 
 # Add the project root to the Python path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from BioLLM.main import main as biomain, strip_command
+
+def extract_model_name_from_analyse(user_input):
+    """
+    Extract model name from analyse command
+    
+    Args:
+        user_input (str): User input containing analyse command
+        
+    Returns:
+        str: Model name if found, None otherwise
+    """
+    if not user_input:
+        return None
+    
+    # Remove 'analyse' command and get the rest
+    user_input_lower = user_input.lower().strip()
+    if user_input_lower.startswith('analyse'):
+        # Extract everything after 'analyse'
+        model_part = user_input[7:].strip()  # 7 is length of 'analyse'
+        if model_part:
+            # Clean up the model name - remove extra spaces and quotes
+            model_part = model_part.strip().strip('"').strip("'")
+            return model_part
+    return None
 
 def load_biosimulation_models():
     """Load biosimulation model names from the database file."""
@@ -47,6 +71,11 @@ def load_biosimulation_models():
 def detect_models_in_text(text, models):
     """Detect model names in text and return positions for button creation."""
     detected_models = []
+    
+    # Handle None or empty text
+    if text is None or not isinstance(text, str):
+        return detected_models
+    
     text_lower = text.lower()
     
     # Create a mapping of common variations and aliases
@@ -94,6 +123,11 @@ def detect_models_in_text(text, models):
 
 def display_text_with_model_buttons(text, detected_models):
     """Display text with clickable buttons for detected models using Streamlit components."""
+    # Handle None or empty text
+    if text is None or not isinstance(text, str):
+        st.markdown("No content to display")
+        return
+    
     # First display the text normally
     st.markdown(text)
     
@@ -125,8 +159,6 @@ def display_text_with_model_buttons(text, detected_models):
                          help=f"Model: {detection['model']} (Click functionality disabled)",
                          use_container_width=True)
                 # Note: Button click does nothing - functionality removed as requested
-
-
 
 def main():
     st.title("BioLLM AI Agent")
@@ -172,19 +204,28 @@ def main():
                 # Only show model buttons for knowledge command responses
                 # Check if this response was from the knowledge command
                 is_knowledge_response = False
-                if 'last_command' in st.session_state:
+                if 'last_command' in st.session_state and st.session_state.last_command is not None:
                     last_cmd = st.session_state.last_command.lower()
                     is_knowledge_response = (last_cmd == 'knowledge')
                 
                 if is_knowledge_response:
                     # Check for models in assistant responses
-                    detected_models = detect_models_in_text(message["content"], models)
-                    display_text_with_model_buttons(message["content"], detected_models)
+                    if message["content"] is not None:
+                        detected_models = detect_models_in_text(message["content"], models)
+                        display_text_with_model_buttons(message["content"], detected_models)
+                    else:
+                        st.markdown("No content available")
                 else:
                     # Regular display without model buttons
-                    st.markdown(message["content"])
+                    if message["content"] is not None:
+                        st.markdown(message["content"])
+                    else:
+                        st.markdown("No content available")
             else:
-                st.markdown(message["content"])
+                if message["content"] is not None:
+                    st.markdown(message["content"])
+                else:
+                    st.markdown("No content available")
 
     if user_input:
         st.chat_message("user").markdown(user_input)
@@ -193,6 +234,144 @@ def main():
         matched = False
         result = ""
         current_command = ""  # Track the current command being executed
+        
+        # Always call task_pick_agent to analyze user input for task type
+        from agent.task_pick_agent import analyze_user_input_for_task_type
+        
+        st.info("🔍 正在分析用户输入以识别任务类型...")
+        
+        # Call task_pick_agent to analyze user input
+        task_pick_result = analyze_user_input_for_task_type(user_input)
+        
+        if task_pick_result['success']:
+            if task_pick_result['matched_task_type']:
+                task_type = task_pick_result['matched_task_type']
+                from analysis_types import get_analysis_type_description
+                task_description = get_analysis_type_description(task_type)
+                
+                st.success(f"✅ 识别到任务类型: {task_type} - {task_description}")
+                st.info("📝 已自动设置bio_task中的task_type字段")
+            else:
+                st.info("ℹ️ 未识别到特定的分析类型，继续正常处理")
+        else:
+            st.warning("⚠️ 任务类型分析失败，继续正常处理")
+            st.error(f"错误: {task_pick_result.get('error', 'Unknown error')}")
+        
+        st.info("🔄 继续处理用户输入...")
+        
+        # Check if this is a response to experiment prompt
+        if 'show_experiment_prompt' in st.session_state and st.session_state.show_experiment_prompt:
+            from agent.judge_agent import judge_user_response
+            from bio_task import update_current_task, get_current_task
+            from experiment_executor import execute_gene_deletion
+            
+            # Use judge agent to determine user's intention
+            wants_experiment = judge_user_response(user_input)
+            
+            if wants_experiment:
+                st.success("✅ Great! Let's start experimenting with the model.")
+                
+                # Get the analyzed model information
+                if 'experiment_prompt_model' in st.session_state:
+                    model_name = st.session_state.experiment_prompt_model
+                    model_location = f"../downloads/{model_name}.mat"  # Default location
+                    
+                    # Update bio_task with model information (preserve task_type)
+                    try:
+                        update_current_task(
+                            model_name=model_name,
+                            model_local=model_location
+                            # Note: We don't update task_type here to preserve user's analysis type
+                            # Only TaskPickAgent should update task_type when matching analysis types
+                        )
+                        st.info(f"📝 Model '{model_name}' saved to bio_task for experiments.")
+                        
+                        # Execute gene deletion method
+                        with st.spinner(f"🔬 Running gene deletion analysis for {model_name}..."):
+                            analysis_result = execute_gene_deletion(model_name, model_location)
+                        
+                        if analysis_result['success']:
+                            st.success("✅ Gene deletion analysis completed successfully!")
+                            
+                            # Display analysis summary
+                            if 'summary' in analysis_result['results']:
+                                summary = analysis_result['results']['summary']
+                                st.markdown("### 📊 Analysis Summary")
+                                st.json(summary)
+                            
+                            # Display visualizations
+                            if 'visualizations' in analysis_result['results']:
+                                visualizations = analysis_result['results']['visualizations']
+                                if visualizations:
+                                    st.markdown("### 📈 Analysis Visualizations")
+                                    for viz in visualizations:
+                                        try:
+                                            if viz['type'] == 'image':
+                                                st.image(viz['path'], caption=viz['name'])
+                                            elif viz['type'] == 'html':
+                                                with open(viz['path'], 'r', encoding='utf-8') as f:
+                                                    html_content = f.read()
+                                                st.components.v1.html(html_content, height=600)
+                                            st.success(f"✅ Displayed: {viz['name']}")
+                                        except Exception as viz_error:
+                                            st.error(f"❌ Error displaying {viz['name']}: {viz_error}")
+                            
+                            # Display reports
+                            if 'report_paths' in analysis_result['results']:
+                                report_paths = analysis_result['results']['report_paths']
+                                if report_paths:
+                                    st.markdown("### 📋 Analysis Reports")
+                                    for report_type, report_path in report_paths.items():
+                                        if os.path.exists(report_path):
+                                            st.markdown(f"**{report_type.replace('_', ' ').title()}**")
+                                            try:
+                                                with open(report_path, 'r', encoding='utf-8') as f:
+                                                    report_content = f.read()
+                                                st.text_area(f"Report Content ({report_type})", report_content, height=300)
+                                            except Exception as report_error:
+                                                st.error(f"❌ Error reading report {report_type}: {report_error}")
+                                            
+                                            # Add LLM analysis of the results
+                                            st.markdown("---")
+                                            st.markdown("### 🤖 LLM Analysis of Results")
+                                            
+                                            try:
+                                                from agent.gene_deletion_analysis_agent import analyze_gene_deletion_results
+                                                
+                                                llm_response = analyze_gene_deletion_results(model_name)
+                                                st.markdown(llm_response)
+                                                
+                                            except Exception as llm_error:
+                                                st.error(f"❌ Error generating LLM analysis: {llm_error}")
+                        else:
+                            st.error(f"❌ Gene deletion analysis failed: {analysis_result.get('error', 'Unknown error')}")
+                            if 'traceback' in analysis_result:
+                                with st.expander("Error Details"):
+                                    st.code(analysis_result['traceback'])
+                    
+                    except Exception as e:
+                        st.error(f"❌ Error during gene deletion analysis: {e}")
+                        st.error(f"Full error details: {traceback.format_exc()}")
+                
+                # Clear experiment prompt state
+                st.session_state.show_experiment_prompt = False
+                if 'experiment_prompt_model' in st.session_state:
+                    del st.session_state.experiment_prompt_model
+                
+                matched = True
+                result = "Experiment completed successfully!"
+                
+            else:
+                st.info("📝 No problem! You can always start experiments later.")
+                st.info("💡 Use 'analyse [model_name]' to analyze other models.")
+                
+                # Clear experiment prompt state
+                st.session_state.show_experiment_prompt = False
+                if 'experiment_prompt_model' in st.session_state:
+                    del st.session_state.experiment_prompt_model
+                
+                matched = True
+                result = "Experiment prompt dismissed."
         
         # Check for virtual command matches
         virtual_match = virtual_command_agent.match_command(user_input)
@@ -224,7 +403,7 @@ def main():
                     if found_model:
                         result = f"Selected biosimulation model: {found_model}"
                         
-                        # 尝试下载对应的.mat文件
+                        # Try to download corresponding .mat file
                         with st.spinner(f"Downloading {found_model}.mat..."):
                             download_result = download_tool.download_model_from_name(found_model)
                         
@@ -236,10 +415,10 @@ def main():
                         
                         matched = True
                     else:
-                        # 没有识别到具体model name，继续执行后面的agent命令判别
-                        # 不设置matched = True，让程序继续执行传统命令和chat
+                        # No specific model name identified, continue with subsequent agent command detection
+                        # Don't set matched = True, let program continue with traditional commands and chat
                         result = f"No matching model found in your input. Available models: {', '.join(available_models)}\n\nContinuing with other commands..."
-                        # 不设置matched = True，让程序继续执行
+                        # Don't set matched = True, let program continue execution
             
             # Handle other virtual commands here if needed
             else:
@@ -250,7 +429,7 @@ def main():
         if not matched:
             try:
                 for cmd, func in commands.items():
-                    if user_input.lower().startswith(cmd):
+                    if user_input is not None and user_input.lower().startswith(cmd):
                         current_command = cmd
                         with st.spinner(f"Running command: {cmd}..."):
                             try:
@@ -261,15 +440,22 @@ def main():
                                     result = func(prompt)
                                     
                                     # Check if this is an analyse command and get figures
-                                    if cmd == 'analyse' and hasattr(func.__self__, 'current_figures'):
-                                        figures = func.__self__.current_figures
-                                        if figures is not None:
-                                            st.session_state.current_figures = figures
-                                            st.write(f"Debug: Stored {len(figures)} figures in session state")
+                                    if cmd == 'analyse':
+                                        # Extract model name from the analyse command
+                                        model_name = extract_model_name_from_analyse(user_input)
+                                        if model_name:
+                                            st.session_state.current_analyzed_model = model_name
+                                            st.success(f"✅ Model '{model_name}' analyzed successfully and ready for experiments!")
                                         else:
-                                            st.write("Debug: analyse command executed but current_figures is None")
-                                    elif cmd == 'analyse':
-                                        st.write("Debug: analyse command executed but no current_figures attribute found")
+                                            st.warning("⚠️ Model name not found in command. Use format: 'analyse [model_name]'")
+                                        
+                                        # Get figures if available
+                                        if hasattr(func.__self__, 'current_figures'):
+                                            figures = func.__self__.current_figures
+                                            if figures is not None:
+                                                st.session_state.current_figures = figures
+                                            # Removed debug messages for cleaner output
+                                        # Removed debug messages for cleaner output
                             except Exception as e:
                                 st.error(f"ERROR executing command '{cmd}': {e}")
                                 st.error(f"Full error details: {traceback.format_exc()}")
@@ -298,40 +484,117 @@ def main():
         with st.chat_message("assistant"):
             if is_knowledge_command:
                 # Show model buttons for knowledge command responses
-                detected_models = detect_models_in_text(result, models)
-                if detected_models:
-                    st.write(f"🔍 Found {len(detected_models)} model(s) in response")
-                display_text_with_model_buttons(result, detected_models)
+                if result is not None:
+                    detected_models = detect_models_in_text(result, models)
+                    if detected_models:
+                        st.write(f"🔍 Found {len(detected_models)} model(s) in response")
+                    display_text_with_model_buttons(result, detected_models)
+                else:
+                    st.markdown("No response content available")
             else:
                 # Regular display without model buttons
-                st.markdown(result)
+                if result is not None:
+                    st.markdown(result)
+                else:
+                    st.markdown("No response content available")
                 
                 # Display visualizations if available (for analyse command)
                 if current_command == 'analyse' and 'current_figures' in st.session_state:
                     figures = st.session_state.current_figures
-                    if figures is not None:
-                        st.write(f"Debug: Found {len(figures)} figures in session state")
-                        if figures:
-                            st.markdown("### 📊 Model Analysis Visualizations")
-                            
-                            # Display each figure
-                            for i, (title, fig) in enumerate(figures):
+                    if figures is not None and figures:
+                        st.markdown("### 📊 Model Analysis Visualizations")
+                        
+                        # Display each figure
+                        for i, figure_data in enumerate(figures):
+                            if isinstance(figure_data, dict):
+                                # Handle dictionary format from new_model_analyzer_agent
+                                title = figure_data.get('name', f'Figure {i+1}')
+                                file_path = figure_data.get('path', '')
+                                file_type = figure_data.get('type', 'image')
+                                
+                                st.markdown(f"**{title}**")
+                                try:
+                                    if file_type == 'image':
+                                        # Display image file
+                                        try:
+                                            # Method 1: Try using file path directly
+                                            st.image(file_path, caption=title)
+                                        except Exception as e1:
+                                            try:
+                                                # Method 2: Try reading file and passing bytes
+                                                with open(file_path, 'rb') as f:
+                                                    image_bytes = f.read()
+                                                    st.image(image_bytes, caption=title)
+                                            except Exception as e2:
+                                                # Method 3: Try using PIL
+                                                from PIL import Image
+                                                image = Image.open(file_path)
+                                                st.image(image, caption=title)
+                                    elif file_type == 'html':
+                                        # Display HTML file content
+                                        with open(file_path, 'r', encoding='utf-8') as f:
+                                            html_content = f.read()
+                                        st.components.v1.html(html_content, height=600)
+                                    st.write(f"✅ Displayed {file_type} {i+1}: {title}")
+                                except Exception as e:
+                                    st.error(f"❌ Error displaying {file_type} {i+1}: {e}")
+                            elif isinstance(figure_data, tuple) and len(figure_data) == 2:
+                                # Handle tuple format (title, fig) from old model_analyzer_agent
+                                title, fig = figure_data
                                 st.markdown(f"**{title}**")
                                 try:
                                     st.pyplot(fig)
                                     st.write(f"✅ Displayed figure {i+1}: {title}")
                                 except Exception as e:
                                     st.error(f"❌ Error displaying figure {i+1}: {e}")
-                            
-                            # Clear the figures from session state
-                            del st.session_state.current_figures
-                        else:
-                            st.write("Debug: No figures found in session state")
+                            else:
+                                st.error(f"❌ Unknown figure format: {type(figure_data)}")
+                        
+                        # Clear the figures from session state
+                        del st.session_state.current_figures
+                        
+                        # Set experiment prompt state after successful analyse command with model name
+                        if 'current_analyzed_model' in st.session_state:
+                            model_name = st.session_state.current_analyzed_model
+                            if model_name:  # Only if we have a valid model name
+                                st.session_state.show_experiment_prompt = True
+                                st.session_state.experiment_prompt_model = model_name
+                                
+                                # Display experiment prompt immediately after analyse command
+                                st.markdown("---")
+                                st.markdown("### 🧪 Experiment Prompt")
+                                st.markdown("**Do you want to use this model for experiments?**")
+                                st.markdown("*You can now perform experiments with the analyzed model using various commands.*")
+                                st.markdown("*Please respond with 'yes' or 'no' in the chat input below.*")
                     else:
-                        st.write("Debug: No figures found in session state")
+                        # Analyse command executed but no figures - still set experiment prompt if model name exists
+                        if 'current_analyzed_model' in st.session_state:
+                            model_name = st.session_state.current_analyzed_model
+                            if model_name:  # Only if we have a valid model name
+                                st.session_state.show_experiment_prompt = True
+                                st.session_state.experiment_prompt_model = model_name
+                                
+                                # Display experiment prompt immediately after analyse command
+                                st.markdown("---")
+                                st.markdown("### 🧪 Experiment Prompt")
+                                st.markdown("**Do you want to use this model for experiments?**")
+                                st.markdown("*You can now perform experiments with the analyzed model using various commands.*")
+                                st.markdown("*Please respond with 'yes' or 'no' in the chat input below.*")
                 elif current_command == 'analyse':
-                    st.write("Debug: analyse command executed but no figures in session state")
-        
+                    # Analyse command executed but no figures in session state - still set experiment prompt if model name exists
+                    if 'current_analyzed_model' in st.session_state:
+                        model_name = st.session_state.current_analyzed_model
+                        if model_name:  # Only if we have a valid model name
+                            st.session_state.show_experiment_prompt = True
+                            st.session_state.experiment_prompt_model = model_name
+                            
+                            # Display experiment prompt immediately after analyse command
+                            st.markdown("---")
+                            st.markdown("### 🧪 Experiment Prompt")
+                            st.markdown("**Do you want to use this model for experiments?**")
+                            st.markdown("*You can now perform experiments with the analyzed model using various commands.*")
+                            st.markdown("*Please respond with 'yes' or 'no' in the chat input below.*")
+
         st.session_state.history.append({"role": "assistant", "content": result})
 
 if __name__ == "__main__":
