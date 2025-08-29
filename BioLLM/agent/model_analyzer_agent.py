@@ -94,15 +94,25 @@ class ModelAnalyzerAgent(BaseAgent):
             str: Analysis results and visualizations
         """
         try:
+            # Clear previous figures at the start of each analysis
+            self.current_figures = []
+            self.streamlit_figures = []
+            
             # Extract model name from prompt - use the same method as match_command
             model_name = self._extract_model_name_from_biosimulation_models(prompt)
             
             if not model_name:
+                # Clear figures when no model name is found
+                self.current_figures = []
+                self.streamlit_figures = []
                 return self._list_available_models()
             
             # Find the model file
             model_file = self._find_model_file(model_name)
             if not model_file:
+                # Clear figures when model file is not found
+                self.current_figures = []
+                self.streamlit_figures = []
                 return f"❌ Model '{model_name}' not found. Available models:\n{self._list_available_models()}"
             
             # Analyze the model

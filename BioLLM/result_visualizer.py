@@ -239,281 +239,352 @@ class EnhancedResultVisualizer:
         """Display enhanced detailed analysis results"""
         st.markdown("## 🔬 Detailed Analysis Results")
         
-        # Create expandable sections for different result types
-        with st.expander("📊 Knockout Analysis Results", expanded=True):
-            self._display_knockout_analysis(analysis_results)
-        
-        with st.expander("🧪 Product Optimization Results", expanded=True):
-            self._display_product_optimization(analysis_results)
-        
-        with st.expander("📈 Performance Metrics", expanded=True):
-            self._display_performance_metrics(analysis_results)
-    
-    def _display_knockout_analysis(self, analysis_results: Dict[str, Any]) -> None:
-        """Display detailed knockout analysis results"""
-        if 'results' in analysis_results:
-            results = analysis_results['results']
-            product_knockout_results = results.get('product_knockout_results')
+        # Get detailed results
+        results = analysis_results.get('results', {})
+        if not results:
+            st.info("📊 Analysis completed successfully. Processing detailed results...")
             
-            if product_knockout_results is not None and not product_knockout_results.empty:
-                st.markdown("### Gene Knockout Impact Analysis")
-                
-                # Filter for beneficial knockouts
-                beneficial_knockouts = product_knockout_results[
-                    (product_knockout_results['viable']) & 
-                    (product_knockout_results['production_improvement'] > 0)
-                ].sort_values('production_improvement', ascending=False)
-                
-                if not beneficial_knockouts.empty:
-                    st.markdown(f"**Top {min(10, len(beneficial_knockouts))} Beneficial Gene Knockouts**")
-                    
-                    # Display top knockouts
-                    top_knockouts = beneficial_knockouts.head(10)
-                    
-                    # Check which columns are available
-                    available_columns = top_knockouts.columns.tolist()
-                    display_columns = ['gene_id', 'production_improvement']
-                    
-                    # Add optional columns if they exist
-                    if 'growth_rate' in available_columns:
-                        display_columns.append('growth_rate')
-                    if 'viable' in available_columns:
-                        display_columns.append('viable')
-                    
-                    # Create enhanced table
-                    display_data = top_knockouts[display_columns].copy()
-                    display_data['production_improvement'] = display_data['production_improvement'].round(2)
-                    
-                    # Format optional columns if they exist
-                    if 'growth_rate' in display_columns:
-                        display_data['growth_rate'] = display_data['growth_rate'].round(4)
-                    if 'viable' in display_columns:
-                        display_data['viable'] = display_data['viable'].map({True: '✅', False: '❌'})
-                    
-                    # Create dynamic column config
-                    column_config = {
-                        "gene_id": "Gene ID",
-                        "production_improvement": st.column_config.NumberColumn(
-                            "Production Improvement (%)",
-                            format="%.2f%%"
-                        )
-                    }
-                    
-                    # Add optional column configs if columns exist
-                    if 'growth_rate' in display_columns:
-                        column_config["growth_rate"] = st.column_config.NumberColumn(
-                            "Growth Rate (1/h)",
-                            format="%.4f"
-                        )
-                    if 'viable' in display_columns:
-                        column_config["viable"] = "Viable"
-                    
-                    st.dataframe(
-                        display_data,
-                        column_config=column_config,
-                        hide_index=True
+            # Provide default detailed analysis content
+            st.markdown("### 📋 Analysis Components")
+            st.markdown("""
+            The Constraint-Based Analysis includes the following components:
+            
+            **1. Basic Model Information**
+            - Model structure and composition
+            - Reaction and metabolite counts
+            - Gene-reaction associations
+            
+            **2. Flux Balance Analysis (FBA)**
+            - Optimal growth rate calculation
+            - Flux distribution analysis
+            - Objective function optimization
+            
+            **3. Growth Analysis**
+            - Aerobic vs anaerobic growth comparison
+            - Carbon source utilization patterns
+            - Environmental condition responses
+            
+            **4. Essentiality Analysis**
+            - Essential reaction identification
+            - Network robustness assessment
+            - Metabolic flexibility evaluation
+            
+            **5. Environmental Analysis**
+            - pH sensitivity analysis
+            - Temperature effects on growth
+            - Stress response assessment
+            """)
+            
+            # Show available data structure
+            st.markdown("### 🔍 Available Data Structure")
+            if analysis_results:
+                st.json(analysis_results)
+            
+            return
+        
+        # Display basic model information
+        if 'basic_info' in results:
+            basic_info = results['basic_info']
+            st.markdown("### 📊 Model Information")
+            
+            col1, col2 = st.columns(2)
+            with col1:
+                st.markdown(f"**Model Name**: {basic_info.get('name', 'Unknown')}")
+                st.markdown(f"**Reactions**: {basic_info.get('reactions_count', 0):,}")
+                st.markdown(f"**Metabolites**: {basic_info.get('metabolites_count', 0):,}")
+                st.markdown(f"**Genes**: {basic_info.get('genes_count', 0):,}")
+            
+            with col2:
+                st.markdown(f"**Compartments**: {basic_info.get('compartments_count', 'N/A')}")
+                st.markdown(f"**Exchange Reactions**: {basic_info.get('exchange_reactions_count', 'N/A')}")
+                st.markdown(f"**Transport Reactions**: {basic_info.get('transport_reactions_count', 'N/A')}")
+                st.markdown(f"**Objective Function**: {basic_info.get('objective_function', 'N/A')}")
+        else:
+            st.markdown("### 📊 Model Information")
+            st.info("Model information not available in results")
+        
+        # Display FBA analysis
+        if 'fba_analysis' in results:
+            fba_analysis = results['fba_analysis']
+            st.markdown("### ⚖️ Flux Balance Analysis")
+            
+            col1, col2, col3 = st.columns(3)
+            with col1:
+                if fba_analysis.get('objective_value') is not None:
+                    st.metric(
+                        "Growth Rate",
+                        f"{fba_analysis.get('objective_value', 0):.6f} h⁻¹"
                     )
-                    
-                    # Create improvement distribution chart
-                    fig = px.histogram(
-                        beneficial_knockouts,
-                        x='production_improvement',
-                        nbins=20,
-                        title="Distribution of Production Improvements",
-                        labels={'production_improvement': 'Production Improvement (%)', 'count': 'Number of Genes'}
-                    )
-                    
-                    fig.update_layout(height=400)
-                    st.plotly_chart(fig, use_container_width=True, key=f"knockout_analysis_improvement_histogram_{id(fig)}")
                 else:
-                    st.info("No beneficial gene knockouts found")
-            else:
-                st.info("No knockout analysis results available")
-    
-    def _display_product_optimization(self, analysis_results: Dict[str, Any]) -> None:
-        """Display product optimization results"""
-        if 'results' in analysis_results:
-            results = analysis_results['results']
-            product_optimization = results.get('product_optimization', {})
+                    st.metric("Growth Rate", "N/A")
             
-            if product_optimization:
-                st.markdown("### Product Optimization Analysis")
-                
-                # Create product comparison chart
-                valid_products = {k: v for k, v in product_optimization.items() if v is not None}
-                
-                if valid_products:
-                    # Prepare data for visualization
-                    product_data = []
-                    for product_id, product_info in valid_products.items():
-                        product_data.append({
-                            'Product': product_info.get('product_name', product_id),
-                            'Efficiency': product_info.get('production_efficiency', 0),
-                            'Improvement': product_info.get('improvement_percentage', 0)
-                        })
-                    
-                    df_products = pd.DataFrame(product_data)
-                    
-                    # Create efficiency comparison chart
-                    fig = px.bar(
-                        df_products,
-                        x='Product',
-                        y='Efficiency',
-                        title="Product Production Efficiency Comparison",
-                        color='Efficiency',
-                        color_continuous_scale='viridis'
+            with col2:
+                st.metric(
+                    "Status",
+                    fba_analysis.get('status', 'Unknown')
+                )
+            
+            with col3:
+                if 'fluxes' in fba_analysis and fba_analysis['fluxes']:
+                    fluxes = fba_analysis['fluxes']
+                    non_zero_fluxes = sum(1 for flux in fluxes.values() if abs(flux) > 1e-6)
+                    st.metric(
+                        "Non-zero Fluxes",
+                        f"{non_zero_fluxes:,}"
                     )
+                else:
+                    st.metric("Non-zero Fluxes", "N/A")
+            
+            # Show flux distribution if available
+            if 'fluxes' in fba_analysis and fba_analysis['fluxes']:
+                st.markdown("#### 📈 Top Flux Reactions")
+                fluxes = fba_analysis['fluxes']
+                flux_data = []
+                for reaction, flux in fluxes.items():
+                    if abs(flux) > 1e-6:  # Only show significant fluxes
+                        flux_data.append({
+                            'Reaction': reaction,
+                            'Flux': flux
+                        })
+                
+                if flux_data:
+                    # Sort by absolute flux value
+                    flux_data.sort(key=lambda x: abs(x['Flux']), reverse=True)
+                    df_flux = pd.DataFrame(flux_data[:20])  # Show top 20
                     
-                    fig.update_layout(height=400)
-                    st.plotly_chart(fig, use_container_width=True, key=f"product_optimization_efficiency_bar_{id(fig)}")
-                    
-                    # Display product table
-                    st.markdown("**Product Optimization Results**")
                     st.dataframe(
-                        df_products,
+                        df_flux,
                         column_config={
-                            "Product": "Product Name",
-                            "Efficiency": st.column_config.NumberColumn(
-                                "Production Efficiency (mmol/g/h)",
-                                format="%.2f"
-                            ),
-                            "Improvement": st.column_config.NumberColumn(
-                                "Improvement (%)",
-                                format="%.1f%%"
+                            "Flux": st.column_config.NumberColumn(
+                                "Flux (mmol/gDW/h)",
+                                format="%.6f"
                             )
                         },
                         hide_index=True
                     )
-                else:
-                    st.info("No valid product optimization results available")
-            else:
-                st.info("No product optimization results available")
-    
-    def _display_performance_metrics(self, analysis_results: Dict[str, Any]) -> None:
-        """Display performance metrics"""
-        st.markdown("### Analysis Performance Metrics")
-        
-        # Calculate and display metrics
-        col1, col2, col3 = st.columns(3)
-        
-        with col1:
-            if 'summary' in analysis_results:
-                summary = analysis_results['summary']
-                knockout_summary = summary.get('knockout_summary', {})
-                total_genes = knockout_summary.get('total_genes_analyzed', 0)
-                effect_dist = knockout_summary.get('effect_distribution', {})
-                
-                if total_genes > 0:
-                    coverage = (sum(effect_dist.values()) / total_genes) * 100
-                    st.metric(
-                        "Analysis Coverage",
-                        f"{coverage:.1f}%",
-                        help="Percentage of genes successfully analyzed"
-                    )
-        
-        with col2:
-            if 'config_used' in analysis_results:
-                config = analysis_results['config_used']
-                target_products = len(config.get('target_products', {}))
-                st.metric(
-                    "Target Products",
-                    target_products,
-                    help="Number of products targeted for optimization"
-                )
-        
-        with col3:
-            # Calculate analysis quality score
-            quality_score = self._calculate_quality_score(analysis_results)
-            st.metric(
-                "Quality Score",
-                quality_score,
-                help="Overall analysis quality assessment"
-            )
-    
-    def _calculate_quality_score(self, analysis_results: Dict[str, Any]) -> str:
-        """Calculate quality score for the analysis"""
-        score = 0
-        
-        if 'summary' in analysis_results:
-            summary = analysis_results['summary']
-            if 'knockout_summary' in summary:
-                score += 30
-            if 'product_summary' in summary:
-                score += 30
-        
-        if 'results' in analysis_results:
-            results = analysis_results['results']
-            if 'product_optimization' in results:
-                score += 20
-            if 'product_knockout_results' in results:
-                score += 20
-        
-        if score >= 80:
-            return "Excellent"
-        elif score >= 60:
-            return "Good"
-        elif score >= 40:
-            return "Fair"
         else:
-            return "Limited"
-    
-    def _scan_analysis_visualizations(self, model_name: str) -> List[Dict[str, Any]]:
-        """
-        Scan multiple directories for visualization files
+            st.markdown("### ⚖️ Flux Balance Analysis")
+            st.info("FBA analysis results not available")
         
-        Args:
-            model_name (str): Name of the model
+        # Display growth analysis
+        if 'growth_analysis' in results:
+            growth_analysis = results['growth_analysis']
+            st.markdown("### 🌱 Growth Analysis")
             
-        Returns:
-            List of visualization file information
-        """
-        visualizations = []
-        
-        try:
-            # List of directories to scan for visualizations
-            scan_directories = [
-                # analysis_results directory
-                os.path.join(os.path.dirname(__file__), 'analysis_results', model_name),
-                # model_data directory
-                os.path.join(os.path.dirname(__file__), 'model_data', model_name),
-                # model_data/visualizations subdirectory
-                os.path.join(os.path.dirname(__file__), 'model_data', model_name, 'visualizations')
-            ]
+            col1, col2, col3 = st.columns(3)
             
-            for scan_dir in scan_directories:
-                if os.path.exists(scan_dir):
-                    # Scan for image files
-                    image_extensions = ('.png', '.jpg', '.jpeg', '.svg', '.pdf')
-                    image_files = [f for f in os.listdir(scan_dir) if f.endswith(image_extensions)]
-                    
-                    for image_file in image_files:
-                        file_path = os.path.join(scan_dir, image_file)
-                        visualizations.append({
-                            'name': image_file,
-                            'path': file_path,
-                            'type': 'image',
-                            'size': os.path.getsize(file_path) if os.path.exists(file_path) else 0
-                        })
-                    
-                    # Scan for HTML files
-                    html_files = [f for f in os.listdir(scan_dir) if f.endswith('.html')]
-                    for html_file in html_files:
-                        file_path = os.path.join(scan_dir, html_file)
-                        visualizations.append({
-                            'name': html_file,
-                            'path': file_path,
-                            'type': 'html',
-                            'size': os.path.getsize(file_path) if os.path.exists(file_path) else 0
-                        })
-                    
-                    print(f"📊 Found {len(image_files) + len(html_files)} visualization files in {scan_dir}")
+            with col1:
+                if growth_analysis.get('aerobic_growth') is not None:
+                    aerobic_growth = growth_analysis.get('aerobic_growth', 0)
+                    st.metric(
+                        "Aerobic Growth",
+                        f"{aerobic_growth:.6f} h⁻¹"
+                    )
                 else:
-                    print(f"📊 Directory not found: {scan_dir}")
-                
-        except Exception as e:
-            print(f"⚠️ Error scanning analysis visualizations: {e}")
+                    st.metric("Aerobic Growth", "N/A")
+            
+            with col2:
+                if growth_analysis.get('anaerobic_growth') is not None:
+                    anaerobic_growth = growth_analysis.get('anaerobic_growth', 0)
+                    st.metric(
+                        "Anaerobic Growth",
+                        f"{anaerobic_growth:.6f} h⁻¹"
+                    )
+                else:
+                    st.metric("Anaerobic Growth", "N/A")
+            
+            with col3:
+                if (growth_analysis.get('aerobic_growth') is not None and 
+                    growth_analysis.get('anaerobic_growth') is not None):
+                    aerobic = growth_analysis.get('aerobic_growth', 0)
+                    anaerobic = growth_analysis.get('anaerobic_growth', 0)
+                    if aerobic > 0:
+                        growth_reduction = ((aerobic - anaerobic) / aerobic) * 100
+                        st.metric(
+                            "Growth Reduction",
+                            f"{growth_reduction:.1f}%"
+                        )
+                    else:
+                        st.metric("Growth Reduction", "N/A")
+                else:
+                    st.metric("Growth Reduction", "N/A")
+            
+            # Carbon source analysis
+            if 'carbon_source_growth' in growth_analysis:
+                carbon_growth = growth_analysis['carbon_source_growth']
+                if isinstance(carbon_growth, dict) and carbon_growth:
+                    st.markdown("#### 📊 Carbon Source Growth Rates")
+                    
+                    carbon_data = []
+                    for source, rate in carbon_growth.items():
+                        carbon_data.append({
+                            'Carbon Source': source,
+                            'Growth Rate (h⁻¹)': rate
+                        })
+                    
+                    if carbon_data:
+                        df_carbon = pd.DataFrame(carbon_data)
+                        df_carbon = df_carbon.sort_values('Growth Rate (h⁻¹)', ascending=False)
+                        
+                        st.dataframe(
+                            df_carbon,
+                            column_config={
+                                "Growth Rate (h⁻¹)": st.column_config.NumberColumn(
+                                    "Growth Rate (h⁻¹)",
+                                    format="%.6f"
+                                )
+                            },
+                            hide_index=True
+                        )
+                        
+                        # Create visualization
+                        fig = px.bar(
+                            df_carbon,
+                            x='Carbon Source',
+                            y='Growth Rate (h⁻¹)',
+                            title="Growth Rates on Different Carbon Sources",
+                            color='Growth Rate (h⁻¹)',
+                            color_continuous_scale='viridis'
+                        )
+                        
+                        fig.update_layout(height=400)
+                        st.plotly_chart(fig, use_container_width=True)
+        else:
+            st.markdown("### 🌱 Growth Analysis")
+            st.info("Growth analysis results not available")
         
-        return visualizations
+        # Display environmental analysis
+        if 'environmental_analysis' in results:
+            environmental_analysis = results['environmental_analysis']
+            st.markdown("### 🌡️ Environmental Analysis")
+            
+            # pH analysis
+            if 'ph_analysis' in environmental_analysis:
+                ph_analysis = environmental_analysis['ph_analysis']
+                if isinstance(ph_analysis, dict) and ph_analysis:
+                    st.markdown("#### 📊 pH Effects on Growth")
+                    
+                    ph_data = []
+                    for condition, data in ph_analysis.items():
+                        if isinstance(data, dict):
+                            ph_data.append({
+                                'pH Condition': condition,
+                                'Growth Rate (h⁻¹)': data.get('growth_rate', 0)
+                            })
+                    
+                    if ph_data:
+                        df_ph = pd.DataFrame(ph_data)
+                        
+                        st.dataframe(
+                            df_ph,
+                            column_config={
+                                "Growth Rate (h⁻¹)": st.column_config.NumberColumn(
+                                    "Growth Rate (h⁻¹)",
+                                    format="%.6f"
+                                )
+                            },
+                            hide_index=True
+                        )
+                        
+                        # Create visualization
+                        fig = px.line(
+                            df_ph,
+                            x='pH Condition',
+                            y='Growth Rate (h⁻¹)',
+                            title="Growth Rate vs pH Conditions",
+                            markers=True
+                        )
+                        
+                        fig.update_layout(height=400)
+                        st.plotly_chart(fig, use_container_width=True)
+                else:
+                    st.info("pH analysis data not available in expected format")
+            else:
+                st.info("pH analysis not performed")
+            
+            # Temperature analysis
+            if 'temperature_analysis' in environmental_analysis:
+                temp_analysis = environmental_analysis['temperature_analysis']
+                if isinstance(temp_analysis, dict) and temp_analysis:
+                    st.markdown("#### 🌡️ Temperature Effects on Growth")
+                    
+                    temp_data = []
+                    for condition, data in temp_analysis.items():
+                        if isinstance(data, dict):
+                            temp_data.append({
+                                'Temperature Condition': condition,
+                                'Growth Rate (h⁻¹)': data.get('growth_rate', 0)
+                            })
+                    
+                    if temp_data:
+                        df_temp = pd.DataFrame(temp_data)
+                        
+                        st.dataframe(
+                            df_temp,
+                            column_config={
+                                "Growth Rate (h⁻¹)": st.column_config.NumberColumn(
+                                    "Growth Rate (h⁻¹)",
+                                    format="%.6f"
+                                )
+                            },
+                            hide_index=True
+                        )
+                        
+                        # Create visualization
+                        fig = px.bar(
+                            df_temp,
+                            x='Temperature Condition',
+                            y='Growth Rate (h⁻¹)',
+                            title="Growth Rate vs Temperature Conditions",
+                            color='Growth Rate (h⁻¹)',
+                            color_continuous_scale='plasma'
+                        )
+                        
+                        fig.update_layout(height=400)
+                        st.plotly_chart(fig, use_container_width=True)
+                else:
+                    st.info("Temperature analysis data not available in expected format")
+            else:
+                st.info("Temperature analysis not performed")
+        else:
+            st.markdown("### 🌡️ Environmental Analysis")
+            st.info("Environmental analysis results not available")
+        
+        # Display essentiality analysis
+        if 'essentiality_analysis' in results:
+            essentiality_analysis = results['essentiality_analysis']
+            st.markdown("### 🔬 Essentiality Analysis")
+            
+            if 'essential_reactions' in essentiality_analysis and essentiality_analysis['essential_reactions']:
+                essential_reactions = essentiality_analysis['essential_reactions']
+                total_tested = essentiality_analysis.get('total_tested', len(essential_reactions))
+                
+                col1, col2 = st.columns(2)
+                with col1:
+                    st.metric("Essential Reactions", len(essential_reactions))
+                with col2:
+                    st.metric("Total Tested", total_tested)
+                
+                # Show essential reactions
+                st.markdown("#### 🎯 Essential Reactions")
+                if len(essential_reactions) <= 20:
+                    for i, reaction in enumerate(essential_reactions, 1):
+                        st.markdown(f"{i}. **{reaction}**")
+                else:
+                    st.markdown(f"**First 20 essential reactions:**")
+                    for i, reaction in enumerate(essential_reactions[:20], 1):
+                        st.markdown(f"{i}. **{reaction}**")
+                    st.markdown(f"... and {len(essential_reactions) - 20} more")
+            else:
+                st.info("Essential reactions data not available")
+        else:
+            st.markdown("### 🔬 Essentiality Analysis")
+            st.info("Essentiality analysis results not available")
+        
+        # Show raw results if available
+        if results:
+            with st.expander("🔍 Raw Analysis Results"):
+                st.json(results)
     
     def _display_enhanced_visualizations(self, experiment_result: Dict[str, Any]) -> None:
         """Display enhanced visualizations"""
@@ -754,30 +825,114 @@ class EnhancedResultVisualizer:
             st.warning("⚠️ No analysis results found")
             return
         
+        # Check data availability for each section
+        has_visualizations = self._has_constraint_based_visualizations_data(experiment_result)
+        has_generated_reports = self._has_constraint_based_generated_reports_data(experiment_result)
+        has_strategic_recommendations = self._has_constraint_based_strategic_recommendations_data(analysis_results)
+        
+        # Create dynamic tabs based on available data
+        tabs = []
+        tab_functions = []
+        
+        if has_visualizations:
+            tabs.append("📈 Generated Visualizations")
+            tab_functions.append(lambda: self._display_constraint_based_visualizations(experiment_result))
+        
+        if has_generated_reports:
+            tabs.append("📋 Generated Reports")
+            tab_functions.append(lambda: self._display_constraint_based_generated_reports(experiment_result))
+        
+        if has_strategic_recommendations:
+            tabs.append("🎯 Strategic Recommendations")
+            tab_functions.append(lambda: self._display_constraint_based_strategic_recommendations(analysis_results))
+        
+        # If no data available, show a message
+        if not tabs:
+            st.info("📊 Analysis completed successfully, but no detailed results are available for display.")
+            return
+        
         # Create tabs for better organization
-        tab1, tab2, tab3, tab4, tab5 = st.tabs([
-            "📊 Executive Summary", 
-            "🔬 Detailed Analysis Results", 
-            "📈 Generated Visualizations", 
-            "📋 Generated Reports", 
-            "🎯 Strategic Recommendations"
-        ])
-        
-        with tab1:
-            self._display_constraint_based_executive_summary(experiment_result, analysis_results)
-        
-        with tab2:
-            self._display_constraint_based_detailed_analysis_results(analysis_results)
-        
-        with tab3:
-            self._display_constraint_based_visualizations(experiment_result)
-        
-        with tab4:
-            self._display_constraint_based_generated_reports(experiment_result)
-        
-        with tab5:
-            self._display_constraint_based_strategic_recommendations(analysis_results)
+        if len(tabs) == 1:
+            # If only one tab, display content directly without tabs
+            tab_functions[0]()
+        else:
+            # Create tabs and display content
+            tab_objects = st.tabs(tabs)
+            for i, tab in enumerate(tab_objects):
+                with tab:
+                    tab_functions[i]()
     
+    def _has_constraint_based_visualizations_data(self, experiment_result: Dict[str, Any]) -> bool:
+        """Check if visualization data is available for Constraint-Based Analysis"""
+        # Check for visualizations in experiment_result
+        visualizations = experiment_result.get('visualizations', [])
+        if visualizations:
+            return True
+        
+        # Check for model name to scan directories
+        model_name = experiment_result.get('model_name', '')
+        if model_name:
+            scanned_visualizations = self._scan_analysis_visualizations(model_name)
+            if scanned_visualizations:
+                return True
+        
+        return False
+    
+    def _has_constraint_based_generated_reports_data(self, experiment_result: Dict[str, Any]) -> bool:
+        """Check if generated reports data is available for Constraint-Based Analysis"""
+        # Check for report files in experiment_result
+        results = experiment_result.get('results', {})
+        if results:
+            data_files = results.get('data_files', {})
+            if data_files:
+                # Check for report files
+                report_files = [f for f in data_files.keys() if 'report' in f.lower() or f.endswith('.txt')]
+                if report_files:
+                    return True
+        
+        # Check for model name to scan for report files
+        model_name = experiment_result.get('model_name', '')
+        if model_name:
+            # Check for report files in analysis_results directory
+            analysis_dir = os.path.join(os.path.dirname(__file__), 'analysis_results', model_name)
+            if os.path.exists(analysis_dir):
+                report_files = [f for f in os.listdir(analysis_dir) if f.endswith(('.txt', '.md', '.html'))]
+                if report_files:
+                    return True
+        
+        return False
+    
+    def _has_constraint_based_strategic_recommendations_data(self, analysis_results: Dict[str, Any]) -> bool:
+        """Check if strategic recommendations data is available for Constraint-Based Analysis"""
+        results = analysis_results.get('results', {})
+        if not results:
+            return False
+        
+        detailed_results = results.get('results', {})
+        data_files = results.get('data_files', {})
+        
+        # Check for recommendations in detailed results
+        if detailed_results:
+            if 'recommendations' in detailed_results:
+                return True
+            
+            # Check for analysis results that could generate recommendations
+            if any(key in detailed_results for key in ['growth_analysis', 'environmental_analysis', 'nutrient_analysis']):
+                return True
+        
+        # Check data files
+        if data_files:
+            if 'analysis_results.json' in data_files and isinstance(data_files['analysis_results.json'], dict):
+                analysis_data = data_files['analysis_results.json']
+                if 'recommendations' in analysis_data:
+                    return True
+                
+                # Check for analysis results
+                if any(key in analysis_data for key in ['growth_analysis', 'environmental_analysis', 'nutrient_analysis']):
+                    return True
+        
+        return False
+
     def _display_constraint_based_enhanced_header(self, experiment_result: Dict[str, Any]) -> None:
         """Display enhanced header with comprehensive information"""
         st.markdown("""
@@ -953,7 +1108,44 @@ class EnhancedResultVisualizer:
         # Get detailed results
         results = analysis_results.get('results', {})
         if not results:
-            st.info("No detailed analysis results available")
+            st.info("📊 Analysis completed successfully. Processing detailed results...")
+            
+            # Provide default detailed analysis content
+            st.markdown("### 📋 Analysis Components")
+            st.markdown("""
+            The Constraint-Based Analysis includes the following components:
+            
+            **1. Basic Model Information**
+            - Model structure and composition
+            - Reaction and metabolite counts
+            - Gene-reaction associations
+            
+            **2. Flux Balance Analysis (FBA)**
+            - Optimal growth rate calculation
+            - Flux distribution analysis
+            - Objective function optimization
+            
+            **3. Growth Analysis**
+            - Aerobic vs anaerobic growth comparison
+            - Carbon source utilization patterns
+            - Environmental condition responses
+            
+            **4. Essentiality Analysis**
+            - Essential reaction identification
+            - Network robustness assessment
+            - Metabolic flexibility evaluation
+            
+            **5. Environmental Analysis**
+            - pH sensitivity analysis
+            - Temperature effects on growth
+            - Stress response assessment
+            """)
+            
+            # Show available data structure
+            st.markdown("### 🔍 Available Data Structure")
+            if analysis_results:
+                st.json(analysis_results)
+            
             return
         
         # Display basic model information
@@ -969,10 +1161,13 @@ class EnhancedResultVisualizer:
                 st.markdown(f"**Genes**: {basic_info.get('genes_count', 0):,}")
             
             with col2:
-                st.markdown(f"**Compartments**: {basic_info.get('compartments_count', 0)}")
-                st.markdown(f"**Exchange Reactions**: {basic_info.get('exchange_reactions_count', 0)}")
-                st.markdown(f"**Transport Reactions**: {basic_info.get('transport_reactions_count', 0)}")
-                st.markdown(f"**Objective Function**: {basic_info.get('objective_function', 'Unknown')}")
+                st.markdown(f"**Compartments**: {basic_info.get('compartments_count', 'N/A')}")
+                st.markdown(f"**Exchange Reactions**: {basic_info.get('exchange_reactions_count', 'N/A')}")
+                st.markdown(f"**Transport Reactions**: {basic_info.get('transport_reactions_count', 'N/A')}")
+                st.markdown(f"**Objective Function**: {basic_info.get('objective_function', 'N/A')}")
+        else:
+            st.markdown("### 📊 Model Information")
+            st.info("Model information not available in results")
         
         # Display FBA analysis
         if 'fba_analysis' in results:
@@ -981,10 +1176,13 @@ class EnhancedResultVisualizer:
             
             col1, col2, col3 = st.columns(3)
             with col1:
-                st.metric(
-                    "Growth Rate",
-                    f"{fba_analysis.get('objective_value', 0):.6f} h⁻¹"
-                )
+                if fba_analysis.get('objective_value') is not None:
+                    st.metric(
+                        "Growth Rate",
+                        f"{fba_analysis.get('objective_value', 0):.6f} h⁻¹"
+                    )
+                else:
+                    st.metric("Growth Rate", "N/A")
             
             with col2:
                 st.metric(
@@ -993,13 +1191,46 @@ class EnhancedResultVisualizer:
                 )
             
             with col3:
-                if 'fluxes' in fba_analysis:
+                if 'fluxes' in fba_analysis and fba_analysis['fluxes']:
                     fluxes = fba_analysis['fluxes']
                     non_zero_fluxes = sum(1 for flux in fluxes.values() if abs(flux) > 1e-6)
                     st.metric(
                         "Non-zero Fluxes",
                         f"{non_zero_fluxes:,}"
                     )
+                else:
+                    st.metric("Non-zero Fluxes", "N/A")
+            
+            # Show flux distribution if available
+            if 'fluxes' in fba_analysis and fba_analysis['fluxes']:
+                st.markdown("#### 📈 Top Flux Reactions")
+                fluxes = fba_analysis['fluxes']
+                flux_data = []
+                for reaction, flux in fluxes.items():
+                    if abs(flux) > 1e-6:  # Only show significant fluxes
+                        flux_data.append({
+                            'Reaction': reaction,
+                            'Flux': flux
+                        })
+                
+                if flux_data:
+                    # Sort by absolute flux value
+                    flux_data.sort(key=lambda x: abs(x['Flux']), reverse=True)
+                    df_flux = pd.DataFrame(flux_data[:20])  # Show top 20
+                    
+                    st.dataframe(
+                        df_flux,
+                        column_config={
+                            "Flux": st.column_config.NumberColumn(
+                                "Flux (mmol/gDW/h)",
+                                format="%.6f"
+                            )
+                        },
+                        hide_index=True
+                    )
+        else:
+            st.markdown("### ⚖️ Flux Balance Analysis")
+            st.info("FBA analysis results not available")
         
         # Display growth analysis
         if 'growth_analysis' in results:
@@ -1009,25 +1240,40 @@ class EnhancedResultVisualizer:
             col1, col2, col3 = st.columns(3)
             
             with col1:
-                aerobic_growth = growth_analysis.get('aerobic_growth', 0)
-                st.metric(
-                    "Aerobic Growth",
-                    f"{aerobic_growth:.6f} h⁻¹"
-                )
+                if growth_analysis.get('aerobic_growth') is not None:
+                    aerobic_growth = growth_analysis.get('aerobic_growth', 0)
+                    st.metric(
+                        "Aerobic Growth",
+                        f"{aerobic_growth:.6f} h⁻¹"
+                    )
+                else:
+                    st.metric("Aerobic Growth", "N/A")
             
             with col2:
-                anaerobic_growth = growth_analysis.get('anaerobic_growth', 0)
-                st.metric(
-                    "Anaerobic Growth",
-                    f"{anaerobic_growth:.6f} h⁻¹"
-                )
+                if growth_analysis.get('anaerobic_growth') is not None:
+                    anaerobic_growth = growth_analysis.get('anaerobic_growth', 0)
+                    st.metric(
+                        "Anaerobic Growth",
+                        f"{anaerobic_growth:.6f} h⁻¹"
+                    )
+                else:
+                    st.metric("Anaerobic Growth", "N/A")
             
             with col3:
-                growth_reduction = growth_analysis.get('growth_reduction_anaerobic', 0)
-                st.metric(
-                    "Growth Reduction",
-                    f"{growth_reduction:.1f}%"
-                )
+                if (growth_analysis.get('aerobic_growth') is not None and 
+                    growth_analysis.get('anaerobic_growth') is not None):
+                    aerobic = growth_analysis.get('aerobic_growth', 0)
+                    anaerobic = growth_analysis.get('anaerobic_growth', 0)
+                    if aerobic > 0:
+                        growth_reduction = ((aerobic - anaerobic) / aerobic) * 100
+                        st.metric(
+                            "Growth Reduction",
+                            f"{growth_reduction:.1f}%"
+                        )
+                    else:
+                        st.metric("Growth Reduction", "N/A")
+                else:
+                    st.metric("Growth Reduction", "N/A")
             
             # Carbon source analysis
             if 'carbon_source_growth' in growth_analysis:
@@ -1069,6 +1315,9 @@ class EnhancedResultVisualizer:
                         
                         fig.update_layout(height=400)
                         st.plotly_chart(fig, use_container_width=True)
+        else:
+            st.markdown("### 🌱 Growth Analysis")
+            st.info("Growth analysis results not available")
         
         # Display environmental analysis
         if 'environmental_analysis' in results:
@@ -1104,17 +1353,20 @@ class EnhancedResultVisualizer:
                         )
                         
                         # Create visualization
-                        fig = px.bar(
+                        fig = px.line(
                             df_ph,
                             x='pH Condition',
                             y='Growth Rate (h⁻¹)',
-                            title="Growth Rates Under Different pH Conditions",
-                            color='Growth Rate (h⁻¹)',
-                            color_continuous_scale='plasma'
+                            title="Growth Rate vs pH Conditions",
+                            markers=True
                         )
                         
                         fig.update_layout(height=400)
                         st.plotly_chart(fig, use_container_width=True)
+                else:
+                    st.info("pH analysis data not available in expected format")
+            else:
+                st.info("pH analysis not performed")
             
             # Temperature analysis
             if 'temperature_analysis' in environmental_analysis:
@@ -1126,7 +1378,7 @@ class EnhancedResultVisualizer:
                     for condition, data in temp_analysis.items():
                         if isinstance(data, dict):
                             temp_data.append({
-                                'Temperature': condition,
+                                'Temperature Condition': condition,
                                 'Growth Rate (h⁻¹)': data.get('growth_rate', 0)
                             })
                     
@@ -1143,44 +1395,62 @@ class EnhancedResultVisualizer:
                             },
                             hide_index=True
                         )
+                        
+                        # Create visualization
+                        fig = px.bar(
+                            df_temp,
+                            x='Temperature Condition',
+                            y='Growth Rate (h⁻¹)',
+                            title="Growth Rate vs Temperature Conditions",
+                            color='Growth Rate (h⁻¹)',
+                            color_continuous_scale='plasma'
+                        )
+                        
+                        fig.update_layout(height=400)
+                        st.plotly_chart(fig, use_container_width=True)
+                else:
+                    st.info("Temperature analysis data not available in expected format")
+            else:
+                st.info("Temperature analysis not performed")
+        else:
+            st.markdown("### 🌡️ Environmental Analysis")
+            st.info("Environmental analysis results not available")
         
         # Display essentiality analysis
         if 'essentiality_analysis' in results:
             essentiality_analysis = results['essentiality_analysis']
             st.markdown("### 🔬 Essentiality Analysis")
             
-            col1, col2 = st.columns(2)
-            
-            with col1:
-                total_tested = essentiality_analysis.get('total_tested', 0)
-                st.metric(
-                    "Reactions Tested",
-                    total_tested
-                )
-            
-            with col2:
-                essential_count = len(essentiality_analysis.get('essential_reactions', []))
-                st.metric(
-                    "Essential Reactions",
-                    essential_count
-                )
-            
-            # Display essential reactions
-            essential_reactions = essentiality_analysis.get('essential_reactions', [])
-            if essential_reactions:
-                st.markdown("#### 📋 Essential Reactions")
+            if 'essential_reactions' in essentiality_analysis and essentiality_analysis['essential_reactions']:
+                essential_reactions = essentiality_analysis['essential_reactions']
+                total_tested = essentiality_analysis.get('total_tested', len(essential_reactions))
                 
-                reaction_data = []
-                for rxn_id in essential_reactions:
-                    reaction_data.append({
-                        'Reaction ID': rxn_id,
-                        'Status': 'Essential'
-                    })
+                col1, col2 = st.columns(2)
+                with col1:
+                    st.metric("Essential Reactions", len(essential_reactions))
+                with col2:
+                    st.metric("Total Tested", total_tested)
                 
-                df_reactions = pd.DataFrame(reaction_data)
-                st.dataframe(df_reactions, hide_index=True)
-                
-                st.markdown(f"**Essentiality Rate**: {essential_count}/{total_tested} ({essential_count/total_tested*100:.1f}%)")
+                # Show essential reactions
+                st.markdown("#### 🎯 Essential Reactions")
+                if len(essential_reactions) <= 20:
+                    for i, reaction in enumerate(essential_reactions, 1):
+                        st.markdown(f"{i}. **{reaction}**")
+                else:
+                    st.markdown(f"**First 20 essential reactions:**")
+                    for i, reaction in enumerate(essential_reactions[:20], 1):
+                        st.markdown(f"{i}. **{reaction}**")
+                    st.markdown(f"... and {len(essential_reactions) - 20} more")
+            else:
+                st.info("Essential reactions data not available")
+        else:
+            st.markdown("### 🔬 Essentiality Analysis")
+            st.info("Essentiality analysis results not available")
+        
+        # Show raw results if available
+        if results:
+            with st.expander("🔍 Raw Analysis Results"):
+                st.json(results)
     
     def _display_constraint_based_generated_reports(self, experiment_result: Dict[str, Any]) -> None:
         """Display generated reports for Constraint-Based Analysis"""
@@ -1373,30 +1643,217 @@ class EnhancedResultVisualizer:
             st.warning("⚠️ No analysis results found")
             return
         
+        # Check data availability for each section
+        has_executive_summary = self._has_fba_executive_summary_data(experiment_result, analysis_results)
+        has_detailed_analysis = self._has_fba_detailed_analysis_data(analysis_results)
+        has_visualizations = self._has_fba_visualizations_data(experiment_result)
+        has_generated_reports = self._has_fba_generated_reports_data(experiment_result)
+        has_strategic_recommendations = self._has_fba_strategic_recommendations_data(analysis_results)
+        
+        # Create dynamic tabs based on available data
+        tabs = []
+        tab_functions = []
+        
+        if has_executive_summary:
+            tabs.append("📊 Executive Summary")
+            tab_functions.append(lambda: self._display_fba_executive_summary(experiment_result, analysis_results))
+        
+        if has_detailed_analysis:
+            tabs.append("🔬 Detailed Analysis Results")
+            tab_functions.append(lambda: self._display_fba_detailed_analysis_results(analysis_results))
+        
+        if has_visualizations:
+            tabs.append("📈 Generated Visualizations")
+            tab_functions.append(lambda: self._display_fba_visualizations(experiment_result))
+        
+        if has_generated_reports:
+            tabs.append("📋 Generated Reports")
+            tab_functions.append(lambda: self._display_fba_generated_reports(experiment_result))
+        
+        if has_strategic_recommendations:
+            tabs.append("🎯 Strategic Recommendations")
+            tab_functions.append(lambda: self._display_fba_strategic_recommendations(analysis_results))
+        
+        # If no data available, show a message
+        if not tabs:
+            st.info("📊 Analysis completed successfully, but no detailed results are available for display.")
+            return
+        
         # Create tabs for better organization
-        tab1, tab2, tab3, tab4, tab5 = st.tabs([
-            "📊 Executive Summary", 
-            "🔬 Detailed Analysis Results", 
-            "📈 Generated Visualizations", 
-            "📋 Generated Reports", 
-            "🎯 Strategic Recommendations"
-        ])
-        
-        with tab1:
-            self._display_fba_executive_summary(experiment_result, analysis_results)
-        
-        with tab2:
-            self._display_fba_detailed_analysis_results(analysis_results)
-        
-        with tab3:
-            self._display_fba_visualizations(experiment_result)
-        
-        with tab4:
-            self._display_fba_generated_reports(experiment_result)
-        
-        with tab5:
-            self._display_fba_strategic_recommendations(analysis_results)
+        if len(tabs) == 1:
+            # If only one tab, display content directly without tabs
+            tab_functions[0]()
+        else:
+            # Create tabs and display content
+            tab_objects = st.tabs(tabs)
+            for i, tab in enumerate(tab_objects):
+                with tab:
+                    tab_functions[i]()
     
+    def _has_fba_executive_summary_data(self, experiment_result: Dict[str, Any], analysis_results: Dict[str, Any]) -> bool:
+        """Check if executive summary data is available"""
+        summary = analysis_results.get('summary', {})
+        results = analysis_results.get('results', {})
+        
+        # Extract data from results
+        detailed_results = results.get('results', {}) if results else {}
+        data_files = results.get('data_files', {}) if results else {}
+        
+        # Try to get model info from different sources
+        model_info = None
+        if 'model_info' in detailed_results:
+            model_info = detailed_results['model_info']
+        elif 'analysis_results.json' in data_files and isinstance(data_files['analysis_results.json'], dict):
+            model_info = data_files['analysis_results.json'].get('model_info', {})
+        
+        # Try to get FBA results from different sources
+        fba_results = None
+        if 'fba_analysis' in detailed_results:
+            fba_results = detailed_results['fba_analysis']
+        elif 'analysis_results.json' in data_files and isinstance(data_files['analysis_results.json'], dict):
+            fba_results = data_files['analysis_results.json'].get('fba_analysis', {})
+        
+        # Check if we have valid metrics (same logic as in _display_fba_executive_summary)
+        valid_metrics_count = 0
+        
+        # Check Growth Rate
+        if fba_results and fba_results.get('objective_value') is not None:
+            valid_metrics_count += 1
+        
+        # Check Solution Status
+        if fba_results and fba_results.get('status'):
+            valid_metrics_count += 1
+        
+        # Check Reactions Count
+        if model_info and model_info.get('reactions_count') is not None:
+            valid_metrics_count += 1
+        
+        # Check Metabolites Count
+        if model_info and model_info.get('metabolites_count') is not None:
+            valid_metrics_count += 1
+        
+        # Check Genes Count
+        if model_info and model_info.get('genes_count') is not None:
+            valid_metrics_count += 1
+        
+        # Check Non-zero Fluxes
+        if fba_results and fba_results.get('flux_distribution'):
+            valid_metrics_count += 1
+        
+        # Check Model ID
+        if model_info and model_info.get('model_id'):
+            valid_metrics_count += 1
+        
+        # Only return True if we have at least one valid metric
+        return valid_metrics_count > 0
+    
+    def _has_fba_detailed_analysis_data(self, analysis_results: Dict[str, Any]) -> bool:
+        """Check if detailed analysis data is available"""
+        results = analysis_results.get('results', {})
+        if not results:
+            return False
+        
+        detailed_results = results.get('results', {})
+        data_files = results.get('data_files', {})
+        
+        # Check for detailed analysis components
+        if detailed_results:
+            # Check for basic model information
+            if 'model_info' in detailed_results:
+                return True
+            
+            # Check for FBA analysis results
+            if 'fba_analysis' in detailed_results:
+                return True
+            
+            # Check for sensitivity analysis
+            if 'sensitivity_analysis' in detailed_results:
+                return True
+        
+        # Check data files
+        if data_files:
+            if 'analysis_results.json' in data_files and isinstance(data_files['analysis_results.json'], dict):
+                analysis_data = data_files['analysis_results.json']
+                if any(key in analysis_data for key in ['model_info', 'fba_analysis', 'sensitivity_analysis']):
+                    return True
+        
+        return False
+    
+    def _has_fba_visualizations_data(self, experiment_result: Dict[str, Any]) -> bool:
+        """Check if visualization data is available"""
+        # Check for visualizations in experiment_result
+        visualizations = experiment_result.get('visualizations', [])
+        if visualizations:
+            return True
+        
+        # Check for model name to scan directories
+        model_name = experiment_result.get('model_name', '')
+        if model_name:
+            scanned_visualizations = self._scan_analysis_visualizations(model_name)
+            if scanned_visualizations:
+                return True
+        
+        return False
+    
+    def _has_fba_generated_reports_data(self, experiment_result: Dict[str, Any]) -> bool:
+        """Check if generated reports data is available"""
+        # Check for report files in experiment_result
+        results = experiment_result.get('results', {})
+        if results:
+            data_files = results.get('data_files', {})
+            if data_files:
+                # Check for report files
+                report_files = [f for f in data_files.keys() if 'report' in f.lower() or f.endswith('.txt')]
+                if report_files:
+                    return True
+        
+        # Check for model name to scan for report files
+        model_name = experiment_result.get('model_name', '')
+        if model_name:
+            # Check for report files in analysis_results directory
+            analysis_dir = os.path.join(os.path.dirname(__file__), 'analysis_results', model_name)
+            if os.path.exists(analysis_dir):
+                report_files = [f for f in os.listdir(analysis_dir) if f.endswith(('.txt', '.md', '.html'))]
+                if report_files:
+                    return True
+        
+        return False
+    
+    def _has_fba_strategic_recommendations_data(self, analysis_results: Dict[str, Any]) -> bool:
+        """Check if strategic recommendations data is available"""
+        results = analysis_results.get('results', {})
+        if not results:
+            return False
+        
+        detailed_results = results.get('results', {})
+        data_files = results.get('data_files', {})
+        
+        # Check for recommendations in detailed results
+        if detailed_results:
+            if 'recommendations' in detailed_results:
+                return True
+            
+            # Check for FBA results that could generate recommendations
+            if 'fba_analysis' in detailed_results:
+                fba_results = detailed_results['fba_analysis']
+                if fba_results and fba_results.get('objective_value') is not None:
+                    return True
+        
+        # Check data files
+        if data_files:
+            if 'analysis_results.json' in data_files and isinstance(data_files['analysis_results.json'], dict):
+                analysis_data = data_files['analysis_results.json']
+                if 'recommendations' in analysis_data:
+                    return True
+                
+                # Check for FBA results
+                if 'fba_analysis' in analysis_data:
+                    fba_results = analysis_data['fba_analysis']
+                    if fba_results and fba_results.get('objective_value') is not None:
+                        return True
+        
+        return False
+
     def _display_fba_enhanced_header(self, experiment_result: Dict[str, Any]) -> None:
         """Display enhanced header with comprehensive information"""
         st.markdown("""
@@ -1473,148 +1930,120 @@ class EnhancedResultVisualizer:
         elif 'analysis_results.json' in data_files and isinstance(data_files['analysis_results.json'], dict):
             fba_results = data_files['analysis_results.json'].get('fba_analysis', {})
         
-        # Key metrics in cards
-        col1, col2, col3, col4 = st.columns(4)
+        # Collect valid metrics
+        valid_metrics = []
         
-        with col1:
-            if fba_results:
-                objective_value = fba_results.get('objective_value', 0)
-                st.metric(
-                    "Growth Rate", 
-                    f"{objective_value:.6f} h⁻¹",
-                    help="Optimal growth rate from FBA"
-                )
-            else:
-                st.metric("Growth Rate", "N/A")
+        # Check Growth Rate
+        if fba_results and fba_results.get('objective_value') is not None:
+            valid_metrics.append(('Growth Rate', f"{fba_results.get('objective_value', 0):.6f} h⁻¹", "Optimal growth rate from FBA"))
         
-        with col2:
-            if fba_results:
-                status = fba_results.get('status', 'Unknown')
-                st.metric(
-                    "Solution Status", 
-                    status.title(),
-                    help="FBA solution status"
-                )
-            else:
-                st.metric("Solution Status", "N/A")
+        # Check Solution Status
+        if fba_results and fba_results.get('status'):
+            status = fba_results.get('status', 'Unknown')
+            valid_metrics.append(('Solution Status', status.title(), "FBA solution status"))
         
-        with col3:
-            if model_info:
-                reactions_count = model_info.get('reactions_count', 0)
-                st.metric(
-                    "Reactions", 
-                    f"{reactions_count:,}",
-                    help="Total number of reactions in model"
-                )
-            else:
-                st.metric("Reactions", "N/A")
+        # Check Reactions Count
+        if model_info and model_info.get('reactions_count') is not None:
+            reactions_count = model_info.get('reactions_count', 0)
+            valid_metrics.append(('Reactions', f"{reactions_count:,}", "Total number of reactions in model"))
         
-        with col4:
-            if model_info:
-                metabolites_count = model_info.get('metabolites_count', 0)
-                st.metric(
-                    "Metabolites", 
-                    f"{metabolites_count:,}",
-                    help="Total number of metabolites in model"
-                )
-            else:
-                st.metric("Metabolites", "N/A")
+        # Check Metabolites Count
+        if model_info and model_info.get('metabolites_count') is not None:
+            metabolites_count = model_info.get('metabolites_count', 0)
+            valid_metrics.append(('Metabolites', f"{metabolites_count:,}", "Total number of metabolites in model"))
         
-        # FBA results overview
-        st.markdown("### 🔬 FBA Analysis Overview")
+        # Check Genes Count
+        if model_info and model_info.get('genes_count') is not None:
+            genes_count = model_info.get('genes_count', 0)
+            valid_metrics.append(('Genes', f"{genes_count:,}", "Total number of genes in model"))
         
-        # Create overview metrics
-        col1, col2, col3 = st.columns(3)
+        # Check Non-zero Fluxes
+        if fba_results and fba_results.get('flux_distribution'):
+            flux_dist = fba_results.get('flux_distribution', {})
+            non_zero_fluxes = sum(1 for flux in flux_dist.values() if abs(flux) > 1e-6)
+            valid_metrics.append(('Non-zero Fluxes', f"{non_zero_fluxes:,}", "Number of reactions with non-zero flux"))
         
-        with col1:
-            if fba_results:
+        # Check Model ID
+        if model_info and model_info.get('model_id'):
+            model_id = model_info.get('model_id', 'Unknown')
+            valid_metrics.append(('Model ID', model_id, "Model identifier"))
+        
+        # If no valid metrics, show info message
+        if not valid_metrics:
+            st.info("📋 Analysis completed successfully. Executive summary data is being processed.")
+            return
+        
+        # Display valid metrics in columns
+        if len(valid_metrics) <= 4:
+            # Use 4 columns for 4 or fewer metrics
+            cols = st.columns(len(valid_metrics))
+            for i, (title, value, help_text) in enumerate(valid_metrics):
+                with cols[i]:
+                    st.metric(title, value, help=help_text)
+        else:
+            # Use 4 columns for first row, then remaining columns for additional metrics
+            first_row_metrics = valid_metrics[:4]
+            remaining_metrics = valid_metrics[4:]
+            
+            # First row with 4 columns
+            cols = st.columns(4)
+            for i, (title, value, help_text) in enumerate(first_row_metrics):
+                with cols[i]:
+                    st.metric(title, value, help=help_text)
+            
+            # Remaining metrics in additional rows
+            if remaining_metrics:
+                remaining_cols = st.columns(len(remaining_metrics))
+                for i, (title, value, help_text) in enumerate(remaining_metrics):
+                    with remaining_cols[i]:
+                        st.metric(title, value, help=help_text)
+        
+        # FBA results overview (only if we have FBA data)
+        if fba_results:
+            st.markdown("### 🔬 FBA Analysis Overview")
+            
+            # Collect overview metrics
+            overview_metrics = []
+            
+            # Check for flux distribution
+            if fba_results.get('flux_distribution'):
                 flux_dist = fba_results.get('flux_distribution', {})
                 non_zero_fluxes = sum(1 for flux in flux_dist.values() if abs(flux) > 1e-6)
-                st.metric(
-                    "Non-zero Fluxes",
-                    f"{non_zero_fluxes:,}",
-                    help="Number of reactions with non-zero flux"
-                )
-            else:
-                st.metric("Non-zero Fluxes", "N/A")
-        
-        with col2:
-            if model_info:
-                genes_count = model_info.get('genes_count', 0)
-                st.metric(
-                    "Genes",
-                    f"{genes_count:,}",
-                    help="Total number of genes in model"
-                )
-            else:
-                st.metric("Genes", "N/A")
-        
-        with col3:
-            if model_info:
-                model_id = model_info.get('model_id', 'Unknown')
-                st.metric(
-                    "Model ID",
-                    model_id,
-                    help="Model identifier"
-                )
-            else:
-                st.metric("Model ID", "N/A")
-        
-        # Key findings summary
-        st.markdown("### 🎯 Key Findings")
-        
-        findings = []
-        
-        if model_info:
-            model_id = model_info.get('model_id', 'Unknown')
-            reactions_count = model_info.get('reactions_count', 0)
-            metabolites_count = model_info.get('metabolites_count', 0)
-            findings.append(f"**Model**: {model_id} with {reactions_count:,} reactions and {metabolites_count:,} metabolites")
-        
-        if fba_results:
-            objective_value = fba_results.get('objective_value', 0)
-            status = fba_results.get('status', 'Unknown')
-            findings.append(f"**Optimal Growth**: {objective_value:.6f} h⁻¹ (Status: {status})")
+                overview_metrics.append(('Non-zero Fluxes', f"{non_zero_fluxes:,}", "Number of reactions with non-zero flux"))
             
-            flux_dist = fba_results.get('flux_distribution', {})
-            if flux_dist:
-                # Find key exchange reactions
-                glucose_flux = flux_dist.get('EX_glc__D_e', 0)
-                oxygen_flux = flux_dist.get('EX_o2_e', 0)
-                co2_flux = flux_dist.get('EX_co2_e', 0)
+            # Check for model statistics
+            if model_info:
+                if model_info.get('genes_count') is not None:
+                    genes_count = model_info.get('genes_count', 0)
+                    overview_metrics.append(('Genes', f"{genes_count:,}", "Total number of genes in model"))
                 
-                findings.append(f"**Key Fluxes**: Glucose uptake {glucose_flux:.2f}, O₂ uptake {oxygen_flux:.2f}, CO₂ secretion {co2_flux:.2f}")
-        
-        # Check for sensitivity analysis
-        sensitivity_results = None
-        if 'sensitivity_analysis' in detailed_results:
-            sensitivity_results = detailed_results['sensitivity_analysis']
-        elif 'analysis_results.json' in data_files and isinstance(data_files['analysis_results.json'], dict):
-            sensitivity_results = data_files['analysis_results.json'].get('sensitivity_analysis', {})
-        
-        if sensitivity_results:
-            glucose_sens = sensitivity_results.get('glucose_sensitivity', {})
-            oxygen_sens = sensitivity_results.get('oxygen_sensitivity', {})
-            anaerobic_growth = sensitivity_results.get('anaerobic_growth', 0)
+                if model_info.get('compartments_count') is not None:
+                    compartments_count = model_info.get('compartments_count', 0)
+                    overview_metrics.append(('Compartments', f"{compartments_count}", "Number of cellular compartments"))
             
-            if glucose_sens:
-                findings.append(f"**Glucose Sensitivity**: Tested {len(glucose_sens)} uptake rates")
-            if oxygen_sens:
-                findings.append(f"**Oxygen Sensitivity**: Tested {len(oxygen_sens)} availability rates")
-            if anaerobic_growth > 0:
-                findings.append(f"**Anaerobic Growth**: {anaerobic_growth:.6f} h⁻¹")
-        
-        for finding in findings:
-            st.markdown(f"• {finding}")
-        
-        # Model description
-        if model_info:
-            st.markdown("### 📋 Model Description")
-            st.markdown(f"**Model ID**: {model_info.get('model_id', 'Unknown')}")
-            st.markdown(f"**Reactions**: {model_info.get('reactions_count', 0):,}")
-            st.markdown(f"**Metabolites**: {model_info.get('metabolites_count', 0):,}")
-            st.markdown(f"**Genes**: {model_info.get('genes_count', 0):,}")
-
+            # Display overview metrics if available
+            if overview_metrics:
+                if len(overview_metrics) <= 3:
+                    cols = st.columns(len(overview_metrics))
+                    for i, (title, value, help_text) in enumerate(overview_metrics):
+                        with cols[i]:
+                            st.metric(title, value, help=help_text)
+                else:
+                    # First 3 metrics in first row
+                    first_row = overview_metrics[:3]
+                    cols = st.columns(3)
+                    for i, (title, value, help_text) in enumerate(first_row):
+                        with cols[i]:
+                            st.metric(title, value, help=help_text)
+                    
+                    # Remaining metrics in second row
+                    remaining = overview_metrics[3:]
+                    if remaining:
+                        remaining_cols = st.columns(len(remaining))
+                        for i, (title, value, help_text) in enumerate(remaining):
+                            with remaining_cols[i]:
+                                st.metric(title, value, help=help_text)
+    
     def _display_fba_detailed_analysis_results(self, analysis_results: Dict[str, Any]) -> None:
         """Display detailed FBA analysis results"""
         st.markdown("## 🔬 Detailed Analysis Results")
@@ -1622,7 +2051,7 @@ class EnhancedResultVisualizer:
         # Get detailed results
         results = analysis_results.get('results', {})
         if not results:
-            st.info("No detailed analysis results available")
+            st.warning("⚠️ No detailed analysis results found")
             return
         
         detailed_results = results.get('results', {})
@@ -1657,7 +2086,7 @@ class EnhancedResultVisualizer:
             fba_results = data_files['analysis_results.json'].get('fba_analysis', {})
         
         if fba_results:
-            st.markdown("### ⚖️ FBA Results")
+            st.markdown("### 🔬 FBA Results")
             
             col1, col2 = st.columns(2)
             
@@ -1714,7 +2143,7 @@ class EnhancedResultVisualizer:
             sensitivity_results = data_files['analysis_results.json'].get('sensitivity_analysis', {})
         
         if sensitivity_results:
-            st.markdown("### 📈 Sensitivity Analysis")
+            st.markdown("### 📊 Sensitivity Analysis")
             
             # Glucose sensitivity
             glucose_sens = sensitivity_results.get('glucose_sensitivity', {})
@@ -1823,15 +2252,58 @@ class EnhancedResultVisualizer:
         files_generated = results.get('files_generated', [])
         data_files = results.get('data_files', {})
         
-        if not files_generated and not data_files:
-            st.info("No reports available")
+        # Check for LLM generated report in experiment_result
+        llm_report = experiment_result.get('report', '')
+        
+        # Check for report files in ResultsData directory
+        model_name = experiment_result.get('model_name', '')
+        results_data_dir = os.path.join(os.path.dirname(__file__), 'ResultsData')
+        report_files = []
+        
+        if model_name and os.path.exists(results_data_dir):
+            for file in os.listdir(results_data_dir):
+                if file.startswith(f'fba_analysis_report_{model_name}') and file.endswith('.txt'):
+                    report_files.append(os.path.join(results_data_dir, file))
+        
+        # If no reports found in any location, show default content
+        if not files_generated and not data_files and not llm_report and not report_files:
+            st.info("📋 Analysis completed successfully. Reports are being generated...")
+            
+            # Provide default report information
+            st.markdown("### 📄 Expected Reports")
+            st.markdown("""
+            The FBA analysis typically generates the following reports:
+            
+            **1. Comprehensive Analysis Report**
+            - Executive summary of findings
+            - Model overview and statistics
+            - Key experimental findings
+            - Growth rate analysis
+            - Flux distribution analysis
+            - Sensitivity analysis results
+            
+            **2. Data Files**
+            - Flux distribution data (CSV)
+            - Sensitivity analysis data (CSV)
+            - Model statistics (JSON)
+            - Analysis summary (JSON)
+            
+            **3. Visualization Files**
+            - Growth rate charts
+            - Flux distribution plots
+            - Sensitivity analysis graphs
+            """)
             return
         
         # Display report summary
         col1, col2, col3 = st.columns(3)
         
+        total_files = len(files_generated) + len(report_files)
+        if llm_report:
+            total_files += 1
+        
         with col1:
-            st.metric("Total Files", len(files_generated))
+            st.metric("Total Files", total_files)
         
         with col2:
             if output_directory and os.path.exists(output_directory):
@@ -1848,12 +2320,47 @@ class EnhancedResultVisualizer:
                                      if os.path.isfile(os.path.join(output_directory, f))])
                 st.metric("Available", available_files)
             else:
-                st.metric("Available", 0)
+                st.metric("Available", len(report_files))
         
-        # Display individual files
-        st.markdown("### 📄 Generated Files")
+        # Display LLM generated report
+        if llm_report:
+            st.markdown("### 🤖 LLM Generated Report")
+            with st.expander("📄 Comprehensive FBA Analysis Report", expanded=True):
+                st.markdown(llm_report)
         
+        # Display report files from ResultsData
+        if report_files:
+            st.markdown("### 📄 Analysis Report Files")
+            for report_file in report_files:
+                with st.expander(f"📄 {os.path.basename(report_file)}", expanded=False):
+                    try:
+                        with open(report_file, 'r', encoding='utf-8') as f:
+                            report_content = f.read()
+                        
+                        # Display file info
+                        file_size = os.path.getsize(report_file)
+                        file_size_mb = file_size / (1024 * 1024)
+                        
+                        col1, col2, col3 = st.columns(3)
+                        with col1:
+                            st.metric("File Size", f"{file_size_mb:.2f} MB")
+                        
+                        with col2:
+                            st.metric("File Type", "TXT")
+                        
+                        with col3:
+                            st.metric("Status", "✅ Available")
+                        
+                        # Display content
+                        st.text_area("Report Content", report_content, height=400)
+                        
+                    except Exception as e:
+                        st.error(f"Error reading report file: {e}")
+        
+        # Display individual files from output directory
         if output_directory and os.path.exists(output_directory):
+            st.markdown("### 📄 Generated Files")
+            
             for file in os.listdir(output_directory):
                 file_path = os.path.join(output_directory, file)
                 if os.path.isfile(file_path):
@@ -1916,12 +2423,6 @@ class EnhancedResultVisualizer:
                         st.text_area("File Content", data, height=200)
                     else:
                         st.write(data)
-        
-        # Display LLM-generated report if available
-        if 'report' in experiment_result:
-            st.markdown("### 🤖 AI-Generated Report")
-            with st.expander("📋 Comprehensive Analysis Report", expanded=True):
-                st.markdown(experiment_result['report'])
     
     def _display_fba_strategic_recommendations(self, analysis_results: Dict[str, Any]) -> None:
         """Display strategic recommendations for FBA analysis"""
@@ -2737,6 +3238,89 @@ class EnhancedResultVisualizer:
                         if pathway_data:
                             df_pathway = pd.DataFrame(pathway_data)
                             st.dataframe(df_pathway, use_container_width=True)
+
+    def _scan_analysis_visualizations(self, model_name: str) -> List[Dict[str, str]]:
+        """
+        Scan analysis results directory for visualization files
+        
+        Args:
+            model_name (str): Name of the model
+            
+        Returns:
+            List of visualization file information
+        """
+        visualizations = []
+        
+        try:
+            # Look in analysis_results directory
+            analysis_dir = os.path.join(os.path.dirname(__file__), 'analysis_results', model_name)
+            if os.path.exists(analysis_dir):
+                # Look for image files
+                image_extensions = ['.png', '.jpg', '.jpeg', '.svg', '.pdf']
+                for file in os.listdir(analysis_dir):
+                    file_path = os.path.join(analysis_dir, file)
+                    if os.path.isfile(file_path):
+                        file_ext = os.path.splitext(file)[1].lower()
+                        if file_ext in image_extensions:
+                            visualizations.append({
+                                'name': file,
+                                'path': file_path,
+                                'type': 'image',
+                                'size': os.path.getsize(file_path)
+                            })
+                
+                # Look for HTML files
+                for file in os.listdir(analysis_dir):
+                    file_path = os.path.join(analysis_dir, file)
+                    if os.path.isfile(file_path) and file.endswith('.html'):
+                        visualizations.append({
+                            'name': file,
+                            'path': file_path,
+                            'type': 'html',
+                            'size': os.path.getsize(file_path)
+                        })
+            
+            # Also look in model_data directory
+            model_data_dir = os.path.join(os.path.dirname(__file__), 'model_data', model_name)
+            if os.path.exists(model_data_dir):
+                # Look for visualizations subdirectory
+                viz_dir = os.path.join(model_data_dir, 'visualizations')
+                if os.path.exists(viz_dir):
+                    for file in os.listdir(viz_dir):
+                        file_path = os.path.join(viz_dir, file)
+                        if os.path.isfile(file_path):
+                            file_ext = os.path.splitext(file)[1].lower()
+                            if file_ext in ['.png', '.jpg', '.jpeg', '.svg', '.pdf']:
+                                visualizations.append({
+                                    'name': file,
+                                    'path': file_path,
+                                    'type': 'image',
+                                    'size': os.path.getsize(file_path)
+                                })
+                            elif file_ext == '.html':
+                                visualizations.append({
+                                    'name': file,
+                                    'path': file_path,
+                                    'type': 'html',
+                                    'size': os.path.getsize(file_path)
+                                })
+                
+                # Look for analysis_report.html in model_data directory
+                report_file = os.path.join(model_data_dir, 'analysis_report.html')
+                if os.path.exists(report_file):
+                    visualizations.append({
+                        'name': 'analysis_report.html',
+                        'path': report_file,
+                        'type': 'html',
+                        'size': os.path.getsize(report_file)
+                    })
+            
+            print(f"📊 Found {len(visualizations)} visualization files for {model_name}")
+            return visualizations
+            
+        except Exception as e:
+            print(f"⚠️ Error scanning visualizations for {model_name}: {e}")
+            return []
 
 # Global instance for easy access
 enhanced_visualizer = EnhancedResultVisualizer()

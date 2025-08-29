@@ -682,9 +682,12 @@ def main():
                                         else:
                                             # Store warning message for display in chat message
                                             st.session_state.analyse_warning_message = "⚠️ Model name not found in command. Use format: 'analyse [model_name]'"
+                                            # Clear any previous figures when analysis fails
+                                            if 'current_figures' in st.session_state:
+                                                del st.session_state.current_figures
                                         
-                                        # Get figures if available
-                                        if hasattr(func.__self__, 'current_figures'):
+                                        # Get figures if available (only for successful analysis)
+                                        if model_name and hasattr(func.__self__, 'current_figures'):
                                             figures = func.__self__.current_figures
                                             if figures is not None:
                                                 st.session_state.current_figures = figures
