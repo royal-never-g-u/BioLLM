@@ -17,7 +17,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')
 
 from bio_task import get_current_task
 from analysis_types import get_analysis_type_description, ANALYSIS_TYPES
-from agent.explanation_agent import generate_model_explanation
+
 from agent.rag_tool import RAGTool
 
 
@@ -86,7 +86,7 @@ class NextStepAgent:
             
             # Check what information is available
             has_model_name = bool(current_task.model_name and current_task.model_name.strip())
-            has_task_type = current_task.task_type is not None
+            has_task_type = current_task.task_type is not None and current_task.task_type != ""
             
             # Case 1: Neither model_name nor task_type exists
             if not has_model_name and not has_task_type:
@@ -206,13 +206,10 @@ Please specify which type of analysis you would like to perform."""
             task_type (int): Type of analysis task
             
         Returns:
-            Dict containing explanation and next step information
+            Dict containing next step information (explanation will be handled by app.py)
         """
         try:
-            # Call explanation agent to generate detailed explanation
-            explanation = generate_model_explanation(model_name, task_type)
-            
-            # Create enhanced message with explanation
+            # Create message without calling explanation agent
             task_description = get_analysis_type_description(task_type)
             
             message = f"""✅ **Configuration Complete!**
@@ -220,16 +217,7 @@ Please specify which type of analysis you would like to perform."""
 **Model**: {model_name}
 **Task Type**: {task_description}
 
----
-
-{explanation}
-
----
-
-**Next Steps:**
-- You can now proceed with the analysis using the {model_name} model
-- The system is ready to execute {task_description}
-- Use the appropriate analysis commands to start your experiment"""
+The system is ready to provide a detailed explanation of the model and task configuration, and then proceed with the analysis."""
             
             return {
                 'success': True,
@@ -237,8 +225,7 @@ Please specify which type of analysis you would like to perform."""
                 'message': message,
                 'model_name': model_name,
                 'task_type': task_type,
-                'task_description': task_description,
-                'explanation': explanation
+                'task_description': task_description
             }
             
         except Exception as e:
@@ -246,7 +233,7 @@ Please specify which type of analysis you would like to perform."""
                 'success': False,
                 'error': str(e),
                 'action': 'error',
-                'message': f'Error generating explanation: {str(e)}'
+                'message': f'Error handling both available case: {str(e)}'
             }
     
     def _generate_model_recommendation(self, prompt: str, task_type: int) -> str:

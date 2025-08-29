@@ -1,0 +1,159 @@
+# Constraint-Based Analysis of the *E. coli* Core Metabolic Model
+
+---
+
+## 1. Executive Summary
+
+This constraint-based analysis of the *E. coli* core metabolic model (id: e_coli_core) provides a comprehensive understanding of the organism's central metabolism under various environmental and genetic perturbations. The model includes 95 reactions, 72 metabolites, and 137 genes, with a focus on glycolysis, the TCA cycle, and oxidative phosphorylation. Flux Balance Analysis (FBA) revealed an optimal growth rate of **0.8739 h⁻¹** under aerobic conditions with glucose as the sole carbon source. Several key reactions were identified as essential for growth, including those in glycolysis and the TCA cycle. Environmental stress simulations showed that the model is robust to changes in pH and temperature, although growth was reduced under basic pH and high-temperature conditions.
+
+---
+
+## 2. Model Overview
+
+The *E. coli* core metabolic model represents a well-curated subset of the genome-scale metabolic network, focusing on core pathways such as glycolysis, pentose phosphate pathway, TCA cycle, and oxidative phosphorylation. Key features include:
+
+- **Reactions**: 95
+- **Metabolites**: 72
+- **Genes**: 137
+- **Compartments**: Cytosol (c), Extracellular (e)
+- **Objective Function**: Maximize biomass production (BIOMASS_Ecoli_core_w_GAM)
+
+The model contains 20 exchange reactions and 22 transport reactions, enabling nutrient uptake and waste secretion. Internal reactions include central carbon metabolism and ATP maintenance.
+
+---
+
+## 3. Key Experimental Findings
+
+### 3.1 Basic Metabolic Capabilities
+
+Flux Balance Analysis (FBA) under standard aerobic conditions (glucose as carbon source) yielded:
+
+- **Growth Rate**: 0.8739 h⁻¹
+- **Status**: Optimal
+- **Key Uptakes**:
+  - Glucose (EX_glc__D_e): -10.0 mmol/gDW/h
+  - Oxygen (EX_o2_e): -21.799 mmol/gDW/h
+  - Ammonium (EX_nh4_e): -4.765 mmol/gDW/h
+- **Key Secretions**:
+  - CO₂ (EX_co2_e): 22.81 mmol/gDW/h
+  - Water (EX_h2o_e): 29.18 mmol/gDW/h
+  - Protons (EX_h_e): 17.53 mmol/gDW/h
+
+### 3.2 Carbon Source Utilization
+
+The model was tested for growth on various carbon sources under aerobic conditions:
+
+| Carbon Source | Growth Rate (h⁻¹) |
+|---------------|-------------------|
+| Glucose       | 0.8739            |
+| Fructose      | 0.8739            |
+| Acetate       | 0.1733            |
+| Succinate     | 0.3976            |
+| Lactate       | 0.0               |
+| Glycerol      | 0.0               |
+| Pyruvate      | 0.2912            |
+
+Glucose and fructose supported maximal growth, while lactate and glycerol failed to support growth. Acetate and pyruvate supported intermediate growth, and succinate supported moderate growth.
+
+### 3.3 Oxygen Dependency
+
+Oxygen availability significantly influenced growth:
+
+- **Aerobic Growth**: 0.8739 h⁻¹
+- **Anaerobic Growth**: 0.2117 h⁻¹
+- **Growth Reduction Under Anaerobiosis**: 75.78%
+
+This indicates a strong dependence on oxidative phosphorylation for optimal biomass production.
+
+### 3.4 Environmental Stress Responses
+
+#### pH Analysis
+
+| Condition       | Proton Exchange (mmol/gDW/h) | Growth Rate (h⁻¹) |
+|----------------|------------------------------|-------------------|
+| Acidic (pH 5)  | +10.0                        | 0.8739            |
+| Neutral (pH 7) | 0.0                          | 0.8739            |
+| Basic (pH 9)   | -10.0                        | 0.4985            |
+
+The model maintained optimal growth under acidic and neutral pH but showed reduced growth under basic conditions.
+
+#### Temperature Analysis
+
+| Temperature | ATP Maintenance (mmol/gDW/h) | Growth Rate (h⁻¹) |
+|-----------|------------------------------|-------------------|
+| 20°C      | 5.0                          | 0.8912            |
+| 37°C      | 8.39                         | 0.8739            |
+| 45°C      | 15.0                         | 0.8403            |
+
+Higher ATP maintenance costs at elevated temperatures led to a gradual decrease in growth rate.
+
+### 3.5 Metabolic Network Robustness
+
+A total of **16 reactions** were tested for essentiality via flux knockout analysis:
+
+| Reaction | Wild-Type Flux | Knockout Growth Rate | Essential? |
+|---------|----------------|----------------------|------------|
+| GAPD    | 16.02          | 1.75e-16             | Yes        |
+| PGK     | -16.02         | 0.0                  | Yes        |
+| PGM     | -14.72         | 0.0                  | Yes        |
+| ENO     | 14.72          | ~0.0                 | Yes        |
+| CS      | 6.01           | ~0.0                 | Yes        |
+| ICDHyr  | 6.01           | ~0.0                 | Yes        |
+
+All six essential reactions belong to glycolysis and the TCA cycle, highlighting the importance of these pathways for biomass production. Other reactions such as PFK, FBA, and PYK were non-essential, indicating pathway redundancy or alternative routes.
+
+---
+
+## 4. Major Conclusions
+
+- **Glycolysis and TCA cycle reactions are essential** for biomass production, indicating their central role in metabolic function.
+- **Glucose and fructose** are the most effective carbon sources under aerobic conditions.
+- **Oxygen significantly enhances growth**, with anaerobic conditions leading to a 75.8% reduction in growth rate.
+- The model is **robust to acidic and neutral pH**, but growth is significantly impaired at pH 9.
+- **Increased ATP maintenance at high temperatures** reduces growth efficiency, suggesting potential targets for stress adaptation studies.
+
+---
+
+## 5. Experimental Significance
+
+This analysis provides a systems-level understanding of *E. coli* metabolism under various environmental and genetic constraints. It highlights key metabolic bottlenecks and essential reactions that can guide metabolic engineering strategies for industrial applications such as biofuel production, synthetic biology, and strain optimization. Additionally, the environmental stress simulations offer insights into how *E. coli* adapts to changing external conditions, which is valuable for both biotechnological and pathogenic studies.
+
+---
+
+## 6. Limitations and Future Directions
+
+### Limitations:
+- The e_coli_core model is a simplified representation and does not capture the full complexity of genome-scale metabolism.
+- Environmental stress simulations are limited to pH and temperature; other factors such as osmolarity and nutrient limitation were not tested.
+- Some carbon sources (e.g., lactate, glycerol) failed to support growth, which may be due to missing transporters or regulatory constraints.
+
+### Future Directions:
+- Expand the model to include regulatory constraints and gene expression data.
+- Perform dynamic FBA (dFBA) to simulate time-dependent growth and substrate depletion.
+- Extend environmental stress analysis to include osmotic stress and antibiotic exposure.
+- Validate essential reactions experimentally using knockouts or CRISPRi.
+
+---
+
+## 7. Methods Summary
+
+- **Model**: e_coli_core from the COBRA Toolbox
+- **Software**: COBRApy and custom Python scripts
+- **Flux Balance Analysis (FBA)**: Maximized biomass production under various environmental conditions.
+- **Carbon Source Testing**: Each carbon source was individually tested under aerobic conditions.
+- **Oxygen Dependency**: Simulated anaerobic conditions by closing oxygen exchange.
+- **Environmental Stress**: pH and temperature effects were modeled through proton exchange and ATP maintenance constraints.
+- **Essentiality Analysis**: Single reaction knockouts were simulated by setting reaction bounds to zero and measuring biomass production.
+
+---
+
+## Visualization Files
+
+- **Constraint-Based Analysis Visualization**:  
+  `/tmp/constraint_analysis_e_coli_core/constraint_based_analysis.png`
+
+This figure summarizes key findings including essential reactions, growth capabilities, and environmental responses.
+
+--- 
+
+**End of Report**

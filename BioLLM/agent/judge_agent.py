@@ -22,14 +22,14 @@ You should return ONLY a boolean value:
 
 Examples of positive responses (return "true"):
 - "yes", "ok", "okay", "sure", "alright", "fine"
-- "同意", "好的", "可以", "行", "没问题", "当然"
+- "agree", "ok", "sure", "fine", "alright", "yes"
 - "I agree", "That's fine", "Go ahead", "Proceed"
 - "Yes, please", "Sure thing", "Absolutely", "Definitely"
-- "好的", "可以", "行", "没问题", "当然", "许可", "同意"
+- "ok", "sure", "fine", "alright", "yes", "permit", "agree"
 
 Examples of negative responses (return "false"):
 - "no", "nope", "not", "don't", "won't", "can't"
-- "不", "不行", "不可以", "不同意", "拒绝"
+- "no", "not", "cannot", "disagree", "refuse"
 - "I don't think so", "Not really", "I'd rather not"
 - "No thanks", "I'll pass", "Maybe later"
 
@@ -72,17 +72,17 @@ IMPORTANT: Respond with ONLY "true" or "false" - no other text."""
         
         # Common positive responses in English
         positive_patterns = [
-            r'^yes$', r'^ok$', r'^okay$', r'^sure$', r'^alright$', r'^fine$',
+            r'^yes$', r'^y$', r'^ok$', r'^okay$', r'^sure$', r'^alright$', r'^fine$',
             r'^absolutely$', r'^definitely$', r'^certainly$', r'^of course$',
             r'^go ahead$', r'^proceed$', r'^continue$', r'^start$',
             r'^i agree$', r'^that\'s fine$', r'^sure thing$', r'^why not$'
         ]
         
-        # Common positive responses in Chinese
-        chinese_positive = [
-            r'^同意$', r'^好的$', r'^可以$', r'^行$', r'^没问题$', r'^当然$',
-            r'^许可$', r'^赞成$', r'^支持$', r'^愿意$', r'^乐意$',
-            r'^好的$', r'^可以$', r'^行$', r'^没问题$', r'^当然$'
+        # Common positive responses in English
+        english_positive = [
+            r'^agree$', r'^ok$', r'^sure$', r'^fine$', r'^alright$', r'^yes$',
+            r'^permit$', r'^approve$', r'^support$', r'^willing$', r'^glad$',
+            r'^ok$', r'^sure$', r'^fine$', r'^alright$', r'^yes$'
         ]
         
         # Check English patterns
@@ -90,8 +90,8 @@ IMPORTANT: Respond with ONLY "true" or "false" - no other text."""
             if re.match(pattern, input_lower):
                 return True
         
-        # Check Chinese patterns
-        for pattern in chinese_positive:
+        # Check English patterns
+        for pattern in english_positive:
             if re.match(pattern, input_lower):
                 return True
         
@@ -136,8 +136,8 @@ IMPORTANT: Respond with ONLY "true" or "false" - no other text."""
         negative_keywords = [
             'no', 'nope', 'not', 'don\'t', 'won\'t', 'can\'t', 'never',
             'refuse', 'reject', 'decline', 'stop', 'cancel', 'quit',
-            '不', '不行', '不可以', '不同意', '拒绝', '不要', '别',
-            '算了', '不用了', '免了', '拉倒', '算了', '你好', '什么', '?'
+            'disagree', 'cannot', 'refuse', 'reject', 'stop', 'cancel',
+            'forget', 'nevermind', 'skip', 'pass', 'hello', 'what', '?'
         ]
         
         for keyword in negative_keywords:
@@ -150,8 +150,8 @@ IMPORTANT: Respond with ONLY "true" or "false" - no other text."""
             'absolutely', 'definitely', 'certainly', 'of course', 'indeed',
             'go ahead', 'proceed', 'continue', 'start', 'begin',
             'i agree', 'that\'s fine', 'sure thing', 'why not', 'let\'s',
-            '同意', '好的', '可以', '行', '没问题', '当然', '许可', '赞成',
-            '支持', '愿意', '乐意', '好', '对', '是', '嗯', '嗯嗯'
+            'agree', 'ok', 'sure', 'fine', 'alright', 'yes', 'permit', 'approve',
+            'support', 'willing', 'glad', 'good', 'right', 'yes', 'uh', 'uh uh'
         ]
         
         # Check if any positive keyword is in the input
@@ -188,13 +188,13 @@ IMPORTANT: Respond with ONLY "true" or "false" - no other text."""
             negative_count = 0
             
             # Check positive indicators
-            positive_keywords = ['yes', 'ok', 'sure', '同意', '好的', '可以']
+            positive_keywords = ['yes', 'ok', 'sure', 'agree', 'ok', 'sure']
             for keyword in positive_keywords:
                 if keyword in input_lower:
                     positive_count += 1
             
             # Check negative indicators
-            negative_keywords = ['no', 'not', '不', '不行', '不可以']
+            negative_keywords = ['no', 'not', 'disagree', 'cannot', 'refuse']
             for keyword in negative_keywords:
                 if keyword in input_lower:
                     negative_count += 1

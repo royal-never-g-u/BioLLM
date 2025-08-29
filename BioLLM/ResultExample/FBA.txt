@@ -1,0 +1,107 @@
+iML1515 E. coli Metabolic Model - Flux Balance Analysis Report
+Executive Summary
+This comprehensive analysis of the iML1515 genome-scale metabolic model of Escherichia coli provides insights into cellular metabolism, growth optimization, and metabolic capabilities under various environmental conditions. The study employed flux balance analysis (FBA) to predict optimal metabolic flux distributions and growth rates.
+
+Model Overview
+The iML1515 model represents the metabolic network of E. coli strain K-12 substr. MG1655 with the following characteristics [1]:
+
+2,712 reactions
+1,877 metabolites
+1,516 genes
+Objective function: Biomass production (BIOMASS_Ec_iML1515_core_75p37M)
+Key Findings
+1. Baseline Growth Performance
+Under standard aerobic conditions with glucose as the carbon source:
+
+Optimal growth rate: 0.876997 h⁻¹
+Active reactions: 497 out of 2,712 total reactions (18.3%)
+Significant flux reactions: 320 reactions with |flux| > 0.001 mmol/gDW/h
+2. Major Metabolic Fluxes
+The highest flux reactions identified are:
+
+ATP synthase (ATPS4rpp): 70.43 mmol/gDW/h - Primary energy generation
+Water transport (H2Otpp): -47.16 mmol/gDW/h - Osmotic regulation
+Cytochrome oxidase (CYTBO3_4pp): 44.26 mmol/gDW/h - Electron transport
+NADH dehydrogenase (NADH16pp): 38.00 mmol/gDW/h - Electron transport
+CO₂ exchange (EX_co2_e): 24.00 mmol/gDW/h - Metabolic waste
+3. Metabolic Pathway Distribution
+Active reactions are distributed across pathways as follows:
+
+Transport reactions: 36 reactions (389.0 total flux units)
+Other metabolic reactions: 249 reactions (136.4 total flux units)
+Energy metabolism: High flux density (70.4 max flux)
+Central carbon metabolism: 21 reactions in glycolysis and TCA cycle
+4. Nutrient Requirements and Waste Products
+Major uptake reactions:
+
+Oxygen (EX_o2_e): -22.13 mmol/gDW/h
+Glucose (EX_glc__D_e): -10.00 mmol/gDW/h
+Ammonium (EX_nh4_e): -9.47 mmol/gDW/h
+Phosphate (EX_pi_e): -0.85 mmol/gDW/h
+Major secretion reactions:
+
+Water (EX_h2o_e): 47.16 mmol/gDW/h
+Carbon dioxide (EX_co2_e): 24.00 mmol/gDW/h
+Protons (EX_h_e): 8.06 mmol/gDW/h
+5. Sensitivity Analysis Results
+Glucose Limitation Effects:
+
+Linear relationship between glucose uptake and growth rate
+Growth rate increases proportionally: 0.426 h⁻¹ at 5 mmol/gDW/h glucose to 2.231 h⁻¹ at 25 mmol/gDW/h
+No apparent saturation within tested range
+Oxygen Limitation Effects:
+
+Growth becomes oxygen-limited below 30 mmol/gDW/h O₂ uptake
+At 10 mmol/gDW/h O₂: growth rate reduced to 0.532 h⁻¹ (39% reduction)
+Above 30 mmol/gDW/h O₂: no further growth improvement
+Anaerobic Growth Capability:
+
+Anaerobic growth rate: 0.158 h⁻¹ (82% reduction from aerobic)
+Demonstrates fermentative capacity of E. coli
+6. Gene Essentiality Analysis
+Single gene knockout analysis revealed:
+
+Essential genes identified: b1136 and b0720 (100% growth reduction)
+Non-essential gene: b0008 and b2925 (no growth impact)
+Partially essential gene: b0114 (2.14% growth reduction)
+Metabolic Insights and Conclusions
+1. Energy Metabolism Dominance
+The analysis reveals that energy-generating reactions (ATP synthesis, electron transport chain) carry the highest fluxes, indicating that energy metabolism is the primary constraint for cellular growth under standard conditions.
+
+2. Respiratory vs. Fermentative Metabolism
+Aerobic respiration is highly efficient (0.877 h⁻¹ growth rate)
+Fermentative pathways provide survival capability (0.158 h⁻¹) but at significantly reduced efficiency
+Oxygen availability becomes limiting below 30 mmol/gDW/h uptake rate
+3. Carbon and Nitrogen Utilization
+The model demonstrates efficient utilization of glucose as the primary carbon source and ammonium as the nitrogen source, with optimal stoichiometric conversion to biomass components.
+
+4. Transport and Regulation
+Transport reactions account for the highest total flux burden (389.0 flux units), highlighting the importance of membrane transport processes in cellular metabolism.
+
+5. Metabolic Flexibility
+The linear response to glucose availability suggests that E. coli can efficiently scale metabolic activity with substrate availability, indicating robust regulatory mechanisms.
+
+Experimental Validation Opportunities
+Growth rate measurements under various glucose and oxygen concentrations
+Metabolomic analysis to validate predicted flux distributions
+Gene knockout experiments to confirm essentiality predictions
+Respiratory quotient measurements to validate CO₂/O₂ exchange ratios
+Limitations and Future Directions
+Static analysis: FBA provides steady-state solutions and doesn't capture dynamic regulation
+Gene regulation: Transcriptional and post-translational controls are not explicitly modeled
+Enzyme kinetics: Kinetic constraints and metabolite concentrations are not considered
+Spatial organization: Subcellular compartmentalization is simplified
+References
+[1] BiGG Model iML1515.
+
+Files Generated:
+
+Flux distribution data: flux_distribution.csv
+Pathway analysis: pathway_analysis.csv
+Sensitivity analysis: sensitivity_analysis.csv
+Detailed flux results: detailed_flux_results.csv
+Comprehensive analysis plot: fba_analysis_results.png
+Pathway flux heatmap: pathway_flux_heatmap.png
+This analysis provides a comprehensive understanding of E. coli metabolism using the iML1515 model, offering insights for metabolic engineering, biotechnology applications, and fundamental biochemical research.
+
+All file outputs are stored in the session execution logs, you may download them from the <Session History & Export> section

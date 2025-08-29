@@ -537,7 +537,7 @@ Focus on making the analysis accessible and informative, highlighting the most i
             import re
             file_patterns = [
                 r'saved to: ([^\n]+)',
-                r'保存到: ([^\n]+)',
+                r'Saved to: ([^\n]+)',
                 r'File saved to: ([^\n]+)'
             ]
             

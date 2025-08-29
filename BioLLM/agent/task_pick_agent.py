@@ -49,17 +49,32 @@ class TaskPickAgent:
             # Update bio_task only if a valid match is found
             if matched_task_type is not None:
                 self._update_bio_task(matched_task_type)
+                
+                # Check if we should trigger if_next_step
+                next_step_result = self._check_and_trigger_next_step()
+                
+                return {
+                    'success': True,
+                    'user_input': user_input,
+                    'matched_task_type': matched_task_type,
+                    'analysis_result': analysis_result,
+                    'bio_task_updated': True,
+                    'next_step_triggered': next_step_result is not None,
+                    'next_step_result': next_step_result
+                }
             else:
                 # Don't update bio_task if no match found, preserve existing task_type
                 print(f"ℹ️ TaskPickAgent: 未匹配到分析类型，保持现有task_type不变")
-            
-            return {
-                'success': True,
-                'user_input': user_input,
-                'matched_task_type': matched_task_type,
-                'analysis_result': analysis_result,
-                'bio_task_updated': matched_task_type is not None
-            }
+                
+                return {
+                    'success': True,
+                    'user_input': user_input,
+                    'matched_task_type': matched_task_type,
+                    'analysis_result': analysis_result,
+                    'bio_task_updated': False,
+                    'next_step_triggered': False,
+                    'next_step_result': None
+                }
             
         except Exception as e:
             print(f"❌ Error in TaskPickAgent: {e}")
@@ -258,6 +273,43 @@ class TaskPickAgent:
             bool: True if valid, False otherwise
         """
         return task_type in self.analysis_types
+    
+    def _check_and_trigger_next_step(self) -> Optional[Dict[str, Any]]:
+        """
+        Check if bio_task has both model_name and task_type, and trigger if_next_step if so
+        
+        Returns:
+            Optional[Dict[str, Any]]: Next step result if triggered, None otherwise
+        """
+        try:
+            # Get current bio_task
+            current_task = get_current_task()
+            
+            # Check if both model_name and task_type exist
+            has_model_name = bool(current_task.model_name and current_task.model_name.strip())
+            has_task_type = current_task.task_type is not None
+            
+            if has_model_name and has_task_type:
+                print(f"🎯 TaskPickAgent: 检测到完整配置 (model_name: {current_task.model_name}, task_type: {current_task.task_type})")
+                print(f"🔄 自动触发 if_next_step...")
+                
+                # Import and call if_next_step
+                from agent.next_step_agent import if_next_step
+                next_step_result = if_next_step()
+                
+                print(f"✅ TaskPickAgent: if_next_step 执行完成")
+                print(f"   结果: {next_step_result.get('action', 'unknown')}")
+                
+                return next_step_result
+            else:
+                print(f"ℹ️ TaskPickAgent: 配置不完整，不触发 if_next_step")
+                print(f"   model_name: {'有' if has_model_name else '无'}")
+                print(f"   task_type: {'有' if has_task_type else '无'}")
+                return None
+                
+        except Exception as e:
+            print(f"❌ TaskPickAgent: 检查并触发 if_next_step 时出错: {e}")
+            return None
 
 
 def analyze_user_input_for_task_type(user_input: str) -> Dict[str, Any]:

@@ -37,32 +37,32 @@ Please return ONLY the corrected Python code without any additional explanations
 
     def _detect_missing_dependencies(self, error_message: str) -> list[str]:
         """
-        从错误信息中检测缺失的依赖包
+        Detect missing dependencies from error messages
         
         Args:
-            error_message: Python错误信息
+            error_message: Python error message
             
         Returns:
-            list[str]: 缺失的依赖包列表
+            list[str]: List of missing dependency packages
         """
         missing_packages = []
         
-        # 常见的ModuleNotFoundError模式
+        # Common ModuleNotFoundError patterns
         module_not_found_patterns = [
             r"No module named ['\"]([^'\"]+)['\"]",
             r"ModuleNotFoundError: No module named ['\"]([^'\"]+)['\"]",
             r"ImportError: No module named ['\"]([^'\"]+)['\"]"
         ]
         
-        # 检查ModuleNotFoundError
+        # Check ModuleNotFoundError
         for pattern in module_not_found_patterns:
             matches = re.findall(pattern, error_message, re.IGNORECASE)
             for match in matches:
-                # 过滤掉标准库模块
+                # Filter out standard library modules
                 if not self._is_standard_library_module(match):
                     missing_packages.append(match)
         
-        # 检查ImportError的其他模式
+        # Check other ImportError patterns
         import_error_patterns = [
             r"ImportError: cannot import name ['\"]([^'\"]+)['\"] from ['\"]([^'\"]+)['\"]",
             r"ImportError: cannot import name ['\"]([^'\"]+)['\"]"
@@ -72,29 +72,29 @@ Please return ONLY the corrected Python code without any additional explanations
             matches = re.findall(pattern, error_message, re.IGNORECASE)
             for match in matches:
                 if isinstance(match, tuple):
-                    # 如果是元组，取第一个元素（通常是模块名）
+                    # If it's a tuple, take the first element (usually the module name)
                     module_name = match[0]
                 else:
                     module_name = match
                 if not self._is_standard_library_module(module_name):
                     missing_packages.append(module_name)
         
-        # 去重并返回
+        # Remove duplicates and return
         return list(set(missing_packages))
 
     def _is_standard_library_module(self, module_name: str) -> bool:
         """
-        检查是否为Python标准库模块
+        Check if it's a Python standard library module
         
         Args:
-            module_name: 模块名
+            module_name: Module name
             
         Returns:
-            bool: 是否为标准库模块
+            bool: Whether it's a standard library module
         """
         import sys
         
-        # 常见的标准库模块列表
+        # Common standard library modules list
         standard_modules = {
             'os', 'sys', 're', 'json', 'datetime', 'time', 'random', 'math',
             'collections', 'itertools', 'functools', 'pathlib', 'tempfile',
@@ -107,16 +107,16 @@ Please return ONLY the corrected Python code without any additional explanations
             'crypt', 'spwd', 'grp', 'pwd', 'crypt', 'spwd', 'grp', 'pwd'
         }
         
-        # 检查是否在标准库模块列表中
+        # Check if it's in the standard library modules list
         if module_name in standard_modules:
             return True
         
-        # 尝试导入模块，如果能导入且路径包含标准库路径，则为标准库
+        # Try to import the module, if it can be imported and the path contains standard library path, it's a standard library
         try:
             import importlib.util
             spec = importlib.util.find_spec(module_name)
             if spec and spec.origin:
-                # 检查模块路径是否在标准库路径中
+                # Check if the module path is in the standard library path
                 stdlib_paths = [os.path.dirname(os.__file__)]
                 for stdlib_path in stdlib_paths:
                     if stdlib_path in spec.origin:

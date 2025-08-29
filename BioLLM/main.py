@@ -44,10 +44,9 @@ def extract_model_name(user_input, available_models):
     
     return None
 
-def main(initialize_only=False):
-    # Initialize BioTask file only if it doesn't exist
-    from bio_task import get_current_task
-    if get_current_task() is None:
+def main(initialize_only=False, initialize_bio_task_flag=True):
+    # Initialize BioTask file only when explicitly requested (usually on app startup)
+    if initialize_bio_task_flag:
         initialize_bio_task()
     
     memory = Memory()

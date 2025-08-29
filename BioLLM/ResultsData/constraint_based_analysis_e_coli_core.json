@@ -1,0 +1,407 @@
+{
+  "success": true,
+  "model_name": "e_coli_core",
+  "task_type": 6,
+  "analysis_completed": true,
+  "summary": "Constraint-Based Analysis Summary\nModel: ../downloads/e_coli_core.mat\nOutput Directory: /tmp/constraint_analysis_e_coli_core\nFiles Generated: 0\nVisualizations: 0\n",
+  "results": {
+    "execution_success": true,
+    "stdout": "CONSTRAINT-BASED ANALYSIS TEMPLATE\n==================================================\n\u2713 Output directory created: /tmp/constraint_analysis_e_coli_core\n=== Loading metabolic model from: ../downloads/e_coli_core.mat ===\n\u2713 Model loaded successfully: None\nApplying model preprocessing...\n\n=== Basic Model Information Analysis ===\nModel name: None\nModel ID: e_coli_core\nNumber of reactions: 95\nNumber of metabolites: 72\nNumber of genes: 137\n\nCompartments:\n  e: e\n  c: c\n\nObjective function: Maximize\n1.0*BIOMASS_Ecoli_core_w_GAM - 1.0*BIOMASS_Ecoli_core_w_GAM_reverse_712e5\nObjective direction: max\n\nReaction categories:\n  Exchange reactions: 20\n  Transport reactions: 21\n  Internal reactions: 54\n\u2713 Basic model information analysis completed\n\n=== Basic Flux Balance Analysis ===\nFBA Solution Status: optimal\nObjective Value (Growth Rate): 0.873922 h\u207b\u00b9\nModel is feasible and optimal solution found\n\nActive exchange reactions (7 out of 20):\nTop 10 uptake reactions (negative flux):\n  EX_o2_e: -21.799493 mmol/gDW/h\n  EX_glc__D_e: -10.000000 mmol/gDW/h\n  EX_nh4_e: -4.765319 mmol/gDW/h\n  EX_pi_e: -3.214895 mmol/gDW/h\n\nTop 10 secretion reactions (positive flux):\n  EX_h2o_e: 29.175827 mmol/gDW/h\n  EX_co2_e: 22.809833 mmol/gDW/h\n  EX_h_e: 17.530865 mmol/gDW/h\n\u2713 Basic FBA completed\n\n=== Growth Capabilities Analysis ===\nTesting growth on different carbon sources:\nCarbon Source\tGrowth Rate (h\u207b\u00b9)\tStatus\n---------------------------------------------\nglucose     \t0.873922\t\toptimal\nfructose    \t0.873922\t\toptimal\nacetate     \t0.173339\t\toptimal\nsuccinate   \t0.397563\t\toptimal\nlactate     \t0.000000\t\tNot available\nglycerol    \t0.000000\t\tNot available\npyruvate    \t0.291225\t\toptimal\n\n=== Aerobic vs Anaerobic Growth Comparison ===\nAerobic growth rate: 0.873922 h\u207b\u00b9\nAnaerobic growth rate: 0.211663 h\u207b\u00b9\nGrowth reduction under anaerobic conditions: 75.8%\n\u2713 Growth capabilities analysis completed\n\n=== Environmental Conditions Analysis ===\nTesting pH sensitivity through proton exchange analysis...\npH Condition\tProton Exchange\tGrowth Rate\tStatus\n-------------------------------------------------------\nAcidic (pH 5)  \t    10.0\t\t0.873922\toptimal\nNeutral (pH 7) \t     0.0\t\t0.873922\toptimal\nBasic (pH 9)   \t   -10.0\t\t0.498504\toptimal\n\nTesting temperature sensitivity through ATP maintenance...\nTemperature\tATP Maintenance\tGrowth Rate\tStatus\n--------------------------------------------------\nLow (20\u00b0C)  \t     5.0\t\t0.891185\toptimal\nOptimal (37\u00b0C)\t     8.4\t\t0.873922\toptimal\nHigh (45\u00b0C) \t    15.0\t\t0.840260\toptimal\n\u2713 Environmental conditions analysis completed\n\n=== Essential Reactions Analysis ===\nTesting 16 central metabolism reactions for essentiality...\nReaction\tWild-type flux\tKnockout growth\tEssential?\n------------------------------------------------------------\nPGI         \t  4.860861\t    0.863160\tNo\nPFK         \t  7.477382\t    0.704037\tNo\nFBA         \t  7.477382\t    0.704037\tNo\nTPI         \t  7.477382\t    0.704037\tNo\nGAPD        \t 16.023526\t    0.000000\tYes\nPGK         \t-16.023526\t    0.000000\tYes\nPGM         \t-14.716140\t    0.000000\tYes\nENO         \t 14.716140\t   -0.000000\tYes\nPYK         \t  1.758177\t    0.864926\tNo\nCS          \t  6.007250\t   -0.000000\tYes\nICDHyr      \t  6.007250\t    0.000000\tYes\nAKGDH       \t  5.064376\t    0.858307\tNo\nSUCOAS      \t -5.064376\t    0.858307\tNo\nSUCDi       \t  5.064376\t    0.814298\tNo\nFUM         \t  5.064376\t    0.814298\tNo\nMDH         \t  5.064376\t    0.825819\tNo\n\nFound 6 essential reactions in central metabolism:\n  GAPD: Glyceraldehyde-3-phosphate dehydrogenase\n  PGK: Phosphoglycerate kinase\n  PGM: Phosphoglycerate mutase\n  ENO: Enolase\n  CS: Citrate synthase\n  ICDHyr: Isocitrate dehydrogenase (NADP)\n\u2713 Essential reactions analysis completed\n\n=== Creating Visualizations ===\nVisualization saved to: /tmp/constraint_analysis_e_coli_core/constraint_based_analysis.png\n\u2713 Visualizations created\n\n=== Saving Results ===\nResults saved to: /tmp/constraint_analysis_e_coli_core/analysis_results.json\nSummary report saved to: /tmp/constraint_analysis_e_coli_core/analysis_summary.txt\n\u2713 Results saved\n\n=== ANALYSIS COMPLETED ===\n\u2713 All requested analyses completed successfully\n\u2713 Results saved to: /tmp/constraint_analysis_e_coli_core\n\nAnalysis completed successfully!\n",
+    "stderr": "This model seems to have metCharge instead of metCharges field. Will use metCharge for what metCharges represents.\nNo defined compartments in model e_coli_core. Compartments will be deduced heuristically using regular expressions.\nUsing regular expression found the following compartments:c, e\n",
+    "results": {
+      "files_generated": [
+        "constraint_based_analysis.png",
+        "analysis_results.json",
+        "analysis_summary.txt"
+      ],
+      "data_files": {
+        "analysis_results.json": {
+          "basic_info": {
+            "name": null,
+            "id": "e_coli_core",
+            "reactions_count": 95,
+            "metabolites_count": 72,
+            "genes_count": 137,
+            "compartments": {
+              "e": "e",
+              "c": "c"
+            },
+            "objective": "Maximize\n1.0*BIOMASS_Ecoli_core_w_GAM - 1.0*BIOMASS_Ecoli_core_w_GAM_reverse_712e5",
+            "objective_direction": "max",
+            "exchange_reactions": [
+              "EX_ac_e",
+              "EX_acald_e",
+              "EX_akg_e",
+              "EX_co2_e",
+              "EX_etoh_e",
+              "EX_for_e",
+              "EX_fru_e",
+              "EX_fum_e",
+              "EX_glc__D_e",
+              "EX_gln__L_e",
+              "EX_glu__L_e",
+              "EX_h_e",
+              "EX_h2o_e",
+              "EX_lac__D_e",
+              "EX_mal__L_e",
+              "EX_nh4_e",
+              "EX_o2_e",
+              "EX_pi_e",
+              "EX_pyr_e",
+              "EX_succ_e"
+            ],
+            "transport_reactions": [
+              "AKGt2r",
+              "PIt2r",
+              "ACALDt",
+              "ACt2r",
+              "PYRt2",
+              "CO2t",
+              "SUCCt2_2",
+              "D_LACt2",
+              "SUCCt3",
+              "ETOHt2r",
+              "FORt2",
+              "FORt",
+              "FRUpts2",
+              "FUMt2_2",
+              "GLCpts",
+              "GLNabc",
+              "GLUt2r",
+              "H2Ot",
+              "MALt2_2",
+              "NH4t",
+              "O2t"
+            ],
+            "internal_reactions": [
+              "PFK",
+              "PFL",
+              "PGI",
+              "PGK",
+              "PGL",
+              "ACALD",
+              "PGM",
+              "ALCD2x",
+              "ACKr",
+              "PPC",
+              "ACONTa",
+              "ACONTb",
+              "ATPM",
+              "PPCK",
+              "PPS",
+              "ADK1",
+              "AKGDH",
+              "ATPS4r",
+              "PTAr",
+              "PYK",
+              "BIOMASS_Ecoli_core_w_GAM",
+              "RPE",
+              "CS",
+              "RPI",
+              "CYTBD",
+              "ENO",
+              "SUCDi",
+              "SUCOAS",
+              "TALA",
+              "THD2",
+              "TKT1",
+              "TKT2",
+              "TPI",
+              "FBA",
+              "FBP",
+              "FRD7",
+              "FUM",
+              "G6PDH2r",
+              "GAPD",
+              "GLNS",
+              "GLUDy",
+              "GLUN",
+              "GLUSy",
+              "GND",
+              "ICDHyr",
+              "ICL",
+              "LDH_D",
+              "MALS",
+              "MDH",
+              "ME1",
+              "ME2",
+              "NADH16",
+              "NADTRHD",
+              "PDH"
+            ]
+          },
+          "fba_analysis": {
+            "status": "optimal",
+            "objective_value": 0.8739215069684305,
+            "exchange_fluxes": {
+              "EX_co2_e": 22.809833310205,
+              "EX_glc__D_e": -10.0,
+              "EX_h_e": 17.530865429786694,
+              "EX_h2o_e": 29.175827135565793,
+              "EX_nh4_e": -4.765319193197457,
+              "EX_o2_e": -21.799492655998797,
+              "EX_pi_e": -3.214895047684764
+            },
+            "uptake_reactions": [
+              {
+                "reaction": "EX_o2_e",
+                "flux": -21.799492655998797
+              },
+              {
+                "reaction": "EX_glc__D_e",
+                "flux": -10.0
+              },
+              {
+                "reaction": "EX_nh4_e",
+                "flux": -4.765319193197457
+              },
+              {
+                "reaction": "EX_pi_e",
+                "flux": -3.214895047684764
+              }
+            ],
+            "secretion_reactions": [
+              {
+                "reaction": "EX_h2o_e",
+                "flux": 29.175827135565793
+              },
+              {
+                "reaction": "EX_co2_e",
+                "flux": 22.809833310205
+              },
+              {
+                "reaction": "EX_h_e",
+                "flux": 17.530865429786694
+              }
+            ]
+          },
+          "growth_analysis": {
+            "carbon_source_growth": {
+              "glucose": 0.8739215069684303,
+              "fructose": 0.8739215069684303,
+              "acetate": 0.17333858447778644,
+              "succinate": 0.3975630154277624,
+              "lactate": 0.0,
+              "glycerol": 0.0,
+              "pyruvate": 0.29122477958429704
+            },
+            "aerobic_growth": 0.8739215069684306,
+            "anaerobic_growth": 0.2116629497353105,
+            "growth_reduction_anaerobic": 75.78009603293164
+          },
+          "environmental_analysis": {
+            "ph_analysis": {
+              "Acidic (pH 5)": {
+                "proton_exchange": 10.0,
+                "growth_rate": 0.8739215069684311,
+                "status": "optimal"
+              },
+              "Neutral (pH 7)": {
+                "proton_exchange": 0.0,
+                "growth_rate": 0.8739215069684303,
+                "status": "optimal"
+              },
+              "Basic (pH 9)": {
+                "proton_exchange": -10.0,
+                "growth_rate": 0.4985044865403807,
+                "status": "optimal"
+              }
+            },
+            "temperature_analysis": {
+              "Low (20\u00b0C)": {
+                "atp_maintenance": 5.0,
+                "growth_rate": 0.8911850342024089,
+                "status": "optimal"
+              },
+              "Optimal (37\u00b0C)": {
+                "atp_maintenance": 8.39,
+                "growth_rate": 0.8739215069684303,
+                "status": "optimal"
+              },
+              "High (45\u00b0C)": {
+                "atp_maintenance": 15.0,
+                "growth_rate": 0.8402601751051285,
+                "status": "optimal"
+              }
+            },
+            "osmotic_analysis": {}
+          },
+          "essentiality_analysis": {
+            "essential_reactions": [
+              "GAPD",
+              "PGK",
+              "PGM",
+              "ENO",
+              "CS",
+              "ICDHyr"
+            ],
+            "reaction_analysis": {
+              "PGI": {
+                "wild_type_flux": 4.860861146496821,
+                "knockout_growth": 0.8631595522084183,
+                "is_essential": false
+              },
+              "PFK": {
+                "wild_type_flux": 7.477381962160286,
+                "knockout_growth": 0.7040369478590239,
+                "is_essential": false
+              },
+              "FBA": {
+                "wild_type_flux": 7.477381962160286,
+                "knockout_growth": 0.704036947859024,
+                "is_essential": false
+              },
+              "TPI": {
+                "wild_type_flux": 7.477381962160286,
+                "knockout_growth": 0.704036947859024,
+                "is_essential": false
+              },
+              "GAPD": {
+                "wild_type_flux": 16.023526143167608,
+                "knockout_growth": 1.750508837381664e-16,
+                "is_essential": true
+              },
+              "PGK": {
+                "wild_type_flux": -16.02352614316761,
+                "knockout_growth": 0.0,
+                "is_essential": true
+              },
+              "PGM": {
+                "wild_type_flux": -14.716139568742836,
+                "knockout_growth": 0.0,
+                "is_essential": true
+              },
+              "ENO": {
+                "wild_type_flux": 14.716139568742836,
+                "knockout_growth": -7.084845404801512e-17,
+                "is_essential": true
+              },
+              "PYK": {
+                "wild_type_flux": 1.7581774441067861,
+                "knockout_growth": 0.864926017949868,
+                "is_essential": false
+              },
+              "CS": {
+                "wild_type_flux": 6.007249575350336,
+                "knockout_growth": -2.688861276278275e-15,
+                "is_essential": true
+              },
+              "ICDHyr": {
+                "wild_type_flux": 6.007249575350338,
+                "knockout_growth": 2.625513565648398e-16,
+                "is_essential": true
+              },
+              "AKGDH": {
+                "wild_type_flux": 5.064375661482096,
+                "knockout_growth": 0.8583074080226888,
+                "is_essential": false
+              },
+              "SUCOAS": {
+                "wild_type_flux": -5.064375661482097,
+                "knockout_growth": 0.8583074080226893,
+                "is_essential": false
+              },
+              "SUCDi": {
+                "wild_type_flux": 5.064375661482097,
+                "knockout_growth": 0.8142975075325306,
+                "is_essential": false
+              },
+              "FUM": {
+                "wild_type_flux": 5.064375661482096,
+                "knockout_growth": 0.8142975075325306,
+                "is_essential": false
+              },
+              "MDH": {
+                "wild_type_flux": 5.064375661482096,
+                "knockout_growth": 0.8258192905969886,
+                "is_essential": false
+              }
+            },
+            "total_tested": 16
+          }
+        },
+        "analysis_summary.txt": "CONSTRAINT-BASED ANALYSIS SUMMARY\n==================================================\n\nMODEL INFORMATION:\n  Name: None\n  Reactions: 95\n  Metabolites: 72\n  Genes: 137\n\nFBA RESULTS:\n  Growth Rate: 0.873922 h\u207b\u00b9\n  Status: optimal\n\nGROWTH CAPABILITIES:\n  Aerobic Growth: 0.873922 h\u207b\u00b9\n  Anaerobic Growth: 0.211663 h\u207b\u00b9\n  Growth Reduction (Anaerobic): 75.8%\n\nESSENTIAL REACTIONS:\n  Total Tested: 16\n  Essential Found: 6\n    - GAPD\n    - PGK\n    - PGM\n    - ENO\n    - CS\n    - ICDHyr\n"
+      },
+      "visualization_files": [
+        "constraint_based_analysis.png"
+      ],
+      "analysis_summary": {}
+    }
+  },
+  "visualizations": [
+    "/tmp/constraint_analysis_e_coli_core/constraint_based_analysis.png"
+  ],
+  "config_used": {
+    "model_name": "e_coli_core",
+    "model_file_path": "../downloads/e_coli_core.mat",
+    "output_directory": "/tmp/constraint_analysis_e_coli_core",
+    "model_loading_options": {
+      "model_format": "mat",
+      "preprocess_model": true,
+      "remove_blocked_reactions": false,
+      "set_objective": null
+    },
+    "analysis_parameters": {
+      "essentiality_threshold": 0.01,
+      "carbon_sources": [
+        "glucose",
+        "fructose",
+        "acetate",
+        "succinate",
+        "lactate",
+        "glycerol",
+        "pyruvate"
+      ],
+      "carbon_exchange_mapping": {
+        "glucose": "EX_glc__D_e",
+        "fructose": "EX_fru_e",
+        "acetate": "EX_ac_e",
+        "succinate": "EX_succ_e",
+        "lactate": "EX_lac__L_e",
+        "glycerol": "EX_glyc_e",
+        "pyruvate": "EX_pyr_e"
+      },
+      "environmental_conditions": [
+        "pH",
+        "temperature",
+        "osmotic"
+      ],
+      "ph_conditions": {
+        "Acidic (pH 5)": 10.0,
+        "Neutral (pH 7)": 0.0,
+        "Basic (pH 9)": -10.0
+      },
+      "temperature_conditions": {
+        "Low (20\u00b0C)": 5.0,
+        "Optimal (37\u00b0C)": 8.39,
+        "High (45\u00b0C)": 15.0
+      },
+      "central_reactions": [
+        "PGI",
+        "PFK",
+        "FBA",
+        "TPI",
+        "GAPD",
+        "PGK",
+        "PGM",
+        "ENO",
+        "PYK",
+        "CS",
+        "ACONT",
+        "ICDHyr",
+        "AKGDH",
+        "SUCOAS",
+        "SUCDi",
+        "FUM",
+        "MDH"
+      ],
+      "perform_basic_info": true,
+      "perform_fba": true,
+      "perform_growth_analysis": true,
+      "perform_environmental_analysis": true,
+      "perform_essentiality_analysis": true,
+      "create_visualizations": true
+    }
+  },
+  "output_directory": "/tmp/constraint_analysis_e_coli_core"
+}

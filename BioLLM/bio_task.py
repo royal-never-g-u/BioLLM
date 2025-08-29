@@ -102,12 +102,12 @@ class BioTaskManager:
     
     def initialize_task_file(self) -> None:
         """
-        Initialize task file, if file exists then clear content, if not exists then create
-        File will save an empty BioTask object
+        Initialize task file, always clear content and create empty BioTask object
+        File will be reset to empty state on every program run
         """
         empty_task = BioTask()
         self.save_task(empty_task)
-        print(f"BioTask file initialized: {self.json_file_path}")
+        print(f"BioTask file initialized (cleared): {self.json_file_path}")
     
     def save_task(self, task: BioTask) -> None:
         """
@@ -243,7 +243,16 @@ def get_current_task() -> Optional[BioTask]:
 
 
 def update_current_task(**kwargs) -> bool:
-    """Update current BioTask object attributes"""
+    """
+    Update current BioTask object attributes
+    
+    This function should only be called by:
+    1. task_pick_agent (for task_type updates)
+    2. analyse command user response (for model_name updates)
+    3. program startup (for initialization)
+    
+    All other calls should be avoided to prevent unauthorized modifications.
+    """
     return bio_task_manager.update_task(**kwargs)
 
 
