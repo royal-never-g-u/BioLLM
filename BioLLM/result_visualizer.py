@@ -236,43 +236,49 @@ class EnhancedResultVisualizer:
                     )
     
     def _display_enhanced_detailed_results(self, analysis_results: Dict[str, Any]) -> None:
-        """Display enhanced detailed analysis results"""
+        """Display enhanced detailed analysis results with improved error handling"""
         st.markdown("## 🔬 Detailed Analysis Results")
         
-        # Get detailed results
+        # Get detailed results with flexible structure handling
         results = analysis_results.get('results', {})
-        if not results:
+        summary = analysis_results.get('summary', {})
+        
+        # Check if we have any meaningful data
+        has_results = bool(results and isinstance(results, dict))
+        has_summary = bool(summary and isinstance(summary, dict))
+        
+        if not has_results and not has_summary:
             st.info("📊 Analysis completed successfully. Processing detailed results...")
             
-            # Provide default detailed analysis content
+            # Provide default detailed analysis content for Gene Deletion Analysis
             st.markdown("### 📋 Analysis Components")
             st.markdown("""
-            The Constraint-Based Analysis includes the following components:
+            The Gene Deletion Analysis includes the following components:
             
             **1. Basic Model Information**
             - Model structure and composition
             - Reaction and metabolite counts
             - Gene-reaction associations
             
-            **2. Flux Balance Analysis (FBA)**
-            - Optimal growth rate calculation
-            - Flux distribution analysis
-            - Objective function optimization
+            **2. Gene Knockout Analysis**
+            - Single gene deletion simulations
+            - Essential gene identification
+            - Growth impact assessment
             
-            **3. Growth Analysis**
-            - Aerobic vs anaerobic growth comparison
-            - Carbon source utilization patterns
-            - Environmental condition responses
+            **3. Product Optimization**
+            - Target metabolite production analysis
+            - Growth-coupled production strategies
+            - Yield improvement identification
             
-            **4. Essentiality Analysis**
-            - Essential reaction identification
-            - Network robustness assessment
-            - Metabolic flexibility evaluation
+            **4. Network Analysis**
+            - Metabolic network robustness
+            - Gene essentiality patterns
+            - Pathway dependencies
             
-            **5. Environmental Analysis**
-            - pH sensitivity analysis
-            - Temperature effects on growth
-            - Stress response assessment
+            **5. Engineering Recommendations**
+            - CRISPR-Cas9 target identification
+            - Strain design strategies
+            - Experimental validation guidance
             """)
             
             # Show available data structure
@@ -282,173 +288,218 @@ class EnhancedResultVisualizer:
             
             return
         
-        # Display basic model information
-        if 'basic_info' in results:
-            basic_info = results['basic_info']
-            st.markdown("### 📊 Model Information")
-            
+        # Display basic model information with flexible data source
+        st.markdown("### 📊 Model Information")
+        model_info = None
+        
+        # Try to get model info from different possible locations
+        if has_summary and 'model_info' in summary:
+            model_info = summary['model_info']
+        elif has_results and 'basic_info' in results:
+            model_info = results['basic_info']
+        elif has_results and 'model_info' in results:
+            model_info = results['model_info']
+        
+        if model_info and isinstance(model_info, dict):
             col1, col2 = st.columns(2)
             with col1:
-                st.markdown(f"**Model Name**: {basic_info.get('name', 'Unknown')}")
-                st.markdown(f"**Reactions**: {basic_info.get('reactions_count', 0):,}")
-                st.markdown(f"**Metabolites**: {basic_info.get('metabolites_count', 0):,}")
-                st.markdown(f"**Genes**: {basic_info.get('genes_count', 0):,}")
+                st.markdown(f"**Model Name**: {model_info.get('model_name', model_info.get('name', 'Unknown'))}")
+                st.markdown(f"**Reactions**: {model_info.get('reactions_count', 0):,}")
+                st.markdown(f"**Metabolites**: {model_info.get('metabolites_count', 0):,}")
+                st.markdown(f"**Genes**: {model_info.get('genes_count', 0):,}")
             
             with col2:
-                st.markdown(f"**Compartments**: {basic_info.get('compartments_count', 'N/A')}")
-                st.markdown(f"**Exchange Reactions**: {basic_info.get('exchange_reactions_count', 'N/A')}")
-                st.markdown(f"**Transport Reactions**: {basic_info.get('transport_reactions_count', 'N/A')}")
-                st.markdown(f"**Objective Function**: {basic_info.get('objective_function', 'N/A')}")
+                st.markdown(f"**Model Type**: {model_info.get('model_type', 'N/A')}")
+                st.markdown(f"**Wild Type Growth**: {model_info.get('wild_type_growth', 'N/A')}")
+                if 'biomass_reactions' in model_info:
+                    biomass_rxns = model_info['biomass_reactions']
+                    if isinstance(biomass_rxns, list) and biomass_rxns:
+                        st.markdown(f"**Biomass Reaction**: {biomass_rxns[0]}")
+                    else:
+                        st.markdown("**Biomass Reaction**: N/A")
+                else:
+                    st.markdown("**Biomass Reaction**: N/A")
         else:
-            st.markdown("### 📊 Model Information")
             st.info("Model information not available in results")
         
-        # Display FBA analysis
-        if 'fba_analysis' in results:
-            fba_analysis = results['fba_analysis']
-            st.markdown("### ⚖️ Flux Balance Analysis")
-            
-            col1, col2, col3 = st.columns(3)
-            with col1:
-                if fba_analysis.get('objective_value') is not None:
-                    st.metric(
-                        "Growth Rate",
-                        f"{fba_analysis.get('objective_value', 0):.6f} h⁻¹"
-                    )
-                else:
-                    st.metric("Growth Rate", "N/A")
-            
-            with col2:
-                st.metric(
-                    "Status",
-                    fba_analysis.get('status', 'Unknown')
-                )
-            
-            with col3:
-                if 'fluxes' in fba_analysis and fba_analysis['fluxes']:
-                    fluxes = fba_analysis['fluxes']
-                    non_zero_fluxes = sum(1 for flux in fluxes.values() if abs(flux) > 1e-6)
-                    st.metric(
-                        "Non-zero Fluxes",
-                        f"{non_zero_fluxes:,}"
-                    )
-                else:
-                    st.metric("Non-zero Fluxes", "N/A")
-            
-            # Show flux distribution if available
-            if 'fluxes' in fba_analysis and fba_analysis['fluxes']:
-                st.markdown("#### 📈 Top Flux Reactions")
-                fluxes = fba_analysis['fluxes']
-                flux_data = []
-                for reaction, flux in fluxes.items():
-                    if abs(flux) > 1e-6:  # Only show significant fluxes
-                        flux_data.append({
-                            'Reaction': reaction,
-                            'Flux': flux
+        # Display Gene Knockout Analysis Results
+        st.markdown("### 🧬 Gene Knockout Analysis")
+        
+        # Check for knockout analysis data
+        knockout_data = None
+        if has_results and 'knockout_analysis' in results:
+            knockout_data = results['knockout_analysis']
+        elif has_summary and 'knockout_summary' in summary:
+            knockout_data = summary['knockout_summary']
+        
+        if knockout_data is not None:
+            if isinstance(knockout_data, str):
+                # If it's a string (DataFrame representation), show it as text
+                st.markdown("#### 📋 Knockout Analysis Results")
+                st.text(knockout_data)
+            elif isinstance(knockout_data, dict):
+                # If it's a dictionary, display structured data
+                col1, col2, col3, col4 = st.columns(4)
+                with col1:
+                    st.metric("Total Genes", knockout_data.get('total_genes_analyzed', 'N/A'))
+                with col2:
+                    if 'effect_distribution' in knockout_data:
+                        effect_dist = knockout_data['effect_distribution']
+                        if isinstance(effect_dist, dict):
+                            lethal_count = effect_dist.get('致死', 0)
+                            st.metric("Lethal Genes", lethal_count)
+                        else:
+                            st.metric("Lethal Genes", "N/A")
+                    else:
+                        st.metric("Lethal Genes", "N/A")
+                with col3:
+                    if 'effect_distribution' in knockout_data:
+                        effect_dist = knockout_data['effect_distribution']
+                        if isinstance(effect_dist, dict):
+                            no_effect_count = effect_dist.get('无影响', 0)
+                            st.metric("No Effect", no_effect_count)
+                        else:
+                            st.metric("No Effect", "N/A")
+                    else:
+                        st.metric("No Effect", "N/A")
+                with col4:
+                    if 'effect_distribution' in knockout_data:
+                        effect_dist = knockout_data['effect_distribution']
+                        if isinstance(effect_dist, dict):
+                            medium_effect_count = effect_dist.get('中等影响', 0)
+                            st.metric("Medium Effect", medium_effect_count)
+                        else:
+                            st.metric("Medium Effect", "N/A")
+                    else:
+                        st.metric("Medium Effect", "N/A")
+        else:
+            st.info("Gene knockout analysis results not available")
+        
+        # Display Product Optimization Results
+        st.markdown("### 🎯 Product Optimization")
+        
+        # Check for product optimization data
+        product_data = None
+        if has_results and 'product_optimization' in results:
+            product_data = results['product_optimization']
+        elif has_results and 'product_knockout_results' in results:
+            product_data = results['product_knockout_results']
+        
+        if product_data is not None:
+            if isinstance(product_data, str):
+                # If it's a string (DataFrame representation), show it as text
+                st.markdown("#### 📋 Product Optimization Results")
+                st.text(product_data)
+            elif isinstance(product_data, dict):
+                # If it's a dictionary, display structured data
+                st.markdown("#### 📊 Product Analysis Summary")
+                
+                # Count successful products
+                successful_products = 0
+                total_products = 0
+                
+                for product_id, product_info in product_data.items():
+                    if product_info is not None and isinstance(product_info, dict):
+                        total_products += 1
+                        if product_info.get('max_production', 0) > 0:
+                            successful_products += 1
+                
+                col1, col2, col3 = st.columns(3)
+                with col1:
+                    st.metric("Total Products", total_products)
+                with col2:
+                    st.metric("Successful Optimizations", successful_products)
+                with col3:
+                    if total_products > 0:
+                        success_rate = (successful_products / total_products) * 100
+                        st.metric("Success Rate", f"{success_rate:.1f}%")
+                    else:
+                        st.metric("Success Rate", "N/A")
+                
+                # Show top products
+                st.markdown("#### 🏆 Top Performing Products")
+                product_list = []
+                for product_id, product_info in product_data.items():
+                    if product_info is not None and isinstance(product_info, dict):
+                        product_list.append({
+                            'Product': product_info.get('product_name', product_id),
+                            'Max Production': product_info.get('max_production', 0),
+                            'Coupled Growth': product_info.get('coupled_growth', 0),
+                            'Efficiency': product_info.get('production_efficiency', 0)
                         })
                 
-                if flux_data:
-                    # Sort by absolute flux value
-                    flux_data.sort(key=lambda x: abs(x['Flux']), reverse=True)
-                    df_flux = pd.DataFrame(flux_data[:20])  # Show top 20
+                if product_list:
+                    # Sort by max production
+                    product_list.sort(key=lambda x: x['Max Production'], reverse=True)
+                    df_products = pd.DataFrame(product_list[:10])  # Show top 10
                     
                     st.dataframe(
-                        df_flux,
+                        df_products,
                         column_config={
-                            "Flux": st.column_config.NumberColumn(
-                                "Flux (mmol/gDW/h)",
-                                format="%.6f"
+                            "Max Production": st.column_config.NumberColumn(
+                                "Max Production (mmol/gDW/h)",
+                                format="%.3f"
+                            ),
+                            "Coupled Growth": st.column_config.NumberColumn(
+                                "Coupled Growth (h⁻¹)",
+                                format="%.3f"
+                            ),
+                            "Efficiency": st.column_config.NumberColumn(
+                                "Efficiency (mmol/g/h)",
+                                format="%.1f"
                             )
                         },
                         hide_index=True
                     )
         else:
-            st.markdown("### ⚖️ Flux Balance Analysis")
-            st.info("FBA analysis results not available")
+            st.info("Product optimization results not available")
         
-        # Display growth analysis
-        if 'growth_analysis' in results:
-            growth_analysis = results['growth_analysis']
-            st.markdown("### 🌱 Growth Analysis")
+        # Display Analysis Summary
+        if has_summary:
+            st.markdown("### 📈 Analysis Summary")
             
-            col1, col2, col3 = st.columns(3)
-            
-            with col1:
-                if growth_analysis.get('aerobic_growth') is not None:
-                    aerobic_growth = growth_analysis.get('aerobic_growth', 0)
-                    st.metric(
-                        "Aerobic Growth",
-                        f"{aerobic_growth:.6f} h⁻¹"
-                    )
+            # Show available results
+            if 'results_available' in summary:
+                st.markdown("#### 📋 Available Results")
+                results_available = summary['results_available']
+                if isinstance(results_available, list):
+                    for result_type in results_available:
+                        st.markdown(f"• {result_type}")
                 else:
-                    st.metric("Aerobic Growth", "N/A")
+                    st.markdown(f"• {results_available}")
             
-            with col2:
-                if growth_analysis.get('anaerobic_growth') is not None:
-                    anaerobic_growth = growth_analysis.get('anaerobic_growth', 0)
-                    st.metric(
-                        "Anaerobic Growth",
-                        f"{anaerobic_growth:.6f} h⁻¹"
-                    )
+            # Show report paths
+            if 'report_paths' in summary:
+                st.markdown("#### 📄 Generated Reports")
+                report_paths = summary['report_paths']
+                if isinstance(report_paths, dict):
+                    for report_type, report_path in report_paths.items():
+                        if report_path:
+                            st.markdown(f"• **{report_type}**: {report_path}")
                 else:
-                    st.metric("Anaerobic Growth", "N/A")
+                    st.markdown(f"• {report_paths}")
+        
+        # Display any additional results that might be available
+        if has_results:
+            st.markdown("### 🔍 Additional Results")
             
-            with col3:
-                if (growth_analysis.get('aerobic_growth') is not None and 
-                    growth_analysis.get('anaerobic_growth') is not None):
-                    aerobic = growth_analysis.get('aerobic_growth', 0)
-                    anaerobic = growth_analysis.get('anaerobic_growth', 0)
-                    if aerobic > 0:
-                        growth_reduction = ((aerobic - anaerobic) / aerobic) * 100
-                        st.metric(
-                            "Growth Reduction",
-                            f"{growth_reduction:.1f}%"
-                        )
-                    else:
-                        st.metric("Growth Reduction", "N/A")
-                else:
-                    st.metric("Growth Reduction", "N/A")
-            
-            # Carbon source analysis
-            if 'carbon_source_growth' in growth_analysis:
-                carbon_growth = growth_analysis['carbon_source_growth']
-                if isinstance(carbon_growth, dict) and carbon_growth:
-                    st.markdown("#### 📊 Carbon Source Growth Rates")
-                    
-                    carbon_data = []
-                    for source, rate in carbon_growth.items():
-                        carbon_data.append({
-                            'Carbon Source': source,
-                            'Growth Rate (h⁻¹)': rate
-                        })
-                    
-                    if carbon_data:
-                        df_carbon = pd.DataFrame(carbon_data)
-                        df_carbon = df_carbon.sort_values('Growth Rate (h⁻¹)', ascending=False)
+            # Show all available keys in results
+            available_keys = list(results.keys())
+            if available_keys:
+                st.markdown("#### 📋 Available Data Sections")
+                for key in available_keys:
+                    if key not in ['knockout_analysis', 'product_optimization', 'product_knockout_results']:
+                        st.markdown(f"• **{key}**: {type(results[key]).__name__}")
                         
-                        st.dataframe(
-                            df_carbon,
-                            column_config={
-                                "Growth Rate (h⁻¹)": st.column_config.NumberColumn(
-                                    "Growth Rate (h⁻¹)",
-                                    format="%.6f"
-                                )
-                            },
-                            hide_index=True
-                        )
-                        
-                        # Create visualization
-                        fig = px.bar(
-                            df_carbon,
-                            x='Carbon Source',
-                            y='Growth Rate (h⁻¹)',
-                            title="Growth Rates on Different Carbon Sources",
-                            color='Growth Rate (h⁻¹)',
-                            color_continuous_scale='viridis'
-                        )
-                        
-                        fig.update_layout(height=400)
-                        st.plotly_chart(fig, use_container_width=True)
+                        # Show a preview of the data
+                        if isinstance(results[key], str) and len(results[key]) > 200:
+                            st.text(results[key][:200] + "...")
+                        elif isinstance(results[key], dict):
+                            st.json(results[key])
+                        elif isinstance(results[key], (list, tuple)) and len(results[key]) > 0:
+                            st.text(f"Array with {len(results[key])} items")
+                        else:
+                            st.text(str(results[key]))
         else:
             st.markdown("### 🌱 Growth Analysis")
             st.info("Growth analysis results not available")
@@ -3314,6 +3365,28 @@ class EnhancedResultVisualizer:
                         'type': 'html',
                         'size': os.path.getsize(report_file)
                     })
+                
+                # Look for cobra_visual directory
+                cobra_visual_dir = os.path.join(model_data_dir, 'cobra_visual')
+                if os.path.exists(cobra_visual_dir):
+                    for file in os.listdir(cobra_visual_dir):
+                        file_path = os.path.join(cobra_visual_dir, file)
+                        if os.path.isfile(file_path):
+                            file_ext = os.path.splitext(file)[1].lower()
+                            if file_ext in ['.png', '.jpg', '.jpeg', '.svg', '.pdf']:
+                                visualizations.append({
+                                    'title': f'Cobra Visual - {file}',
+                                    'path': file_path,
+                                    'type': 'image',
+                                    'size': os.path.getsize(file_path)
+                                })
+                            elif file_ext == '.html':
+                                visualizations.append({
+                                    'title': f'Cobra Visual - {file}',
+                                    'path': file_path,
+                                    'type': 'html',
+                                    'size': os.path.getsize(file_path)
+                                })
             
             print(f"📊 Found {len(visualizations)} visualization files for {model_name}")
             return visualizations

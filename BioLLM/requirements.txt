@@ -16,3 +16,9 @@ matplotlib
 seaborn
 pandas
 numpy
+biopython
+pubmed-lookup
+scholarly
+arxiv
+semanticscholar
+crossref-commons

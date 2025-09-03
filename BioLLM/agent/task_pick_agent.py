@@ -287,7 +287,7 @@ class TaskPickAgent:
             
             # Check if both model_name and task_type exist
             has_model_name = bool(current_task.model_name and current_task.model_name.strip())
-            has_task_type = current_task.task_type is not None
+            has_task_type = current_task.task_type is not None and current_task.task_type != ""
             
             if has_model_name and has_task_type:
                 print(f"🎯 TaskPickAgent: 检测到完整配置 (model_name: {current_task.model_name}, task_type: {current_task.task_type})")

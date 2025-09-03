@@ -6,6 +6,14 @@ from agent.base import BaseAgent
 import warnings
 warnings.filterwarnings('ignore')
 
+# Import cobra visual agent
+try:
+    from agent.cobra_visual_agent import CobraVisualAgent
+    COBRA_VISUAL_AVAILABLE = True
+except ImportError:
+    COBRA_VISUAL_AVAILABLE = False
+    print("⚠️ CobraVisualAgent not available. Install required dependencies.")
+
 class ModelAnalyzerAgent(BaseAgent):
     def __init__(self):
         super().__init__()
@@ -63,6 +71,16 @@ class ModelAnalyzerAgent(BaseAgent):
         # Initialize figures storage for Streamlit display
         self.current_figures = []
         self.streamlit_figures = []
+        
+        # Initialize cobra visual agent if available
+        self.cobra_visual_agent = None
+        if COBRA_VISUAL_AVAILABLE:
+            try:
+                self.cobra_visual_agent = CobraVisualAgent()
+                print("✅ CobraVisualAgent initialized successfully")
+            except Exception as e:
+                print(f"⚠️ Failed to initialize CobraVisualAgent: {e}")
+                self.cobra_visual_agent = None
         
         print(f"🔬 Available .mat models: {len(self.available_models)}")
         for i, model in enumerate(self.available_models, 1):
@@ -282,8 +300,9 @@ class ModelAnalyzerAgent(BaseAgent):
             import scipy.io
             model_data = scipy.io.loadmat(model_file)
             
-            result = f"🔬 Model Analysis: {model_name}\n"
-            result += "=" * 50 + "\n\n"
+            result = f"🔬 Metabolic Model Analysis Report\n"
+            result += f"Model: {model_name}\n"
+            result += "=" * 60 + "\n\n"
             
             # Basic structure analysis
             result += self._analyze_basic_structure(model_data, model_name)
@@ -298,12 +317,25 @@ class ModelAnalyzerAgent(BaseAgent):
             if structured_result:
                 result += "\n" + structured_result
             
+            # Generate AI-powered analysis insights
+            ai_analysis = self._generate_ai_analysis(model_name, model_data, cobra_result, structured_result)
+            if ai_analysis:
+                result += "\n" + ai_analysis
+            
             # Export data and get visualizations
             streamlit_figures = self._export_model_data(model_data, model_name)
             result += f"\n📁 Data exported to: model_data/{model_name}/"
             
             # Store figures for later use
             self.current_figures = streamlit_figures
+            
+            # Generate cobra visual analysis (fluxmap and network graphs)
+            cobra_visual_result = self._generate_cobra_visual_analysis(model_file, model_name)
+            if cobra_visual_result:
+                result += "\n" + cobra_visual_result
+            
+            # Add technical details and usage instructions
+            result += self._generate_technical_details(model_name)
             
             return result
             
@@ -962,6 +994,270 @@ class ModelAnalyzerAgent(BaseAgent):
             
         except Exception as e:
             print(f"Warning: Could not generate HTML report: {e}")
+    
+    def _generate_cobra_visual_analysis(self, model_file: str, model_name: str) -> str:
+        """
+        Generate cobra visual analysis (fluxmap and network graphs)
+        
+        Args:
+            model_file: Path to the .mat model file
+            model_name: Name of the model
+            
+        Returns:
+            str: Analysis result message
+        """
+        try:
+            if not self.cobra_visual_agent:
+                return "\n⚠️ CobraVisualAgent not available. Skipping fluxmap generation."
+            
+            print(f"🎨 Generating cobra visual analysis for {model_name}...")
+            
+            # Create output directory for cobra visual results
+            cobra_output_dir = f"model_data/{model_name}/cobra_visual"
+            os.makedirs(cobra_output_dir, exist_ok=True)
+            
+            # Configure cobra visual agent request
+            request = {
+                'model_path': model_file,
+                'output_dir': cobra_output_dir,
+                'visualization_types': ['network', 'fluxmap', 'analysis'],
+                'analysis_level': 'comprehensive'
+            }
+            
+            # Execute cobra visual analysis
+            result = self.cobra_visual_agent.process_request(request)
+            
+            if result['success']:
+                # Add cobra visual figures to streamlit figures
+                cobra_figures = self._collect_cobra_visual_figures(cobra_output_dir, model_name)
+                self.streamlit_figures.extend(cobra_figures)
+                
+                # Generate result message
+                result_msg = f"\n🎨 Cobra Visual Analysis Results:\n"
+                result_msg += "-" * 40 + "\n"
+                result_msg += f"📁 Output directory: {cobra_output_dir}\n"
+                
+                # List generated files
+                if os.path.exists(cobra_output_dir):
+                    files = os.listdir(cobra_output_dir)
+                    result_msg += f"📊 Generated files ({len(files)}):\n"
+                    for file in sorted(files):
+                        if file.endswith('.png'):
+                            result_msg += f"  🖼️ {file}\n"
+                        elif file.endswith('.html'):
+                            result_msg += f"  📄 {file}\n"
+                        elif file.endswith('.csv'):
+                            result_msg += f"  📊 {file}\n"
+                
+                result_msg += f"\n✅ Cobra visual analysis completed successfully!"
+                return result_msg
+            else:
+                return f"\n❌ Cobra visual analysis failed: {result.get('error', 'Unknown error')}"
+                
+        except Exception as e:
+            return f"\n❌ Error in cobra visual analysis: {str(e)}"
+    
+    def _collect_cobra_visual_figures(self, cobra_output_dir: str, model_name: str) -> list:
+        """
+        Collect cobra visual figures for Streamlit display
+        
+        Args:
+            cobra_output_dir: Directory containing cobra visual results
+            model_name: Name of the model
+            
+        Returns:
+            list: List of figure information for Streamlit
+        """
+        figures = []
+        
+        try:
+            if not os.path.exists(cobra_output_dir):
+                return figures
+            
+            # Define expected cobra visual files
+            expected_files = [
+                ('metabolic_network_graph.png', 'Complete metabolic network showing all reactions and their connections'),
+                ('metabolic_fluxmap.png', 'Metabolic Fluxmap'),
+                ('pathway_flux_heatmap.png', 'Pathway Flux Heatmap'),
+                ('flux_distribution_plots.png', 'Flux Distribution Analysis')
+            ]
+            
+            for filename, title in expected_files:
+                file_path = os.path.join(cobra_output_dir, filename)
+                if os.path.exists(file_path):
+                    # Special handling for metabolic network graph to match Flux Distribution Analysis format
+                    if filename == 'metabolic_network_graph.png':
+                        figures.append({
+                            'title': f"Cobra Visual - {title}",
+                            'path': file_path,
+                            'type': 'image',
+                            'description': f'Cobra visual analysis: {title} for {model_name}'
+                        })
+                    else:
+                        figures.append({
+                            'title': f"Cobra Visual - {title}",
+                            'path': file_path,
+                            'type': 'image',
+                            'description': f'Cobra visual analysis: {title} for {model_name}'
+                        })
+            
+
+            
+        except Exception as e:
+            print(f"Warning: Error collecting cobra visual figures: {e}")
+        
+        return figures
+    
+    def _generate_ai_analysis(self, model_name: str, model_data: dict, cobra_result: str, structured_result: str) -> str:
+        """
+        Generate AI-powered analysis insights using LLM
+        
+        Args:
+            model_name: Name of the model
+            model_data: Model data dictionary
+            cobra_result: COBRA analysis results
+            structured_result: Structured model analysis results
+            
+        Returns:
+            str: AI-generated analysis report
+        """
+        try:
+            # Prepare analysis data for LLM
+            analysis_data = f"""
+Model Name: {model_name}
+
+Basic Model Structure:
+- Total data objects: {len([k for k in model_data.keys() if not k.startswith('__')])}
+- Structured arrays: {len([k for k, v in model_data.items() if not k.startswith('__') and hasattr(v, 'dtype') and v.dtype.names])}
+- Matrices: {len([k for k, v in model_data.items() if not k.startswith('__') and hasattr(v, 'shape') and len(v.shape) == 2])}
+- Vectors: {len([k for k, v in model_data.items() if not k.startswith('__') and hasattr(v, 'shape') and len(v.shape) == 1])}
+
+COBRA Analysis Results:
+{cobra_result if cobra_result else "No COBRA analysis available"}
+
+Structured Model Analysis:
+{structured_result if structured_result else "No structured analysis available"}
+"""
+
+            # Create a prompt for LLM analysis
+            analysis_prompt = f"""
+You are a metabolic model analysis expert. Analyze the following results from a COBRA metabolic model analysis and provide comprehensive insights.
+
+{analysis_data}
+
+Please provide a detailed analysis including:
+
+1. **Model Overview**: Basic statistics and characteristics
+2. **Metabolic Network Structure**: Key pathways and reactions
+3. **Metabolites Analysis**: Important metabolites and their roles
+4. **Reactions Analysis**: Key reactions and their significance
+5. **Genes Analysis**: Important genes and their functions
+6. **Pathway Distribution**: Major metabolic pathways
+7. **Biological Insights**: What this tells us about the organism
+8. **Potential Applications**: How this model could be used
+
+Format your response with clear sections, bullet points, and insights that would be valuable for researchers and students.
+
+Focus on making the analysis accessible and informative, highlighting the most important findings from the data.
+"""
+
+            # Call LLM for analysis
+            from agent.code_writer import CodeWriterAgent
+            llm_agent = CodeWriterAgent()
+            
+            print(f"🤖 Generating AI analysis for {model_name}...")
+            analysis_report = llm_agent.chat(analysis_prompt)
+            
+            # Format the AI analysis
+            formatted_analysis = f"📊 AI-Generated Analysis\n"
+            formatted_analysis += "-" * 30 + "\n"
+            formatted_analysis += analysis_report
+            formatted_analysis += "\n\n"
+            
+            return formatted_analysis
+            
+        except Exception as e:
+            print(f"Warning: Could not generate AI analysis: {e}")
+            return ""
+    
+    def _generate_technical_details(self, model_name: str) -> str:
+        """
+        Generate technical details and usage instructions
+        
+        Args:
+            model_name: Name of the model
+            
+        Returns:
+            str: Technical details and usage instructions
+        """
+        try:
+            technical_details = f"\n🔧 Technical Details\n"
+            technical_details += "-" * 30 + "\n"
+            
+            # Check for generated files
+            model_data_dir = f"model_data/{model_name}"
+            if os.path.exists(model_data_dir):
+                technical_details += "📁 Generated Files:\n"
+                
+                # Check regular analysis files
+                regular_files = ['metabolites.csv', 'reactions.csv', 'genes.csv', 'structure_info.json', 'analysis_report.html']
+                for file in regular_files:
+                    file_path = os.path.join(model_data_dir, file)
+                    if os.path.exists(file_path):
+                        file_size = os.path.getsize(file_path)
+                        technical_details += f"  • {file} ({file_size:,} bytes)\n"
+                
+                # Check visualizations directory
+                viz_dir = os.path.join(model_data_dir, 'visualizations')
+                if os.path.exists(viz_dir):
+                    vis_files = [f for f in os.listdir(viz_dir) if f.endswith(('.png', '.jpg', '.jpeg', '.svg', '.pdf'))]
+                    if vis_files:
+                        technical_details += f"  • visualizations/ ({len(vis_files)} files)\n"
+                
+                # Check cobra visual directory
+                cobra_visual_dir = os.path.join(model_data_dir, 'cobra_visual')
+                if os.path.exists(cobra_visual_dir):
+                    cobra_files = [f for f in os.listdir(cobra_visual_dir) if f.endswith(('.png', '.jpg', '.jpeg', '.svg', '.pdf', '.html', '.csv'))]
+                    if cobra_files:
+                        technical_details += f"  • cobra_visual/ ({len(cobra_files)} files)\n"
+                
+                technical_details += "\n"
+            else:
+                technical_details += "No generated files found.\n\n"
+            
+            # Add visualization information
+            technical_details += "📈 Visualizations\n"
+            technical_details += "-" * 30 + "\n"
+            
+            if hasattr(self, 'streamlit_figures') and self.streamlit_figures:
+                technical_details += f"Generated {len(self.streamlit_figures)} visualization figures:\n"
+                
+                # Count different types
+                regular_count = len([f for f in self.streamlit_figures if not (isinstance(f, dict) and f.get('title', f.get('name', '')).startswith('Cobra Visual -'))])
+                cobra_count = len([f for f in self.streamlit_figures if isinstance(f, dict) and f.get('title', f.get('name', '')).startswith('Cobra Visual -')])
+                
+                technical_details += f"  • Basic analysis charts: {regular_count}\n"
+                technical_details += f"  • Cobra visual charts: {cobra_count}\n"
+            else:
+                technical_details += "No visualization figures generated.\n"
+            
+            technical_details += "\n"
+            
+            # Add usage instructions
+            technical_details += "💡 Usage Instructions\n"
+            technical_details += "-" * 30 + "\n"
+            technical_details += "• View generated files in the model_data directory\n"
+            technical_details += "• Check the visualizations subdirectory for basic analysis charts\n"
+            technical_details += "• Check the cobra_visual subdirectory for advanced fluxmap visualizations\n"
+            technical_details += "• Use the CSV files for further data analysis\n"
+            technical_details += "• The HTML reports provide comprehensive summaries\n"
+            technical_details += "• The AI analysis provides biological insights and applications\n\n"
+            
+            return technical_details
+            
+        except Exception as e:
+            print(f"Warning: Could not generate technical details: {e}")
+            return ""
     
     def chat(self, prompt: str, memory=None) -> str:
         """

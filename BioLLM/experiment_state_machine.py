@@ -98,13 +98,20 @@ class ExperimentStateMachine:
                 self.explain_task_type = kwargs.get('task_type')
                 
                 # Verify that explain parameters match analyse parameters
-                if (self.explain_model_name == self.analyse_model_name and 
-                    self.explain_task_type == self.analyse_task_type):
+                # Allow task_type to be updated in explain phase if it was empty in analyse phase
+                model_name_match = self.explain_model_name == self.analyse_model_name
+                task_type_match = (self.explain_task_type == self.analyse_task_type or 
+                                 (self.analyse_task_type is None or self.analyse_task_type == "") and 
+                                 self.explain_task_type is not None and self.explain_task_type != "")
+                
+                if model_name_match and task_type_match:
+                    # Use the task_type from explain phase (it's more up-to-date)
+                    final_task_type = self.explain_task_type if (self.explain_task_type is not None and self.explain_task_type != "") else self.analyse_task_type
                     
                     # Prepare experiment parameters
                     experiment_params = {
                         'model_name': self.explain_model_name,
-                        'task_type': self.explain_task_type
+                        'task_type': final_task_type
                     }
                     
                     # Reset to initial state

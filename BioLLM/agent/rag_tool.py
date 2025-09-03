@@ -16,6 +16,8 @@ from langchain_community.document_loaders import TextLoader
 from langchain.text_splitter import CharacterTextSplitter
 from langchain_community.document_loaders import PyPDFLoader
 from langchain.schema import Document
+import glob
+import json
 
 
 class RAGTool:
@@ -372,4 +374,251 @@ class RAGTool:
             
         except Exception as e:
             print(f"Error searching knowledge base: {e}")
-            return [] 
+            return []
+
+    def _get_literature_agent(self):
+        """Get literature agent instance"""
+        try:
+            from agent.literature_agent import LiteratureAgent
+            return LiteratureAgent()
+        except ImportError:
+            print("Warning: Literature agent not available")
+            return None
+
+    def _trigger_literature_search(self, user_input: str) -> str:
+        """Trigger literature agent to search and build temporary knowledge base"""
+        try:
+            literature_agent = self._get_literature_agent()
+            if not literature_agent:
+                return None
+            
+            print("Triggering literature agent to search for relevant papers...")
+            result = literature_agent.run(user_input)
+            
+            # Extract knowledge base ID from result
+            kb_id = None
+            if "Temporary Knowledge Base Created:" in result:
+                lines = result.split('\n')
+                for line in lines:
+                    if "Knowledge Base ID:" in line:
+                        kb_id = line.split("Knowledge Base ID:")[1].strip()
+                        break
+            
+            return kb_id
+            
+        except Exception as e:
+            print(f"Error triggering literature search: {e}")
+            return None
+
+    def _search_temporary_knowledge_bases(self, query: str, top_k: int = 3) -> list:
+        """Search all available temporary knowledge bases"""
+        try:
+            temp_kb_dir = os.path.join(os.path.dirname(__file__), '..', 'temp_knowledge_base')
+            if not os.path.exists(temp_kb_dir):
+                return []
+            
+            all_results = []
+            
+            # Get all temporary knowledge base directories
+            kb_dirs = [d for d in os.listdir(temp_kb_dir) 
+                      if os.path.isdir(os.path.join(temp_kb_dir, d))]
+            
+            for kb_id in kb_dirs:
+                kb_path = os.path.join(temp_kb_dir, kb_id)
+                kb_info_path = os.path.join(kb_path, 'kb_info.json')
+                
+                # Check if knowledge base info exists
+                if not os.path.exists(kb_info_path):
+                    continue
+                
+                try:
+                    # Create temporary vector store for this knowledge base
+                    temp_vectorstore = Chroma(persist_directory=kb_path, embedding_function=self.embeddings)
+                    
+                    # Search in this knowledge base
+                    docs = temp_vectorstore.similarity_search(query, k=top_k)
+                    
+                    for doc in docs:
+                        result = {
+                            'content': doc.page_content,
+                            'source': doc.metadata.get('source', 'Unknown'),
+                            'original_url': doc.metadata.get('original_url', 'Unknown'),
+                            'type': doc.metadata.get('type', 'Unknown'),
+                            'title': doc.metadata.get('title', 'Unknown'),
+                            'kb_id': kb_id,
+                            'kb_type': 'temporary'
+                        }
+                        all_results.append(result)
+                        
+                except Exception as e:
+                    print(f"Error searching temporary knowledge base {kb_id}: {e}")
+                    continue
+            
+            return all_results
+            
+        except Exception as e:
+            print(f"Error searching temporary knowledge bases: {e}")
+            return []
+
+    def _create_citation_instructions(self, source_info: list) -> str:
+        """Create citation instructions for the LLM"""
+        if not source_info:
+            return ""
+        
+        instructions = """IMPORTANT CITATION INSTRUCTIONS:
+When using information from the knowledge base, you MUST cite the sources using the provided identifiers [LOCAL_X] or [TEMP_X].
+
+Available Sources:"""
+        
+        for source in source_info:
+            source_id = source['id']
+            title = source['title']
+            source_path = source['source']
+            doc_type = source['type']
+            kb_type = source['kb_type']
+            original_url = source.get('original_url', 'Unknown')
+            
+            instructions += f"\n[{source_id}] {title}"
+            instructions += f"\n   Type: {doc_type}"
+            instructions += f"\n   Source: {source_path}"
+            
+            if kb_type == 'local':
+                instructions += f"\n   Knowledge Base: Local"
+                if original_url != 'Unknown':
+                    instructions += f"\n   URL: {original_url}"
+            else:
+                instructions += f"\n   Knowledge Base: Temporary (ID: {source.get('kb_id', 'Unknown')})"
+                if original_url != 'Unknown':
+                    instructions += f"\n   URL: {original_url}"
+        
+        instructions += """
+
+CITATION FORMAT:
+- When referencing information, use the format: [source_id]
+- Example: "According to [LOCAL_1], FBA is a constraint-based modeling approach..."
+- Always include citations for any factual information you use
+- At the end of your response, provide a "References" section with full source details and URLs
+
+Example response format:
+[Your answer with citations like [LOCAL_1] and [TEMP_2]]
+
+References:
+[LOCAL_1] [Title] - [Source path] - [URL if available]
+[TEMP_2] [Title] - [Source path] - [URL if available]"""
+        
+        return instructions
+
+    def _extract_paper_url(self, source_path: str) -> str:
+        """Extract or generate URL for a paper source"""
+        try:
+            # If it's a local file, try to find corresponding URL
+            if source_path.endswith('.pdf'):
+                filename = os.path.basename(source_path)
+                
+                # Check if it's in the downloads/papers directory (from literature agent)
+                if 'downloads/papers' in source_path:
+                    # This is a downloaded paper, we might have URL info in the filename
+                    # For now, return a placeholder
+                    return f"Downloaded paper: {filename}"
+                
+                # Check if it's in the paper directory (local papers)
+                elif 'paper/' in source_path:
+                    # This is a local paper, return file path
+                    return f"Local file: {source_path}"
+                
+                else:
+                    return f"File: {source_path}"
+            
+            # If it's already a URL, return it
+            elif source_path.startswith(('http://', 'https://')):
+                return source_path
+            
+            else:
+                return f"Source: {source_path}"
+                
+        except Exception as e:
+            return f"Source: {source_path}"
+
+    def run(self, prompt: str, memory=None, tools: list = None) -> str:
+        # Step 1: Trigger literature agent to search and build temporary knowledge base
+        temp_kb_id = self._trigger_literature_search(prompt)
+        
+        # Step 2: Search both local and temporary knowledge bases
+        local_docs = self.vectorstore.similarity_search(prompt, k=3)
+        temp_docs = self._search_temporary_knowledge_bases(prompt, top_k=3)
+        
+        # Step 3: Prepare context with source information
+        all_contexts = []
+        source_info = []
+        
+        # Add local knowledge base results with source tracking
+        if local_docs:
+            local_contexts = []
+            for doc in local_docs:
+                source = doc.metadata.get('source', 'Unknown')
+                title = doc.metadata.get('title', 'Unknown')
+                doc_type = doc.metadata.get('type', 'Unknown')
+                
+                # Create source identifier
+                source_id = f"LOCAL_{len(source_info) + 1}"
+                source_info.append({
+                    'id': source_id,
+                    'title': title,
+                    'source': source,
+                    'type': doc_type,
+                    'kb_type': 'local'
+                })
+                
+                local_contexts.append(f"[{source_id}] {doc.page_content}")
+            
+            local_context = '\n\n'.join(local_contexts)
+            all_contexts.append(f"Local Knowledge Base:\n{local_context}")
+        
+        # Add temporary knowledge base results with source tracking
+        if temp_docs:
+            temp_contexts = []
+            for doc in temp_docs:
+                source = doc.get('source', 'Unknown')
+                title = doc.get('title', 'Unknown')
+                doc_type = doc.get('type', 'Unknown')
+                kb_id = doc.get('kb_id', 'Unknown')
+                original_url = doc.get('original_url', 'Unknown')
+                
+                # Create source identifier
+                source_id = f"TEMP_{len(source_info) + 1}"
+                source_info.append({
+                    'id': source_id,
+                    'title': title,
+                    'source': source,
+                    'original_url': original_url,
+                    'type': doc_type,
+                    'kb_type': 'temporary',
+                    'kb_id': kb_id
+                })
+                
+                temp_contexts.append(f"[{source_id}] {doc['content']}")
+            
+            temp_context = '\n\n'.join(temp_contexts)
+            all_contexts.append(f"Temporary Knowledge Base (from Literature Search):\n{temp_context}")
+        
+        # Step 4: Create enhanced prompt with citation instructions
+        if all_contexts:
+            context = '\n\n'.join(all_contexts)
+            
+            # Create citation instructions
+            citation_instructions = self._create_citation_instructions(source_info)
+            
+            user_input = f"""Relevant Knowledge:
+{context}
+
+User Question: {prompt}
+
+{citation_instructions}"""
+        else:
+            user_input = prompt
+        
+        # Step 5: Add information about temporary knowledge base if created
+        if temp_kb_id:
+            user_input += f"\n\nNote: A temporary knowledge base (ID: {temp_kb_id}) was created from literature search. You can query it directly using: literature_query {temp_kb_id} <your question>"
+        
+        return self._call_llm(user_input, system_prompt=self.system_prompt, tools=tools) 

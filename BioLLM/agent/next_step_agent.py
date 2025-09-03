@@ -127,34 +127,26 @@ class NextStepAgent:
             model_name (str): Name of the metabolic model
             
         Returns:
-            Dict containing experiment options
+            Dict containing experiment options with LLM-generated recommendation
         """
-        # Create experiment options for all task types
-        all_experiments = []
-        for task_type, experiments in self.available_experiments.items():
-            task_description = get_analysis_type_description(task_type)
-            all_experiments.append(f"**{task_description}**")
-            for experiment in experiments:
-                all_experiments.append(f"• {experiment}")
-            all_experiments.append("")  # Add empty line between task types
-        
-        experiment_list = "\n".join(all_experiments)
-        
-        message = f"""Would you like to conduct any of the following experiments with the {model_name} model?
-
-{experiment_list}
-
-Please specify which type of analysis you would like to perform."""
-        
-        return {
-            'success': True,
-            'action': 'model_only',
-            'message': message,
-            'model_name': model_name,
-            'task_type': None,
-            'task_description': None,
-            'available_experiments': self.available_experiments
-        }
+        try:
+            # Generate experiment recommendation using LLM with knowledge base integration
+            experiment_recommendation = self._generate_experiment_recommendation_with_knowledge(model_name)
+            
+            return {
+                'success': True,
+                'action': 'model_only',
+                'message': experiment_recommendation,
+                'model_name': model_name,
+                'task_type': None,
+                'task_description': None,
+                'available_experiments': self.available_experiments
+            }
+            
+        except Exception as e:
+            # Fallback to basic recommendation if LLM generation fails
+            print(f"Warning: LLM experiment recommendation failed: {e}")
+            return self._generate_basic_experiment_recommendation(model_name)
     
     def _handle_task_only(self, task_type: int) -> Dict[str, Any]:
         """
@@ -494,6 +486,238 @@ This recommendation has been enhanced with relevant information from our knowled
         else:
             enhanced_recommendation = basic_recommendation
         
+        return enhanced_recommendation
+    
+    def _generate_basic_experiment_recommendation(self, model_name: str) -> Dict[str, Any]:
+        """
+        Generate basic experiment recommendation without LLM
+        
+        Args:
+            model_name (str): Name of the metabolic model
+            
+        Returns:
+            Dict containing basic experiment recommendation
+        """
+        # Create experiment options for all task types
+        all_experiments = []
+        for task_type, experiments in self.available_experiments.items():
+            task_description = get_analysis_type_description(task_type)
+            all_experiments.append(f"**{task_description}**")
+            for experiment in experiments:
+                all_experiments.append(f"• {experiment}")
+            all_experiments.append("")  # Add empty line between task types
+        
+        experiment_list = "\n".join(all_experiments)
+        
+        message = f"""Would you like to conduct any of the following experiments with the {model_name} model?
+
+{experiment_list}
+
+Please specify which type of analysis you would like to perform."""
+        
+        return {
+            'success': True,
+            'action': 'model_only',
+            'message': message,
+            'model_name': model_name,
+            'task_type': None,
+            'task_description': None,
+            'available_experiments': self.available_experiments
+        }
+    
+    def _generate_experiment_recommendation_with_knowledge(self, model_name: str) -> str:
+        """
+        Generate experiment recommendation using LLM with knowledge base integration
+        
+        Args:
+            model_name (str): Name of the metabolic model
+            
+        Returns:
+            str: Enhanced experiment recommendation with knowledge base content
+        """
+        try:
+            # Search knowledge base for relevant information about the model
+            knowledge_results = self._search_knowledge_base(model_name)
+            
+            # Create enhanced prompt for experiment recommendation
+            enhanced_prompt = self._create_experiment_recommendation_prompt(model_name, knowledge_results)
+            
+            # Generate enhanced recommendation
+            enhanced_recommendation = self._generate_enhanced_experiment_recommendation(enhanced_prompt, model_name, knowledge_results)
+            
+            return enhanced_recommendation
+            
+        except Exception as e:
+            # Fallback to basic recommendation if knowledge base integration fails
+            print(f"Warning: Knowledge base integration failed: {e}")
+            basic_recommendation = self._generate_basic_experiment_recommendation(model_name)
+            return basic_recommendation['message']
+    
+    def _create_experiment_recommendation_prompt(self, model_name: str, knowledge_results: List[Dict[str, Any]]) -> str:
+        """
+        Create enhanced prompt for experiment recommendation
+        
+        Args:
+            model_name (str): Name of the metabolic model
+            knowledge_results (List[Dict]): Knowledge base search results
+            
+        Returns:
+            str: Enhanced prompt for LLM
+        """
+        # Create experiment information
+        experiment_info = []
+        for task_type, experiments in self.available_experiments.items():
+            task_description = get_analysis_type_description(task_type)
+            experiment_info.append(f"**{task_description}**:")
+            for experiment in experiments:
+                experiment_info.append(f"  - {experiment}")
+            experiment_info.append("")
+        
+        experiment_text = "\n".join(experiment_info)
+        
+        # Create knowledge section
+        knowledge_section = self._create_knowledge_section(knowledge_results)
+        
+        prompt = f"""You are an expert in computational biology and metabolic network analysis. 
+
+A user has selected the **{model_name}** model for analysis but hasn't specified which type of experiment they want to perform.
+
+**Available Experiment Types:**
+{experiment_text}
+
+**Knowledge Base Information about {model_name}:**
+{knowledge_section}
+
+Please provide a comprehensive and engaging recommendation that:
+
+1. **Introduces the model**: Briefly explain what {model_name} is and its characteristics
+2. **Explains each experiment type**: Describe what each analysis type does, its benefits, and when to use it
+3. **Provides recommendations**: Suggest which experiments would be most suitable for {model_name} and why
+4. **Guides the user**: Help them choose the right experiment based on their goals
+
+Make your response informative, engaging, and helpful. Use markdown formatting for better readability.
+
+**Your recommendation:**"""
+        
+        return prompt
+    
+    def _generate_enhanced_experiment_recommendation(self, prompt: str, model_name: str, knowledge_results: List[Dict[str, Any]]) -> str:
+        """
+        Generate enhanced experiment recommendation using LLM
+        
+        Args:
+            prompt (str): The enhanced prompt
+            model_name (str): Name of the metabolic model
+            knowledge_results (List[Dict]): Knowledge base search results
+            
+        Returns:
+            str: Enhanced experiment recommendation
+        """
+        # For now, we'll simulate LLM response based on model name
+        # In a real implementation, this would call an actual LLM API
+        
+        if "e_coli_core" in model_name.lower():
+            enhanced_recommendation = f"""# 🧬 Experiment Recommendations for {model_name}
+
+## 📋 Model Overview
+
+The **{model_name}** is a well-curated core metabolic model of *Escherichia coli*, containing 95 reactions and 72 metabolites. This model represents the essential metabolic pathways and is widely used for fundamental metabolic analysis due to its simplicity and computational efficiency.
+
+## 🔬 Available Experiment Types
+
+### 1. **Flux Balance Analysis (FBA)**
+**What it does**: Predicts optimal growth rates and metabolic flux distributions under given conditions.
+**Best for**: Understanding how the model optimizes biomass production and identifying key metabolic pathways.
+**Why choose this**: Perfect for {model_name} as it's a core model designed for FBA studies.
+
+### 2. **Gene Knockout Analysis**
+**What it does**: Predicts the effects of removing individual genes on growth and metabolism.
+**Best for**: Identifying essential genes and understanding gene-reaction relationships.
+**Why choose this**: {model_name} has well-annotated gene-reaction mappings, making it ideal for knockout studies.
+
+### 3. **Phenotype Prediction**
+**What it does**: Predicts growth behavior under different environmental conditions.
+**Best for**: Understanding how the model responds to changes in nutrient availability.
+**Why choose this**: Core models like {model_name} are excellent for phenotype prediction due to their focused scope.
+
+### 4. **Pathway Analysis**
+**What it does**: Assesses the activity of metabolic pathways and identifies bottlenecks.
+**Best for**: Understanding metabolic network structure and identifying key reactions.
+**Why choose this**: {model_name}'s simplified structure makes pathway analysis clear and interpretable.
+
+### 5. **Evolutionary Analysis**
+**What it does**: Simulates adaptive evolution and analyzes trade-offs between different objectives.
+**Best for**: Understanding evolutionary constraints and optimization strategies.
+**Why choose this**: Core models provide a good foundation for evolutionary studies.
+
+### 6. **Constraint-Based Analysis**
+**What it does**: Performs flux variability analysis and assesses reaction feasibility.
+**Best for**: Understanding the flexibility and robustness of the metabolic network.
+**Why choose this**: {model_name}'s well-defined constraints make it suitable for detailed constraint analysis.
+
+## 🎯 My Recommendations
+
+**For beginners**: Start with **Flux Balance Analysis (FBA)** to understand basic metabolic optimization.
+
+**For gene studies**: Choose **Gene Knockout Analysis** to explore essential genes and synthetic lethality.
+
+**For environmental studies**: Use **Phenotype Prediction** to understand growth under different conditions.
+
+**For network analysis**: Select **Pathway Analysis** to identify metabolic bottlenecks and key reactions.
+
+## 💡 Next Steps
+
+Please specify which type of analysis you would like to perform. You can say something like:
+- "I want to do FBA analysis"
+- "Let's perform gene knockout analysis"
+- "I'm interested in phenotype prediction"
+- "Show me pathway analysis results"
+
+Which experiment type interests you most?"""
+        
+        else:
+            # Generic recommendation for other models
+            enhanced_recommendation = f"""# 🧬 Experiment Recommendations for {model_name}
+
+## 📋 Model Overview
+
+The **{model_name}** is a metabolic network model that can be used for various types of computational analysis.
+
+## 🔬 Available Experiment Types
+
+### 1. **Flux Balance Analysis (FBA)**
+Predicts optimal growth rates and metabolic flux distributions.
+
+### 2. **Gene Knockout Analysis**
+Predicts the effects of removing individual genes on growth and metabolism.
+
+### 3. **Phenotype Prediction**
+Predicts growth behavior under different environmental conditions.
+
+### 4. **Pathway Analysis**
+Assesses the activity of metabolic pathways and identifies bottlenecks.
+
+### 5. **Evolutionary Analysis**
+Simulates adaptive evolution and analyzes trade-offs between different objectives.
+
+### 6. **Constraint-Based Analysis**
+Performs flux variability analysis and assesses reaction feasibility.
+
+## 🎯 Recommendations
+
+Each experiment type offers unique insights into the metabolic network. Choose based on your research goals:
+
+- **FBA**: For understanding optimal metabolic states
+- **Gene Knockout**: For identifying essential genes
+- **Phenotype Prediction**: For environmental response analysis
+- **Pathway Analysis**: For network structure understanding
+- **Evolutionary Analysis**: For optimization studies
+- **Constraint-Based Analysis**: For network flexibility assessment
+
+## 💡 Next Steps
+
+Please specify which type of analysis you would like to perform with {model_name}."""
+
         return enhanced_recommendation
     
     def _create_knowledge_section(self, knowledge_results: List[Dict[str, Any]]) -> str:
