@@ -1,4 +1,7 @@
 import os
+import asyncio
+import sys
+import warnings
 from agent.code_writer import CodeWriterAgent
 from agent.code_explainer import CodeExplainerAgent
 from agent.code_debugger import CodeDebuggerAgent
@@ -8,10 +11,16 @@ from agent.rag_tool import RAGTool
 from agent.memory import Memory
 from agent.virtual_command_agent import VirtualCommandAgent
 from agent.download_tool import DownloadTool
-from agent.new_model_analyzer_agent import NewModelAnalyzerAgent
+from agent.model_analyzer_agent import ModelAnalyzerAgent
+from agent.literature_agent import LiteratureAgent
+from agent.agent_for_agent import AgentForAgent
 from bio_task import initialize_bio_task
 from dotenv import load_dotenv
 import re
+
+# 抑制 asyncio 相关的警告
+warnings.filterwarnings("ignore", category=ResourceWarning, message=".*unclosed event loop.*")
+warnings.filterwarnings("ignore", category=DeprecationWarning, module="asyncio")
 
 load_dotenv()
 
@@ -58,7 +67,9 @@ def main(initialize_only=False, initialize_bio_task_flag=True):
     rag_tool = RAGTool()
     virtual_command_agent = VirtualCommandAgent()
     download_tool = DownloadTool()
-    model_analyzer = NewModelAnalyzerAgent()
+    model_analyzer = ModelAnalyzerAgent()
+    literature_agent = LiteratureAgent()
+    agent_for_agent = AgentForAgent()
 
     def search_and_answer(prompt):
         search_results = search_tool.run(prompt)
@@ -82,7 +93,26 @@ def main(initialize_only=False, initialize_bio_task_flag=True):
         if result['success']:
             return f"✓ {result['message']}\nFile saved to: {result['file_path']}"
         else:
-            return f"✗ Download failed: {result['message']}"
+            return "The model was not found. Please try other models."
+
+    def literature_query(temp_kb_id_and_query):
+        """Query a temporary knowledge base created by literature agent."""
+        if not temp_kb_id_and_query:
+            return "Please specify knowledge base ID and query. Format: literature_query <kb_id> <query>"
+        
+        # Split the input to get kb_id and query
+        parts = temp_kb_id_and_query.split(' ', 1)
+        if len(parts) < 2:
+            return "Please provide both knowledge base ID and query. Format: literature_query <kb_id> <query>"
+        
+        temp_kb_id = parts[0]
+        query = parts[1]
+        
+        return literature_agent.query_knowledge_base(temp_kb_id, query)
+
+    def list_literature_kbs():
+        """List all available temporary knowledge bases."""
+        return literature_agent.list_knowledge_bases()
 
     # Group 1: Special commands that need virtual command recognition and BiosimulationModels
     special_commands = {
@@ -97,10 +127,14 @@ def main(initialize_only=False, initialize_bio_task_flag=True):
         "debug": code_debugger.run,
         "execute": code_executor.run,
         "knowledge": rag_tool.run,
+        "literature": literature_agent.run,
+        "literature_query": literature_query,
+        "list_literature_kbs": list_literature_kbs,
         "search": search_and_answer,
         "update_data": lambda: rag_tool.update_knowledge_base(),
         "force_update": lambda: rag_tool.force_update_knowledge_base(),
-        "models": show_models
+        "models": show_models,
+        "reset_temp_kb": lambda: literature_agent.reset_temporary_knowledge_base()
     }
     
     # Combined commands for help display
@@ -180,6 +214,9 @@ def main(initialize_only=False, initialize_bio_task_flag=True):
                     special_command_executed = True
                 else:
                     print("No specific model found for download", file=sys.stderr)
+                    result = "The model was not found. Please try other models."
+                    matched = True
+                    special_command_executed = True
             except Exception as e:
                 print(f"Download command failed: {e}", file=sys.stderr)
         
@@ -238,11 +275,11 @@ def main(initialize_only=False, initialize_bio_task_flag=True):
                             result += f"\n✓ {download_result['message']}"
                             result += f"\nFile saved to: {download_result['file_path']}"
                         else:
-                            result += f"\n✗ Download failed: {download_result['message']}"
+                            result += f"\nThe model was not found. Please try other models."
                         
                         matched = True
                     else:
-                        result = f"No matching model found in your input. Available models: {', '.join(available_models)}\n\nPlease specify one of these models in your request."
+                        result = "The model was not found. Please try other models."
                         matched = True
             
             # Handle analyse_model virtual command
@@ -274,6 +311,32 @@ def main(initialize_only=False, initialize_bio_task_flag=True):
                     result = model_analyzer.run("analyse")
                 
                 matched = True
+        
+        # Step 3.5: Agent for Agent - Check if input is related to biological research
+        if not special_command_executed and not matched:
+            # First check if user input already contains a regular command
+            cmd_lower = user_input.lower().strip()
+            contains_regular_command = False
+            for cmd in regular_commands.keys():
+                if cmd_lower.startswith(cmd):
+                    contains_regular_command = True
+                    break
+            
+            # If no regular command found, check biological relevance
+            if not contains_regular_command:
+                print("Agent for Agent: Checking biological relevance...", file=sys.stderr)
+                agent_result = agent_for_agent.check_biological_relevance(user_input)
+                
+                if agent_result['is_relevant']:
+                    print(f"Agent for Agent: Biological relevance detected (confidence: {agent_result['confidence']:.2f})", file=sys.stderr)
+                    print(f"Agent for Agent: Reasoning: {agent_result['reasoning']}", file=sys.stderr)
+                    print(f"Agent for Agent: Modified input: {agent_result['modified_input']}", file=sys.stderr)
+                    
+                    # Use the modified input for further processing
+                    user_input = agent_result['modified_input']
+                else:
+                    print(f"Agent for Agent: Not biologically relevant (confidence: {agent_result['confidence']:.2f})", file=sys.stderr)
+                    print(f"Agent for Agent: Reasoning: {agent_result['reasoning']}", file=sys.stderr)
         
         # Step 4: Fallback to regular commands (if special commands failed or didn't match)
         if not matched:
@@ -312,4 +375,53 @@ def main(initialize_only=False, initialize_bio_task_flag=True):
         memory.add(user_input, result)
 
 if __name__ == "__main__":
-    main() 
+    # 设置事件循环以修复 "unclosed event loop" 错误
+    loop = None
+    try:
+        # 获取或创建事件循环
+        try:
+            loop = asyncio.get_event_loop()
+            if loop.is_closed():
+                loop = asyncio.new_event_loop()
+                asyncio.set_event_loop(loop)
+        except RuntimeError:
+            # 没有事件循环，创建新的
+            loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(loop)
+        
+        # 运行主程序
+        main()
+        
+    except Exception as e:
+        print(f"程序执行错误: {e}")
+    finally:
+        # 确保所有事件循环正确关闭
+        try:
+            # 关闭当前事件循环
+            if loop and not loop.is_closed():
+                # 关闭所有挂起的任务
+                pending_tasks = asyncio.all_tasks(loop)
+                if pending_tasks:
+                    for task in pending_tasks:
+                        task.cancel()
+                    # 等待所有任务取消完成
+                    loop.run_until_complete(asyncio.gather(*pending_tasks, return_exceptions=True))
+                
+                loop.close()
+            
+            # 尝试关闭其他可能的事件循环
+            try:
+                current_loop = asyncio.get_event_loop()
+                if current_loop and not current_loop.is_closed() and current_loop != loop:
+                    current_loop.close()
+            except RuntimeError:
+                pass  # 没有事件循环运行，忽略
+                
+        except Exception as e:
+            print(f"关闭事件循环时出错: {e}")
+        
+        # 清理 asyncio 策略
+        try:
+            asyncio.set_event_loop(None)
+        except Exception:
+            pass 

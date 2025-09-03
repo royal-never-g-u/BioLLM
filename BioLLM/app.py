@@ -6,8 +6,10 @@ import warnings
 import traceback
 import json
 
-# Show all warnings
-warnings.filterwarnings("always")
+# Suppress asyncio-related warnings but show others
+warnings.filterwarnings("ignore", category=ResourceWarning, message=".*unclosed event loop.*")
+warnings.filterwarnings("ignore", category=DeprecationWarning, module="asyncio")
+warnings.filterwarnings("default")  # Show other warnings
 
 # Add the project root to the Python path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -205,6 +207,16 @@ def main():
             st.error(f"ERROR initializing virtual command agent: {e}")
             st.error(f"Full error details: {traceback.format_exc()}")
             return
+        
+        # Get the agent-for-agent
+        try:
+            from BioLLM.agent.agent_for_agent import AgentForAgent
+            agent_for_agent = AgentForAgent()
+            st.info("Successfully initialized agent-for-agent")
+        except Exception as e:
+            st.error(f"ERROR initializing agent-for-agent: {e}")
+            st.error(f"Full error details: {traceback.format_exc()}")
+            return
 
         # Store models and agents in session state for reuse
         st.session_state.models = models
@@ -212,6 +224,7 @@ def main():
         st.session_state.commands = commands
         st.session_state.code_writer = code_writer
         st.session_state.virtual_command_agent = virtual_command_agent
+        st.session_state.agent_for_agent = agent_for_agent
         st.session_state.initialized = True
         
         st.success("🚀 BioLLM initialized successfully!")
@@ -222,6 +235,7 @@ def main():
         commands = st.session_state.commands
         code_writer = st.session_state.code_writer
         virtual_command_agent = st.session_state.virtual_command_agent
+        agent_for_agent = st.session_state.agent_for_agent
 
     if 'history' not in st.session_state:
         st.session_state.history = []
@@ -292,17 +306,17 @@ def main():
                     if next_step_result and next_step_result.get('success'):
                         st.success("✅ Next step analysis completed!")
                         
-                        # Display the next step guidance
-                        st.markdown("### 🎯 Next Step Guidance")
-                        st.markdown(next_step_result['message'])
-                        
                         # Display additional information based on action type
+                        print(f"🔍 DEBUG: Processing next_step_result action: {next_step_result['action']}")
                         if next_step_result['action'] == 'both_available':
                             # Call explanation agent to provide detailed explanation
+                            print(f"🔍 DEBUG: Calling explanation_agent for both_available case")
                             from agent.explanation_agent import generate_model_explanation
                             
                             model_name = next_step_result.get('model_name')
                             task_type = next_step_result.get('task_type')
+                            
+                            print(f"🔍 DEBUG: model_name: {model_name}, task_type: {task_type}")
                             
                             with st.spinner(f"🔍 Generating explanation for {model_name} with task type {task_type}..."):
                                 explanation_result = generate_model_explanation(model_name, task_type)
@@ -315,6 +329,9 @@ def main():
                                 st.session_state.show_explanation_prompt = True
                                 st.session_state.explanation_prompt_model = model_name
                                 st.session_state.explanation_prompt_task_type = task_type
+                                
+                                # Set flag to indicate that explanation_agent has been called
+                                st.session_state.explanation_agent_called = True
                             else:
                                 # Store error message for display in chat message
                                 st.session_state.next_step_explanation_error_message = "❌ Failed to generate explanation"
@@ -383,7 +400,7 @@ def main():
                             result += f"\n✓ {download_result['message']}"
                             result += f"\nFile saved to: {download_result['file_path']}"
                         else:
-                            result += f"\n✗ Download failed: {download_result['message']}"
+                            result += f"\nThe model was not found. Please try other models."
                         
                         matched = True
                     else:
@@ -415,38 +432,96 @@ def main():
                     # Store success message for display in chat message
                     st.session_state.transition_success_message = transition_result['message']
                     
-                    # Check if we should proceed to explanation agent
-                    if transition_result['new_state'].value == 2:  # ANALYSIS_CONFIRMED
-                        # Call explanation agent to provide detailed explanation
-                        from agent.explanation_agent import generate_model_explanation
-                        
-                        with st.spinner(f"🔍 Generating explanation for {model_name} with task type {task_type}..."):
-                            explanation_result = generate_model_explanation(model_name, task_type)
-                        
-                        if explanation_result:
-                            # Store explanation result for display in chat message
-                            st.session_state.explanation_result = explanation_result
-                            
-                            # Set explanation prompt state for user response handling
-                            st.session_state.show_explanation_prompt = True
-                            st.session_state.explanation_prompt_model = model_name
-                            st.session_state.explanation_prompt_task_type = task_type
-                            
-                            # Store explanation prompt information in session state for later display
-                            st.session_state.pending_prompt = {
-                                'type': 'explanation_agent',
-                                'title': '📋 Explanation Agent Prompt',
-                                'message': f"**Do you want to proceed with the experiment for model '{model_name}'?**",
-                                'instruction': "*Please respond with 'yes' or 'no' in the chat input below.*"
-                            }
+                    # Update bio_task with model information when user confirms
+                    try:
+                        from bio_task import update_current_task
+                        model_location = f"../downloads/{model_name}.mat"
+                        update_success = update_current_task(
+                            model_name=model_name,
+                            model_local=model_location
+                        )
+                        if update_success:
+                            print(f"✅ Updated bio_task with model: {model_name}, location: {model_location}")
                         else:
+                            print(f"❌ Failed to update bio_task with model: {model_name}")
+                    except Exception as e:
+                        print(f"❌ Error updating bio_task: {e}")
+                    
+                    # Check if we should proceed to explanation agent or if_next_step
+                    try:
+                        from bio_task import get_current_task
+                        current_task = get_current_task()
+                        has_model_name = bool(current_task.model_name and current_task.model_name.strip())
+                        has_task_type = current_task.task_type is not None and current_task.task_type != ""
+                        
+                        print(f"🔍 DEBUG: bio_task check - model_name: '{current_task.model_name}', task_type: '{current_task.task_type}'")
+                        print(f"🔍 DEBUG: has_model_name: {has_model_name}, has_task_type: {has_task_type}")
+                        print(f"🔍 DEBUG: transition_result['new_state'].value: {transition_result['new_state'].value}")
+                        
+                        if has_model_name and has_task_type and transition_result['new_state'].value == 2:  # ANALYSIS_CONFIRMED
+                            # Both model_name and task_type exist, call explanation agent
+                            from agent.explanation_agent import generate_model_explanation
+                            
+                            with st.spinner(f"🔍 Generating explanation for {model_name} with task type {task_type}..."):
+                                explanation_result = generate_model_explanation(model_name, task_type)
+                        elif has_model_name and not has_task_type and transition_result['new_state'].value == 2:  # ANALYSIS_CONFIRMED
+                            # Only model_name exists, call if_next_step to provide experiment options
+                            print(f"🔍 DEBUG: Calling if_next_step for model_only case")
+                            from agent.next_step_agent import if_next_step
+                            
+                            with st.spinner(f"🔍 Analyzing available experiments for {model_name}..."):
+                                next_step_result = if_next_step()
+                            
+                            print(f"🔍 DEBUG: if_next_step result: {next_step_result}")
+                            
+                            if next_step_result and next_step_result.get('success'):
+                                # Store next step result for display
+                                st.session_state.next_step_result = next_step_result
+                                explanation_result = None
+                                print(f"✅ if_next_step executed successfully: {next_step_result.get('action', 'unknown')}")
+                            else:
+                                explanation_result = None
+                                print(f"❌ if_next_step failed: {next_step_result.get('error', 'Unknown error') if next_step_result else 'No result'}")
+                        else:
+                            # Don't call explanation agent if bio_task is not complete
+                            explanation_result = None
+                            print(f"ℹ️ Skipping explanation agent: model_name={'有' if has_model_name else '无'}, task_type={'有' if has_task_type else '无'}")
+                    except Exception as e:
+                        print(f"❌ Error checking bio_task completeness: {e}")
+                        explanation_result = None
+                    
+                    # Handle explanation_result or next_step_result
+                    if explanation_result:
+                        # Store explanation result for display in chat message
+                        st.session_state.explanation_result = explanation_result
+                        
+                        # Set explanation prompt state for user response handling
+                        st.session_state.show_explanation_prompt = True
+                        st.session_state.explanation_prompt_model = model_name
+                        st.session_state.explanation_prompt_task_type = task_type
+                        
+                        # Store explanation prompt information in session state for later display
+                        st.session_state.pending_prompt = {
+                            'type': 'explanation_agent',
+                            'title': '📋 Explanation Agent Prompt',
+                            'message': f"**Do you want to proceed with the experiment for model '{model_name}'?**",
+                            'instruction': "*Please respond with 'yes' or 'no' in the chat input below.*"
+                        }
+                    else:
+                        # Check if we have next_step_result from if_next_step
+                        if 'next_step_result' in st.session_state and st.session_state.next_step_result:
+                            # Don't set explanation prompt, next_step_result will be handled in result message
+                            pass
+                        elif has_model_name and has_task_type:
                             # Store error message for display in chat message
                             st.session_state.explanation_error_message = "❌ Failed to generate explanation"
                             # Reset state machine on failure
                             reset_state_machine()
-                    else:
-                        # Store info message for display in chat message
-                        st.session_state.analysis_cancelled_message = "📝 Analysis cancelled. You can try again later."
+                        else:
+                            # Store info message for display in chat message
+                            st.session_state.incomplete_config_message = "📋 Configuration incomplete. Please specify a task type to proceed."
+                            # Reset state machine
+                            reset_state_machine()
                 else:
                     # Store error message for display in chat message
                     st.session_state.transition_error_message = f"❌ State transition failed: {transition_result['message']}"
@@ -467,27 +542,57 @@ def main():
                 result += f"**Task Type**: {task_type}\n"
                 result += f"**Status**: Analysis confirmed\n\n"
                 
+                print(f"🔍 DEBUG: Creating result message for analysis prompt")
+                print(f"🔍 DEBUG: model_name: {model_name}, task_type: {task_type}")
+                
                 if transition_result['transition_successful']:
                     if transition_result['new_state'].value == 2:  # ANALYSIS_CONFIRMED
-                        result += "🔄 **Next Step**: Explanation agent will provide detailed information.\n\n"
-                        
-                        # Add explanation result if available
-                        if 'explanation_result' in st.session_state and st.session_state.explanation_result:
-                            result += "---\n\n"
-                            result += "### 📋 Model and Task Explanation\n\n"
-                            result += st.session_state.explanation_result + "\n\n"
-                        
-                        # Add pending prompt if available
-                        if 'pending_prompt' in st.session_state and st.session_state.pending_prompt:
-                            prompt_info = st.session_state.pending_prompt
-                            result += "---\n\n"
-                            result += f"### {prompt_info['title']}\n\n"
-                            result += prompt_info['message'] + "\n\n"
-                            result += prompt_info['instruction'] + "\n\n"
+                        # Check if bio_task is complete
+                        try:
+                            from bio_task import get_current_task
+                            current_task = get_current_task()
+                            has_model_name = bool(current_task.model_name and current_task.model_name.strip())
+                            has_task_type = current_task.task_type is not None and current_task.task_type != ""
+                            
+                            if has_model_name and has_task_type:
+                                result += "🔄 **Next Step**: Explanation agent will provide detailed information.\n\n"
+                                
+                                # Add explanation result if available
+                                if 'explanation_result' in st.session_state and st.session_state.explanation_result:
+                                    result += "---\n\n"
+                                    result += "### 📋 Model and Task Explanation\n\n"
+                                    result += st.session_state.explanation_result + "\n\n"
+                                
+                                # Add pending prompt if available
+                                if 'pending_prompt' in st.session_state and st.session_state.pending_prompt:
+                                    prompt_info = st.session_state.pending_prompt
+                                    result += "---\n\n"
+                                    result += f"### {prompt_info['title']}\n\n"
+                                    result += prompt_info['message'] + "\n\n"
+                                    result += prompt_info['instruction'] + "\n\n"
+                            elif has_model_name and not has_task_type:
+                                # Only model_name exists, show next_step_result
+                                print(f"🔍 DEBUG: Processing model_only case in result message generation")
+                                if 'next_step_result' in st.session_state and st.session_state.next_step_result:
+                                    next_step_result = st.session_state.next_step_result
+                                    print(f"🔍 DEBUG: Found next_step_result: {next_step_result.get('action', 'unknown')}")
+                                    # Only show the LLM-generated message, not the raw experiment list
+                                    result += next_step_result.get('message', 'No message available') + "\n\n"
+                                else:
+                                    print(f"🔍 DEBUG: No next_step_result found in session state")
+                                    result += "📋 **Status**: Configuration incomplete. Please specify a task type to proceed.\n\n"
+                            else:
+                                result += "📋 **Status**: Configuration incomplete. Please specify a task type to proceed.\n\n"
+                        except Exception as e:
+                            result += f"❌ **Error**: Failed to check configuration: {e}\n\n"
                     else:
                         result += "📝 **Status**: Analysis cancelled.\n\n"
                 else:
                     result += f"❌ **Error**: {transition_result['message']}\n\n"
+                
+                # Clear next_step_result after result message generation
+                if 'next_step_result' in st.session_state:
+                    del st.session_state.next_step_result
             else:
                 st.error("❌ Missing analyse prompt parameters")
                 matched = True
@@ -502,6 +607,16 @@ def main():
             if 'explanation_prompt_model' in st.session_state and 'explanation_prompt_task_type' in st.session_state:
                 model_name = st.session_state.explanation_prompt_model
                 task_type = st.session_state.explanation_prompt_task_type
+                
+                # Get the latest task_type from bio_task to ensure consistency
+                try:
+                    from bio_task import get_current_task
+                    current_task = get_current_task()
+                    if current_task.task_type is not None and current_task.task_type != "":
+                        task_type = current_task.task_type
+                        print(f"🔍 DEBUG: Using latest task_type from bio_task: {task_type}")
+                except Exception as e:
+                    print(f"🔍 DEBUG: Failed to get latest task_type from bio_task: {e}")
                 
                 # Handle explain agent response using state machine
                 transition_result = handle_explain_agent_response(user_input, model_name, task_type)
@@ -549,36 +664,8 @@ def main():
                                 st.session_state.show_constraint_based_visualization = True
                                 st.session_state.constraint_based_analysis_result = experiment_result
                             else:
-                                # Fallback to basic display for other experiment types
-                                st.markdown("### 📊 Experiment Results")
-                                st.markdown(f"**Model**: {experiment_result.get('model_name', 'Unknown')}")
-                                
-                                if task_type:
-                                    st.markdown(f"**Task Type**: {task_type}")
-                                else:
-                                    st.markdown("**Task Type**: Unknown")
-                                
-                                message = experiment_result.get('message') or experiment_result.get('error', 'No message available')
-                                st.markdown(f"**Message**: {message}")
-                                
-                                timestamp = experiment_result.get('timestamp') or experiment_result.get('experiment_timestamp', 'Unknown')
-                                st.markdown(f"**Timestamp**: {timestamp}")
-                                
-                                # Display basic visualizations if available
-                                if 'visualizations' in experiment_result and experiment_result['visualizations']:
-                                    st.markdown("### 📈 Visualizations")
-                                    for viz in experiment_result['visualizations']:
-                                        if viz.get('type') == 'figure':
-                                            st.pyplot(viz['data'])
-                                        elif viz.get('type') == 'plot':
-                                            st.plotly_chart(viz['data'])
-                                        elif viz.get('type') == 'image':
-                                            st.image(viz['data'])
-                                
-                                # Display detailed results
-                                if 'detailed_results' in experiment_result:
-                                    st.markdown("### 📋 Detailed Results")
-                                    st.json(experiment_result['detailed_results'])
+                                # Store experiment result for display in chat message
+                                st.session_state.experiment_result = experiment_result
                             
                         else:
                             # Store error message for display in chat message
@@ -626,6 +713,32 @@ def main():
             
 
         
+        # Agent for Agent - Check if input is related to biological research (if no command matched yet)
+        if not matched:
+            # First check if user input already contains a regular command
+            cmd_lower = user_input.lower().strip()
+            contains_regular_command = False
+            for cmd in commands.keys():
+                if cmd_lower.startswith(cmd):
+                    contains_regular_command = True
+                    break
+            
+            # If no regular command found, check biological relevance
+            if not contains_regular_command:
+                with st.spinner("🤖 Agent for Agent: Checking biological relevance..."):
+                    agent_result = agent_for_agent.check_biological_relevance(user_input)
+                
+                if agent_result['is_relevant']:
+                    st.info(f"🧬 Biological relevance detected (confidence: {agent_result['confidence']:.2f})")
+                    st.info(f"💭 Reasoning: {agent_result['reasoning']}")
+                    st.info(f"🔄 Converting to knowledge command...")
+                    
+                    # Use the modified input for further processing
+                    user_input = agent_result['modified_input']
+                    st.success(f"✅ Input automatically enhanced: '{user_input}'")
+                else:
+                    st.info(f"ℹ️ Agent for Agent: Not biologically relevant (confidence: {agent_result['confidence']:.2f})")
+        
         # Try traditional commands if no virtual command matched
         if not matched:
             try:
@@ -665,7 +778,7 @@ def main():
                                             st.session_state.pending_prompt = {
                                                 'type': 'analyse_agent',
                                                 'title': '🔬 Analyse Agent Prompt',
-                                                'message': f"**Do you want to proceed with analysis for model '{model_name}'?**",
+                                                'message': f"**Do you want to use this model '{model_name}' for experiment?**",
                                                 'instruction': "*Please respond with 'yes' or 'no' in the chat input below.*"
                                             }
                                             
@@ -704,13 +817,20 @@ def main():
                 st.error(f"Full error details: {traceback.format_exc()}")
         
         if not matched:
-            try:
-                with st.spinner("Generating response..."):
-                    result = code_writer.chat(user_input, memory)
-            except Exception as e:
-                st.error(f"ERROR generating response: {e}")
-                st.error(f"Full error details: {traceback.format_exc()}")
-                result = f"Error generating response: {e}"
+            # Check if explanation_agent has been called by task_pick_agent
+            if 'explanation_agent_called' in st.session_state and st.session_state.explanation_agent_called:
+                # Explanation agent has been called, don't generate default LLM response
+                result = ""
+                # Clear the flag
+                del st.session_state.explanation_agent_called
+            else:
+                try:
+                    with st.spinner("Generating response..."):
+                        result = code_writer.chat(user_input, memory)
+                except Exception as e:
+                    st.error(f"ERROR generating response: {e}")
+                    st.error(f"Full error details: {traceback.format_exc()}")
+                    result = f"Error generating response: {e}"
 
         # Store the current command for determining if model buttons should be shown
         st.session_state.last_command = current_command
@@ -719,7 +839,50 @@ def main():
         is_knowledge_command = (current_command == 'knowledge')
         
         with st.chat_message("assistant"):
-            if is_knowledge_command:
+            # Check if explanation_agent has been called and display its result
+            if 'explanation_result' in st.session_state and st.session_state.explanation_result:
+                st.markdown(st.session_state.explanation_result)
+                # Clear the explanation result after display
+                del st.session_state.explanation_result
+            # Check if experiment result is available and display it
+            elif 'experiment_result' in st.session_state and st.session_state.experiment_result:
+                experiment_result = st.session_state.experiment_result
+                
+                # Display experiment results
+                st.markdown("### 📊 Experiment Results")
+                st.markdown(f"**Model**: {experiment_result.get('model_name', 'Unknown')}")
+                
+                task_type = experiment_result.get('task_type') or experiment_result.get('experiment_task_type')
+                if task_type:
+                    st.markdown(f"**Task Type**: {task_type}")
+                else:
+                    st.markdown("**Task Type**: Unknown")
+                
+                message = experiment_result.get('message') or experiment_result.get('error', 'No message available')
+                st.markdown(f"**Message**: {message}")
+                
+                timestamp = experiment_result.get('timestamp') or experiment_result.get('experiment_timestamp', 'Unknown')
+                st.markdown(f"**Timestamp**: {timestamp}")
+                
+                # Display basic visualizations if available
+                if 'visualizations' in experiment_result and experiment_result['visualizations']:
+                    st.markdown("### 📈 Visualizations")
+                    for viz in experiment_result['visualizations']:
+                        if viz.get('type') == 'figure':
+                            st.pyplot(viz['data'])
+                        elif viz.get('type') == 'plot':
+                            st.plotly_chart(viz['data'])
+                        elif viz.get('type') == 'image':
+                            st.image(viz['data'])
+                
+                # Display detailed results
+                if 'detailed_results' in experiment_result:
+                    st.markdown("### 📋 Detailed Results")
+                    st.json(experiment_result['detailed_results'])
+                
+                # Clear the experiment result after display
+                del st.session_state.experiment_result
+            elif is_knowledge_command:
                 # Show model buttons for knowledge command responses
                 if result is not None:
                     detected_models = detect_models_in_text(result, models)
@@ -741,11 +904,76 @@ def main():
                     if figures is not None and figures:
                         st.markdown("### 📊 Model Analysis Visualizations")
                         
-                        # Display each figure
-                        for i, figure_data in enumerate(figures):
+                        # Separate regular analysis figures from cobra visual figures
+                        regular_figures = []
+                        cobra_visual_figures = []
+                        
+                        for figure_data in figures:
                             if isinstance(figure_data, dict):
-                                # Handle dictionary format from new_model_analyzer_agent
-                                title = figure_data.get('name', f'Figure {i+1}')
+                                title = figure_data.get('title', figure_data.get('name', ''))
+                                if title.startswith('Cobra Visual -'):
+                                    cobra_visual_figures.append(figure_data)
+                                else:
+                                    regular_figures.append(figure_data)
+                            else:
+                                regular_figures.append(figure_data)
+                        
+                        # Display regular analysis figures first
+                        if regular_figures:
+                            st.markdown("#### 🔬 Basic Model Analysis")
+                            for i, figure_data in enumerate(regular_figures):
+                                if isinstance(figure_data, dict):
+                                    # Handle dictionary format from new_model_analyzer_agent
+                                    title = figure_data.get('title', figure_data.get('name', f'Figure {i+1}'))
+                                    file_path = figure_data.get('path', '')
+                                    file_type = figure_data.get('type', 'image')
+                                    
+                                    st.markdown(f"**{title}**")
+                                    try:
+                                        if file_type == 'image':
+                                            # Display image file
+                                            try:
+                                                # Method 1: Try using file path directly
+                                                st.image(file_path, caption=title)
+                                            except Exception as e1:
+                                                try:
+                                                    # Method 2: Try reading file and passing bytes
+                                                    with open(file_path, 'rb') as f:
+                                                        image_bytes = f.read()
+                                                        st.image(image_bytes, caption=title)
+                                                except Exception as e2:
+                                                    # Method 3: Try using PIL
+                                                    from PIL import Image
+                                                    image = Image.open(file_path)
+                                                    st.image(image, caption=title)
+                                        elif file_type == 'html':
+                                            # Display HTML file content
+                                            with open(file_path, 'r', encoding='utf-8') as f:
+                                                html_content = f.read()
+                                            st.components.v1.html(html_content, height=600)
+                                        st.write(f"✅ Displayed {file_type} {i+1}: {title}")
+                                    except Exception as e:
+                                        st.error(f"❌ Error displaying {file_type} {i+1}: {e}")
+                                elif isinstance(figure_data, tuple) and len(figure_data) == 2:
+                                    # Handle tuple format (title, fig) from old model_analyzer_agent
+                                    title, fig = figure_data
+                                    st.markdown(f"**{title}**")
+                                    try:
+                                        st.pyplot(fig)
+                                        st.write(f"✅ Displayed figure {i+1}: {title}")
+                                    except Exception as e:
+                                        st.error(f"❌ Error displaying figure {i+1}: {e}")
+                                else:
+                                    st.error(f"❌ Unknown figure format: {type(figure_data)}")
+                        
+                        # Display cobra visual figures below regular analysis
+                        if cobra_visual_figures:
+                            st.markdown("---")
+                            st.markdown("### 🎨 Cobra Visual Analysis (Fluxmap & Network Graphs)")
+                            st.markdown("*Advanced metabolic network visualizations with flux data*")
+                            
+                            for i, figure_data in enumerate(cobra_visual_figures):
+                                title = figure_data.get('title', figure_data.get('name', f'Cobra Visual Figure {i+1}'))
                                 file_path = figure_data.get('path', '')
                                 file_type = figure_data.get('type', 'image')
                                 
@@ -775,17 +1003,6 @@ def main():
                                     st.write(f"✅ Displayed {file_type} {i+1}: {title}")
                                 except Exception as e:
                                     st.error(f"❌ Error displaying {file_type} {i+1}: {e}")
-                            elif isinstance(figure_data, tuple) and len(figure_data) == 2:
-                                # Handle tuple format (title, fig) from old model_analyzer_agent
-                                title, fig = figure_data
-                                st.markdown(f"**{title}**")
-                                try:
-                                    st.pyplot(fig)
-                                    st.write(f"✅ Displayed figure {i+1}: {title}")
-                                except Exception as e:
-                                    st.error(f"❌ Error displaying figure {i+1}: {e}")
-                            else:
-                                st.error(f"❌ Unknown figure format: {type(figure_data)}")
                         
                         # Clear the figures from session state
                         del st.session_state.current_figures
@@ -907,12 +1124,9 @@ def main():
                         result_visualizer = get_result_visualizer()
                         result_visualizer.visualize_fba_results(experiment_result)
                     elif task_type == 2:  # Gene deletion analysis
-                        # Use enhanced visualization for gene deletion results
+                        # Use enhanced visualization for gene deletion results (only once)
                         result_visualizer = get_result_visualizer()
-                        result_visualizer.visualize_gene_deletion_results(experiment_result)
-                        
-                        # Also create interactive dashboard
-                        result_visualizer.create_interactive_dashboard(experiment_result)
+                        result_visualizer.visualize_gene_deletion_results_enhanced(experiment_result)
                         
                         # Display enhanced LLM analysis if available
                         if 'gene_deletion_llm_analysis' in st.session_state:
