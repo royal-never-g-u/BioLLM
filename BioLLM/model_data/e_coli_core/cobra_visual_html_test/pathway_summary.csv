@@ -1,0 +1,9 @@
+Pathway,Mean_Flux,Total_Flux,Std_Flux,Mean_Abs_Flux,Total_Abs_Flux,Reaction_Count
+Other,2.8141,123.8196,11.274,5.2808,232.3539,44
+Glycolysis,1.6352,17.9876,10.39,9.0425,99.467,11
+Exchange,2.8383,39.7368,12.6318,7.0926,99.2962,14
+Nucleotide Metabolism,26.952,53.904,26.2506,26.952,53.904,2
+TCA Cycle,1.2412,16.136,3.1444,2.0204,26.2648,13
+Amino Acid Metabolism,-0.3135,-2.8214,1.6596,0.6958,6.2623,9
+Biomass,0.8739,0.8739,,0.8739,0.8739,1
+Transport,0.0,0.0,,0.0,0.0,1

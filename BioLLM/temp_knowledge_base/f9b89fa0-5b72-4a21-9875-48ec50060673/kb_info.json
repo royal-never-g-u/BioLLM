@@ -1,0 +1,20 @@
+{
+  "temp_kb_id": "f9b89fa0-5b72-4a21-9875-48ec50060673",
+  "temp_kb_path": "/Users/wjgy/PycharmProjects/BioLLM/BioLLM/agent/../temp_knowledge_base/f9b89fa0-5b72-4a21-9875-48ec50060673",
+  "processed_papers": [
+    {
+      "filename": "Theoretical_estimation_of_metabolic_network_robustness_against_multiple_reaction_knockouts_using_branching_process_approximation_3.pdf",
+      "original_url": "http://arxiv.org/pdf/1307.4922v1",
+      "model_names": "None",
+      "summary": "metabolic robustness, branching process approximation, cascading failure, multiple reaction knockout, impact degree distribution"
+    },
+    {
+      "filename": "An_algorithm_for_the_optimal_solution_of_variable_knockout_problems_4.pdf",
+      "original_url": "http://arxiv.org/pdf/1908.02031v5",
+      "model_names": "None",
+      "summary": "The paper presents an optimal algorithm for solving variable knockout problems in zero-one integer programming, where \"knockout\" means setting a variable to zero. The goal is to identify a minimal set..."
+    }
+  ],
+  "total_chunks": 46,
+  "created_at": 1756872055.746444
+}
