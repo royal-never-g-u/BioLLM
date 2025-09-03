@@ -7,6 +7,7 @@ Recon1
 Recon2
 Recon3D
 Saccharomyces cerevisiae
+YeastGEM 9.0.0
 core E. coli metabolic model
 coreE. coli
 e_coli_core
